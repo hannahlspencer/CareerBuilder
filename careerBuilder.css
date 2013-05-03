@@ -1,0 +1,144 @@
+#careerBuilder, #careerBuilder ul {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+
+#careerBuilder h2, #careerBuilder h3 {
+	margin: 0;
+	font-weight: normal;
+}
+
+#careerBuilder h2 {
+	padding: 10px;
+}
+
+#careerBuilder p {
+	padding: 0 10px 15px 10px;
+	margin:0;
+	font-size: 12px;
+}
+
+#careerBuilder .sub-content {
+	font-size: 12px;
+}
+
+#careerBuilder .suggestion {
+	display: none;
+	margin-top: 15px;
+}
+
+#careerBuilder {
+	width: 488px;
+	margin: 25px auto;
+}
+
+#careerBuilder li li div.suggestion p {
+	background: #FFFFFF;
+	margin:0;
+	padding: 10px;
+}
+
+.toggler {
+	cursor: pointer;
+}
+
+#careerBuilder li {
+	font-family: Arial, sans serif;
+	padding: 0;
+}
+
+#careerBuilder li li {
+	padding: 10px;
+}
+
+#careerBuilder li li p{
+	padding: 10px 10px 10px 0;
+}
+
+#careerBuilder input {
+	margin-bottom: 7px;
+}
+
+.check-option {
+	display: inline;
+}
+
+.check-option span {
+	font-weight: bold;
+}
+
+.check-option .sub-content {
+	padding: 0 10px 10px 23px;
+}
+
+.selection-summary {
+	width: 100%;
+}
+
+.selection-summary td {
+	width: 50%;
+}
+
+.selection-summary td #skills-summary li, .selection-summary td #values-summary li {
+	font-size: 12px;
+	padding: 0;
+	margin: 0;
+}
+
+/*Colours*/
+#who {
+	background: #FF9999;
+}
+
+#who #skills-sub {
+	background: #FFADAD;
+}
+
+#who #values-sub {
+	background: #FFC2C2;
+}
+
+#who #summary-sub {
+	background: #FFD6D6;
+}
+
+#research {
+	background: #9999FF;
+}
+
+#research #sectors-sub {
+	background: #ADADFF;
+}
+
+#research #roles-sub {
+	background: #C2C2FF;
+}
+
+#research #importance-sub {
+	background: #CCCCFF;
+}
+
+#decision {
+	background: #3399FF;
+}
+
+#achieving {
+	background: #66CC99;
+}
+
+#achieving #cv-sub {
+	background: #85D6AD;
+}
+
+#achieving #application-sub {
+	background: #A3E0C2;
+}
+
+#achieving #interview-sub {
+	background: #C2EBD6;
+}
+
+#achieving #assessment-sub {
+	background: #E0F5EB;
+}
