@@ -1,1 +1,2 @@
-Demo: http://personal.lse.ac.uk/wildmanm/careerbuilder.mockup.html
+<a href="http://personal.lse.ac.uk/wildmanm/careerbuilder.mockup.html"
+>Demo</a>
