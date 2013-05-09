@@ -4,7 +4,7 @@
 <body>
 	<ul id="careerBuilder">
 		<li class="section" id="who">
-			<h2 class="toggler" id="who-head">Who are you?</h2>
+			<h2 class="toggler" id="who-head">Who are you?<span class="number">1</span></h2>
 			<div class="section-content" id="who-content">
 				<p>Describe who you are:</p>
 				<ul>
@@ -106,7 +106,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="sub-section" id="values-sub">
+					<li class="subsection" id="values-sub">
 						<h3 class="toggler">Values and motivations</h3>
 						<div class="sub-content" id="values-sub-content">
 							<p>Pick the values and motivations which are most important to you.</p>
@@ -188,7 +188,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="sub-section" id="summary-sub">
+					<li class="subsection" id="summary-sub">
 						<h3 class="toggler">What next?</h3>
 						<div class="sub-content" id="summary-sub-content">
 							<p>You have selected:</p>
@@ -206,18 +206,20 @@
 									</td>
 								</tr>
 							</table>
-							<p>Now you have had time to think about your keys skills, values and motivations it might be helpful to take this to the next stage. LSE Careers has access to various self-assessment and career matching tools. They are designed to analyse your skills and to help you gain personal insight and information which can be helpful in making career decisions. Use these tools as suggestions and a useful starting point for thinking about important factors in your career.</p>
-							<p>Book a Careers Discussion here with one of our career consultants to discuss how understanding your skills and values can help you to analyse your career options.</p>
-							<p>It may help to think about the career options alumni with similar skills and subject backgrounds have selected. Take a look at the LSE Graduate Destinations data for your department and course.</p>
-							<p>Your department has an assigned careers consultant. Please check CareerHub to see department events tailored for students on your course.</p>
-							<p>Throughout the year LSE Careers runs a series of seminars in conjunction with the student counselling service. These sessions explore the issues you may face when considering job options and life after LSE. To book onto a Career In:Sight seminar please book via CareerHub.</p>
+							<div class="suggestion" id="skills-values-suggestion">
+								<p>Now you have had time to think about your keys skills, values and motivations it might be helpful to take this to the next stage. LSE Careers has access to various self-assessment and career matching tools. They are designed to analyse your skills and to help you gain personal insight and information which can be helpful in making career decisions. Use these tools as suggestions and a useful starting point for thinking about important factors in your career.</p>
+								<p>Book a Careers Discussion here with one of our career consultants to discuss how understanding your skills and values can help you to analyse your career options.</p>
+								<p>It may help to think about the career options alumni with similar skills and subject backgrounds have selected. Take a look at the LSE Graduate Destinations data for your department and course.</p>
+								<p>Your department has an assigned careers consultant. Please check CareerHub to see department events tailored for students on your course.</p>
+								<p>Throughout the year LSE Careers runs a series of seminars in conjunction with the student counselling service. These sessions explore the issues you may face when considering job options and life after LSE. To book onto a Career In:Sight seminar please book via CareerHub.</p>
+							</div>
 						</div>
 					</li>
 				</ul>
 			</div>
 		</li>
 		<li class="section" id="research">
-			<h2 class="toggler" id="research-head">Careers research</h2>
+			<h2 class="toggler" id="research-head">Careers research<span class="number">2</span></h2>
 			<div class="section-content" id="research-content">
 				<p>The more research you do, the more you will uncover new ideas and new career paths. You will still need to work out to which careers you are best suited. But without good research your options will always be limited and your career options may not be as good as they could be.</p>
 				<p>There are many ways to research career options and sometimes it is difficult to know where to start. It helps if you have an idea of what stage you are at with your Career Research. In answering the questions below we will be able to point you to the best research resources available at your stage.</p>
@@ -304,9 +306,115 @@
 				</ul>
 			</div>
 		</li>
-		<li class="section" id="decision"><h2 id="decision-head">Making a decision</h2></li>
+		<li class="section" id="decision">
+			<h2 class="toggler" id="decision-head">Making a decision<span class="number">3</span></h2>
+			<div class="section-content" id="decision-content">
+				<p>Decision making plays a key role in career planning and having too many choices will confuse you and slow you down. We all approach decision making in different ways some favour following their instincts, some take a pot luck approach whilst a fortunate few are lucky enough to have always known what they want to do!</p>
+				<p>In our experience, action occurs quickest when people recognise their decision making barriers which can often result from their own attitude rather than external factors.</p>
+				<ul>
+					<li class="subsection" id="barriers-sub">
+						<h3 class="toggler">Barriers to effective decision making</h3>
+						<div class="sub-content" id="barriers-sub-content">
+							<p>The following exercise will help you to reflect on what may be preventing you moving forward with your career decision making. The statements below are commonly cited reasons why LSE students find it difficult to take the next step.</p>
+							<p>Read through the following 30 statements and indicate all the constraints that you feel apply to you:</p>
+							<input type="checkbox" name="barrier" value="Nothing seems just right">
+							<span class="check-option">Nothing seems just right</span><br />
+							<input type="checkbox" name="barrier" value="Lack of information about the job market">
+							<span class="check-option">Lack of information about the job market</span><br />
+							<input type="checkbox" name="barrier" value="There are too many things I would like to do">
+							<span class="check-option">There are too many things I would like to do</span><br />
+							<input type="checkbox" name="barrier" value="There are too many options">
+							<span class="check-option">There are too many options</span><br />
+							<input type="checkbox" name="barrier" value="I do not feel ready to make decisions">
+							<span class="check-option">I do not feel ready to make decisions</span><br />
+							<input type="checkbox" name="barrier" value="I worry about taking risks">
+							<span class="check-option">I worry about taking risks</span><br />
+							<input type="checkbox" name="barrier" value="It all seems so final">
+							<span class="check-option">It all seems so final</span><br />
+							<input type="checkbox" name="barrier" value="How do I know if something will be right if I have not tried it?">
+							<span class="check-option">How do I know if something will be right if I have not tried it?</span><br />
+							<input type="checkbox" name="barrier" value="Just tell me what I should do">
+							<span class="check-option">Just tell me what I should do</span><br />
+							<input type="checkbox" name="barrier" value="I want time out to travel – not a career">
+							<span class="check-option">I want time out to travel – not a career</span><br />
+							<input type="checkbox" name="barrier" value="My parents/partner/personal tutor would not approve">
+							<span class="check-option">My parents/partner/personal tutor would not approve</span><br />
+							<input type="checkbox" name="barrier" value="None of my flatmates are planning to do these kinds of jobs">
+							<span class="check-option">None of my flatmates are planning to do these kinds of jobs</span><br />
+							<input type="checkbox" name="barrier" value="My peers have done so much more career stuff than me – I just feel like I’m lagging behind">
+							<span class="check-option">My peers have done so much more career stuff than me – I just feel like I’m lagging behind</span><br />
+							<input type="checkbox" name="barrier" value="LSE graduates do not do the kind of things which interest me">
+							<span class="check-option">LSE graduates do not do the kind of things which interest me</span><br />
+							<input type="checkbox" name="barrier" value="I have too many debts/financial commitments to proceed with my chosen career">
+							<span class="check-option">I have too many debts/financial commitments to proceed with my chosen career</span><br />
+							<input type="checkbox" name="barrier" value="I worry about having to retrain/complete further study">
+							<span class="check-option">I worry about having to retrain/complete further study</span><br />
+							<input type="checkbox" name="barrier" value="I lack the relevant qualifications">
+							<span class="check-option">I lack the relevant qualifications</span><br />
+							<input type="checkbox" name="barrier" value="I lack confidence selling myself">
+							<span class="check-option">I lack confidence selling myself</span><br />
+							<input type="checkbox" name="barrier" value="I just want to use my languages">
+							<span class="check-option">I just want to use my languages</span><br />
+							<input type="checkbox" name="barrier" value="I just want a good job that looks impressive on my CV">
+							<span class="check-option">I just want a good job that looks impressive on my CV</span><br />
+							<input type="checkbox" name="barrier" value="I have no experience other than voluntary work– no employer will be interested">
+							<span class="check-option">I have no experience other than voluntary work– no employer will be interested</span><br />
+							<input type="checkbox" name="barrier" value="I am too old/young">
+							<span class="check-option">I am too old/young</span><br />
+							<input type="checkbox" name="barrier" value="I am overqualified/under qualified">
+							<span class="check-option">I am overqualified/under qualified</span><br />
+							<input type="checkbox" name="barrier" value="My experience is all in one sector/industry">
+							<span class="check-option">My experience is all in one sector/industry</span><br />
+							<input type="checkbox" name="barrier" value="I don't interview well">
+							<span class="check-option">I don't interview well</span><br />
+							<input type="checkbox" name="barrier" value="Fear of rejection">
+							<span class="check-option">Fear of rejection</span><br />
+							<input type="checkbox" name="barrier" value="My job search to date has not been successful">
+							<span class="check-option">My job search to date has not been successful</span><br />
+							<input type="checkbox" name="barrier" value="Other factors">
+							<span class="check-option">Other factors</span><br />
+							<textarea id="other-barriers">
+							</textarea>
+						</div>
+					</li>
+					<li class="subsection" id="review-sub">
+						<h3 class="toggler">Reviewing your responses</h3>
+						<div class="sub-content" id="review-sub-content">
+							<div class="advice" id="perfect-job">
+								<h4 class="toggler">Looking for the perfect job? This may not actually exist!</h4>
+								<p>Remember that there isn’t a single perfect career for you. There are usually a range of possibilities that would suit you. Looking for the perfect job can actually prevent you from trialling some really exciting opportunities. The perfect job rarely exists and your preferences and the nature of the job are likely to change over time. Don’t make the mistake of passing up great work experience opportunities as the role does not match every marker. You will find you have to compromise on some things; this is not an exact science.</p>
+							</div>
+							<div class="advice" id="wrong-decision">
+								<h4 class="toggler">Afraid of making the wrong decision? Trial it – you’ve got nothing to lose</h4>
+								<p>Remember, the career choice you make now is not a life sentence! Most LSE graduates will make several career changes throughout their working lives. If the first role you do does not work out, then you will have a better understanding of what is important to you when you make the next choice. Focus on a few ideas at a time. Remember that you can always review and adapt your plans and goals as they develop and take shape. Why not use your time at university to try out a variety of roles so you can get a flavour of the work involved?</p>
+							</div>
+							<div class="advice" id="compromise">
+								<h4 class="toggler">Compromise may be the key</h4>
+								<p>If one particular factor, eg location or using languages, has a major priority in your choice of career, you may have to compromise on some other factors to help you get started. For example, you may have to take a job which is not in your chosen field, in order to make use of your languages in the first instance. Alternatively, in the short term you may have to compromise on your main deciding factor in career choice to enable you to realise your ambition longer term. For example, if your main priority is to live in London, but you also want to work in international development, you may have to gain experience in the field first, to enable you to move back to London at a later stage.</p>
+							</div>
+							<div class="advice" id="people-think">
+								<h4 class="toggler">Worried about what people will think?</h4>
+								<p>If you are concerned about what other people think – then you need to assess how important these influences are for you. Is it that important for you to work in a similar sector to your friends?? In career discussions we commonly hear students admitting to applying for a role as many of their friends were also applying. You have to be genuinely interested in a role to actually enjoy the work so does it really matter what your LSE friends are doing? More significant can be the influences of parents or partners – you need to be honest with yourself and with them about how important their views are.</p>
+							</div>
+							<div class="advice" id="confidence">
+								<h4 class="toggler">Do you lack confidence?</h4>
+								<p>If you lack confidence in yourself, try to be realistic. Remember you will graduate from a globally respected university with a range of transferable academic skills and personal qualities. Review your PDAM to gain a clearer understanding of what you have already engaged in. Most careers can be achieved through gaining a range of work experience – it’s about finding the right experience to get you there!</p>
+							</div>
+						</div>
+					</li>
+					<li class="subsection" id="further-sub">
+						<h3 class="toggler">Further support and advice</h3>
+						<div class="sub-content" id="further-sub-content">
+								<p>LSE Careers have some futher information and advice on choosing a career on our website.</p>
+								<p>Mindtools have a resource which may help you to recognise how good you are at making decisions.</p>
+								<p>If you're still having difficulty making a decision book a Careers Discussion with one of our careers consultants here. We can talk through strategies to help you arrive at a decision you’re comfortable with.</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</li>
 		<li class="section" id="achieving">
-			<h2 class="toggler" id="achieving-head">Achieving</h2>
+			<h2 class="toggler" id="achieving-head">Achieving<span class="number">4</span></h2>
 			<div class="section-content" id="achieving-content">
 				<p>This section of ‘Career Builder’ is designed to help you navigate the process of applying for jobs and preparing for interviews and assessment centres. It is designed to help you utilise your time with LSE Careers efficiently.</p>
 				<p>To ensure you get the most out of your termly appointment allocation (4 x 15 minute appointments) we would advise you to read and answer the following questions prior to booking an appointment:</p>	
