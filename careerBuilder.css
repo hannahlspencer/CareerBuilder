@@ -15,7 +15,7 @@
 }
 
 #careerBuilder h2 {
-	padding: 7px 0 0 10px;
+	padding: 7px 0 0 15px;
 	font-size: 1.5em;
 }
 
@@ -27,22 +27,22 @@
 }
 
 #careerbuilder #who-head .number {
-	padding: 0 0 0 289px;
+	padding: 0 0 0 284px;
 	color: #F8AA64;
 }
 
 #careerbuilder #research-head .number {
-	padding: 0 0 0 255px;
+	padding: 0 0 0 250px;
 	color: #5EB8E1
 }
 
 #careerbuilder #decision-head .number {
-	padding: 0 0 0 247px;
+	padding: 0 0 0 242px;
 	color: #B397C8;
 }
 
 #careerbuilder #achieving-head .number {
-	padding: 0 0 0 335px;
+	padding: 0 0 0 330px;
 	color: #59C56F;
 }
 
@@ -57,7 +57,7 @@
 }
 
 #careerBuilder p {
-	padding: 0 10px 15px 10px;
+	padding: 0 10px 15px 15px;
 	margin:0;
 	font-size: 12px;
 }
@@ -134,7 +134,7 @@
 .section {
 	color: #fff;
 	margin: 0 0 8px 0;
-	padding: 0 0 5px 0;
+	padding: 0 0 3px 0;
 }
 
 .subsection {
