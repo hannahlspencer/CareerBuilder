@@ -99,6 +99,7 @@
 
 .check-option {
 	display: inline;
+	vertical-align: 2px;
 }
 
 .check-option span {
