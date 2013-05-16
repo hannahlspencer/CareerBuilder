@@ -5,7 +5,9 @@ $('.section-content').hide();
 $('.sub-content').hide();
 $('.suggestion').hide();
 $('.advice p').hide();
+$('#skills-values-suggestion').hide();
 $('#other-barriers').hide();
+$('#review-sub-content .advice').hide();
 $('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
 
@@ -58,9 +60,28 @@ $('input:checkbox').change(function() {
 		if (skillsCount == 0 && valsCount == 0)
 			$('#skills-values-suggestion').hide('slow');
 	}
-	else if ($(this).attr('name') == 'barrier') {
-		if ($(this).attr('value') == 'Other factors') {
-			$('#other-barriers').toggle('slow');
-		}
+});
+
+$('input:checkbox[name="barrier"]').change(function() { 
+	$('.barrier-list').html("");
+	$('#review-sub-content .advice').hide();
+	if ($(this).attr('value') == 'Other factors') {
+		$('#other-barriers').toggle('slow');
 	}
+	var noneSelected = true;
+	$('input:checkbox[name="barrier"]').each(function() {
+		if ($(this).is(':checked')) {
+			noneSelected = false;
+			var checkClass = $(this).attr('class');
+			var checkVal = $(this).attr('value');
+			$('#review-sub-content .advice').each(function() {
+				var adviceID = $(this).attr('id');
+				if (checkClass.indexOf(adviceID) >= 0) {
+					$('#' + adviceID + ' .barrier-list').append("<li>" + checkVal + "</li>");
+					$(this).show();
+				}
+			});
+		}
+	});
+	noneSelected ? $('.no-selection').show() : $('.no-selection').hide();
 });

@@ -206,7 +206,7 @@
 									</td>
 								</tr>
 							</table>
-							<div class="suggestion" id="skills-values-suggestion">
+							<div id="skills-values-suggestion">
 								<p>Now you have had time to think about your keys skills, values and motivations it might be helpful to take this to the next stage. LSE Careers has access to various self-assessment and career matching tools. They are designed to analyse your skills and to help you gain personal insight and information which can be helpful in making career decisions. Use these tools as suggestions and a useful starting point for thinking about important factors in your career.</p>
 								<p>Book a Careers Discussion here with one of our career consultants to discuss how understanding your skills and values can help you to analyse your career options.</p>
 								<p>It may help to think about the career options alumni with similar skills and subject backgrounds have selected. Take a look at the LSE Graduate Destinations data for your department and course.</p>
@@ -317,59 +317,63 @@
 						<div class="sub-content" id="barriers-sub-content">
 							<p>The following exercise will help you to reflect on what may be preventing you moving forward with your career decision making. The statements below are commonly cited reasons why LSE students find it difficult to take the next step.</p>
 							<p>Read through the following 30 statements and indicate all the constraints that you feel apply to you:</p>
-							<input type="checkbox" name="barrier" value="Nothing seems just right">
+							<input type="checkbox" name="barrier" value="Nothing seems just right" class="perfect-job compromise">
 							<span class="check-option">Nothing seems just right</span><br />
-							<input type="checkbox" name="barrier" value="Lack of information about the job market">
+							<input type="checkbox" name="barrier" value="Lack of information about the job market" class="perfect-job wrong-decision">
 							<span class="check-option">Lack of information about the job market</span><br />
-							<input type="checkbox" name="barrier" value="There are too many things I would like to do">
+							<input type="checkbox" name="barrier" value="There are too many things I would like to do" class="wrong-decision compromise">
 							<span class="check-option">There are too many things I would like to do</span><br />
-							<input type="checkbox" name="barrier" value="There are too many options">
+							<input type="checkbox" name="barrier" value="There are too many options" class="wrong-decision">
 							<span class="check-option">There are too many options</span><br />
-							<input type="checkbox" name="barrier" value="I do not feel ready to make decisions">
+							<input type="checkbox" name="barrier" value="I do not feel ready to make decisions" class="opt-out">
 							<span class="check-option">I do not feel ready to make decisions</span><br />
-							<input type="checkbox" name="barrier" value="I worry about taking risks">
+							<input type="checkbox" name="barrier" value="I worry about taking risks" class="wrong-decision confidence">
 							<span class="check-option">I worry about taking risks</span><br />
-							<input type="checkbox" name="barrier" value="It all seems so final">
+							<input type="checkbox" name="barrier" value="It all seems so final" class="wrong-decision">
 							<span class="check-option">It all seems so final</span><br />
-							<input type="checkbox" name="barrier" value="How do I know if something will be right if I have not tried it?">
+							<input type="checkbox" name="barrier" value="How do I know if something will be right if I have not tried it?" class="wrong-decision">
 							<span class="check-option">How do I know if something will be right if I have not tried it?</span><br />
-							<input type="checkbox" name="barrier" value="Just tell me what I should do">
+							<input type="checkbox" name="barrier" value="Just tell me what I should do" class="people-think confidence">
 							<span class="check-option">Just tell me what I should do</span><br />
-							<input type="checkbox" name="barrier" value="I want time out to travel – not a career">
+							<input type="checkbox" name="barrier" value="I want time out to travel – not a career" class="opt-out">
 							<span class="check-option">I want time out to travel – not a career</span><br />
-							<input type="checkbox" name="barrier" value="My parents/partner/personal tutor would not approve">
+							<input type="checkbox" name="barrier" value="My parents/partner/personal tutor would not approve" class="people-think">
 							<span class="check-option">My parents/partner/personal tutor would not approve</span><br />
-							<input type="checkbox" name="barrier" value="None of my flatmates are planning to do these kinds of jobs">
+							<input type="checkbox" name="barrier" value="None of my flatmates are planning to do these kinds of jobs" class="people-think">
 							<span class="check-option">None of my flatmates are planning to do these kinds of jobs</span><br />
-							<input type="checkbox" name="barrier" value="My peers have done so much more career stuff than me – I just feel like I’m lagging behind">
+							<input type="checkbox" name="barrier" value="My peers have done so much more career stuff than me – I just feel like I’m lagging behind" class="opt-out confidence">
 							<span class="check-option">My peers have done so much more career stuff than me – I just feel like I’m lagging behind</span><br />
-							<input type="checkbox" name="barrier" value="LSE graduates do not do the kind of things which interest me">
+							<input type="checkbox" name="barrier" value="LSE graduates do not do the kind of things which interest me" class="perfect-job compromise">
 							<span class="check-option">LSE graduates do not do the kind of things which interest me</span><br />
-							<input type="checkbox" name="barrier" value="I have too many debts/financial commitments to proceed with my chosen career">
+							<input type="checkbox" name="barrier" value="I have too many debts/financial commitments to proceed with my chosen career" class="compromise opt-out">
 							<span class="check-option">I have too many debts/financial commitments to proceed with my chosen career</span><br />
-							<input type="checkbox" name="barrier" value="I worry about having to retrain/complete further study">
+							<input type="checkbox" name="barrier" value="I worry about having to retrain/complete further study" class="compromise">
 							<span class="check-option">I worry about having to retrain/complete further study</span><br />
-							<input type="checkbox" name="barrier" value="I lack the relevant qualifications">
+							<input type="checkbox" name="barrier" value="I lack the relevant qualifications" class="compromise confidence">
 							<span class="check-option">I lack the relevant qualifications</span><br />
-							<input type="checkbox" name="barrier" value="I lack confidence selling myself">
+							<input type="checkbox" name="barrier" value="Nothing I want to do is available where I want to live" class="perfect-job compromise">
+							<span class="check-option">Nothing I want to do is available where I want to live</span><br />
+							<input type="checkbox" name="barrier" value="I have work permit/visa issues" class="compromise opt-out">
+							<span class="check-option">I have work permit/visa issues</span><br />
+							<input type="checkbox" name="barrier" value="I lack confidence selling myself" class="confidence">
 							<span class="check-option">I lack confidence selling myself</span><br />
-							<input type="checkbox" name="barrier" value="I just want to use my languages">
+							<input type="checkbox" name="barrier" value="I just want to use my languages" class="perfect-job compromise">
 							<span class="check-option">I just want to use my languages</span><br />
-							<input type="checkbox" name="barrier" value="I just want a good job that looks impressive on my CV">
+							<input type="checkbox" name="barrier" value="I just want a good job that looks impressive on my CV" class="people-think">
 							<span class="check-option">I just want a good job that looks impressive on my CV</span><br />
-							<input type="checkbox" name="barrier" value="I have no experience other than voluntary work– no employer will be interested">
+							<input type="checkbox" name="barrier" value="I have no experience other than voluntary work– no employer will be interested" class="confidence">
 							<span class="check-option">I have no experience other than voluntary work– no employer will be interested</span><br />
-							<input type="checkbox" name="barrier" value="I am too old/young">
+							<input type="checkbox" name="barrier" value="I am too old/young" class="confidence">
 							<span class="check-option">I am too old/young</span><br />
-							<input type="checkbox" name="barrier" value="I am overqualified/under qualified">
+							<input type="checkbox" name="barrier" value="I am overqualified/under qualified" class="confidence">
 							<span class="check-option">I am overqualified/under qualified</span><br />
-							<input type="checkbox" name="barrier" value="My experience is all in one sector/industry">
+							<input type="checkbox" name="barrier" value="My experience is all in one sector/industry" class="wrong-decision confidence">
 							<span class="check-option">My experience is all in one sector/industry</span><br />
-							<input type="checkbox" name="barrier" value="I don't interview well">
+							<input type="checkbox" name="barrier" value="I don't interview well" class="confidence">
 							<span class="check-option">I don't interview well</span><br />
-							<input type="checkbox" name="barrier" value="Fear of rejection">
+							<input type="checkbox" name="barrier" value="Fear of rejection" class="opt-out confidence">
 							<span class="check-option">Fear of rejection</span><br />
-							<input type="checkbox" name="barrier" value="My job search to date has not been successful">
+							<input type="checkbox" name="barrier" value="My job search to date has not been successful" class="opt-out">
 							<span class="check-option">My job search to date has not been successful</span><br />
 							<input type="checkbox" name="barrier" value="Other factors">
 							<span class="check-option">Other factors</span><br />
@@ -380,24 +384,35 @@
 					<li class="subsection" id="review-sub">
 						<h3 class="toggler">Reviewing your responses</h3>
 						<div class="sub-content" id="review-sub-content">
-							<div class="advice" id="perfect-job">
+							<p class="no-selection">Please select one or more decision making barriers from the section above.</p>
+							<div class="advice 1" id="perfect-job">
 								<h4 class="toggler">Looking for the perfect job? This may not actually exist!</h4>
+								<ul class="barrier-list"></ul>
 								<p>Remember that there isn’t a single perfect career for you. There are usually a range of possibilities that would suit you. Looking for the perfect job can actually prevent you from trialling some really exciting opportunities. The perfect job rarely exists and your preferences and the nature of the job are likely to change over time. Don’t make the mistake of passing up great work experience opportunities as the role does not match every marker. You will find you have to compromise on some things; this is not an exact science.</p>
 							</div>
-							<div class="advice" id="wrong-decision">
+							<div class="advice 2" id="wrong-decision">
 								<h4 class="toggler">Afraid of making the wrong decision? Trial it – you’ve got nothing to lose</h4>
+								<ul class="barrier-list"></ul>
 								<p>Remember, the career choice you make now is not a life sentence! Most LSE graduates will make several career changes throughout their working lives. If the first role you do does not work out, then you will have a better understanding of what is important to you when you make the next choice. Focus on a few ideas at a time. Remember that you can always review and adapt your plans and goals as they develop and take shape. Why not use your time at university to try out a variety of roles so you can get a flavour of the work involved?</p>
 							</div>
-							<div class="advice" id="compromise">
+							<div class="advice 3" id="compromise">
 								<h4 class="toggler">Compromise may be the key</h4>
+								<ul class="barrier-list"></ul>
 								<p>If one particular factor, eg location or using languages, has a major priority in your choice of career, you may have to compromise on some other factors to help you get started. For example, you may have to take a job which is not in your chosen field, in order to make use of your languages in the first instance. Alternatively, in the short term you may have to compromise on your main deciding factor in career choice to enable you to realise your ambition longer term. For example, if your main priority is to live in London, but you also want to work in international development, you may have to gain experience in the field first, to enable you to move back to London at a later stage.</p>
 							</div>
-							<div class="advice" id="people-think">
+							<div class="advice 4" id="people-think">
 								<h4 class="toggler">Worried about what people will think?</h4>
+								<ul class="barrier-list"></ul>
 								<p>If you are concerned about what other people think – then you need to assess how important these influences are for you. Is it that important for you to work in a similar sector to your friends?? In career discussions we commonly hear students admitting to applying for a role as many of their friends were also applying. You have to be genuinely interested in a role to actually enjoy the work so does it really matter what your LSE friends are doing? More significant can be the influences of parents or partners – you need to be honest with yourself and with them about how important their views are.</p>
 							</div>
-							<div class="advice" id="confidence">
+							<div class="advice opt-out" id="opt-out">
+								<h4 class="toggler">Are you opting out?</h4>
+								<ul class="barrier-list"></ul>
+								<p>It often feels easier to put off making the big decisions. Even if you are planning on looking for a job following your exams there are still small things you can be doing whilst at university to make the process easier when you finish. If you plan to travel – make sure you know what your first steps will be when you return. In reality, very few people find 'themselves' or their ideal career whilst daydreaming on a beach!</p>
+							</div>
+							<div class="advice 6" id="confidence">
 								<h4 class="toggler">Do you lack confidence?</h4>
+								<ul class="barrier-list"></ul>
 								<p>If you lack confidence in yourself, try to be realistic. Remember you will graduate from a globally respected university with a range of transferable academic skills and personal qualities. Review your PDAM to gain a clearer understanding of what you have already engaged in. Most careers can be achieved through gaining a range of work experience – it’s about finding the right experience to get you there!</p>
 							</div>
 						</div>
@@ -417,7 +432,7 @@
 			<h2 class="toggler" id="achieving-head">Achieving<span class="number">4</span></h2>
 			<div class="section-content" id="achieving-content">
 				<p>This section of ‘Career Builder’ is designed to help you navigate the process of applying for jobs and preparing for interviews and assessment centres. It is designed to help you utilise your time with LSE Careers efficiently.</p>
-				<p>To ensure you get the most out of your termly appointment allocation (4 x 15 minute appointments) we would advise you to read and answer the following questions prior to booking an appointment:</p>	
+				<p>To ensure you get the most out of your termly appointment allocation (4 x 1opt-out minute appointments) we would advise you to read and answer the following questions prior to booking an appointment:</p>	
 				<ul>
 					<li class="subsection" id="cv-sub">
 						<h3 class="toggler">CV and Cover Letter support</h3>

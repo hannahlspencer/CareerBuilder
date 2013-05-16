@@ -19,6 +19,16 @@
 	font-size: 1.5em;
 }
 
+#careerBuilder h3 {
+	font-size: 1.3em;
+}
+
+#careerBuilder h4 {
+	margin: 10px 0 0 0;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
 #careerbuilder .number {
 	vertical-align: -10px;
 	font-weight: bold;
@@ -44,16 +54,6 @@
 #careerbuilder #achieving-head .number {
 	padding: 0 0 0 330px;
 	color: #59C56F;
-}
-
-#careerBuilder h3 {
-	font-size: 1.3em;
-}
-
-#careerBuilder h4 {
-	margin: 10px 0 0 0;
-	font-weight: bold;
-	font-size: 1em;
 }
 
 #careerBuilder p {
@@ -130,6 +130,16 @@
 	height: 60px;
 	margin: 5px 0 0 0;
 }
+
+#careerBuilder ul.barrier-list, #careerBuilder ul#skills-summary, #careerBuilder ul#values-summary {
+	list-style-type: square;
+}
+
+#careerBuilder ul.barrier-list li, #careerBuilder ul#skills-summary li, #careerBuilder ul#values-summary li {
+	padding: 3px 0 0 0;
+	margin-left: 17px;
+}
+
 
 /*Colours*/
 .section {
