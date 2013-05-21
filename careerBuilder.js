@@ -54,9 +54,9 @@ $('input:checkbox').change(function() {
 			}
 		});
 		if (skillsCount == 0)
-			$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
+			$('#skills-summary').append("<li>" + noSelectMessage + " skills</li>");
 		if (valsCount == 0)
-			$('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
+			$('#values-summary').append("<li>" + noSelectMessage + " values</li>");
 		if (skillsCount == 0 && valsCount == 0)
 			$('#skills-values-suggestion').hide('slow');
 	}
