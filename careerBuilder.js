@@ -1,5 +1,5 @@
 var noSelectMessage = "You have not selected any";
-var totalSkills = 13;
+var totalSkills = $('input:checkbox[name="skill"]').length;
 
 //set up
 $('.section-content').hide();
@@ -8,7 +8,6 @@ $('.suggestion').hide();
 $('.advice p').hide();
 $('#skills-values-suggestion').hide();
 $('#all-skills-advice').hide();
-$('#other-barriers').hide();
 $('#review-sub-content .advice').hide();
 $('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
@@ -57,7 +56,8 @@ $('input:checkbox').change(function() {
 				}
 			}
 			else if ($(this).not(':checked')) {
-				$('#missing-skill-list #' + checkClass).show();
+				var missingSkillTargetId = '#missing-skill-list #' + checkClass;
+				$(missingSkillTargetId).show();
 			}
 		});
 		if (skillsCount == totalSkills) {
@@ -80,9 +80,6 @@ $('input:checkbox').change(function() {
 $('input:checkbox[name="barrier"]').change(function() { 
 	$('.barrier-list').html("");
 	$('#review-sub-content .advice').hide();
-	if ($(this).attr('value') == 'Other factors') {
-		$('#other-barriers').toggle('slow');
-	}
 	var noneSelected = true;
 	$('input:checkbox[name="barrier"]').each(function() {
 		if ($(this).is(':checked')) {
