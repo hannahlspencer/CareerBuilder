@@ -1,4 +1,5 @@
 var noSelectMessage = "You have not selected any";
+var totalSkills = 13;
 
 //set up
 $('.section-content').hide();
@@ -6,6 +7,7 @@ $('.sub-content').hide();
 $('.suggestion').hide();
 $('.advice p').hide();
 $('#skills-values-suggestion').hide();
+$('#all-skills-advice').hide();
 $('#other-barriers').hide();
 $('#review-sub-content .advice').hide();
 $('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
@@ -36,12 +38,14 @@ $('input:checkbox').change(function() {
 	if ($(this).attr('name') == 'skill' || $(this).attr('name') == 'value') { //add selected checkbox items to summary lists
 		$('#skills-summary').html("");
 		$('#values-summary').html("");
+		$('#missing-skill-list li').hide();
 		$('#skills-values-suggestion').show('slow');
 		var skillsCount = 0;
 		var valsCount = 0;
 		$('input:checkbox').each(function() {
 			var checkName = $(this).attr('name');
 			var checkVal = $(this).attr('value');
+			var checkClass = $(this).attr('class');
 			if ($(this).is(':checked')) {
 				if (checkName == 'skill') {
 					$('#skills-summary').append("<li>" + checkVal + "</li>");
@@ -52,7 +56,18 @@ $('input:checkbox').change(function() {
 					valsCount++;
 				}
 			}
+			else if ($(this).not(':checked')) {
+				$('#missing-skill-list #' + checkClass).show();
+			}
 		});
+		if (skillsCount == totalSkills) {
+			$('#missing-skills-advice').hide();
+			$('#all-skills-advice').show();
+		}
+		else {
+			$('#all-skills-advice').hide();
+			$('#missing-skills-advice').show();
+		}
 		if (skillsCount == 0)
 			$('#skills-summary').append("<li>" + noSelectMessage + " skills</li>");
 		if (valsCount == 0)

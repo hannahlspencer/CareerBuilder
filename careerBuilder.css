@@ -9,6 +9,36 @@
 	margin: 0;
 }
 
+#careerBuilder a, #careerBuilder a:visited {
+	color: #F00;
+	text-decoration: none;
+}
+
+#careerBuilder a:hover, #careerBuilder a:active{
+	text-decoration: underline;
+}
+
+
+#careerBuilder ul#missing-skill-list {
+	list-style: none;
+	margin: 0;
+	overflow: auto;
+}
+
+#careerBuilder ul#missing-skill-list li {
+	padding: 0;
+	margin: 0;
+}
+
+#careerBuilder ul#missing-skill-list li a {
+	padding: 10px;
+	margin: 5px 10px 5px 0;
+	display: block;
+	background: #FFF;
+	width: 43%;
+	float: left;
+}
+
 #careerBuilder h2, #careerBuilder h3 {
 	margin: 0;
 	font-weight: normal;
@@ -38,7 +68,7 @@
 
 #careerbuilder #who-head .number {
 	padding: 0 0 0 284px;
-	color: #F8AA64;
+	color: #F79E4D;
 }
 
 #careerbuilder #research-head .number {
@@ -160,15 +190,19 @@
 }
 
 #who #skills-sub {
-	background: #F8AA64;
+	background: #F79E4D;
+}
+
+#who #pdam-sub {
+	background: #F9B67A;
 }
 
 #who #values-sub {
-	background: #FAC290;
+	background: #FBCFA6;
 }
 
 #who #summary-sub {
-	background: #FCDBBC;
+	background: #FDE7D3;
 }
 
 #research, #research .subsection {
