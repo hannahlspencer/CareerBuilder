@@ -1,6 +1,7 @@
 #careerBuilder {
 	width: 488px;
 	margin: 25px auto !important;
+	border-style: none;
 }
 
 #careerBuilder, #careerBuilder ul {
@@ -20,8 +21,6 @@
 
 
 #careerBuilder ul#missing-skill-list {
-	list-style: none;
-	margin: 0;
 	overflow: auto;
 }
 
@@ -34,7 +33,7 @@
 	padding: 10px;
 	margin: 5px 10px 5px 0;
 	display: block;
-	background: #FFF;
+	background: #F2F2F2;
 	width: 43%;
 	float: left;
 }
