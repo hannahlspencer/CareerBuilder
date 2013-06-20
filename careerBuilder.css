@@ -57,30 +57,34 @@
 	font-size: 1.2em;
 }
 
-#careerbuilder .number {
+#careerBuilder .toggler span.toggle-arrow{
+	font-weight: normal;
+}
+
+#careerBuilder .toggler .number {
 	vertical-align: -10px;
 	font-weight: bold;
 	font-size: 2em;
 	margin: 0;
 }
 
-#careerbuilder #who-head .number {
-	padding: 0 0 0 284px;
+#careerBuilder #who-head .number {
+	padding: 0 0 0 258px;
 	color: #F79E4D;
 }
 
-#careerbuilder #research-head .number {
-	padding: 0 0 0 250px;
+#careerBuilder #research-head .number {
+	padding: 0 0 0 224px;
 	color: #5EB8E1
 }
 
-#careerbuilder #decision-head .number {
-	padding: 0 0 0 242px;
+#careerBuilder #decision-head .number {
+	padding: 0 0 0 214px;
 	color: #B397C8;
 }
 
-#careerbuilder #achieving-head .number {
-	padding: 0 0 0 330px;
+#careerBuilder #achieving-head .number {
+	padding: 0 0 0 304px;
 	color: #59C56F;
 }
 
