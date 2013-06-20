@@ -59,6 +59,7 @@
 
 #careerBuilder .toggler span.toggle-arrow{
 	font-weight: normal;
+	font-size: 1.6em;
 }
 
 #careerBuilder .toggler .number {
@@ -69,22 +70,22 @@
 }
 
 #careerBuilder #who-head .number {
-	padding: 0 0 0 258px;
+	padding: 0 0 0 252px;
 	color: #F79E4D;
 }
 
 #careerBuilder #research-head .number {
-	padding: 0 0 0 224px;
+	padding: 0 0 0 218px;
 	color: #5EB8E1
 }
 
 #careerBuilder #decision-head .number {
-	padding: 0 0 0 214px;
+	padding: 0 0 0 208px;
 	color: #B397C8;
 }
 
 #careerBuilder #achieving-head .number {
-	padding: 0 0 0 304px;
+	padding: 0 0 0 298px;
 	color: #59C56F;
 }
 
@@ -118,7 +119,7 @@
 }
 
 #careerBuilder li li {
-	padding: 10px;
+	padding: 2px 10px 10px 10px;
 }
 
 #careerBuilder li li p{

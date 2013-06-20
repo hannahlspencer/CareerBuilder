@@ -1,7 +1,7 @@
 var noSelectMessage = "You have not selected any";
 var totalSkills = $('input:checkbox[name="skill"]').length;
-var right = "&#9654; ";
-var down = "&#9660; ";
+var up = "&#9662; ";
+var down = "&#9656; ";
 
 //set up
 $('.section-content').hide();
@@ -13,12 +13,12 @@ $('#all-skills-advice').hide();
 $('#review-sub-content .advice').hide();
 $('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
-$('.toggler').prepend("<span class='toggle-arrow'>&#9654; </span>");
+$('.toggler').prepend("<span class='toggle-arrow'>" + down + "</span>");
 
 function toggleWithArrow($target, speed) {
 	$target.toggleClass('hidden');
-	$target.siblings().toggle(speed, function() {
-		$target.children('.toggle-arrow').html($target.hasClass('hidden') ? right : down);
+	$target.siblings().slideToggle(speed, function() {
+		$target.children('.toggle-arrow').html($target.hasClass('hidden') ? down : up);
 	});
 }
 
@@ -31,8 +31,8 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 			var $thisH2 = $(this);
 			if ($thisH2.attr('id') != headID) {
 				$thisH2.addClass('hidden');
-				$thisH2.siblings().hide('slow', function() {
-					$thisH2.children('.toggle-arrow').html($thisH2.hasClass('hidden') ? right : down);
+				$thisH2.siblings().slideUp('slow', function() {
+					$thisH2.children('.toggle-arrow').html($thisH2.hasClass('hidden') ? down : up);
 				});
 			}
 		});
