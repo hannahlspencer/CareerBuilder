@@ -1,3 +1,4 @@
+//globals
 var noSelectMessage = "You have not selected any";
 var totalSkills = $('input:checkbox[name="skill"]').length;
 var up = "&#9662; ";
@@ -7,6 +8,7 @@ var down = "&#9656; ";
 $('.section-content').hide();
 $('.sub-content').hide();
 $('.suggestion').hide();
+$('#further-sub-content .suggestion').show();
 $('.advice p').hide();
 $('#skills-values-suggestion').hide();
 $('#all-skills-advice').hide();
@@ -15,16 +17,12 @@ $('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
 $('.toggler').prepend("<span class='toggle-arrow'>" + down + "</span>");
 
-function toggleWithArrow($target, speed) {
-	$target.toggleClass('hidden');
-	$target.siblings().slideToggle(speed, function() {
-		$target.children('.toggle-arrow').html($target.hasClass('hidden') ? down : up);
-	});
-}
-
 $('.toggler').click(function() { //toggle section & subsection visibility
 	var $this = $(this);
-	toggleWithArrow($this, 'slow');
+	$this.toggleClass('hidden');
+	$this.siblings().slideToggle('slow', function() {
+		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? down : up);
+	});
 	if($this.is('h2')) {
 		var headID = $this.attr('id');
 		$('h2.toggler').each(function() {
@@ -41,10 +39,11 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 
 $('input:radio').change(function() { //expand advice according to radio button selection
 	$('input:radio').each(function() {
-		var qName = this.name;
-		var qVal = this.value;
+		var $this = $(this);
+		var qName = $this.attr('name');
+		var qVal = $this.attr('value');
 		var sID = qName + '-' + qVal;
-		$(this).is(':checked') ? $('#' + sID).show('slow') : $('#' + sID).hide();
+		$this.is(':checked') ? $('#' + sID).slideDown('slow') : $('#' + sID).slideUp('slow');
 	});
 });
 
@@ -105,10 +104,11 @@ $('input:checkbox[name="barrier"]').change(function() {
 			var checkClass = $this.attr('class');
 			var checkVal = $this.attr('value');
 			$('#review-sub-content .advice').each(function() {
-				var adviceID = $(this).attr('id');
+				var $this = $(this);
+				var adviceID = $this.attr('id');
 				if (checkClass.indexOf(adviceID) >= 0) {
 					$('#' + adviceID + ' .barrier-list').append("<li>" + checkVal + "</li>");
-					$(this).show();
+					$this.show();
 				}
 			});
 		}
