@@ -1,8 +1,9 @@
 //globals
 var noSelectMessage = "You have not selected any";
 var totalSkills = $('input:checkbox[name="skill"]').length;
-var up = "&#9652; ";
+var right = "&#9656; ";
 var down = "&#9662; ";
+var up = "&#9652; ";
 
 //set up
 $('input:checkbox, input:radio').removeAttr('checked'); //unchecks boxes which remain checked in moz after refreshing
@@ -16,14 +17,14 @@ $('#all-skills-advice').hide();
 $('#review-sub-content .advice').hide();
 $('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
-$('.toggler').prepend("<span class='toggle-arrow'>" + down + "</span>");
+$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 
 $('.toggler').hover(
 	function() {
-		$(this).children('.toggle-arrow').css('color', 'red');
+		$(this).children('.toggle-arrow').html($(this).hasClass('hidden') ? down : up);
 	},
 	function() {
-		$(this).children('.toggle-arrow').removeAttr('style');
+		$(this).children('.toggle-arrow').html($(this).hasClass('hidden') ? right : down);
 	}
 );
 	
@@ -31,7 +32,7 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 	var $this = $(this);
 	$this.toggleClass('hidden');
 	$this.siblings().slideToggle('slow', function() {
-		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? down : up);
+		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down);
 	});
 	if($this.is('h2')) {
 		var headID = $this.attr('id');
@@ -40,7 +41,7 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 			if ($thisH2.attr('id') != headID) {
 				$thisH2.addClass('hidden');
 				$thisH2.siblings().slideUp('slow', function() {
-					$thisH2.children('.toggle-arrow').html($thisH2.hasClass('hidden') ? down : up);
+					$thisH2.children('.toggle-arrow').html($thisH2.hasClass('hidden') ? right : down);
 				});
 			}
 		});
