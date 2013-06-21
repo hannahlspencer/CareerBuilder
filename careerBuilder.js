@@ -1,10 +1,11 @@
 //globals
 var noSelectMessage = "You have not selected any";
 var totalSkills = $('input:checkbox[name="skill"]').length;
-var up = "&#9662; ";
-var down = "&#9656; ";
+var up = "&#9652; ";
+var down = "&#9662; ";
 
 //set up
+$('input:checkbox, input:radio').removeAttr('checked'); //unchecks boxes which remain checked in moz after refreshing
 $('.section-content').hide();
 $('.sub-content').hide();
 $('.suggestion').hide();
@@ -17,6 +18,15 @@ $('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
 $('.toggler').prepend("<span class='toggle-arrow'>" + down + "</span>");
 
+$('.toggler').hover(
+	function() {
+		$(this).children('.toggle-arrow').css('color', 'red');
+	},
+	function() {
+		$(this).children('.toggle-arrow').removeAttr('style');
+	}
+);
+	
 $('.toggler').click(function() { //toggle section & subsection visibility
 	var $this = $(this);
 	$this.toggleClass('hidden');
@@ -34,7 +44,7 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 				});
 			}
 		});
-  }
+	}
 });
 
 $('input:radio').change(function() { //expand advice according to radio button selection
