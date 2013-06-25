@@ -64,7 +64,7 @@ $('input:checkbox').change(function() {
 		$('#skills-summary').html("");
 		$('#values-summary').html("");
 		$('#missing-skill-list li').hide();
-		$('#skills-values-suggestion').show('slow');
+		$('#skills-values-suggestion').slideDown('slow');
 		var skillsCount = 0;
 		var valsCount = 0;
 		$('input:checkbox').each(function() {
@@ -100,7 +100,7 @@ $('input:checkbox').change(function() {
 		if (valsCount == 0)
 			$('#values-summary').append("<li>" + noSelectMessage + " values</li>");
 		if (skillsCount == 0 && valsCount == 0)
-			$('#skills-values-suggestion').hide('slow');
+			$('#skills-values-suggestion').slideUp('slow');
 	}
 });
 
