@@ -166,8 +166,6 @@
 	overflow: visible;
 }
 
-
-/*Colours*/
 #careerBuilder .section {
 	color: #fff;
 	margin: 0 0 8px 0;
@@ -179,6 +177,7 @@
 	margin: 5px 5px 0 5px;
 }
 
+/*Colours*/
 #who, #who .subsection {
 	background: #F58621;
 	border-bottom: 2px solid #935014;
