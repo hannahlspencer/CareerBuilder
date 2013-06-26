@@ -1,6 +1,7 @@
 //globals
 var noSelectMessage = "You have not selected any";
 var totalSkills = $('input:checkbox[name="skill"]').length;
+var totalValues = $('input:checkbox[name="value"]').length;
 var right = "&#9656; ";
 var down = "&#9662; ";
 var up = "&#9652; ";
@@ -13,7 +14,7 @@ $('.suggestion').hide();
 $('#further-sub-content .suggestion').show();
 $('.advice p').hide();
 $('#skills-values-suggestion').hide();
-$('#all-skills-advice').hide();
+$('.skill-value-advice').hide();
 $('#review-sub-content .advice').hide();
 $('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
@@ -21,10 +22,14 @@ $('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 
 $('.toggler').hover(
 	function() {
-		$(this).children('.toggle-arrow').html($(this).hasClass('hidden') ? down : up);
+		var $this = $(this);
+		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? down : up);
+		$this.children('.toggle-arrow').css('color',  'white');
 	},
 	function() {
-		$(this).children('.toggle-arrow').html($(this).hasClass('hidden') ? right : down);
+		var $this = $(this);
+		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down);
+		$this.children('.toggle-arrow').removeAttr('style');
 	}
 );
 	
@@ -95,6 +100,12 @@ $('input:checkbox').change(function() {
 			$('#all-skills-advice').hide();
 			$('#missing-skills-advice').show();
 		}
+		if (valsCount > (totalValues/2)) {
+			$('#too-many-values-advice').slideDown('slow');
+		}
+		else {
+			$('#too-many-values-advice').slideUp('slow');
+		}
 		if (skillsCount == 0)
 			$('#skills-summary').append("<li>" + noSelectMessage + " skills</li>");
 		if (valsCount == 0)
@@ -110,7 +121,15 @@ $('input:checkbox[name="barrier"]').change(function() {
 	var noneSelected = true;
 	$('input:checkbox[name="barrier"]').each(function() {
 		var $this = $(this);
+		$this.prop('disabled', false);
 		if ($this.is(':checked')) {
+			if ($this.attr('value') == 'None') {
+				$('input:checkbox[name="barrier"]').removeAttr('checked').prop('disabled', true);
+				$this.prop('checked', true).prop('disabled', false);
+				$('.barrier-list').html("");
+				$('#review-sub-content .advice').hide();
+				$('.7 p').show();
+			}
 			noneSelected = false;
 			var checkClass = $this.attr('class');
 			var checkVal = $this.attr('value');

@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<link rel="stylesheet" type="text/css" href="careerBuilder.css" />
 </head>
-<body>
+<body>-->
 	<ul id="careerBuilder">
 		<li class="section" id="who">
 			<h2 class="toggler hidden" id="who-head">Who are you?<span class="number">1</span></h2>
@@ -100,13 +100,6 @@
 									Flexibility involves adapting successfully to changing situations and environments and thinking quickly respond to sudden changes in circumstances.
 								</div>
 							</div>
-							<input type="checkbox" name="skill" value="Creativity">
-							<div class="check-option">
-								<span class="toggler hidden">Creativity</span><br />
-								<div class="sub-content">
-									Creativity involves using your inspiration and imagination to solve problems by looking at them from unexpected perspectives. Includes the Ability to generate and recognise how best practice and imaginative ideas can be applied to different situation
-								</div>
-							</div>
 						</div>
 					</li>
 					<li class="subsection" id="pdam-sub">
@@ -126,7 +119,7 @@
 									<li id="research-skills"><a href="http://www2.lse.ac.uk/intranet/LSEServices/APD/personalDevelopmentAideMemoire/specificSkills.aspx#DynamicJumpMenuManager_1_Anchor_4" target="_blank">Research</a></li>
 								</ul>
 							</div>
-							<div id="all-skills-advice">
+							<div id="all-skills-advice" class="skill-value-advice">
 								<p>You've selected every skill from the list! The LSE Personal Development Aide Memoire (PDAM) site mentions some skills which we haven't covered so have a look at that for some more ideas for areas to develop.</p>
 								<p>You should focus now on how to present the skills you have as effectively as possible to potential employers. If there are any which you don't feel you can talk about as strongly then uncheck those boxes in the Skills and abilities section and come back here and follow the advice.</p>
 							</div>
@@ -135,7 +128,7 @@
 					<li class="subsection" id="values-sub">
 						<h3 class="toggler hidden">Values and motivations</h3>
 						<div class="sub-content" id="values-sub-content">
-							<p>In order to have a happy, successful and fulfilling life, you need to consider your values as they are likely to be a key factor in deciding on a career, or a career path within a particular sector. Although clarifying your values from the list below will not dictate the careers advice we provide, it is important that you keep your values and motivations in the forefront of your mind whilst progressing through the ‘Career Research’, ‘Making a Decision’ and ‘Achieving’ sections.</p>
+							<p>In order to have a happy, successful and fulfilling life, you need to consider your values as they are likely to be a key factor in deciding on a career, or a career path within a particular sector. Although clarifying your values from the list below will not dictate the careers advice we provide, it is important that you keep your values and motivations in the forefront of your mind whilst progressing through the 'Career Research', 'Making a Decision' and 'Achieving' sections.</p>
 							<p>Pick the values and motivations below which are most important to you in a job or career path.</p>
 							<input type="checkbox" name="value" value="Status">
 							<div class="check-option">
@@ -256,6 +249,9 @@
 									Understanding gained through study and experience.
 								</div>
 							</div>
+							<div id="too-many-values-advice" class="skill-value-advice">
+								<p>Having lots of values and motivations is great, but you might find it more helpful to focus on just the values which are most important to you when researching sectors, organisations and roles.</p>
+							</div>
 						</div>
 					</li>
 					<li class="subsection" id="summary-sub">
@@ -276,7 +272,7 @@
 									</td>
 								</tr>
 							</table>
-							<div id="skills-values-suggestion">
+							<div id="skills-values-suggestion" class="suggestion">
 								<p>Now you have had time to think about your keys skills, values and motivations it might be helpful to take this to the next stage. LSE Careers has access to various self-assessment and career matching tools. They are designed to analyse your skills and to help you gain personal insight and information which can be helpful in making career decisions. Use these tools as suggestions and a useful starting point for thinking about important factors in your career.</p>
 								<p>Book a careers discussion here with one of our career consultants to discuss how understanding your skills and values can help you to analyse your career options.</p>
 								<p>It may help to think about the career options alumni with similar skills and subject backgrounds have selected. Take a look at the LSE Graduate Destinations data for your department and course.</p>
@@ -308,19 +304,19 @@
 								<p>If you have not already done so, take a look at the employment sectors section of our website. You will find detailed information on the range of organisations within your chosen sector including information on the smaller, often hard to find organisations!</p>
 							</div>
 							<div class="suggestion" id="sectors-general">
-								<p>It is important to understand the hiring timescales for your sector so you don’t miss out on applying for opportunities. View the LSE Careers Internship/Work Experience timescales PDF.</p>
+								<p>It is important to understand the hiring timescales for your sector so you don't miss out on applying for opportunities. View the LSE Careers Internship/Work Experience timescales PDF.</p>
 								<p>For the opportunity to meet with a wide range of employers in different settings, view our comprehensive employer events programme on CareerHub, including presentations, employer-led seminars and sector fairs.</p>
 								<p>You will find comprehensive information on the most popular LSE employment sectors on our website. The sector sites provide detailed information on the range of organisations within your chosen sector and advice on what they are looking for in successful students.</p>
 								<p>Why not join a student society or do some volunteering? This can help to expand your network and provides the opportunity to gain new skills. Many of the LSE Societies are sector specific and will provide more opportunities to network with employers. Volunteering helps to develop skills, give something back and gain experience of a sector whilst providing evidence of skills for your CV. You can find lots of volunteer roles on CareerHub.</p>
 							</div>
 							<div class="suggestion" id="sectors-limited">
-								<p>Start to build a picture of the sectors and type of work which will match your skills and interests.</p>
-								<p>The prospects site is good for this. Look at the ‘Options with you Subject’ section which provides a useful summary on the career paths of recent UK graduates in your degree subject.</p>
-								<p>The Prospects ‘Type of Jobs’ section provides a useful overview of the range of sectors available and includes regularly updated labour market information.</p>
-								<p>It may also help to think about the career options that LSE alumni with similar subject backgrounds have selected. Take a look at the LSE Graduate Destinations data for your department and course here.</p>
-								<p>View our range of sector specific LSE Careers Fairs. These fairs provide the opportunity to meet with a range of employers within a particualr sector.</p>
-								<p>View the LSE Careers blog which has regular contributions from LSE careers consultants and guest bloggers covering information and advice on a range of sectors.</p>
-								<p>Visit the LSE Careers resource area to find reference and take away information on occupational areas and graduate directories and employer rankings.</p>
+								<p>Start to build a picture of the sectors and type of work which will match your skills and interests. </p>
+								<p>You will find comprehensive information on the most popular LSE Employment Sectors here. The sector sites provide detailed information on the range of organisations within your chosen sector and advice on what they are looking for in successful students.</p>
+								<p>It may also help to think about the career options LSE alumni with similar subject backgrounds have selected. Take a look at the LSE Graduate Destinations data for your department and course here</p>
+								<p>View our range of sector specific LSE Career Fairs here, Career Sector fairs provide the opportunity to meet with a range of employers within one sector</p>
+								<p>View the LSE Careers Blog which has regular contributions from LSE Career Consultants and guest bloggers covering information and advice on a range of sectors.</p>
+								<p>Visit the LSE Careers Resource area to find reference and take away information on occupational areas and graduate directories and employer rankings.</p>
+								<p>The Prospects site is also a useful resource when commencing your career research. The site has comprehensive information on ALL the sectors, including areas that fewer LSE students go into. The Type of Jobs and Options with your Subject sections are a good place to start.</p>
 							</div>
 						</div>
 					</li>
@@ -343,8 +339,10 @@
 								<p>Joining certain sector specific student societies may provide the opportunity to meet with more employers. It also demonstrates a real interest in a sector and there are opportunities for you to take on positions of responsibility, all of which is attractive to employers.</p>
 							</div>
 							<div class="suggestion" id="roles-limited">
-								<p>Prospects provide detailed role descriptions including typical work activities, employers within the sector, salary and conditions, entry requirements, career development and related jobs.</p>
-								<p>Meet with a wide range of employers at the LSE Careers Fairs. Here you will have the opportunity to ask employers in more detail about their day to day work and the type of projects they are involved in.</p>
+								<p>Throughout the year LSE Careers organises and facilitates various events, including careers seminars, fairs, forums and employer presentations to help you find out more about the roles on offer.</p>
+								<p>You can meet with a wide range of employers at the LSE Careers Fairs. Here you will have the opportunity to ask employers in more detail about their day to day work and the type of projects they are involved in. View our Careers fairs here.</p>
+								<p>Career Forums involve a panel of speakers discussing all aspects of their careers. Students should go away from a forum event having got useful technical information about the careers represented, a good sense of the reality of these careers and an idea of whether these are career areas they would like to pursue further. View our Careers Forums here</p>
+								<p>The Prospects and TargetJobs sites also provide detailed role descriptions including typical work activities, employers within the sector, salary and conditions, entry requirements, career development and related jobs.</p>
 							</div>
 						</div>
 					</li>
@@ -404,14 +402,14 @@
 							<span class="check-option">How do I know if something will be right if I have not tried it?</span><br />
 							<input type="checkbox" name="barrier" value="I want to be told what to do" class="people-think confidence">
 							<span class="check-option">I want to be told what to do</span><br />
-							<input type="checkbox" name="barrier" value="I want time out to travel – not a career" class="opt-out">
-							<span class="check-option">I want time out to travel – not a career</span><br />
+							<input type="checkbox" name="barrier" value="I want time out to travel &#45; not a career" class="opt-out">
+							<span class="check-option">I want time out to travel &#45; not a career</span><br />
 							<input type="checkbox" name="barrier" value="My parents/partner/personal tutor would not approve" class="people-think">
 							<span class="check-option">My parents/partner/personal tutor would not approve</span><br />
 							<input type="checkbox" name="barrier" value="None of my friends/flatmates are planning to do these kinds of jobs" class="people-think">
 							<span class="check-option">None of my friends/flatmates are planning to do these kinds of jobs</span><br />
-							<input type="checkbox" name="barrier" value="My peers have done so much more career stuff than me – I just feel like I’m lagging behind" class="opt-out confidence">
-							<span class="check-option">My peers have done so much more career stuff than me – I feel like I'm lagging behind</span><br />
+							<input type="checkbox" name="barrier" value="My peers have done so much more career stuff than me &#45; I just feel like I'm lagging behind" class="opt-out confidence">
+							<span class="check-option">My peers have done so much more career stuff than me &#45; I feel like I'm lagging behind</span><br />
 							<input type="checkbox" name="barrier" value="LSE graduates do not do the kind of things which interest me" class="perfect-job compromise">
 							<span class="check-option">LSE graduates do not do the kind of things which interest me</span><br />
 							<input type="checkbox" name="barrier" value="I have too many debts/financial commitments to proceed with my chosen career" class="compromise opt-out">
@@ -430,8 +428,8 @@
 							<span class="check-option">I just want to use my languages</span><br />
 							<input type="checkbox" name="barrier" value="I just want a good job that looks impressive on my CV" class="people-think">
 							<span class="check-option">I just want a good job that looks impressive on my CV</span><br />
-							<input type="checkbox" name="barrier" value="I have no experience other than voluntary work – no employer will be interested" class="confidence">
-							<span class="check-option">I have no experience other than voluntary work – no employer will be interested</span><br />
+							<input type="checkbox" name="barrier" value="I have no experience other than voluntary work &#45; no employer will be interested" class="confidence">
+							<span class="check-option">I have no experience other than voluntary work &#45; no employer will be interested</span><br />
 							<input type="checkbox" name="barrier" value="I am too old/young" class="confidence">
 							<span class="check-option">I am too old/young</span><br />
 							<input type="checkbox" name="barrier" value="I am overqualified/under qualified" class="confidence">
@@ -444,6 +442,8 @@
 							<span class="check-option">I'm afraid of rejection</span><br />
 							<input type="checkbox" name="barrier" value="My job search has not been successful so far" class="opt-out">
 							<span class="check-option">My job search has not been successful so far</span><br />
+							<input type="checkbox" name="barrier" value="None" class="none">
+							<span class="check-option">None of these apply to me!</span>
 						</div>
 					</li>
 					<li class="subsection" id="review-sub">
@@ -456,7 +456,7 @@
 								<p>Remember that there isn't a single perfect career for you. There are usually a range of possibilities that would suit you. Looking for the perfect job can actually prevent you from trialing some really exciting opportunities. The perfect job rarely exists and your preferences and the nature of the job are likely to change over time. Don't make the mistake of passing up great work experience opportunities as the role does not match every marker. You will find you have to compromise on some things; this is not an exact science.</p>
 							</div>
 							<div class="advice 2" id="wrong-decision">
-								<h4 class="toggler hidden">Afraid of making the wrong decision? Trial it – you've got nothing to lose</h4>
+								<h4 class="toggler hidden">Afraid of making the wrong decision? Trial it &#45; you've got nothing to lose</h4>
 								<ul class="barrier-list"></ul>
 								<p>Remember, the career choice you make now is not a life sentence! Most LSE graduates will make several career changes throughout their working lives. If the first role you do does not work out, then you will have a better understanding of what is important to you when you make the next choice. Focus on a few ideas at a time. Remember that you can always review and adapt your plans and goals as they develop and take shape. Why not use your time at university to try out a variety of roles so you can get a flavour of the work involved?</p>
 							</div>
@@ -468,17 +468,21 @@
 							<div class="advice 4" id="people-think">
 								<h4 class="toggler hidden">Worried about what people will think?</h4>
 								<ul class="barrier-list"></ul>
-								<p>If you are concerned about what other people think then you need to assess how important these influences are for you. Is it that important for you to work in a similar sector to your friends? In career discussions we commonly hear students admitting to applying for a role as many of their friends were also applying. You have to be genuinely interested in a role to actually enjoy the work so does it really matter what your LSE friends are doing? More significant can be the influences of parents or partners – you need to be honest with yourself and with them about how important their views are.</p>
+								<p>If you are concerned about what other people think then you need to assess how important these influences are for you. Is it that important for you to work in a similar sector to your friends? In career discussions we commonly hear students admitting to applying for a role as many of their friends were also applying. You have to be genuinely interested in a role to actually enjoy the work so does it really matter what your LSE friends are doing? More significant can be the influences of parents or partners &#45; you need to be honest with yourself and with them about how important their views are.</p>
 							</div>
 							<div class="advice opt-out" id="opt-out">
 								<h4 class="toggler hidden">Are you opting out?</h4>
 								<ul class="barrier-list"></ul>
-								<p>It often feels easier to put off making the big decisions. Even if you are planning on looking for a job following your exams there are still small things you can be doing whilst at university to make the process easier when you finish. If you plan to travel – make sure you know what your first steps will be when you return. In reality, very few people find 'themselves' or their ideal career whilst daydreaming on a beach!</p>
+								<p>It often feels easier to put off making the big decisions. Even if you are planning on looking for a job following your exams there are still small things you can be doing whilst at university to make the process easier when you finish. If you plan to travel &#45; make sure you know what your first steps will be when you return. In reality, very few people find 'themselves' or their ideal career whilst daydreaming on a beach!</p>
 							</div>
 							<div class="advice 6" id="confidence">
 								<h4 class="toggler hidden">Do you lack confidence?</h4>
 								<ul class="barrier-list"></ul>
-								<p>If you lack confidence in yourself, try to be realistic. Remember you will graduate from a globally respected university with a range of transferable academic skills and personal qualities. Review your PDAM to gain a clearer understanding of what you have already engaged in. Most careers can be achieved through gaining a range of work experience – it's about finding the right experience to get you there!</p>
+								<p>If you lack confidence in yourself, try to be realistic. Remember you will graduate from a globally respected university with a range of transferable academic skills and personal qualities. Review your PDAM to gain a clearer understanding of what you have already engaged in. Most careers can be achieved through gaining a range of work experience &#45; it's about finding the right experience to get you there!</p>
+							</div>
+							<div class="advice 7" id="none">
+								<h4>None of these apply to me!</h4>
+								<p>This isn't an exhaustive list of external factors so there's bound to be some situations we haven't covered. Please open the next section for further support and advice on career decision making.</p>
 							</div>
 						</div>
 					</li>
@@ -488,7 +492,8 @@
 							<div class="suggestion">
 								<p>LSE Careers have some more information and advice on choosing a career on our website.</p>
 								<p>Mindtools have a resource which may help you to recognise how good you are at making decisions.</p>
-								<p>If you're still having difficulty making a decision book a careers discussion with one of our careers consultants here. We can talk through strategies to help you arrive at a decision you’re comfortable with.</p>
+								<p>If you're still having difficulty making a decision book a careers discussion with one of our careers consultants here. We can talk through strategies to help you arrive at a decision you're comfortable with.</p>
+								<p>The student counselling service can also support you with any personal factors which might be affecting your career decisions.</p>
 							</div>
 						</div>
 					</li>
@@ -576,7 +581,7 @@
 							<input class="question" type="radio" name="assessment" value="maybe">No, but I'm applying and I could get called for an assessment centre in the near future.</input><br />
 							<input class="question" type="radio" name="assessment" value="no">No I have not yet applied for anything.</input>
 							<div class="suggestion" id="assessment-yes">
-								<p>Book to attend an assessment centre semiar or workshop delivered by LSE careers consultants or employers. Check for the next available session in the events section of CareerHub. These cover a range of common assessment centre activities such as group exercises, presentation skills, case Studies and e-tray exercises.</p>
+								<p>Book to attend an assessment centre seminar or workshop delivered by LSE careers consultants or employers. Check for the next available session in the events section of CareerHub. These cover a range of common assessment centre activities such as group exercises, presentation skills, case Studies and e-tray exercises.</p>
 								<p>Practise free psychometric tests such as numerical, verbal and diagrammatical tests on our website.</p>
 							</div>
 							<div class="suggestion" id="assessment-maybe">
@@ -594,7 +599,7 @@
 			</div>
 		</li>
 	</ul>
-	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<!--	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 	<script type="text/javascript" src="careerBuilder.js"></script>
 </body>
-</html>
+</html>-->
