@@ -100,6 +100,7 @@
 
 #careerBuilder .sub-content {
 	font-size: 12px;
+	overflow: auto;
 }
 
 #careerBuilder .suggestion {
@@ -177,12 +178,31 @@
 	margin: 5px 5px 0 5px;
 }
 
+#careerBuilder button.next-subsection {
+	float: right;
+	font-weight: bold;
+	color: #FFF;
+	border-style: solid;
+	border-width: 2px;
+	padding: 5px;
+}
+
+#careerBuilder button.next-subsection:hover  {
+	border-color: #FFF;
+	cursor: pointer;
+}
+
 /*Colours*/
 #who, #who .subsection {
 	background: #F58621;
 	border-bottom: 2px solid #935014;
 	border-right: 1px solid #935014;
 	border-radius: 10px;
+}
+
+#who button.next-subsection {
+	background-color: #F58621;
+	border-color: #F58621;
 }
 
 #who #skills-sub {
@@ -208,6 +228,11 @@
 	border-radius: 10px;
 }
 
+#research button.next-subsection {
+	background-color: #1999D4;
+	border-color: #1999D4;
+}
+
 #research #sectors-sub {
 	background: #5EB8E1;
 }
@@ -227,6 +252,11 @@
 	border-radius: 10px;
 }
 
+#decision button.next-subsection {
+	background-color: #936AB0;
+	border-color: #936AB0;
+}
+
 #decision #barriers-sub {
 	background: #B397C8;
 }
@@ -244,6 +274,11 @@
 	border-bottom: 2px solid #1C6D2D;
 	border-right: 1px solid #1C6D2D;
 	border-radius: 10px;
+}
+
+#achieving button.next-subsection {
+	background-color: #2FB64B;
+	border-color: #2FB64B;
 }
 
 #achieving #cv-sub {

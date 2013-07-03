@@ -5,6 +5,7 @@ var totalValues = $('input:checkbox[name="value"]').length;
 var right = "&#9656; ";
 var down = "&#9662; ";
 var up = "&#9652; ";
+var nextButton = "<button class='next-subsection' type='button'>Next</button>";
 
 //set up
 $('input:checkbox, input:radio').removeAttr('checked'); //unchecks boxes which remain checked in moz after refreshing
@@ -19,6 +20,7 @@ $('#review-sub-content .advice').hide();
 $('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
 $('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
+$('.sub-content').append(nextButton);
 
 $('.toggler').hover(
 	function() {
