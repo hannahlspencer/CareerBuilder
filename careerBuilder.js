@@ -26,7 +26,7 @@ $('.toggler').hover(
 	function() {
 		var $this = $(this);
 		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? down : up);
-		$this.children('.toggle-arrow').css('color',  'white');
+		$this.children('.toggle-arrow').css('color', 'white');
 	},
 	function() {
 		var $this = $(this);
@@ -52,6 +52,27 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 				});
 			}
 		});
+	}
+});
+
+$('button.next-subsection').click(function() {
+	var $this = $(this);
+	var $thisSub = $this.closest('li');
+	var $thisSection = $thisSub.closest('.section');
+	var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
+	$h3Togglers.trigger('click');
+	if ($thisSub.is(':last-child')) {
+		if ($thisSection.is(':last-child')) {
+			$thisSection.find('h2.toggler').trigger('click');
+			alert('You now have a career.');
+		}
+		else { 
+			$thisSection.next().find('h2.toggler').trigger('click');
+			$thisSection.next().find('h3.toggler').not('.hidden').trigger('click');
+		}
+	}
+	else {
+		$thisSub.next().find('h3.toggler').trigger('click');
 	}
 });
 
