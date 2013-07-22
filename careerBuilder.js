@@ -54,6 +54,9 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 			}
 		});
 	}
+	if ($this.not('.hidden')) {
+		$('html,body').animate({scrollTop: $this.offset().top});
+	}
 });
 
 $('button.next-subsection').click(function() {
@@ -68,12 +71,14 @@ $('button.next-subsection').click(function() {
 			alert('You now have a career.');
 		}
 		else { 
-			$thisSection.next().find('h2.toggler').trigger('click');
+			var $nextH2 = $thisSection.next().find('h2.toggler');
+			$nextH2.trigger('click');
 			$thisSection.next().find('h3.toggler').not('.hidden').trigger('click');
 		}
 	}
 	else {
-		$thisSub.next().find('h3.toggler').trigger('click');
+		var $nextH3 = $thisSub.next().find('h3.toggler');
+		$nextH3.trigger('click');
 	}
 });
 
