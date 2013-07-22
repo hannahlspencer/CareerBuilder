@@ -159,11 +159,22 @@
 	width: 50%;
 }
 
-#careerBuilder ul.barrier-list, #careerBuilder ul#skills-summary, #careerBuilder ul#values-summary {
+#careerBuilder ul.barrier-list {
+	list-style: none;
+}
+
+#careerBuilder ul.barrier-list li {
+	padding: 3px 0 0 0;
+	margin-left: 17px;
+	font-size: 12px;
+	overflow: visible;
+}
+
+#careerBuilder ul#skills-summary, #careerBuilder ul#values-summary {
 	list-style-type: square;
 }
 
-#careerBuilder ul.barrier-list li, #careerBuilder ul#skills-summary li, #careerBuilder ul#values-summary li {
+#careerBuilder ul#skills-summary li, #careerBuilder ul#values-summary li {
 	padding: 3px 0 0 0;
 	margin-left: 17px;
 	font-size: 12px;

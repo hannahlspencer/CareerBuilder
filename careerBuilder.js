@@ -14,6 +14,7 @@ $('.sub-content').hide();
 $('.suggestion').hide();
 $('#further-sub-content .suggestion').show();
 $('.advice p').hide();
+$('#reviewing-intro').hide();
 $('#skills-values-suggestion').hide();
 $('.skill-value-advice').hide();
 $('#review-sub-content .advice').hide();
@@ -140,6 +141,7 @@ $('input:checkbox').change(function() {
 
 $('input:checkbox[name="barrier"]').change(function() { 
 	$('.barrier-list').html("");
+	$('#reviewing-intro').hide();
 	$('#review-sub-content .advice').hide();
 	var noneSelected = true;
 	$('input:checkbox[name="barrier"]').each(function() {
@@ -151,8 +153,11 @@ $('input:checkbox[name="barrier"]').change(function() {
 				$this.prop('checked', true).prop('disabled', false);
 				$('.barrier-list').html("");
 				$('#review-sub-content .advice').hide();
+				$('#reviewing-intro').hide();
 				$('.7 p').show();
 			}
+			else
+				$('#reviewing-intro').show();
 			noneSelected = false;
 			var checkClass = $this.attr('class');
 			var checkVal = $this.attr('value');
@@ -160,7 +165,7 @@ $('input:checkbox[name="barrier"]').change(function() {
 				var $this = $(this);
 				var adviceID = $this.attr('id');
 				if (checkClass.indexOf(adviceID) >= 0) {
-					$('#' + adviceID + ' .barrier-list').append("<li>" + checkVal + "</li>");
+					$('#' + adviceID + ' .barrier-list').append("<li>You selected: <em>" + checkVal + "</em></li>");
 					$this.show();
 				}
 			});
