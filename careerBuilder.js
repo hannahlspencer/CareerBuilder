@@ -7,6 +7,27 @@ var down = "&#9662; ";
 var up = "&#9652; ";
 var nextButton = "<button class='next-subsection' type='button'>Next</button>";
 
+function triggerTogglers(e, $this) {
+	var $thisSub = $this.closest('li');
+	var $thisSection = $thisSub.closest('.section');
+	var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
+	$h3Togglers.trigger(e.type);
+	if ($thisSub.is(':last-child')) {
+		if ($thisSection.is(':last-child')) {
+			$thisSection.find('h2.toggler').trigger(e.type);
+		}
+		else { 
+			var $nextH2 = $thisSection.next().find('h2.toggler');
+			$nextH2.trigger(e.type);
+			$thisSection.next().find('h3.toggler').not('.hidden').trigger(e.type);
+		}
+	}
+	else {
+		var $nextH3 = $thisSub.next().find('h3.toggler');
+		$nextH3.trigger(e.type);
+	}
+}
+
 //set up
 $('input:checkbox, input:radio').removeAttr('checked'); //unchecks boxes which remain checked in moz after refreshing
 $('.section-content').hide();
@@ -71,71 +92,16 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 	}
 });
 
-$('button.next-subsection').click(function() {
-	var $this = $(this);
-	var $thisSub = $this.closest('li');
-	var $thisSection = $thisSub.closest('.section');
-	var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
-	$h3Togglers.trigger('click');
-	if ($thisSub.is(':last-child')) {
-		if ($thisSection.is(':last-child')) {
-			$thisSection.find('h2.toggler').trigger('click');
-			alert('You now have a career.');
-		}
-		else { 
-			var $nextH2 = $thisSection.next().find('h2.toggler');
-			$nextH2.trigger('click');
-			$thisSection.next().find('h3.toggler').not('.hidden').trigger('click');
-		}
-	}
-	else {
-		var $nextH3 = $thisSub.next().find('h3.toggler');
-		$nextH3.trigger('click');
-	}
+$('button.next-subsection').click(function(e) {
+	triggerTogglers(e, $(this));
 });
 
 $('button.next-subsection').hover(
 	function(e) {
-		var $this = $(this);
-		var $thisSub = $this.closest('li');
-		var $thisSection = $thisSub.closest('.section');
-		var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
-		$h3Togglers.trigger(e.type);
-		if ($thisSub.is(':last-child')) {
-			if ($thisSection.is(':last-child')) {
-				$thisSection.find('h2.toggler').trigger(e.type);
-			}
-			else { 
-				var $nextH2 = $thisSection.next().find('h2.toggler');
-				$nextH2.trigger(e.type);
-				$thisSection.next().find('h3.toggler').not('.hidden').trigger(e.type);
-			}
-		}
-		else {
-			var $nextH3 = $thisSub.next().find('h3.toggler');
-			$nextH3.trigger(e.type);
-		}
+		triggerTogglers(e, $(this));
 	},
 	function(e) {
-		var $this = $(this);
-		var $thisSub = $this.closest('li');
-		var $thisSection = $thisSub.closest('.section');
-		var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
-		$h3Togglers.trigger(e.type);
-		if ($thisSub.is(':last-child')) {
-			if ($thisSection.is(':last-child')) {
-				$thisSection.find('h2.toggler').trigger(e.type);
-			}
-			else { 
-				var $nextH2 = $thisSection.next().find('h2.toggler');
-				$nextH2.trigger(e.type);
-				$thisSection.next().find('h3.toggler').not('.hidden').trigger(e.type);
-			}
-		}
-		else {
-			var $nextH3 = $thisSub.next().find('h3.toggler');
-			$nextH3.trigger(e.type);
-		}
+		triggerTogglers(e, $(this));
 	}
 );
 
