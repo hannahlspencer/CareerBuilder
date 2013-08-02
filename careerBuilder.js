@@ -21,18 +21,30 @@ $('#review-sub-content .advice').hide();
 $('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
 $('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
-$('.sub-content').append(nextButton);
+$('.sub-content').not('.check-option .sub-content').append(nextButton);
 
 $('.toggler').hover(
 	function() {
 		var $this = $(this);
 		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? down : up);
 		$this.children('.toggle-arrow').css('color', 'white');
+		if($this.is('h2')) {
+			var headID = $this.attr('id');
+			$('h2.toggler').not('.hidden').each(function() {
+				$(this).children('.toggle-arrow').html(up);
+			});
+		}
 	},
 	function() {
 		var $this = $(this);
 		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down);
 		$this.children('.toggle-arrow').removeAttr('style');
+		if($this.is('h2')) {
+			var headID = $this.attr('id');
+			$('h2.toggler').not('.hidden').each(function() {
+				$(this).children('.toggle-arrow').html(down);
+			});
+		}
 	}
 );
 	
@@ -40,7 +52,7 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 	var $this = $(this);
 	$this.toggleClass('hidden');
 	$this.siblings().slideToggle('slow', function() {
-		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down);
+		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down).removeAttr('style');
 	});
 	if($this.is('h2')) {
 		var headID = $this.attr('id');
@@ -54,7 +66,7 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 			}
 		});
 	}
-	if ($this.not('.hidden')) {
+	if (!$this.hasClass('hidden')) {
 		$('html,body').animate({scrollTop: $this.offset().top});
 	}
 });
@@ -81,6 +93,51 @@ $('button.next-subsection').click(function() {
 		$nextH3.trigger('click');
 	}
 });
+
+$('button.next-subsection').hover(
+	function(e) {
+		var $this = $(this);
+		var $thisSub = $this.closest('li');
+		var $thisSection = $thisSub.closest('.section');
+		var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
+		$h3Togglers.trigger(e.type);
+		if ($thisSub.is(':last-child')) {
+			if ($thisSection.is(':last-child')) {
+				$thisSection.find('h2.toggler').trigger(e.type);
+			}
+			else { 
+				var $nextH2 = $thisSection.next().find('h2.toggler');
+				$nextH2.trigger(e.type);
+				$thisSection.next().find('h3.toggler').not('.hidden').trigger(e.type);
+			}
+		}
+		else {
+			var $nextH3 = $thisSub.next().find('h3.toggler');
+			$nextH3.trigger(e.type);
+		}
+	},
+	function(e) {
+		var $this = $(this);
+		var $thisSub = $this.closest('li');
+		var $thisSection = $thisSub.closest('.section');
+		var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
+		$h3Togglers.trigger(e.type);
+		if ($thisSub.is(':last-child')) {
+			if ($thisSection.is(':last-child')) {
+				$thisSection.find('h2.toggler').trigger(e.type);
+			}
+			else { 
+				var $nextH2 = $thisSection.next().find('h2.toggler');
+				$nextH2.trigger(e.type);
+				$thisSection.next().find('h3.toggler').not('.hidden').trigger(e.type);
+			}
+		}
+		else {
+			var $nextH3 = $thisSub.next().find('h3.toggler');
+			$nextH3.trigger(e.type);
+		}
+	}
+);
 
 $('input:radio').change(function() { //expand advice according to radio button selection
 	$('input:radio').each(function() {
