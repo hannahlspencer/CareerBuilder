@@ -15,6 +15,23 @@ function triggerTogglers(e, $this) {
 	if ($thisSub.is(':last-child')) {
 		if ($thisSection.is(':last-child')) {
 			$thisSection.find('h2.toggler').trigger(e.type);
+			if (e.type == 'click') {
+				var docHeight = $(document).height();
+				$("body").append("<div id='overlay'></div>");
+				$("#overlay")
+					.height(docHeight)
+					.css({
+						'opacity' : 0.5,
+						'position': 'fixed',
+						'top': 0,
+						'left': 0,
+						'background-color': 'black',
+						'width': '100%',
+						'z-index': 4999
+					});
+					$("body").append($('#final-popup'));
+					$('#final-popup').show();
+			}
 		}
 		else { 
 			var $nextH2 = $thisSection.next().find('h2.toggler');
@@ -29,7 +46,7 @@ function triggerTogglers(e, $this) {
 }
 
 //set up
-$('input:checkbox, input:radio').removeAttr('checked'); //unchecks boxes which remain checked in moz after refreshing
+$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla browsers
 $('.section-content').hide();
 $('.sub-content').hide();
 $('.suggestion').hide();
@@ -92,17 +109,11 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 	}
 });
 
-$('button.next-subsection').click(function(e) {
-	triggerTogglers(e, $(this));
-});
+$('button.next-subsection').click(function(e) { triggerTogglers(e, $(this)); });
 
 $('button.next-subsection').hover(
-	function(e) {
-		triggerTogglers(e, $(this));
-	},
-	function(e) {
-		triggerTogglers(e, $(this));
-	}
+	function(e) { triggerTogglers(e, $(this)); },
+	function(e) { triggerTogglers(e, $(this)); }
 );
 
 $('input:radio').change(function() { //expand advice according to radio button selection
@@ -200,4 +211,9 @@ $('input:checkbox[name="barrier"]').change(function() {
 		}
 	});
 	noneSelected ? $('.no-selection').show() : $('.no-selection').hide();
+});
+
+$('#close-popup').click(function() {
+	$('#overlay').remove();
+	$('#final-popup').hide();
 });

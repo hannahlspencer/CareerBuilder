@@ -186,7 +186,8 @@
 	margin: 5px 5px 0 5px;
 }
 
-#careerBuilder button.next-subsection {
+#careerBuilder button.next-subsection,
+#final-popup button.next-subsection {
 	float: right;
 	font-weight: bold;
 	color: #FFF;
@@ -195,13 +196,36 @@
 	padding: 5px;
 }
 
-#careerBuilder button.next-subsection:hover  {
+#careerBuilder button.next-subsection:hover {
 	border-color: #FFF;
 	cursor: pointer;
 }
 
 #careerBuilder #who button.next-subsection  {
 	margin-top: 5px;
+}
+
+#final-popup {
+	display: none;
+	z-index: 5000;
+	color: #000000;
+	background-color: #ececec;
+	margin-left: -200px;
+	width: 400px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	padding: 0 10px;
+	border-bottom: 2px solid #000000;
+	border-right: 1px solid #000000;
+	border-radius: 10px;
+}
+
+#final-popup button.next-subsection {
+	background-color: #333;
+	border-color: #333;
+	margin-bottom: 10px;
+	cursor: pointer;
 }
 
 /*Colours*/
