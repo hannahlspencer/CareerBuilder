@@ -43,7 +43,7 @@
 }
 
 #careerBuilder h2 {
-	padding: 7px 0 0 15px;
+	padding: 5px 0 0 10px;
 	font-size: 1.5em;
 }
 
@@ -59,37 +59,23 @@
 
 #careerBuilder .toggler span.toggle-arrow{
 	font-weight: normal;
-	font-size: 1.6em;
+	font-size: 1.4em;
 	vertical-align: -2px;
 	text-decoration: none;
 }
 
 #careerBuilder .toggler span.number {
-	vertical-align: -10px;
+	float: right;
 	font-weight: bold;
 	font-size: 2em;
-	margin: 0;
+	margin: 0 9px 0 0;
 	text-decoration: none;
 }
 
-#careerBuilder #who-head .number {
-	padding: 0 0 0 232px;
-	color: #F79E4D;
-}
-
-#careerBuilder #research-head .number {
-	padding: 0 0 0 198px;
-	color: #5EB8E1
-}
-
-#careerBuilder #decision-head .number {
-	padding: 0 0 0 190px;
-	color: #B397C8;
-}
-
-#careerBuilder #achieving-head .number {
-	padding: 0 0 0 278px;
-	color: #59C56F;
+#careerBuilder h2 .subtitle {
+	font-size: 0.8em;
+	vertical-align: 15px;
+	margin-left: 6px;
 }
 
 #careerBuilder p {
@@ -232,7 +218,7 @@
 	background-color: #666;
 }
 
-/*Colours*/
+/****************** Colours ********************/
 #who, #who .subsection {
 	background: #F58621;
 	border-bottom: 2px solid #935014;
@@ -335,4 +321,36 @@
 
 #achieving #assessment-sub {
 	background: #D5F0DB;
+}
+
+#who-head .number {
+	color: #F79E4D;
+}
+
+#who-head .subtitle {
+	color: #FBCFA6;
+}
+
+#research-head .number {
+	color: #5EB8E1
+}
+
+#research-head .subtitle {
+	color: #8CCCEA;
+}
+
+#decision-head .number {
+	color: #B397C8;
+}
+
+#decision-head .subtitle {
+	color: #C9B4D8;
+}
+
+#achieving-head .number {
+	color: #59C56F;
+}
+
+#achieving-head .subtitle {
+	color: #ACE2B7;
 }

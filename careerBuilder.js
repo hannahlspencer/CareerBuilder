@@ -11,7 +11,7 @@ function triggerTogglers(e, $this) {
 	var $thisSub = $this.closest('li');
 	var $thisSection = $thisSub.closest('.section');
 	var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
-	$h3Togglers.trigger(e.type);
+	var $nextH3 = $thisSub.next().find('h3.toggler');
 	if ($thisSub.is(':last-child')) {
 		if ($thisSection.is(':last-child')) {
 			$thisSection.find('h2.toggler').trigger(e.type);
@@ -40,9 +40,11 @@ function triggerTogglers(e, $this) {
 		}
 	}
 	else {
-		var $nextH3 = $thisSub.next().find('h3.toggler');
-		$nextH3.trigger(e.type);
+		if ($nextH3.is('.hidden')) {
+			$nextH3.trigger(e.type);
+		}
 	}
+	$h3Togglers.not($nextH3).trigger(e.type);
 }
 
 //set up
