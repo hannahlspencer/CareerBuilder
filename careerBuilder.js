@@ -47,6 +47,11 @@ function triggerTogglers(e, $this) {
 	$h3Togglers.not($nextH3).trigger(e.type);
 }
 
+function skipSectionTrigger(e, $this) {
+	var $lastButton = $this.closest('.section').find('.next-subsection:last');
+	triggerTogglers(e, $lastButton);
+}
+
 //set up
 $('input:checkbox, input:radio').removeAttr('checked'); //for mozilla browsers
 $('.section-content').hide();
@@ -69,7 +74,6 @@ $('.toggler').hover(
 		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? down : up);
 		$this.children('.toggle-arrow').css('color', 'white');
 		if($this.is('h2')) {
-			var headID = $this.attr('id');
 			$('h2.toggler').not('.hidden').each(function() {
 				$(this).children('.toggle-arrow').html(up);
 			});
@@ -80,7 +84,6 @@ $('.toggler').hover(
 		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down);
 		$this.children('.toggle-arrow').removeAttr('style');
 		if($this.is('h2')) {
-			var headID = $this.attr('id');
 			$('h2.toggler').not('.hidden').each(function() {
 				$(this).children('.toggle-arrow').html(down);
 			});
@@ -95,18 +98,15 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down).removeAttr('style');
 	});
 	if($this.is('h2')) {
-		var headID = $this.attr('id');
-		$('h2.toggler').each(function() {
+		$('h2.toggler').not($this).not('.hidden').each(function() {
 			var $thisH2 = $(this);
-			if ($thisH2.attr('id') != headID) {
-				$thisH2.addClass('hidden');
-				$thisH2.siblings().slideUp('slow', function() {
-					$thisH2.children('.toggle-arrow').html($thisH2.hasClass('hidden') ? right : down);
-				});
-			}
+			$thisH2.addClass('hidden');
+			$thisH2.siblings().slideUp('slow', function() {
+				$thisH2.children('.toggle-arrow').html(right);
+			});
 		});
 	}
-	if (!$this.hasClass('hidden')) {
+	if (!$this.hasClass('hidden') && !$this.hasClass('check-label')) {
 		$('html,body').animate({scrollTop: $this.offset().top});
 	}
 });
@@ -117,6 +117,18 @@ $('button.next-subsection').hover(
 	function(e) { triggerTogglers(e, $(this)); },
 	function(e) { triggerTogglers(e, $(this)); }
 );
+
+$('button.skip-section').click(function(e) { skipSectionTrigger(e, $(this)); });
+
+$('button.skip-section').hover( 
+	function(e) { skipSectionTrigger(e, $(this)); },
+	function(e) { skipSectionTrigger(e, $(this)); }
+);
+
+$('#close-popup').click(function() {
+	$('#overlay').remove();
+	$('#final-popup').hide();
+});
 
 $('input:radio').change(function() { //expand advice according to radio button selection
 	$('input:radio').each(function() {
@@ -130,7 +142,7 @@ $('input:radio').change(function() { //expand advice according to radio button s
 
 $('input:checkbox').change(function() {
 	var $checked = $(this);
-	if ($checked.attr('name') == 'skill' || $checked.attr('name') == 'value') { //add selected checkbox items to summary lists
+	if ($checked.attr('name') == 'skill' || $checked.attr('name') == 'value') { //add selected items to summary lists
 		$('#skills-summary').html("");
 		$('#values-summary').html("");
 		$('#missing-skill-list li').hide();
@@ -213,9 +225,4 @@ $('input:checkbox[name="barrier"]').change(function() {
 		}
 	});
 	noneSelected ? $('.no-selection').show() : $('.no-selection').hide();
-});
-
-$('#close-popup').click(function() {
-	$('#overlay').remove();
-	$('#final-popup').hide();
 });
