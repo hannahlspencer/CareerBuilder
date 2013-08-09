@@ -58,7 +58,6 @@ $('.section-content').hide();
 $('.sub-content').hide();
 $('.suggestion').hide();
 $('#further-sub-content .suggestion').show();
-$('.advice p').hide();
 $('#reviewing-intro').hide();
 $('#skills-values-suggestion').hide();
 $('.skill-value-advice').hide();
@@ -106,7 +105,7 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 			});
 		});
 	}
-	if (!$this.hasClass('hidden') && !$this.hasClass('check-label')) {
+	if (!$this.hasClass('hidden') && ($this.is('h2') || $this.is('h3'))) {
 		$('html,body').animate({scrollTop: $this.offset().top});
 	}
 });
@@ -207,7 +206,7 @@ $('input:checkbox[name="barrier"]').change(function() {
 				$('.barrier-list').html("");
 				$('#review-sub-content .advice').hide();
 				$('#reviewing-intro').hide();
-				$('.7 p').show();
+				$('.8 p').show();
 			}
 			else
 				$('#reviewing-intro').show();
