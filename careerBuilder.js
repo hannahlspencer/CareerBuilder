@@ -105,9 +105,6 @@ $('.toggler').click(function() { //toggle section & subsection visibility
 			});
 		});
 	}
-	if (!$this.hasClass('hidden') && ($this.is('h2') || $this.is('h3'))) {
-		$('html,body').animate({scrollTop: $this.offset().top});
-	}
 });
 
 $('button.next-subsection').click(function(e) { triggerTogglers(e, $(this)); });
