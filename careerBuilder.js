@@ -214,8 +214,9 @@ $('input:checkbox[name="barrier"]').change(function() {
 				$('#reviewing-intro').hide();
 				$('.8 p').show();
 			}
-			else
+			else {
 				$('#reviewing-intro').show();
+			}
 			noneSelected = false;
 			var checkClass = $this.attr('class');
 			var checkVal = $this.attr('value');
@@ -223,7 +224,8 @@ $('input:checkbox[name="barrier"]').change(function() {
 				var $this = $(this);
 				var adviceID = $this.attr('id');
 				if (checkClass.indexOf(adviceID) >= 0) {
-					$('#' + adviceID + ' .barrier-list').append("<li>You selected: <em>" + checkVal + "</em></li>");
+					var barrierListSelector = '#' + adviceID + ' .barrier-list';
+					$(barrierListSelector).append("<li>You selected: <em>" + checkVal + "</em></li>");
 					$this.show();
 				}
 			});
