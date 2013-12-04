@@ -7,6 +7,11 @@ var down = "&#9662; ";
 var up = "&#9652; ";
 var nextButton = "<button class='next-subsection' type='button'>Next</button>";
 
+//replace prop() with attr() if jQuery is older than 1.6
+if (typeof jQuery.fn.prop != 'function') {
+    jQuery.fn.prop = jQuery.fn.attr;
+}
+
 function triggerTogglers(e, $this) {
 	var $thisSub = $this.closest('li');
 	var $thisSection = $thisSub.closest('.section');
@@ -53,7 +58,7 @@ function skipSectionTrigger(e, $this) {
 }
 
 //set up
-$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla browsers
+$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
 $('.section-content').hide();
 $('.sub-content').hide();
 $('.suggestion').hide();
@@ -90,7 +95,8 @@ $('.toggler').hover(
 	}
 );
 	
-$('.toggler').click(function() { //toggle section & subsection visibility
+//toggle section & subsection visibility
+$('.toggler').click(function() {
 	var $this = $(this);
 	$this.toggleClass('hidden');
 	$this.siblings().slideToggle('slow', function() {
@@ -126,7 +132,8 @@ $('#close-popup').click(function() {
 	$('#final-popup').hide();
 });
 
-$('input:radio').change(function() { //expand advice according to radio button selection
+//expand advice according to radio button selection
+$('input:radio').change(function() {
 	$('input:radio').each(function() {
 		var $this = $(this);
 		var qName = $this.attr('name');
@@ -136,9 +143,10 @@ $('input:radio').change(function() { //expand advice according to radio button s
 	});
 });
 
+//show skills and values in list and remove skills from pdam set when selected
 $('input:checkbox').change(function() {
 	var $checked = $(this);
-	if ($checked.attr('name') == 'skill' || $checked.attr('name') == 'value') { //add selected items to summary lists
+	if ($checked.attr('name') == 'skill' || $checked.attr('name') == 'value') { 
 		$('#skills-summary').html("");
 		$('#values-summary').html("");
 		$('#missing-skill-list li').hide();
@@ -188,6 +196,7 @@ $('input:checkbox').change(function() {
 	}
 });
 
+//show advice based on decision making barrier checkbox selection
 $('input:checkbox[name="barrier"]').change(function() { 
 	$('.barrier-list').html("");
 	$('#reviewing-intro').hide();
