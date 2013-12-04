@@ -169,7 +169,7 @@ $('input:checkbox').change(function() {
 				}
 			}
 			else if ($this.not(':checked')) {
-				var missingSkillTargetId = '#missing-skill-list #' + checkClass;
+				var missingSkillTargetId = '#' + checkClass + '-pdam';
 				$(missingSkillTargetId).show();
 			}
 		});
