@@ -133,6 +133,7 @@ $('button.skip-section').hover(
 $('#close-popup').click(function() {
 	$('#overlay').remove();
 	$('#final-popup').hide();
+	$("html, body").animate({ scrollTop: 0 }, 500);
 });
 
 //expand advice according to radio button selection
