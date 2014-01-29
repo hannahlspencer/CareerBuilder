@@ -74,7 +74,7 @@ $('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
 $('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 $('#forme-sub-content').append(skipButton);
 $('.sub-content').not('.check-option .sub-content').append(nextButton);
-$('a.section2-trigger').css("cursor", "pointer");
+$('a.trigger-link').css("cursor", "pointer");
 
 $('.toggler').hover(
 	function() {
@@ -117,11 +117,25 @@ $('.toggler').click(function() {
 	}
 });
 
+$('a.section1-trigger').click(function(e) { $('#who-head').trigger(e); });
+
+$('a.section1-trigger').hover(	
+	function(e) { $('#who-head').trigger(e); },
+	function(e) { $('#who-head').trigger(e); }
+);
+
 $('a.section2-trigger').click(function(e) { $('#research-head').trigger(e); });
 
 $('a.section2-trigger').hover(	
 	function(e) { $('#research-head').trigger(e); },
 	function(e) { $('#research-head').trigger(e); }
+);
+
+$('a.section3-trigger').click(function(e) { $('#decision-head').trigger(e); });
+
+$('a.section3-trigger').hover(	
+	function(e) { $('#decision-head').trigger(e); },
+	function(e) { $('#decision-head').trigger(e); }
 );
 
 $('button.next-subsection').click(function(e) { triggerTogglers(e, $(this)); });
