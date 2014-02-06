@@ -74,7 +74,10 @@ $('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
 $('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 $('#forme-sub-content').append(skipButton);
 $('.sub-content').not('.check-option .sub-content').append(nextButton);
-$('a.trigger-link').css("cursor", "pointer");
+$('#careerBuilder a').each(function() {
+	var $this = $(this);
+	$this.attr("target", "_blank");
+});
 
 $('.toggler').hover(
 	function() {
@@ -117,23 +120,23 @@ $('.toggler').click(function() {
 	}
 });
 
-$('a.section1-trigger').click(function(e) { $('#who-head').trigger(e); });
+$('.section1-trigger').click(function(e) { $('#who-head').trigger(e); });
 
-$('a.section1-trigger').hover(	
+$('.section1-trigger').hover(	
 	function(e) { $('#who-head').trigger(e); },
 	function(e) { $('#who-head').trigger(e); }
 );
 
-$('a.section2-trigger').click(function(e) { $('#research-head').trigger(e); });
+$('.section2-trigger').click(function(e) { $('#research-head').trigger(e); });
 
-$('a.section2-trigger').hover(	
+$('.section2-trigger').hover(	
 	function(e) { $('#research-head').trigger(e); },
 	function(e) { $('#research-head').trigger(e); }
 );
 
-$('a.section3-trigger').click(function(e) { $('#decision-head').trigger(e); });
+$('.section3-trigger').click(function(e) { $('#decision-head').trigger(e); });
 
-$('a.section3-trigger').hover(	
+$('.section3-trigger').hover(	
 	function(e) { $('#decision-head').trigger(e); },
 	function(e) { $('#decision-head').trigger(e); }
 );

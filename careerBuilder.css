@@ -9,12 +9,13 @@
 	margin: 0;
 }
 
-#careerBuilder a, #careerBuilder a:visited {
+#careerBuilder a, #careerBuilder a:visited, #careerBuilder .trigger-link {
 	color: #F00;
 	text-decoration: none;
+	cursor:pointer;
 }
 
-#careerBuilder a:hover, #careerBuilder a:active{
+#careerBuilder a:hover, #careerBuilder a:active, #careerBuilder .trigger-link:hover{
 	text-decoration: underline;
 }
 
@@ -212,7 +213,7 @@
 
 #final-popup {
 	display: none;
-	z-index: 5000;
+	z-index: 9999;
 	color: #000000;
 	background-color: #ececec;
 	box-sizing: border-box;
