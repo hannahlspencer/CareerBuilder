@@ -7,6 +7,7 @@ var down = "&#9662; ";
 var up = "&#9652; ";
 var nextButton = "<button class='next-subsection' type='button'>Next</button>";
 var skipButton = "<button class='skip-section' type='button'>Skip this section</button>";
+var summaryButton = "<button class='get-summary' type='button'>Section summary</button>";
 
 //replace prop() with attr() if jQuery is older than 1.6
 if (typeof jQuery.fn.prop != 'function') {
@@ -73,7 +74,9 @@ $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
 $('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
 $('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 $('#forme-sub-content').append(skipButton);
+$('.subsection:last-child .sub-content').append(summaryButton);
 $('.sub-content').not('.check-option .sub-content').append(nextButton);
+
 $('#careerBuilder a').each(function() {
 	var $this = $(this);
 	$this.attr("target", "_blank");

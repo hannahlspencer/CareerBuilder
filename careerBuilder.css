@@ -191,6 +191,7 @@
 }
 
 #careerBuilder button.next-subsection,
+#careerBuilder button.get-summary,
 #careerBuilder button.skip-section,
 #final-popup button.next-subsection {
 	float: right;
@@ -203,7 +204,7 @@
 	cursor: pointer;
 }
 
-#careerBuilder button.skip-section {
+#careerBuilder button.skip-section, #careerBuilder button.get-summary {
 	float: left;
 }
 
@@ -264,12 +265,13 @@
 	border-radius: 10px;
 }
 
-#who button.next-subsection {
+#who button.next-subsection, #who button.get-summary {
 	background-color: #F58621;
 	border-color: #F58621;
 }
 
-#who #skills-sub, #who button.next-subsection:hover {
+#who #skills-sub, #who button.next-subsection:hover, 
+#who button.get-summary:hover {
 	background: #F79E4D;
 }
 
@@ -292,12 +294,13 @@
 	border-radius: 10px;
 }
 
-#research button.next-subsection {
+#research button.next-subsection, #research button.get-summary {
 	background-color: #1999D4;
 	border-color: #1999D4;
 }
 
-#research #sectors-sub, #research button.next-subsection:hover {
+#research #sectors-sub, #research button.next-subsection:hover,
+#research button.get-summary:hover {
 	background: #5EB8E1;
 }
 
@@ -317,13 +320,15 @@
 }
 
 #decision button.next-subsection, 
-#decision button.skip-section {
+#decision button.skip-section,
+#decision button.get-summary {
 	background-color: #936AB0;
 	border-color: #936AB0;
 }
 
 #decision #forme-sub, #decision button.next-subsection:hover,
-#decision button.skip-section:hover {
+#decision button.skip-section:hover,
+#decision button.get-summary:hover {
 	background: #A988C0;
 }
 
@@ -346,12 +351,13 @@
 	border-radius: 10px;
 }
 
-#achieving button.next-subsection {
+#achieving button.next-subsection, #achieving button.get-summary {
 	background-color: #2FB64B;
 	border-color: #2FB64B;
 }
 
-#achieving #cv-sub, #achieving button.next-subsection:hover {
+#achieving #cv-sub, #achieving button.next-subsection:hover,
+#achieving button.get-summary:hover {
 	background: #59C56F;
 }
 
