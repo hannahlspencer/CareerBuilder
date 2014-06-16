@@ -59,6 +59,35 @@ function skipSectionTrigger(e, $this) {
 	triggerTogglers(e, $lastButton);
 }
 
+function getSummary($section) {
+	var sectionID = $section.attr('id');
+	var body = "";
+	if (sectionID == "who") {
+		body += "<h2>Self-assessment</h2>";
+	}
+	else if (sectionID == "research") {
+		body += "<h2>Careers research</h2>";
+	}
+	else if (sectionID == "decision") {
+		body += "<h2>Making a decision</h2>";
+	}
+	else if (sectionID == "achieving") {
+		body += "<h2>Taking action</h2>";
+	}
+	return body;
+}
+
+function saveSummary(e, $this) {
+	var header = "<!doctype html><html><head>" +
+				 "<title>Your Career Builder summary</title>" +
+				 "</head><body><h1>Your Career Builder summary</h1>";
+	var footer = "</body></html>";
+	var $section = $this.closest('.section');
+	var html = header + getSummary($section) + footer;
+	var oSummaryBlob = new Blob([html], {type: 'text/html'});
+	saveAs(oSummaryBlob, "Career Builder summary.html");
+}
+
 //set up
 $('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
 $('.section-content').hide();
@@ -157,6 +186,8 @@ $('button.skip-section').hover(
 	function(e) { skipSectionTrigger(e, $(this)); },
 	function(e) { skipSectionTrigger(e, $(this)); }
 );
+
+$('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
 
 $('#close-popup').click(function() {
 	$('#overlay').remove();
