@@ -193,7 +193,8 @@
 #careerBuilder button.next-subsection,
 #careerBuilder button.get-summary,
 #careerBuilder button.skip-section,
-#final-popup button.next-subsection {
+#final-popup button.next-subsection,
+#final-popup button.get-summary {
 	float: right;
 	font-weight: bold;
 	color: #FFF;
@@ -204,7 +205,9 @@
 	cursor: pointer;
 }
 
-#careerBuilder button.skip-section, #careerBuilder button.get-summary {
+#careerBuilder button.skip-section, 
+#careerBuilder button.get-summary,
+#final-popup button.get-summary {
 	float: left;
 }
 
@@ -231,14 +234,16 @@
 	border-radius: 10px;
 }
 
-#final-popup button.next-subsection {
+#final-popup button.next-subsection,
+#final-popup button.get-summary {
 	background-color: #333;
 	border-color: #333;
 	margin-bottom: 5px;
 	cursor: pointer;
 }
 
-#final-popup button.next-subsection:hover {
+#final-popup button.next-subsection:hover,
+#final-popup button.get-summary:hover {
 	background-color: #666;
 }
 

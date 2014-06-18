@@ -7,7 +7,127 @@ var down = "&#9662; ";
 var up = "&#9652; ";
 var nextButton = "<button class='next-subsection' type='button'>Next</button>";
 var skipButton = "<button class='skip-section' type='button'>Skip this section</button>";
-var summaryButton = "<button class='get-summary' type='button'>Section summary</button>";
+var summaryButton = "<button class='get-summary' type='button'>Save summary</button>";
+var closeButton = "<button id='close-popup' class='next-subsection' type='button'>Close</button>";
+
+var cb = {
+	"title" : "Career Builder",
+	"sections" : [
+		{
+			"id" : "who",
+			"title" : "Self assessment",
+			"subs" : [
+				{
+					"id" : "skills",
+					"title" : "Skills and abilities"
+				},
+				{
+					"id" : "pdam",
+					"title" : "Developing your skillset"
+				},
+				{
+					"id" : "values",
+					"title" : "Values and motivations"
+				},
+				{
+					"id" : "summary",
+					"title" : "What next?"
+				}
+			]
+		},
+		{
+			"id" : "research",
+			"title" : "Careers research",
+			"subs" : [
+				{
+					"id" : "sectors",
+					"title" : "Sectors"
+				},
+				{
+					"id" : "roles",
+					"title" : "Roles"
+				},
+				{
+					"id" : "employers",
+					"title" : "Employers"
+				}
+			]
+		},
+		{
+			"id" : "decision",
+			"title" : "Making a decision",
+			"subs" : [
+				{
+					"id" : "forme",
+					"title" : "Do I need to use this section?"
+				},
+				{
+					"id" : "barriers",
+					"title" : "Barriers to effective decision making"
+				},
+				{
+					"id" : "review",
+					"title" : "Reviewing your responses"
+				},
+				{
+					"id" : "further",
+					"title" : "Further support and advice"
+				}
+			]
+		},
+		{
+			"id" : "achieving",
+			"title" : "Taking action",
+			"subs" : [
+				{
+					"id" : "cv",
+					"title" : "CV and cover letter support"
+				},
+				{
+					"id" : "application",
+					"title" : "Application form support"
+				},
+				{
+					"id" : "interview",
+					"title" : "Interview support"
+				},
+				{
+					"id" : "assessment",
+					"title" : "Assessment centre support"
+				}
+			]
+		},
+		{
+			"id" : "final-popup",
+			"title" : "You have now finished the last section of Career Builder but this is not the end of your career planning!",
+			"subs" : []
+		}
+	]
+};
+
+//set up
+$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
+$('.section-content').hide();
+$('.sub-content').hide();
+$('.suggestion').hide();
+$('#further-sub-content .suggestion').show();
+$('#reviewing-intro').hide();
+$('#skills-values-suggestion').hide();
+$('.skill-value-advice').hide();
+$('#review-sub-content .advice').hide();
+$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
+$('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
+$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
+$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
+$('#forme-sub-content').append(skipButton);
+$('.subsection:last-child .sub-content').append(summaryButton);
+$('.sub-content').not('.check-option .sub-content').append(nextButton);
+$('#final-popup').append(summaryButton);
+$('#final-popup').append(closeButton);
+$('#careerBuilder a').each(function() {
+	var $this = $(this);
+	$this.attr("target", "_blank");
+});
 
 //replace prop() with attr() if jQuery is older than 1.6
 if (typeof jQuery.fn.prop != 'function') {
@@ -34,7 +154,7 @@ function triggerTogglers(e, $this) {
 						'left': 0,
 						'background-color': 'black',
 						'width': '100%',
-						'z-index': 4999
+						'z-index': 9998
 					});
 					$("body").append($('#final-popup'));
 					$('#final-popup').show();
@@ -59,20 +179,63 @@ function skipSectionTrigger(e, $this) {
 	triggerTogglers(e, $lastButton);
 }
 
+function buildSectionSummary(section) {
+	var sectionHTML = "<h2>" + section.title + "</h2>";
+	$.each(section.subs, function(i, sub) {
+		sectionHTML += "<h3>" + sub.title + "</h3>";
+		if ($('input:radio[name=' + sub.id + ']:checked').length > 0) {
+			sectionHTML += "<p>" + $('#' + sub.id + '-sub-content').children(':first').html();
+			var radId = $('input:radio[name=' + sub.id + ']:checked').attr('id');
+			sectionHTML += " " + $('label[for=' + radId + ']').text() + "</p>";
+			var sugId = radId.substring(0, radId.length - 6); // 6 is length of "-radio"
+			sectionHTML += $('#' + sub.id + '-sub-content #' + sugId).html();
+		}
+		else {
+			sectionHTML += "<p>You didn't answer this question.</p>";
+		}
+	});
+	return sectionHTML;
+};
+
 function getSummary($section) {
 	var sectionID = $section.attr('id');
 	var body = "";
-	if (sectionID == "who") {
+	if (sectionID == cb.sections[0].id) {
 		body += "<h2>Self-assessment</h2>";
+		
+		body += "<h3>Your skills</h3>";
+		body += $('<div>').append($('#skills-summary').clone()).remove().html();
+		body += $('#pdam-sub-content').children().html(); //hidden ones have display:none on element
+		
+		body+= "<h3>Your values</h3>";
+		body += $('<div>').append($('#values-summary').clone()).remove().html();
+		
+		body+= "<h3>Next steps</h3>";
+		body += $('#skills-values-suggestion').html();
 	}
-	else if (sectionID == "research") {
-		body += "<h2>Careers research</h2>";
+	else if (sectionID == cb.sections[1].id) {
+		body += buildSectionSummary(cb.sections[1]);
 	}
-	else if (sectionID == "decision") {
+	else if (sectionID == cb.sections[2].id) {
 		body += "<h2>Making a decision</h2>";
+		
+		body += "<h3>Overcoming your decision making barriers</h3>";
+		var $adviceList = $("#" + sectionID + " .advice")
+							  .filter(function(index) {
+								  return $(this).css("display") == "block";
+							}).clone();
+		$adviceList.each(function() {
+			var $advice = $(this);
+			$advice.children().css('display', 'block');
+			$advice.find(".toggle-arrow").remove();
+			body += $(this).html();
+		});
+		
+		body += "<h3>Further support and advice</h3>"
+		body += $('#further-sub-content .suggestion').html();
 	}
-	else if (sectionID == "achieving") {
-		body += "<h2>Taking action</h2>";
+	else if (sectionID == cb.sections[3].id) {	
+		body += buildSectionSummary(cb.sections[3]);
 	}
 	return body;
 }
@@ -80,36 +243,31 @@ function getSummary($section) {
 function saveSummary(e, $this) {
 	var header = "<!doctype html><html><head>" +
 				 "<title>Your Career Builder summary</title>" +
-				 "</head><body><h1>Your Career Builder summary</h1>";
+				 "<link rel=\"stylesheet\" type=\"text/css\" href=\"careerBuilder.css\">" +
+				 "</head><body><h1>Your Career Builder summary</h1>" +
+				 "<p>Here are your selections from Career Builder" + 
+				 " along with our suggestions of the resources and services best suited to you.</p>";
 	var footer = "</body></html>";
 	var $section = $this.closest('.section');
-	var html = header + getSummary($section) + footer;
+	var body = "";
+	if ($section.attr('id') == cb.sections[cb.sections.length - 1].id) {
+		$.each(cb.sections, function(i, section) {
+			body += getSummary($('#' + section.id));
+		});
+	}
+	else {
+		body += getSummary($section);
+	}
+	body += "<h2>Next steps in your career planning</h2>";
+	$('#final-popup').children().each(function(i) {
+		if (i == 1 || i == 2) {
+			body += "<p>" + $(this).html() + "</p>";
+		}
+	});
+	var html = header + body + footer;
 	var oSummaryBlob = new Blob([html], {type: 'text/html'});
 	saveAs(oSummaryBlob, "Career Builder summary.html");
 }
-
-//set up
-$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
-$('.section-content').hide();
-$('.sub-content').hide();
-$('.suggestion').hide();
-$('#further-sub-content .suggestion').show();
-$('#reviewing-intro').hide();
-$('#skills-values-suggestion').hide();
-$('.skill-value-advice').hide();
-$('#review-sub-content .advice').hide();
-$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
-$('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
-$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
-$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
-$('#forme-sub-content').append(skipButton);
-$('.subsection:last-child .sub-content').append(summaryButton);
-$('.sub-content').not('.check-option .sub-content').append(nextButton);
-
-$('#careerBuilder a').each(function() {
-	var $this = $(this);
-	$this.attr("target", "_blank");
-});
 
 $('.toggler').hover(
 	function() {
