@@ -7,7 +7,8 @@ var down = "&#9662; ";
 var up = "&#9652; ";
 var nextButton = "<button class='next-subsection' type='button'>Next</button>";
 var skipButton = "<button class='skip-section' type='button'>Skip this section</button>";
-var summaryButton = "<button class='get-summary' type='button'>Save summary</button>";
+var summaryButton = "<button class='get-summary' type='button'>Download summary</button>";
+var fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>";
 var closeButton = "<button id='close-popup' class='next-subsection' type='button'>Close</button>";
 
 var cb = {
@@ -105,6 +106,58 @@ var cb = {
 	]
 };
 
+var cbSummaryStyle = 
+"#careerBuilder-summary {" +
+"	font-family: Arial, sans serif;" +
+"	max-width: 760px;" +
+"	margin: 0 auto;" +
+"	padding: 1em;" +
+"}" +
+"#careerBuilder-summary a," +
+"#careerBuilder-summary a:hover," +
+"#careerBuilder-summary a:visited {" +
+"	color: red;" +
+"}" +
+"#careerBuilder-summary ul {" +
+"	list-style: square;" +
+"}" +
+"#careerBuilder-summary .advice {" +
+"	background: #F2F2F2;" +
+"	padding: 0 1em;" +
+"	overflow: auto;" +
+"	" +
+"}" +
+"#careerBuilder-summary .section-summary {" +
+"	border: 4px solid;" +
+"	padding: 0 1em 1em 1em;" +
+"	margin: 1em 0;" +
+"	background: white;" +
+"}" +
+"#careerBuilder-summary #who-summary {" +
+"	border: 4px solid #F58621;" +
+"}" +
+"#careerBuilder-summary #who-summary h2 {" +
+"	color: #F58621;" +
+"}" +
+"#careerBuilder-summary #research-summary {" +
+"	border: 4px solid #1999D4;" +
+"}" +
+"#careerBuilder-summary #research-summary h2 {" +
+"	color: #1999D4;" +
+"}" +
+"#careerBuilder-summary #decision-summary {" +
+"	border: 4px solid #936AB0;" +
+"}" +
+"#careerBuilder-summary #decision-summary h2 {" +
+"	color: #936AB0;" +
+"}" +
+"#careerBuilder-summary #achieving-summary {" +
+"	border: 4px solid #2FB64B;" +
+"}" +
+"#careerBuilder-summary #achieving-summary h2 {" +
+"	color: #2FB64B;" +
+"}";
+
 //set up
 $('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
 $('.section-content').hide();
@@ -122,7 +175,7 @@ $('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 $('#forme-sub-content').append(skipButton);
 $('.subsection:last-child .sub-content').append(summaryButton);
 $('.sub-content').not('.check-option .sub-content').append(nextButton);
-$('#final-popup').append(summaryButton);
+$('#final-popup').append(fullSummaryButton);
 $('#final-popup').append(closeButton);
 $('#careerBuilder a').each(function() {
 	var $this = $(this);
@@ -186,9 +239,13 @@ function buildSectionSummary(section) {
 		if ($('input:radio[name=' + sub.id + ']:checked').length > 0) {
 			sectionHTML += "<p>" + $('#' + sub.id + '-sub-content').children(':first').html();
 			var radId = $('input:radio[name=' + sub.id + ']:checked').attr('id');
-			sectionHTML += " " + $('label[for=' + radId + ']').text() + "</p>";
+			sectionHTML += "<strong>";
+			sectionHTML += " " + $('label[for=' + radId + ']').text() + "</strong>.</p>";
+			sectionHTML += "<p>Here's our advice:</p>";
+			sectionHTML += "<div class=\"advice\">";
 			var sugId = radId.substring(0, radId.length - 6); // 6 is length of "-radio"
 			sectionHTML += $('#' + sub.id + '-sub-content #' + sugId).html();
+			sectionHTML += "</div>";
 		}
 		else {
 			sectionHTML += "<p>You didn't answer this question.</p>";
@@ -197,9 +254,8 @@ function buildSectionSummary(section) {
 	return sectionHTML;
 };
 
-function getSummary($section) {
-	var sectionID = $section.attr('id');
-	var body = "";
+function getSummary(sectionID) {
+	var body = "<div class=\"section-summary\" id=\"" + sectionID + "-summary\">";
 	if (sectionID == cb.sections[0].id) {
 		body += "<h2>Self-assessment</h2>";
 		
@@ -211,7 +267,9 @@ function getSummary($section) {
 		body += $('<div>').append($('#values-summary').clone()).remove().html();
 		
 		body+= "<h3>Next steps</h3>";
+		body += "<div class=\"advice\">";
 		body += $('#skills-values-suggestion').html();
+		body += "</div>";
 	}
 	else if (sectionID == cb.sections[1].id) {
 		body += buildSectionSummary(cb.sections[1]);
@@ -224,39 +282,49 @@ function getSummary($section) {
 							  .filter(function(index) {
 								  return $(this).css("display") == "block";
 							}).clone();
-		$adviceList.each(function() {
-			var $advice = $(this);
-			$advice.children().css('display', 'block');
-			$advice.find(".toggle-arrow").remove();
-			body += $(this).html();
-		});
+		if ($adviceList.length > 0) {
+			$adviceList.each(function() {
+				var $advice = $(this);
+				$advice.children().css('display', 'block');
+				$advice.find(".toggle-arrow").remove();
+				body += $advice.html();
+			});
+		}
+		else {
+			body += "<p>You didn't select any decision making barriers.</p>";
+		}
 		
 		body += "<h3>Further support and advice</h3>"
+		body += "<div class=\"advice\">";
 		body += $('#further-sub-content .suggestion').html();
+		body += "</div>";
 	}
 	else if (sectionID == cb.sections[3].id) {	
 		body += buildSectionSummary(cb.sections[3]);
 	}
+	body += "</div>"
 	return body;
 }
 
 function saveSummary(e, $this) {
-	var header = "<!doctype html><html><head>" +
+	var header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
 				 "<title>Your Career Builder summary</title>" +
-				 "<link rel=\"stylesheet\" type=\"text/css\" href=\"careerBuilder.css\">" +
-				 "</head><body><h1>Your Career Builder summary</h1>" +
-				 "<p>Here are your selections from Career Builder" + 
+				 "<style>" + cbSummaryStyle + "</style>" +
+				 "</head><body id=\"careerBuilder-summary\"><h1>Your Career Builder summary</h1>" +
+				 "<p>Here are your selections from <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" + 
 				 " along with our suggestions of the resources and services best suited to you.</p>";
 	var footer = "</body></html>";
-	var $section = $this.closest('.section');
+	var sId = $this.closest('.section').attr('id');
 	var body = "";
-	if ($section.attr('id') == cb.sections[cb.sections.length - 1].id) {
+	if (sId == cb.sections[cb.sections.length - 1].id) {
 		$.each(cb.sections, function(i, section) {
-			body += getSummary($('#' + section.id));
+			if (section.id != "final-popup") {
+				body += getSummary(section.id);
+			}
 		});
 	}
 	else {
-		body += getSummary($section);
+		body += getSummary(sId);
 	}
 	body += "<h2>Next steps in your career planning</h2>";
 	$('#final-popup').children().each(function(i) {
@@ -365,56 +433,54 @@ $('input:radio').change(function() {
 });
 
 //show skills and values in list and remove skills from pdam set when selected
-$('input:checkbox').change(function() {
+$('input[name=skill], input[name=value]').change(function() {
 	var $checked = $(this);
-	if ($checked.attr('name') == 'skill' || $checked.attr('name') == 'value') { 
-		$('#skills-summary').html("");
-		$('#values-summary').html("");
-		$('#missing-skill-list li').hide();
-		$('#skills-values-suggestion').slideDown('slow');
-		var skillsCount = 0;
-		var valsCount = 0;
-		$('input:checkbox').each(function() {
-			var $this = $(this);
-			var checkName = $this.attr('name');
-			var checkVal = $this.attr('value');
-			var checkClass = $this.attr('class');
-			if ($this.is(':checked')) {
-				if (checkName == 'skill') {
-					$('#skills-summary').append("<li>" + checkVal + "</li>");
-					skillsCount++;
-				}
-				else if (checkName == 'value') {
-					$('#values-summary').append("<li>" + checkVal + "</li>");
-					valsCount++;
-				}
+	$('#skills-summary').html("");
+	$('#values-summary').html("");
+	$('#missing-skill-list li').hide();
+	$('#skills-values-suggestion').slideDown('slow');
+	var skillsCount = 0;
+	var valsCount = 0;
+	$('input:checkbox').each(function() {
+		var $this = $(this);
+		var checkName = $this.attr('name');
+		var checkVal = $this.attr('value');
+		var checkClass = $this.attr('class');
+		if ($this.is(':checked')) {
+			if (checkName == 'skill') {
+				$('#skills-summary').append("<li>" + checkVal + "</li>");
+				skillsCount++;
 			}
-			else if ($this.not(':checked')) {
-				var missingSkillTargetId = '#' + checkClass + '-pdam';
-				$(missingSkillTargetId).show();
+			else if (checkName == 'value') {
+				$('#values-summary').append("<li>" + checkVal + "</li>");
+				valsCount++;
 			}
-		});
-		if (skillsCount == totalSkills) {
-			$('#missing-skills-advice').hide();
-			$('#all-skills-advice').show();
 		}
-		else {
-			$('#all-skills-advice').hide();
-			$('#missing-skills-advice').show();
+		else if ($this.not(':checked')) {
+			var missingSkillTargetId = '#' + checkClass + '-pdam';
+			$(missingSkillTargetId).show();
 		}
-		if (valsCount > (totalValues/2)) {
-			$('#too-many-values-advice').slideDown('slow');
-		}
-		else {
-			$('#too-many-values-advice').slideUp('slow');
-		}
-		if (skillsCount == 0)
-			$('#skills-summary').append("<li>" + noSelectMessage + " skills</li>");
-		if (valsCount == 0)
-			$('#values-summary').append("<li>" + noSelectMessage + " values</li>");
-		if (skillsCount == 0 && valsCount == 0)
-			$('#skills-values-suggestion').slideUp('slow');
+	});
+	if (skillsCount == totalSkills) {
+		$('#missing-skills-advice').hide();
+		$('#all-skills-advice').show();
 	}
+	else {
+		$('#all-skills-advice').hide();
+		$('#missing-skills-advice').show();
+	}
+	if (valsCount > (totalValues/2)) {
+		$('#too-many-values-advice').slideDown('slow');
+	}
+	else {
+		$('#too-many-values-advice').slideUp('slow');
+	}
+	if (skillsCount == 0)
+		$('#skills-summary').append("<li>" + noSelectMessage + " skills</li>");
+	if (valsCount == 0)
+		$('#values-summary').append("<li>" + noSelectMessage + " values</li>");
+	if (skillsCount == 0 && valsCount == 0)
+		$('#skills-values-suggestion').slideUp('slow');
 });
 
 //show advice based on decision making barrier checkbox selection
@@ -445,8 +511,10 @@ $('input:checkbox[name="barrier"]').change(function() {
 				var $this = $(this);
 				var adviceID = $this.attr('id');
 				if (checkClass.indexOf(adviceID) >= 0) {
-					var barrierListSelector = '#' + adviceID + ' .barrier-list';
-					$(barrierListSelector).append("<li>You selected: <em>" + checkVal + "</em></li>");
+					if (adviceID != "none") {
+						var barrierListSelector = '#' + adviceID + ' .barrier-list';
+						$(barrierListSelector).append("<li>You selected: <em>" + checkVal + "</em></li>");
+					}
 					$this.show();
 				}
 			});
