@@ -190,10 +190,18 @@
 	margin: 5px 5px 0 5px;
 }
 
-#careerBuilder button.next-subsection,
+#careerBuilder .section-level-buttons {
+	padding: 5px;
+}
+
+#careerBuilder .section-level-buttons button {
+	border-color: white !important;
+}
+
+#careerBuilder button.next,
 #careerBuilder button.get-summary,
 #careerBuilder button.skip-section,
-#final-popup button.next-subsection,
+#final-popup button.next,
 #final-popup button.get-summary {
 	float: right;
 	font-weight: bold;
@@ -211,7 +219,7 @@
 	float: left;
 }
 
-#careerBuilder #who button.next-subsection  {
+#careerBuilder #who button.next  {
 	margin-top: 5px;
 }
 
@@ -234,7 +242,7 @@
 	border-radius: 10px;
 }
 
-#final-popup button.next-subsection,
+#final-popup button.next,
 #final-popup button.get-summary {
 	background-color: #333;
 	border-color: #333;
@@ -242,7 +250,7 @@
 	cursor: pointer;
 }
 
-#final-popup button.next-subsection:hover,
+#final-popup button.next:hover,
 #final-popup button.get-summary:hover {
 	background-color: #666;
 }
@@ -270,12 +278,12 @@
 	border-radius: 10px;
 }
 
-#who button.next-subsection, #who button.get-summary {
+#who button.next, #who button.get-summary {
 	background-color: #F58621;
 	border-color: #F58621;
 }
 
-#who #skills-sub, #who button.next-subsection:hover, 
+#who #skills-sub, #who button.next:hover, 
 #who button.get-summary:hover {
 	background: #F79E4D;
 }
@@ -299,12 +307,12 @@
 	border-radius: 10px;
 }
 
-#research button.next-subsection, #research button.get-summary {
+#research button.next, #research button.get-summary {
 	background-color: #1999D4;
 	border-color: #1999D4;
 }
 
-#research #sectors-sub, #research button.next-subsection:hover,
+#research #sectors-sub, #research button.next:hover,
 #research button.get-summary:hover {
 	background: #5EB8E1;
 }
@@ -324,14 +332,14 @@
 	border-radius: 10px;
 }
 
-#decision button.next-subsection, 
+#decision button.next, 
 #decision button.skip-section,
 #decision button.get-summary {
 	background-color: #936AB0;
 	border-color: #936AB0;
 }
 
-#decision #forme-sub, #decision button.next-subsection:hover,
+#decision #forme-sub, #decision button.next:hover,
 #decision button.skip-section:hover,
 #decision button.get-summary:hover {
 	background: #A988C0;
@@ -356,12 +364,12 @@
 	border-radius: 10px;
 }
 
-#achieving button.next-subsection, #achieving button.get-summary {
+#achieving button.next, #achieving button.get-summary {
 	background-color: #2FB64B;
 	border-color: #2FB64B;
 }
 
-#achieving #cv-sub, #achieving button.next-subsection:hover,
+#achieving #cv-sub, #achieving button.next:hover,
 #achieving button.get-summary:hover {
 	background: #59C56F;
 }

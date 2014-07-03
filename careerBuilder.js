@@ -5,11 +5,12 @@ var totalValues = $('input:checkbox[name="value"]').length;
 var right = "&#9656; ";
 var down = "&#9662; ";
 var up = "&#9652; ";
-var nextButton = "<button class='next-subsection' type='button'>Next</button>";
+var nextButton = "<button class='next next-subsection' type='button'>Next</button>";
+var nextSectionButton = "<button class='next next-section' type='button'>Next section</button>";
 var skipButton = "<button class='skip-section' type='button'>Skip this section</button>";
-var summaryButton = "<button class='get-summary' type='button'>Download summary</button>";
+var summaryButton = "<button class='get-summary' type='button'>Download section summary</button>";
 var fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>";
-var closeButton = "<button id='close-popup' class='next-subsection' type='button'>Close</button>";
+var closeButton = "<button id='close-popup' class='next' type='button'>Close</button>";
 
 var cb = {
 	"title" : "Career Builder",
@@ -163,6 +164,7 @@ $('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
 $('.section-content').hide();
 $('.sub-content').hide();
 $('.suggestion').hide();
+$('.section-level-buttons').hide();
 $('#further-sub-content .suggestion').show();
 $('#reviewing-intro').hide();
 $('#skills-values-suggestion').hide();
@@ -173,10 +175,11 @@ $('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
 $('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
 $('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 $('#forme-sub-content').append(skipButton);
-$('.subsection:last-child .sub-content').append(summaryButton);
 $('.sub-content').not('.check-option .sub-content').append(nextButton);
+$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
 $('#final-popup').append(fullSummaryButton);
 $('#final-popup').append(closeButton);
+$('.section:last-child .next-section').text('What next?');
 $('#careerBuilder a').each(function() {
 	var $this = $(this);
 	$this.attr("target", "_blank");
@@ -189,10 +192,10 @@ if (typeof jQuery.fn.prop != 'function') {
 
 function triggerTogglers(e, $this) {
 	var $thisSub = $this.closest('li');
-	var $thisSection = $thisSub.closest('.section');
+	var $thisSection = $this.closest('.section');
 	var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
 	var $nextH3 = $thisSub.next().find('h3.toggler');
-	if ($thisSub.is(':last-child')) {
+	if ($this.hasClass('next-section')) {
 		if ($thisSection.is(':last-child')) {
 			$thisSection.find('h2.toggler').trigger(e.type);
 			if (e.type == 'click') {
@@ -213,11 +216,14 @@ function triggerTogglers(e, $this) {
 					$('#final-popup').show();
 			}
 		}
-		else { 
+		else {
 			var $nextH2 = $thisSection.next().find('h2.toggler');
 			$nextH2.trigger(e.type);
 			$thisSection.next().find('h3.toggler').not('.hidden').trigger(e.type);
 		}
+	}
+	else if ($thisSub.is(':last-child') && e.type == 'click') {
+		$thisSection.find('.section-level-buttons').slideDown();
 	}
 	else {
 		if ($nextH3.is('.hidden')) {
@@ -411,6 +417,13 @@ $('button.skip-section').click(function(e) { skipSectionTrigger(e, $(this)); });
 $('button.skip-section').hover( 
 	function(e) { skipSectionTrigger(e, $(this)); },
 	function(e) { skipSectionTrigger(e, $(this)); }
+);
+
+$('button.next-section').click(function(e) { triggerTogglers(e, $(this)); });
+
+$('button.next-section').hover( 
+	function(e) { triggerTogglers(e, $(this)); },
+	function(e) { triggerTogglers(e, $(this)); }
 );
 
 $('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
