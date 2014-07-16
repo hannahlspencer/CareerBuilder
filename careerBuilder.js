@@ -108,6 +108,11 @@ var cb = {
 };
 
 var cbSummaryStyle = 
+"@media print {" +
+"    .advice {" +
+"        border: 1px solid #898989;" +
+"    }" +
+"}" +
 "#careerBuilder-summary {" +
 "	font-family: Arial, sans serif;" +
 "	max-width: 760px;" +
@@ -160,34 +165,70 @@ var cbSummaryStyle =
 "}";
 
 //set up
-$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
-$('.section-content').hide();
-$('.sub-content').hide();
-$('.suggestion').hide();
-$('.section-level-buttons').hide();
-$('#further-sub-content .suggestion').show();
-$('#reviewing-intro').hide();
-$('#skills-values-suggestion').hide();
-$('.skill-value-advice').hide();
-$('#review-sub-content .advice').hide();
-$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
-$('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
-$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
-$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
-$('#forme-sub-content').append(skipButton);
-$('.sub-content').not('.check-option .sub-content').append(nextButton);
-$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
-$('#final-popup').append(fullSummaryButton);
-$('#final-popup').append(closeButton);
-$('.section:last-child .next-section').text('What next?');
-$('#careerBuilder a').each(function() {
-	var $this = $(this);
-	$this.attr("target", "_blank");
-});
+if (!loadProgress()) {
+	$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
+	$('.section-content').hide();
+	$('.sub-content').hide();
+	$('.suggestion').hide();
+	$('.section-level-buttons').hide();
+	$('#further-sub-content .suggestion').show();
+	$('#review-sub-content .suggestion').show();
+	$('#reviewing-intro').hide();
+	$('#skills-values-suggestion').hide();
+	$('.skill-value-advice').hide();
+	$('#review-sub-content .advice').hide();
+	$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
+	$('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
+	$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
+	$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
+	$('#forme-sub-content').append(skipButton);
+	$('.sub-content').not('.check-option .sub-content').append(nextButton);
+	$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
+	$('#final-popup').append(fullSummaryButton);
+	$('#final-popup').append(closeButton);
+	$('.section:last-child .next-section').text('What next?');
+	$('#careerBuilder a').each(function() {
+		var $this = $(this);
+		$this.attr("target", "_blank");
+	});
+}
 
 //replace prop() with attr() if jQuery is older than 1.6
 if (typeof jQuery.fn.prop != 'function') {
     jQuery.fn.prop = jQuery.fn.attr;
+}
+
+function supportsStorage() {
+	try {
+		return 'localStorage' in window && window['localStorage'] !== null;
+	} catch (e) {
+		return false;
+	}
+}
+
+function saveProgress() {
+	if (supportsStorage()) {
+		localStorage.setItem('cb-html', $('#careerBuilder').html());
+	} else {
+		alert("Unable to save progress");
+	}
+}
+
+function loadProgress() {
+	if (supportsStorage()) {
+		if (localStorage.getItem('cb-html') != undefined) {
+			$('#careerBuilder').html(localStorage.getItem('cb-html'));
+			return true;
+		}
+	}
+	return false;
+}
+
+function clearAll() {
+	if (supportsStorage()) {
+		localStorage.clear();
+	}
+	document.location.reload(true);
 }
 
 function triggerTogglers(e, $this) {
@@ -534,4 +575,14 @@ $('input:checkbox[name="barrier"]').change(function() {
 		}
 	});
 	noneSelected ? $('.no-selection').show() : $('.no-selection').hide();
+});
+
+$('input:radio, input:checkbox').change(function() {
+	$this = $(this);
+	if ($this.is(':checked')) {
+		$this.attr('checked', true);
+	}
+	else {
+		$this.removeAttr('checked');
+	}
 });
