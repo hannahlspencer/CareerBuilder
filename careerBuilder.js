@@ -231,6 +231,24 @@ function clearAll() {
 	document.location.reload(true);
 }
 
+function showPopup(z, $popup) {
+	var docHeight = $(document).height();
+	$("body").append("<div id='overlay'></div>");
+	$("#overlay")
+		.height(docHeight)
+		.css({
+			'opacity' : 0.5,
+			'position': 'fixed',
+			'top': 0,
+			'left': 0,
+			'background-color': 'black',
+			'width': '100%',
+			'z-index': z - 1
+		});
+	$("body").append($popup);
+	$popup.show();	
+}
+
 function triggerTogglers(e, $this) {
 	var $thisSub = $this.closest('li');
 	var $thisSection = $this.closest('.section');
@@ -240,21 +258,7 @@ function triggerTogglers(e, $this) {
 		if ($thisSection.is(':last-child')) {
 			$thisSection.find('h2.toggler').trigger(e.type);
 			if (e.type == 'click') {
-				var docHeight = $(document).height();
-				$("body").append("<div id='overlay'></div>");
-				$("#overlay")
-					.height(docHeight)
-					.css({
-						'opacity' : 0.5,
-						'position': 'fixed',
-						'top': 0,
-						'left': 0,
-						'background-color': 'black',
-						'width': '100%',
-						'z-index': 9998
-					});
-					$("body").append($('#final-popup'));
-					$('#final-popup').show();
+				showPopup(9999, $('#final-popup'));
 			}
 		}
 		else {
@@ -586,3 +590,318 @@ $('input:radio, input:checkbox').change(function() {
 		$this.removeAttr('checked');
 	}
 });
+
+/*********CARD SORTING MODULE*********/
+var cs =
+(function() {
+
+    /***VARIABLES***/
+
+    function Value(name, description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    var iScale = [{name: "Least important"}, {name: "Quite important"}, {name: "Important"}, {name: "Very important"}, {name: "Essential"}],
+        vDeck  = new Array(),
+        deck = document.getElementById('deck-container'),
+        playingArea = document.getElementById('playing-area'),
+        skipButton = document.getElementById('skip-button'),
+        finishButton = document.getElementById('finish-button'),
+        deckButton = document.getElementById('deck-button'),
+        followUp = document.getElementById('follow-up');
+
+    vDeck.push(new Value("Promotion", "You like to work where there is a good chance of promotion"));
+    vDeck.push(new Value("Persuading people", "You enjoy persuading people to buy something or change their minds about something"));
+    vDeck.push(new Value("Community", "You like to live in a place where you can get involved with the community"));
+    vDeck.push(new Value("Help society", "You like to think that your work is producing something worthwhile for society"));
+    vDeck.push(new Value("Helping others", "It is important to you to help other people either individually or ingroups, as part of your work"));
+    vDeck.push(new Value("Learning", "It is important for you to learn new things"));
+    vDeck.push(new Value("Communication", "You enjoy being able to express ideas well in writing or in speech"));
+    vDeck.push(new Value("Recognition", "You do like people to appreciate you for the work you do"));
+    vDeck.push(new Value("Independence", "You like being able to work in the way you want, without others welling you what to do"));
+    vDeck.push(new Value("Supervision", "You enjoy being responsible for work done by others"));
+    vDeck.push(new Value("Status", "You enjoy being in a position which leads others to respect you"));
+    vDeck.push(new Value("Time freedom", "You prefer to be able to choose your own times for doing things, not having rigid working hours"));
+    vDeck.push(new Value("Routine", "You like a work routine which is fairly predictable"));
+    vDeck.push(new Value("A well-known organisation", "You like being paart of a well-known organisation"));
+    vDeck.push(new Value("Challenge", "You enjoy being 'stretched' and given new problems to work on"));
+    vDeck.push(new Value("Work with others", "You like to work where there is a good chance of promotion"));
+    vDeck.push(new Value("Friendship", "You would or do like close friendships with people at work"));
+    vDeck.push(new Value("Making decisions", "It is important to you to have to make decisions about how things should be done, who should do it and when it should be done"));
+    vDeck.push(new Value("Money", "Earning a large amount of money is important to you"));
+    vDeck.push(new Value("Contact with people", "You enjoy having a lot of contact with people"));
+    vDeck.push(new Value("Being expert", "You like being known as someone with special knowledge or skills"));
+    vDeck.push(new Value("Risk", "You like to take risks"));
+    vDeck.push(new Value("Creativity", "Thinking up new ideas and ways of doing things is important to you"));
+    vDeck.push(new Value("Variety", "You enjoy having lots of different things to do"));
+    vDeck.push(new Value("Pressure", "You like to work under pressure"));
+    vDeck.push(new Value("Place of work", "It is important that you work in the right part of the country for you"));
+    vDeck.push(new Value("Security", "It is important to know your work will always be there for you"));
+    vDeck.push(new Value("Fast pace", "You enjoy working rapidly at a high pace"));
+    vDeck.push(new Value("Precise work", "You like working at things which invlove great care and concentration"));
+    vDeck.push(new Value("Work alone", "You like to work on your own"));
+    vDeck.push(new Value("Artistic", "You enjoy work involving drawing, designing, making music, making models, etc"));
+    vDeck.push(new Value("Excitement", "It is important to you to have a lot of excitement in your work"));
+    vDeck.push(new Value("Competition", "You enjoy competing against other people or groups"));
+    vDeck.push(new Value("Physical challenge", "You enjoy doing something that is physically demanding"));
+    vDeck.push(new Value("Peace", "You prefer to have few pressures or uncomfortable demands"));
+
+    var dropLimit = Math.ceil(vDeck.length/iScale.length);
+
+    /***UTILS***/
+
+    function getTemplateElement(className) {
+        var templates = document.getElementById('templates');
+        return templates.getElementsByClassName(className)[0].cloneNode(true);
+    }
+
+    //Fisher-Yates Shuffle
+    function shuffle(array) {
+        var m = array.length, t, i;
+        while (m) {
+            i = Math.floor(Math.random() * m--);
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
+        return array;
+    }
+
+    function findPos(obj) {
+        var curtop = 0;
+        if (obj.offsetParent) {
+            do {
+                curtop += obj.offsetTop;
+            } while (obj = obj.offsetParent);
+            return [curtop];
+        }
+    }
+
+    /***START STATE***/
+
+    function makeCols() {
+        for (var i = 0; i < iScale.length; i++) {
+            var newCol = getTemplateElement('playing-col');
+            newCol.setAttribute('id', 'col-' + i);
+            var colHeader = iScale[i].name;
+            colHeader += ' - <span class="col-card-count"></span>/' + dropLimit;
+            newCol.getElementsByClassName('importance-level')[0].innerHTML = colHeader;
+            var id = 'dz-' + i;
+            iScale[i].id = id;
+            newCol.getElementsByClassName('drop-zone')[0].setAttribute('id', id);
+            playingArea.appendChild(newCol);
+        }
+    }
+
+    function makeCard(val) {
+        var card = getTemplateElement('value-card');
+        card.setAttribute('id', 'card-' + val.id)
+        card.getElementsByClassName('value-name')[0].innerHTML = val.name;
+        card.getElementsByClassName('value-description')[0].innerHTML = val.description;
+        return card;
+    }
+
+    function makeDeck() {
+        vDeck = shuffle(vDeck);
+        for (var i = 0; i < vDeck.length; i++) {
+            vDeck[i].id = i;
+            deck.appendChild(makeCard(vDeck[i]));
+        }
+        if (vDeck.length > 1) {
+            skipButton.disabled = false;
+        }
+    }
+
+    function start() {
+        makeCols();
+        makeDeck();
+        cardMoved();
+    }
+
+    /***IN-PROGRESS STATE***/
+
+    function styleDeck() {
+        var cards = deck.getElementsByClassName('value-card'),
+            l = cards.length;
+        for (var i = 0; i < l; i++) {
+            cards[i].style.top = '-' + i/2 + 'px';
+            cards[i].style.left = '-' + i/2 + 'px';
+        }
+    }
+
+    function getDeckCount() {
+        return deck.getElementsByClassName('value-card').length;
+    }
+
+    function updateDeckCount() {
+        document.getElementById('deck-count').innerHTML = getDeckCount();
+    }
+    
+    function updateColCounts() {
+        var c = playingArea.getElementsByClassName('playing-col');
+        for (var i = 0; i < c.length; i++) {
+            var label = c[i].getElementsByClassName('importance-level')[0].getElementsByClassName('col-card-count')[0];
+            var count = c[i].getElementsByClassName('drop-zone')[0].getElementsByClassName('value-card').length;
+            label.innerHTML = count;
+        }
+    }
+
+    function pickUpCard(event) {
+        event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+    
+    function canPutSelectedOnDeck() {
+        try {
+            return document.getElementsByClassName('selected')[0].parentElement.id != 'deck-container';
+        } catch (e) {
+            return false;
+        }
+    }
+    
+    function cardMoved() {
+        updateDeckCount();
+        styleDeck();
+        updateColCounts();
+        deckButton.disabled = !(canPutSelectedOnDeck());
+    }
+    
+    function appendToDeck(id) {
+        var card = document.getElementById(id);
+        if (card.parentElement != deck) {
+            deck.appendChild(card);
+            finishButton.disabled = true;
+            if (getDeckCount() != 1) {
+                skipButton.disabled = false;
+            }
+            cardMoved();
+        }
+    }
+
+    function dropCardOnDeck(event) {
+        event.preventDefault();
+        appendToDeck(event.dataTransfer.getData("text"));
+    }
+    
+    function deckButtonAction() {
+        var selected = document.getElementsByClassName('selected')[0];
+        if (selected != undefined) {
+            appendToDeck(selected.id);
+            selected.classList.remove('selected');
+            deckButton.disabled = true;
+        }
+        else {
+            alert("No card selected!");
+        }
+    }
+
+    function addCardToPlayingArea(card, col) {
+        var dz = col.getElementsByClassName('drop-zone')[0];
+        if (card.parentElement != dz) {
+            if (dz.getElementsByClassName('value-card').length < dropLimit) {
+                card.setAttribute('style', '');
+                dz.appendChild(card);
+            }
+            else {
+                alert("Maximum of " + dropLimit + " cards per heading!");
+            }
+            if (getDeckCount() == 1) {
+                skipButton.disabled = true;
+            }
+            if (isPotentiallyFinished()) {
+                allowFinish();
+            }
+            cardMoved();
+        }
+    }
+
+    function dropCardInPlayingArea(event, col) {
+        var data = event.dataTransfer.getData("text"),
+            card = document.getElementById(data);
+        addCardToPlayingArea(card, col);
+    }
+
+    function toggleSelect(event, target) {
+        deckButton.disabled = true;
+        var selected = document.getElementsByClassName('selected')[0];
+        if (selected != undefined) {
+            selected.classList.remove('selected');
+        }
+        if (target.parentElement == deck) {
+            target = deck.lastChild;
+        }
+        if (target != selected) {
+            target.classList.add('selected');
+            if (target.parentElement != deck) {
+                deckButton.disabled = false;
+            }
+        }
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        }
+        else {
+            event.cancelBubble = true;
+        }
+    }
+
+    function clickDrop(event, col) {
+        var card = document.getElementsByClassName('selected')[0];
+        if (card != undefined) {
+            card.classList.remove('selected');
+            addCardToPlayingArea(card, col);
+        }
+    }
+
+    function skipCard() {
+        var topCard = deck.getElementsByClassName('value-card')[0];
+        deck.appendChild(topCard);
+        styleDeck();
+    }
+
+    function isPotentiallyFinished() {
+        return getDeckCount() == 0;
+    }
+
+    function restart() {
+        finishButton.disabled = true;
+        deck.innerHTML = "";
+        playingArea.innerHTML = "";
+        followUp.classList.add('hidden');
+        start();
+    }
+
+    /***FINISH STATE***/
+
+    function allowFinish() {
+        finishButton.disabled = false;
+        skipButton.disabled = true;
+    }
+
+    function finish() {
+        var topLabel = document.getElementById('top-scale-label');
+        topLabel.innerHTML = iScale[iScale.length - 1].name;
+        followUp.classList.remove('hidden');
+        window.scroll(0,findPos(followUp));
+    }
+
+    /***API***/
+
+    return {
+        start :            function()    {start();},
+        restart :          function()    {restart();},
+        finish :           function()    {finish();},
+        skipCard :         function()    {skipCard();},
+        pickUp :           function(e)   {pickUpCard(e)},
+        allowDrop :        function(e)   {allowDrop(e);},
+        deckButtonAction : function()    {deckButtonAction();},
+        deckDrop :         function(e,t) {dropCardOnDeck(e,t);},
+        playingAreaDrop :  function(e,t) {dropCardInPlayingArea(e,t);},
+        toggleSelect :     function(e,t) {toggleSelect(e,t);},
+        clickDrop :        function(e,t) {clickDrop(e,t);}
+    };
+
+}());
