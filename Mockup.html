@@ -130,6 +130,158 @@
 						<h3 class="toggler hidden">Values and motivations</h3>
 						<div class="sub-content" id="values-sub-content">
 							<p>In order to have a happy, successful and fulfilling career, you need to consider your values as they are likely to be a key factor in deciding on a role or a particular sector. Although clarifying your values from the list below will not dictate the careers advice we provide, it is important that you keep your values and motivations in the forefront of your mind whilst progressing through the 'Career Research', 'Making a Decision' and 'Achieving' sections.</p>
+							<button id='start-card-sort' type='button'>Start</button>
+    						<button id='continue-card-sort' type='button' disabled>Continue</button>
+    						<div id="card-sorter" class="hidden">
+								<div id="cs-container">
+									<div id="control-panel">
+										<div id="instructions">
+											<p>Drag each card onto a heading, or select a card and then select a column to drop the card there.</p>
+										</div>
+										<div id="deck-area">
+											<div id="deck-container" class="drop-zone" ondrop="cs.deckDrop(event);" ondragover="cs.allowDrop(event);"></div>
+											<p><span id="deck-count"></span> cards remaining</p>
+										</div>
+										<div id="button-container">
+											<div class="button-sub-container" id="card-actions">
+												<button id="skip-button" onclick="cs.skipCard();">Skip card</button>
+												<button id="deck-button" onclick="cs.deckButtonAction();" disabled>Put on deck</button>
+											</div>
+											<div class="button-sub-container" id="game-actions"> 
+												<button id="restart-button" onclick="cs.restart();">Restart</button>
+												<button id="finish-button" onclick="cs.finish();" disabled>Finish</button>
+											</div>
+										</div>
+									</div>
+									<div id="playing-area"></div>
+									<div id="follow-up" class="hidden">
+										<h2>What next?</h2>
+										<p>Here is a message to appear after finishing. Book an appointment etc.</p>
+										<h3>Things to think about</h3>
+										<p class="question">
+											If you are currently employed then how many of the <span id="top-scale-label"></span>
+											features do you have in your current job?
+										</p>
+									</div>
+								</div>
+
+								<!--templates-->
+								<div id="templates">
+									<div class="value-card" draggable="true" ondragstart="cs.pickUp(event);" onclick="cs.toggleSelect(event, this);">
+										<h3 class="value-name"></h3>
+										<p class="value-description"></p>
+									</div>
+									<div class="col playing-col" ondrop="cs.playingAreaDrop(event, this);" ondragover="cs.allowDrop(event);" onclick="cs.clickDrop(event, this);">
+										<h2 class="importance-level"></h2>
+										<div class="drop-zone"></div>
+									</div>
+									<ul class="value-list">
+										<li class="value">
+											<h4 class="title">Status</h4>
+											<p class="description">
+												Having high standing and respect from others.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Intellectual challenge</h4>
+											<p class="description">
+												Enjoy consistently performing tasks that are difficult, stimulates full use of your potential.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Helping others</h4>
+											<p class="description">
+												Helping people in a direct way, providing assistance to individuals or groups.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Using creativity</h4>
+											<p class="description">
+												Using your own ideas, being imaginative and innovative.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Variety</h4>
+											<p class="description">
+												Completing different tasks, work is varied with a broad range of tasks.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Change</h4>
+											<p class="description">
+												Adapts well to frequently changing work responsibilities/settings.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Continual learning</h4>
+											<p class="description">
+												Keen to continue developing and learning new skills throughout your career.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Security</h4>
+											<p class="description">
+												A high probability that you will remain employed.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Working with others</h4>
+											<p class="description">
+												Happy collaborating in a team to achieve a desired goal or outcome.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Wealth</h4>
+											<p class="description">
+												Profit, gain, making a lot of money.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Benefiting society</h4>
+											<p class="description">
+												Contributing to the betterment of the world.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Competition</h4>
+											<p class="description">
+												Testing your abilities against others, clear win/lose outcomes.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Responsibility</h4>
+											<p class="description">
+												Being directly accountable for results.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Advancement</h4>
+											<p class="description">
+												Moving forward in a career through promotions.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Autonomy</h4>
+											<p class="description">
+												Working independently, without significant direction from others.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Recognition</h4>
+											<p class="description">
+												Getting recognised for your work or contributions.
+											</p>
+										</li>
+										<li class="value">
+											<h4 class="title">Knowledge</h4>
+											<p class="description">
+												Understanding gained through study and experience.
+											</p>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!--
 							<p>Pick the values and motivations below which are most important to you in a job or career path. Try to select those which are absolutely essential criteria for you in a career.</p>
 							<input type="checkbox" name="value" value="Status">
 							<div class="check-option">
@@ -253,6 +405,7 @@
 							<div id="too-many-values-advice" class="skill-value-advice">
 								<p>Having lots of values and motivations is great, but you might find it more helpful to focus on just the values which are most important to you when researching sectors, organisations and roles.</p>
 							</div>
+							-->
 						</div>
 					</li>
 					<li class="subsection" id="summary-sub">

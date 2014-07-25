@@ -409,3 +409,155 @@
 #achieving-head .subtitle, #achieving-head .number  {
 	color: #ACE2B7;
 }
+
+/******************CARD SORTER******************/
+#cs-container {
+    width: 1056px;
+    z-index: 9999;
+    position: relative;
+    display: table;
+    top: 10%;
+    background: white;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 2px solid #000000;
+    border-right: 1px solid #000000;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#cs-container button {
+    display: block;
+    width: 203px;
+    background: #F58621;
+    border-style: solid;
+	border-width: 2px;
+	border-color: #F58621;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    margin: 10px 0;
+}
+    
+    #cs-container button:first-child {
+        margin-top: 0;
+    }
+    
+    #cs-container button:hover {
+        background: #F79E4D;
+    }
+    
+    #cs-container button[disabled], #cs-container button[disabled]:hover {
+        background: #898989;
+        color: #cecece;
+        border: 2px solid #898989;
+    }
+
+#cs-container #playing-area {
+    display: table;
+    min-height: 500px;
+}
+
+#cs-container #playing-area, #follow-up {
+    overflow: auto;
+}
+
+#cs-container #control-panel {
+	width: 100%;
+    
+	display: table;
+}
+
+	#cs-container #instructions {
+		width: 27%;	
+	}
+	
+	#cs-container #button-container .button-sub-container {
+		float: left;
+		margin-left: 24px;
+	}
+
+#cs-container #control-panel > div {
+    float: left;
+	padding: 10px;
+	padding-bottom: 0;
+    display: table-cell;
+}
+
+#cs-container .col {
+    width: 197px;
+    padding: 7px;
+    display: table-cell;
+}
+
+#cs-container .col:nth-child(odd) {
+    background: #ececec;
+}
+
+    #cs-container .importance-level {
+        margin: 0 auto;
+        display: inline;
+    }
+
+#cs-container .col .value-card {
+    box-shadow: 2px 2px 5px #999;
+    margin: 8px 0;
+    position: relative;
+}
+
+#cs-container .value-card {
+    cursor: move;
+    border-radius: 10px;
+    padding: 10px;
+    background: #FBCFA6;
+    height: 110px;
+    font-size: 0.8em;
+    width: 173px;
+}
+    
+    #cs-container .value-name {
+        margin: 0;
+    }
+    
+    #cs-container .value-description {
+        margin: 5px 0 0 0;
+    }
+
+#cs-container #deck-container {
+    width: 200px;
+    height: 137px;
+    border: 2px solid #ececec;
+    border-left-color: #898989;
+    border-top-color: #898989;
+    position: relative;
+}
+
+#cs-container #deck-container .value-card {
+    position: absolute;
+    margin: 3px 0 0 3px;
+    border-bottom: 1px solid #C9A685;
+    border-right: 1px solid #C9A685;
+}
+
+#cs-container #deck-container .value-card:last-child {
+        display: block;
+        background: #FBCFA6;
+        border: none;
+    }
+    
+    #cs-container #deck-container .value-card:nth-child(odd) {
+        border-bottom: 1px solid #E2BA95;
+        border-right: 1px solid #E2BA95;
+    }
+
+#cs-container #deck-container .value-card.selected, #cs-container .value-card.selected {
+    border: 2px solid blue;
+}
+
+#card-sorter #templates * {
+    display: none !important;
+}
+
+#cs-container .hidden {
+    display: none;
+}

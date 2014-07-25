@@ -1,16 +1,17 @@
 //globals
-var noSelectMessage = "You have not selected any";
-var totalSkills = $('input:checkbox[name="skill"]').length;
-var totalValues = $('input:checkbox[name="value"]').length;
-var right = "&#9656; ";
-var down = "&#9662; ";
-var up = "&#9652; ";
-var nextButton = "<button class='next next-subsection' type='button'>Next</button>";
-var nextSectionButton = "<button class='next next-section' type='button'>Next section</button>";
-var skipButton = "<button class='skip-section' type='button'>Skip this section</button>";
-var summaryButton = "<button class='get-summary' type='button'>Download section summary</button>";
-var fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>";
-var closeButton = "<button id='close-popup' class='next' type='button'>Close</button>";
+var noSelectMessage = "You have not selected any",
+    totalSkills = $('input:checkbox[name="skill"]').length,
+    right = "&#9656; ",
+    down = "&#9662; ",
+    up = "&#9652; ",
+    nextButton = "<button class='next next-subsection' type='button'>Next</button>",
+    nextSectionButton = "<button class='next next-section' type='button'>Next section</button>",
+    skipButton = "<button class='skip-section' type='button'>Skip this section</button>",
+    summaryButton = "<button class='get-summary' type='button'>Download section summary</button>",
+    fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>",
+    closeButton = "<button id='close-popup' class='next' type='button'>Close</button>",
+    cardSortStart = "<button id='start-card-sort' class='next' type='button'>Start</button>",
+    cardSortContinue = "<button id='continue-card-sort' class='next' type='button'>Continue</button>";
 
 var cb = {
 	"title" : "Career Builder",
@@ -176,9 +177,9 @@ if (!loadProgress()) {
 	$('#reviewing-intro').hide();
 	$('#skills-values-suggestion').hide();
 	$('.skill-value-advice').hide();
+	$('#card-sorter').hide();
 	$('#review-sub-content .advice').hide();
 	$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
-	$('#values-summary').append("<li>" + noSelectMessage + " values.</li>");
 	$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
 	$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 	$('#forme-sub-content').append(skipButton);
@@ -245,8 +246,18 @@ function showPopup(z, $popup) {
 			'width': '100%',
 			'z-index': z - 1
 		});
-	$("body").append($popup);
-	$popup.show();	
+	$('body').append('<div id="clear-overlay"></div>');
+	$('#clear-overlay')
+		.height(docHeight)
+		.css({
+			'position': 'fixed',
+			'top': 0,
+			'left': 0,
+			'width': '100%',
+			'z-index': z - 1
+		})
+		.append($popup);
+	$popup.show();
 }
 
 function triggerTogglers(e, $this) {
@@ -490,29 +501,21 @@ $('input:radio').change(function() {
 	});
 });
 
-//show skills and values in list and remove skills from pdam set when selected
-$('input[name=skill], input[name=value]').change(function() {
+//show skills in list and remove skills from pdam set when selected
+$('input[name=skill]').change(function() {
 	var $checked = $(this);
 	$('#skills-summary').html("");
-	$('#values-summary').html("");
 	$('#missing-skill-list li').hide();
 	$('#skills-values-suggestion').slideDown('slow');
 	var skillsCount = 0;
-	var valsCount = 0;
 	$('input:checkbox').each(function() {
 		var $this = $(this);
 		var checkName = $this.attr('name');
 		var checkVal = $this.attr('value');
 		var checkClass = $this.attr('class');
 		if ($this.is(':checked')) {
-			if (checkName == 'skill') {
-				$('#skills-summary').append("<li>" + checkVal + "</li>");
-				skillsCount++;
-			}
-			else if (checkName == 'value') {
-				$('#values-summary').append("<li>" + checkVal + "</li>");
-				valsCount++;
-			}
+			$('#skills-summary').append("<li>" + checkVal + "</li>");
+			skillsCount++;
 		}
 		else if ($this.not(':checked')) {
 			var missingSkillTargetId = '#' + checkClass + '-pdam';
@@ -527,18 +530,10 @@ $('input[name=skill], input[name=value]').change(function() {
 		$('#all-skills-advice').hide();
 		$('#missing-skills-advice').show();
 	}
-	if (valsCount > (totalValues/2)) {
-		$('#too-many-values-advice').slideDown('slow');
-	}
-	else {
-		$('#too-many-values-advice').slideUp('slow');
-	}
-	if (skillsCount == 0)
+	if (skillsCount == 0) {
 		$('#skills-summary').append("<li>" + noSelectMessage + " skills</li>");
-	if (valsCount == 0)
-		$('#values-summary').append("<li>" + noSelectMessage + " values</li>");
-	if (skillsCount == 0 && valsCount == 0)
 		$('#skills-values-suggestion').slideUp('slow');
+	}
 });
 
 //show advice based on decision making barrier checkbox selection
@@ -603,13 +598,13 @@ var cs =
     }
 
     var iScale = [{name: "Least important"}, {name: "Quite important"}, {name: "Important"}, {name: "Very important"}, {name: "Essential"}],
-        vDeck  = new Array(),
         deck = document.getElementById('deck-container'),
         playingArea = document.getElementById('playing-area'),
         skipButton = document.getElementById('skip-button'),
         finishButton = document.getElementById('finish-button'),
         deckButton = document.getElementById('deck-button'),
-        followUp = document.getElementById('follow-up');
+        followUp = document.getElementById('follow-up'),
+        vDeck  = new Array();
 
     vDeck.push(new Value("Promotion", "You like to work where there is a good chance of promotion"));
     vDeck.push(new Value("Persuading people", "You enjoy persuading people to buy something or change their minds about something"));
@@ -905,3 +900,9 @@ var cs =
     };
 
 }());
+
+
+$('#start-card-sort').click(function(e) {
+	showPopup(9999, $('#cs-container'));
+	cs.start();
+});
