@@ -130,41 +130,8 @@
 						<h3 class="toggler hidden">Values and motivations</h3>
 						<div class="sub-content" id="values-sub-content">
 							<p>In order to have a happy, successful and fulfilling career, you need to consider your values as they are likely to be a key factor in deciding on a role or a particular sector. Although clarifying your values from the list below will not dictate the careers advice we provide, it is important that you keep your values and motivations in the forefront of your mind whilst progressing through the 'Career Research', 'Making a Decision' and 'Achieving' sections.</p>
-							<button id='start-card-sort' type='button'>Start</button>
-    						<button id='continue-card-sort' type='button' disabled>Continue</button>
+							<button id='start-card-sort' type='button'>Open card sorting task</button>
     						<div id="card-sorter" class="hidden">
-								<div id="cs-container">
-									<div id="control-panel">
-										<div id="instructions">
-											<p>Drag each card onto a heading, or select a card and then select a column to drop the card there.</p>
-										</div>
-										<div id="deck-area">
-											<div id="deck-container" class="drop-zone" ondrop="cs.deckDrop(event);" ondragover="cs.allowDrop(event);"></div>
-											<p><span id="deck-count"></span> cards remaining</p>
-										</div>
-										<div id="button-container">
-											<div class="button-sub-container" id="card-actions">
-												<button id="skip-button" onclick="cs.skipCard();">Skip card</button>
-												<button id="deck-button" onclick="cs.deckButtonAction();" disabled>Put on deck</button>
-											</div>
-											<div class="button-sub-container" id="game-actions"> 
-												<button id="restart-button" onclick="cs.restart();">Restart</button>
-												<button id="finish-button" onclick="cs.finish();" disabled>Finish</button>
-											</div>
-										</div>
-									</div>
-									<div id="playing-area"></div>
-									<div id="follow-up" class="hidden">
-										<h2>What next?</h2>
-										<p>Here is a message to appear after finishing. Book an appointment etc.</p>
-										<h3>Things to think about</h3>
-										<p class="question">
-											If you are currently employed then how many of the <span id="top-scale-label"></span>
-											features do you have in your current job?
-										</p>
-									</div>
-								</div>
-
 								<!--templates-->
 								<div id="templates">
 									<div class="value-card" draggable="true" ondragstart="cs.pickUp(event);" onclick="cs.toggleSelect(event, this);">
@@ -281,131 +248,6 @@
 									</ul>
 								</div>
 							</div>
-							<!--
-							<p>Pick the values and motivations below which are most important to you in a job or career path. Try to select those which are absolutely essential criteria for you in a career.</p>
-							<input type="checkbox" name="value" value="Status">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Status</span><br />
-								<div class="sub-content">
-									Having high standing and respect from others.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Intellectual challenge">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Intellectual challenge</span><br />
-								<div class="sub-content">
-									Enjoy consistently performing tasks that are difficult, stimulates full use of your potential.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Helping others">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Helping others</span><br />
-								<div class="sub-content">
-									Helping people in a direct way, providing assistance to individuals or groups.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Creativity">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Using creativity</span><br />
-								<div class="sub-content">
-									Using your own ideas, being imaginative and innovative.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Variety">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Variety</span><br />
-								<div class="sub-content">
-									Completing different tasks, work is varied with a broad range of tasks.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Change">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Change</span><br />
-								<div class="sub-content">
-									Adapts well to frequently changing work responsibilities/settings.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Continual learning">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Continual learning</span><br />
-								<div class="sub-content">
-									Keen to continue developing and learning new skills throughout your career.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Security">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Security</span><br />
-								<div class="sub-content">
-									A high probability that you will remain employed.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Working with others">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Working with others</span><br />
-								<div class="sub-content">
-									Happy collaborating in a team to achieve a desired goal or outcome.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Wealth">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Wealth</span><br />
-								<div class="sub-content">
-									Profit, gain, making a lot of money.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Benefiting society">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Benefiting society</span><br />
-								<div class="sub-content">
-									Contributing to the betterment of the world.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Competition">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Competition</span><br />
-								<div class="sub-content">
-									Testing your abilities against others, clear win/lose outcomes.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Responsibility">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Responsibility</span><br />
-								<div class="sub-content">
-									Being directly accountable for results.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Advancement">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Advancement</span><br />
-								<div class="sub-content">
-									Moving forward in a career through promotions.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Autonomy">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Autonomy</span><br />
-								<div class="sub-content">
-									Working independently, without significant direction from others.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Recognition">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Recognition</span><br />
-								<div class="sub-content">
-									Getting recognised for your work or contributions.
-								</div>
-							</div>
-							<input type="checkbox" name="value" value="Knowledge">
-							<div class="check-option">
-								<span class="check-label toggler hidden">Knowledge</span><br />
-								<div class="sub-content">
-									Understanding gained through study and experience.
-								</div>
-							</div>
-							<div id="too-many-values-advice" class="skill-value-advice">
-								<p>Having lots of values and motivations is great, but you might find it more helpful to focus on just the values which are most important to you when researching sectors, organisations and roles.</p>
-							</div>
-							-->
 						</div>
 					</li>
 					<li class="subsection" id="summary-sub">
@@ -917,8 +759,42 @@
 			</div>
 		</li>
 	</ul>
-	<div id="final-popup" class="section">
-		<p><strong>You have now finished the last section of Career Builder but this is not the end of your career planning!</strong></p>
-		<p>Career Builder can be picked up again at any time. The tool works best if you dip in and out or the various sections at different stages in your career planning. It's important to recognise that your feelings towards careers and your current situation will change even while you are at university.</p>
-		<p>If you are having difficulty finding a role or getting a job please <a href="https://careers.lse.ac.uk/Appointments.chpx" title="book a careers discussion">book a careers discussion</a> with a Careers Consultant to discuss this in more detail.</p>
+	<div id="popups">
+		<div id="cs-container" class="popup">
+			<div id="control-panel">
+				<div id="instructions">
+					<p>Drag each card onto a heading, or select a card and then select a column to drop the card there.</p>
+				</div>
+				<div id="deck-area">
+					<div id="deck-container" class="drop-zone" ondrop="cs.deckDrop(event);" ondragover="cs.allowDrop(event);"></div>
+					<p><span id="deck-count"></span> cards remaining</p>
+				</div>
+				<div id="button-container">
+					<div class="button-sub-container" id="card-actions">
+						<button id="skip-button" onclick="cs.skipCard();">Skip card</button>
+						<button id="deck-button" onclick="cs.deckButtonAction();" disabled>Put on deck</button>
+					</div>
+					<div class="button-sub-container" id="game-actions"> 
+						<button id="restart-button" onclick="cs.restart();">Restart</button>
+						<button id="finish-button" onclick="cs.finish();" disabled>Finish</button>
+					</div>
+				</div>
+			</div>
+			<div id="playing-area"></div>
+			<div id="follow-up" class="hidden">
+				<h2>What next?</h2>
+				<p>Here is a message to appear after finishing. Book an appointment etc.</p>
+				<h3>Things to think about</h3>
+				<p class="question">
+					If you are currently employed then how many of the <span id="top-scale-label"></span>
+					features do you have in your current job?
+				</p>
+			</div>
+			<button id="close-cs" type='button'>Close</button>
+		</div>
+		<div id="final-popup" class="section popup">
+			<p><strong>You have now finished the last section of Career Builder but this is not the end of your career planning!</strong></p>
+			<p>Career Builder can be picked up again at any time. The tool works best if you dip in and out or the various sections at different stages in your career planning. It's important to recognise that your feelings towards careers and your current situation will change even while you are at university.</p>
+			<p>If you are having difficulty finding a role or getting a job please <a href="https://careers.lse.ac.uk/Appointments.chpx" title="book a careers discussion">book a careers discussion</a> with a Careers Consultant to discuss this in more detail.</p>
+		</div>
 	</div>

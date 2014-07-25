@@ -11,7 +11,7 @@ var noSelectMessage = "You have not selected any",
     fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>",
     closeButton = "<button id='close-popup' class='next' type='button'>Close</button>",
     cardSortStart = "<button id='start-card-sort' class='next' type='button'>Start</button>",
-    cardSortContinue = "<button id='continue-card-sort' class='next' type='button'>Continue</button>";
+    cardSortInProgess = false;
 
 var cb = {
 	"title" : "Career Builder",
@@ -178,6 +178,7 @@ if (!loadProgress()) {
 	$('#skills-values-suggestion').hide();
 	$('.skill-value-advice').hide();
 	$('#card-sorter').hide();
+	$('#popups').hide();
 	$('#review-sub-content .advice').hide();
 	$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 	$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
@@ -233,7 +234,8 @@ function clearAll() {
 }
 
 function showPopup(z, $popup) {
-	var docHeight = $(document).height();
+	var docHeight = $(document).height(),
+	    pid = $popup.attr('id');
 	$("body").append("<div id='overlay'></div>");
 	$("#overlay")
 		.height(docHeight)
@@ -250,15 +252,28 @@ function showPopup(z, $popup) {
 	$('#clear-overlay')
 		.height(docHeight)
 		.css({
-			'position': 'fixed',
+			'position': 'absolute',
 			'top': 0,
 			'left': 0,
 			'width': '100%',
 			'z-index': z - 1
-		})
-		.append($popup);
+		}).append($popup);
 	$popup.show();
+	$("html, body").animate({ scrollTop: 0 }, 500);
 }
+
+function closePopup(popupId) {
+	$('#popups').append($('#'+popupId));
+	$('#overlay, #clear-overlay').remove();
+}
+
+$('#close-cs').click(function() {
+	closePopup('cs-container');
+});
+
+$('#close-popup').click(function() {
+	closePopup('final-popup');
+});
 
 function triggerTogglers(e, $this) {
 	var $thisSub = $this.closest('li');
@@ -484,12 +499,6 @@ $('button.next-section').hover(
 
 $('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
 
-$('#close-popup').click(function() {
-	$('#overlay').remove();
-	$('#final-popup').hide();
-	$("html, body").animate({ scrollTop: 0 }, 500);
-});
-
 //expand advice according to radio button selection
 $('input:radio').change(function() {
 	$('input:radio').each(function() {
@@ -714,6 +723,10 @@ var cs =
         cardMoved();
     }
 
+    function hasStarted() {
+		return vDeck.length > 0;
+    }
+
     /***IN-PROGRESS STATE***/
 
     function styleDeck() {
@@ -887,6 +900,7 @@ var cs =
 
     return {
         start :            function()    {start();},
+        hasStarted :       function()    {hasStarted();},
         restart :          function()    {restart();},
         finish :           function()    {finish();},
         skipCard :         function()    {skipCard();},
@@ -901,8 +915,8 @@ var cs =
 
 }());
 
+cs.start();
 
 $('#start-card-sort').click(function(e) {
 	showPopup(9999, $('#cs-container'));
-	cs.start();
 });

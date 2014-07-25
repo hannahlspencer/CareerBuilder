@@ -203,7 +203,8 @@
 #careerBuilder button.skip-section,
 #final-popup button.next,
 #final-popup button.get-summary,
-#save-button, #clear-button {
+#save-button, #clear-button,
+#start-card-sort {
 	float: right;
 	font-weight: bold;
 	color: #FFF;
@@ -216,11 +217,13 @@
 
 #careerBuilder button.skip-section, 
 #careerBuilder button.get-summary,
-#final-popup button.get-summary {
+#final-popup button.get-summary,
+#start-card-sort {
 	float: left;
 }
 
-#careerBuilder #who button.next  {
+#careerBuilder #who button.next,
+#start-card-sort  {
 	margin-top: 5px;
 }
 
@@ -286,13 +289,13 @@
 	border-radius: 10px;
 }
 
-#who button.next, #who button.get-summary {
+#who button.next, #who button.get-summary, #start-card-sort {
 	background-color: #F58621;
 	border-color: #F58621;
 }
 
 #who #skills-sub, #who button.next:hover, 
-#who button.get-summary:hover {
+#who button.get-summary:hover, #start-card-sort:hover {
 	background: #F79E4D;
 }
 
