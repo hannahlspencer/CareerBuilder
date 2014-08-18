@@ -415,7 +415,7 @@
 
 /******************CARD SORTER******************/
 #cs-container {
-    width: 1056px;
+    width: 875px;
     z-index: 9999;
     position: relative;
     display: table;
@@ -431,7 +431,7 @@
 
 #cs-container button {
     display: block;
-    width: 203px;
+    width: 175px;
     background: #F58621;
     border-style: solid;
 	border-width: 2px;
@@ -439,7 +439,7 @@
     color: white;
     font-weight: bold;
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px;
 }
     
     #cs-container button:first-child {
@@ -466,18 +466,15 @@
 }
 
 #cs-container #control-panel {
-	width: 100%;
-    
 	display: table;
 }
 
 	#cs-container #instructions {
-		width: 27%;	
+		width: 20%;	
 	}
 	
 	#cs-container #button-container .button-sub-container {
 		float: left;
-		margin-left: 24px;
 	}
 
 #cs-container #control-panel > div {
@@ -493,7 +490,7 @@
     display: table-cell;
 }
 
-#cs-container .col:nth-child(odd) {
+#cs-container .col:nth-child(even) {
     background: #ececec;
 }
 
@@ -520,6 +517,7 @@
     
     #cs-container .value-name {
         margin: 0;
+        font-weight: bold;
     }
     
     #cs-container .value-description {
