@@ -38,6 +38,10 @@
 	width: 43%;
 }
 
+#careerBuilder .importance-level {
+	font-weight: bold;
+}
+
 #careerBuilder h2, #careerBuilder h3 {
 	margin: 0;
 	font-weight: normal;
@@ -148,10 +152,6 @@
 
 #careerBuilder .selection-summary {
 	width: 100%;
-}
-
-#careerBuilder .selection-summary td {
-	width: 50%;
 }
 
 #careerBuilder ul.barrier-list {
@@ -269,8 +269,8 @@
 #careerBuilderGuide {
 	background: #F2F2F2;
 	padding: 10px;
-	position: fixed;
 	width: 220px;
+	overflow: auto;
 }
 
 #careerBuilderGuide h5 {
@@ -415,7 +415,7 @@
 
 /******************CARD SORTER******************/
 #cs-container {
-    width: 875px;
+    width: 850px;
     z-index: 9999;
     position: relative;
     display: table;
@@ -423,10 +423,15 @@
     background: white;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
     border-bottom: 2px solid #000000;
     border-right: 1px solid #000000;
     border-radius: 10px;
     padding: 10px;
+}
+
+#cs-container h3 {
+	margin-left: 0;
 }
 
 #cs-container button {

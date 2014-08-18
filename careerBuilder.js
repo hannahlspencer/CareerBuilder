@@ -7,7 +7,7 @@ var noSelectMessage = "You have not selected any",
     nextButton = "<button class='next next-subsection' type='button'>Next</button>",
     nextSectionButton = "<button class='next next-section' type='button'>Next section</button>",
     skipButton = "<button class='skip-section' type='button'>Skip this section</button>",
-    summaryButton = "<button class='get-summary' type='button'>Download section summary</button>",
+    summaryButton = "<button class='get-summary next' type='button'>Download section summary</button>",
     fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>",
     closeButton = "<button id='close-popup' class='next' type='button'>Close</button>",
     cardSortStart = "<button id='start-card-sort' class='next' type='button'>Start</button>",
@@ -435,6 +435,22 @@ var cs =
         window.scroll(0,findPos(followUp));
     }
 
+    function getData() {
+    	var data = new Array(),
+    	    cols = playingArea.getElementsByClassName('playing-col');
+    	for (var i = 0; i < cols.length; i++) {
+    		var colTitle = iScale[i].name,
+    		    vals = cols[i].getElementsByClassName('value-card'),
+    		    valNames = new Array();
+    		for (var j = 0; j < vals.length; j++) {
+    			var valName = vals[j].getElementsByClassName('value-name')[0].innerHTML;
+    			valNames.push(valName);
+    		}
+    		data.push({column: {title: colTitle, values: valNames}});
+    	}
+    	return data;
+    }
+
     /***API***/
 
     return {
@@ -448,7 +464,8 @@ var cs =
         deckDrop :         function(e,t) {dropCardOnDeck(e,t);},
         playingAreaDrop :  function(e,t) {dropCardInPlayingArea(e,t);},
         toggleSelect :     function(e,t) {toggleSelect(e,t);},
-        clickDrop :        function(e,t) {clickDrop(e,t);}
+        clickDrop :        function(e,t) {clickDrop(e,t);},
+        getData :          function()    {return getData();}
     };
 
 }());
@@ -469,6 +486,7 @@ if (!loadProgress()) {
 	$('#card-sorter').hide();
 	$('#review-sub-content .advice').hide();
 	$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
+	$('#values-summary').append("<li>You haven't finished the card sorting task.</li>");
 	$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
 	$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 	$('#forme-sub-content').append(skipButton);
@@ -597,6 +615,20 @@ function triggerTogglers(e, $this) {
 function skipSectionTrigger(e, $this) {
 	var $lastButton = $this.closest('.section').find('.next-subsection:last');
 	triggerTogglers(e, $lastButton);
+}
+
+function buildCardSortSummary() {
+	var csData = cs.getData(),
+	    summary = "";
+	for (var i = 0; i < csData.length; i++) {
+		summary += "<li><span class='importance-level'>" + csData[i].column.title + "</span> \
+		            <ul class='value-list'>";
+		for (var j = 0; j < csData[i].column.values.length; j++) {
+			summary += "<li class='value-item'>" + csData[i].column.values[j] + "</li>";
+		}
+		summary += "</ul></li>";
+	}
+	$('#values-summary').html(summary);
 }
 
 function buildSectionSummary(section) {
@@ -788,6 +820,8 @@ $('button.next-section').hover(
 );
 
 $('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
+
+$('button#finish-button').click(function(e) { buildCardSortSummary(); });
 
 //expand advice according to radio button selection
 $('input:radio').change(function() {
