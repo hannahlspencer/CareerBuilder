@@ -11,6 +11,7 @@ var noSelectMessage = "You have not selected any",
     fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>",
     closeButton = "<button id='close-popup' class='next' type='button'>Close</button>",
     cardSortStart = "<button id='start-card-sort' class='next' type='button'>Start</button>",
+    printButton = "<button id='print-summary' type='button' onclick='window.print()'>Print summary</button>",
     cardSortInProgess = false;
 
 var cb = {
@@ -124,6 +125,21 @@ var cbSummaryStyle =
 "#careerBuilder-summary a:hover," +
 "#careerBuilder-summary a:visited {" +
 "	color: red;" +
+"}" +
+"#careerBuilder-summary #print-summary {" +
+"	float: right;" +
+"	margin-top: 30px;" +
+"   background-color: #333;" +
+"   border-color: #333;" +
+"   cursor: pointer;" +
+"   font-weight: bold;" +
+"   color: #FFF;" +
+"   border-style: solid;" +
+"   border-width: 2px;" +
+"   padding: 5px" +
+"}" +
+"#careerBuilder-summary #print-summary:hover {" +
+"   background-color: #666;" +
 "}" +
 "#careerBuilder-summary ul {" +
 "	list-style: square;" +
@@ -721,7 +737,7 @@ function saveSummary(e, $this) {
 	var header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
 				 "<title>Your Career Builder summary</title>" +
 				 "<style>" + cbSummaryStyle + "</style>" +
-				 "</head><body id=\"careerBuilder-summary\"><h1>Your Career Builder summary</h1>" +
+				 "</head><body id=\"careerBuilder-summary\">" + printButton + "<h1>Your Career Builder summary</h1>" +
 				 "<p>Here are your selections from <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" + 
 				 " along with our suggestions of the resources and services best suited to you.</p>";
 	var footer = "</body></html>";
