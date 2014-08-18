@@ -727,7 +727,7 @@ function saveSummary(e, $this) {
 	var footer = "</body></html>";
 	var sId = $this.closest('.section').attr('id');
 	var body = "";
-	if (sId == cb.sections[cb.sections.length - 1].id) {
+	if (sId == cb.sections[cb.sections.length - 1].id || sId == "careerBuilderGuide") {
 		$.each(cb.sections, function(i, section) {
 			if (section.id != "final-popup") {
 				body += getSummary(section.id);

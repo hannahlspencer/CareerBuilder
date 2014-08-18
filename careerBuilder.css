@@ -203,6 +203,7 @@
 #careerBuilder button.skip-section,
 #final-popup button.next,
 #final-popup button.get-summary,
+#careerBuilderGuide button.get-summary,
 #save-button, #clear-button,
 #start-card-sort {
 	float: right;
@@ -218,6 +219,7 @@
 #careerBuilder button.skip-section, 
 #careerBuilder button.get-summary,
 #final-popup button.get-summary,
+#careerBuilderGuide button.get-summary,
 #start-card-sort {
 	float: left;
 }
@@ -248,6 +250,7 @@
 
 #final-popup button.next,
 #final-popup button.get-summary,
+#careerBuilderGuide button.get-summary,
 #save-button, #clear-button {
 	background-color: #333;
 	border-color: #333;
@@ -257,12 +260,14 @@
 
 #final-popup button.next:hover,
 #final-popup button.get-summary:hover,
-#save-button:hover, #clear-button:hover {
+#save-button:hover, #clear-button:hover,
+#careerBuilderGuide button.get-summary:hover {
 	background-color: #666;
 }
 
 #save-button,
-#clear-button {
+#clear-button,
+#careerBuilderGuide button.get-summary {
 	width: 100%;
 }
 
