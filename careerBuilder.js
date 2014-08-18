@@ -549,6 +549,8 @@ function showPopup(z, $popup) {
 			'background-color': 'black',
 			'width': '100%',
 			'z-index': z - 1
+		}).click(function() {
+				closePopup($popup.attr('id'));
 		});
 	$('body').append('<div id="clear-overlay"></div>');
 	$('#clear-overlay')
@@ -558,7 +560,6 @@ function showPopup(z, $popup) {
 			'top': 0,
 			'left': 0,
 			'width': '100%',
-			'z-index': z - 1
 		}).append($popup);
 	$popup.show();
 	$("html, body").animate({ scrollTop: 0 }, 500);
