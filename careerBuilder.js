@@ -146,6 +146,18 @@ var cbSummaryStyle =
 "#careerBuilder-summary #who-summary h2 {" +
 "	color: #F58621;" +
 "}" +
+"#careerBuilder-summary #who-summary #values-summary {" +
+"   padding: 0;" +
+"   overflow: auto;" +
+"}" +
+"#careerBuilder-summary #who-summary #values-summary > li {" +
+"   list-style: none;" +
+"   float: left;" +
+"   margin-right: 10px;" +
+"}" +
+"#careerBuilder-summary #who-summary #values-summary > li .importance-level {" +
+"   font-weight: bold;" +
+"}" +
 "#careerBuilder-summary #research-summary {" +
 "	border: 4px solid #1999D4;" +
 "}" +
