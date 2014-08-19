@@ -1,3 +1,8 @@
+/***LSE site resets***/
+.sys_layout_three_column_three p , .sys_layout_three_column_three ul  {font-size:.75em;}
+label {font-size:1em !important;}
+
+/***CareerBuilder styling***/
 #careerBuilder {
 	width: 478px;
 	font-size: 100%;

@@ -732,9 +732,10 @@ function saveSummary(e, $this) {
 				 "<style>" + cbSummaryStyle + "</style>" +
 				 "</head><body id=\"careerBuilder-summary\">" + printButton + "<h1>Your Career Builder summary</h1>" +
 				 "<p>Here are your selections from <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" + 
-				 " along with our suggestions of the resources and services best suited to you.</p>";
-	var footer = "</body></html>";
-	var sId = $this.closest('.section').attr('id');
+				 " along with our suggestions of the resources and services best suited to you.</p>",
+	    footer = "</body></html>",
+	    fileName = "Career Builder";
+	    sId = $this.closest('.section').attr('id');
 	var body = "";
 	if (sId == cb.sections[cb.sections.length - 1].id || sId == "careerBuilderGuide") {
 		$.each(cb.sections, function(i, section) {
@@ -745,6 +746,11 @@ function saveSummary(e, $this) {
 	}
 	else {
 		body += getSummary(sId);
+		$.each(cb.sections, function(i, section) {
+			if (section.id == sId) {
+				fileName += " - " + section.title;
+			}
+		});
 	}
 	body += "<h2>Next steps in your career planning</h2>";
 	$('#final-popup').children().each(function(i) {
@@ -752,9 +758,10 @@ function saveSummary(e, $this) {
 			body += "<p>" + $(this).html() + "</p>";
 		}
 	});
-	var html = header + body + footer;
-	var oSummaryBlob = new Blob([html], {type: 'text/html'});
-	saveAs(oSummaryBlob, "Career Builder summary.html");
+	var html = header + body + footer,
+	    oSummaryBlob = new Blob([html], {type: 'text/html'});
+	fileName += " summary.html";
+	saveAs(oSummaryBlob, fileName);
 }
 
 $('.toggler').hover(
