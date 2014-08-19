@@ -641,7 +641,7 @@ function skipSectionTrigger(e, $this) {
 function buildCardSortSummary() {
 	var csData = cs.getData(),
 	    summary = "";
-	for (var i = 0; i < csData.length; i++) {
+	for (var i = csData.length - 1; i >= 0; i--) {
 		summary += "<li><span class='importance-level'>" + csData[i].column.title + "</span> \
 		            <ul class='value-list'>";
 		for (var j = 0; j < csData[i].column.values.length; j++) {
