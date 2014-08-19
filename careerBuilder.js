@@ -169,7 +169,6 @@ var cbSummaryStyle =
 "#careerBuilder-summary #who-summary #values-summary > li {" +
 "   list-style: none;" +
 "   float: left;" +
-"   margin-right: 10px;" +
 "}" +
 "#careerBuilder-summary #who-summary #values-summary > li .importance-level {" +
 "   font-weight: bold;" +
@@ -456,12 +455,7 @@ var cs =
         skipCardButton.disabled = true;
     }
 
-    function finish() {
-        var topLabel = document.getElementById('top-scale-label');
-        topLabel.innerHTML = iScale[iScale.length - 1].name;
-        followUp.classList.remove('hidden');
-        window.scroll(0,findPos(followUp));
-    }
+    function finish() { }
 
     function getData() {
     	var data = new Array(),
@@ -608,7 +602,6 @@ function showPopup(z, $popup) {
 			'width': '100%',
 		}).append($popup);
 	$popup.show();
-	$("html, body").animate({ scrollTop: 0 }, 500);
 }
 
 function triggerTogglers(e, $this) {
@@ -849,7 +842,16 @@ $('button.next-section').hover(
 
 $('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
 
-$('button#finish-button').click(function(e) { buildCardSortSummary(); });
+$('button#finish-button').click(function(e) { 
+									buildCardSortSummary();
+									closePopup('cs-container');
+									$('#cs-suggestion').slideDown('slow');
+								});
+								
+$('#start-card-sort').click(function(e) {
+	showPopup(9999, $('#cs-container'));
+	$(this).html("Continue card sorting task");
+});
 
 //expand advice according to radio button selection
 $('input:radio').change(function() {
@@ -948,8 +950,4 @@ $('input:radio, input:checkbox').change(function() {
 	if ($('#save-button').html() != 'Save progress') {
 		$('#save-button').html('Save progress');
 	}
-});
-
-$('#start-card-sort').click(function(e) {
-	showPopup(9999, $('#cs-container'));
 });
