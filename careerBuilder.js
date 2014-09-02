@@ -9,7 +9,7 @@ var noSelectMessage = "You have not selected any",
     skipButton = "<button class='skip-section' type='button'>Skip this section</button>",
     summaryButton = "<button class='get-summary next' type='button'>Download section summary</button>",
     fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>",
-    closeButton = "<button id='close-popup' class='next' type='button'>Close</button>",
+    closeButton = "<button class='next close-popup' type='button'>Close</button>",
     cardSortStart = "<button id='start-card-sort' class='next' type='button'>Start</button>",
     printButton = "<button id='print-summary' type='button' onclick='window.print()'>Print summary</button>",
     cardSortInProgess = false;
@@ -513,7 +513,7 @@ if (!loadProgress()) {
 	$('.sub-content').not('.check-option .sub-content').append(nextButton);
 	$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
 	$('#final-popup').append(fullSummaryButton);
-	$('#final-popup').append(closeButton);
+	$('#final-popup, #save-popup').append(closeButton);
 	$('.section:last-of-type .next-section').text('What next?');
 	$('#careerBuilder a').each(function() {
 		var $this = $(this);
@@ -538,6 +538,7 @@ function saveProgress() {
 	if (supportsStorage()) {
 		localStorage.setItem('cb-html', $('#careerBuilder').html());
 		$('#save-button').html('&#10004; Saved');
+		showPopup(9999, $('#save-popup'));
 	} else {
 		alert("Unable to save progress");
 	}
@@ -569,8 +570,8 @@ $('#close-cs').click(function() {
 	closePopup('cs-container');
 });
 
-$('#close-popup').click(function() {
-	closePopup('final-popup');
+$('.close-popup').click(function() {
+	closePopup($(this).parent().attr('id'));
 });
 
 function showPopup(z, $popup) {
