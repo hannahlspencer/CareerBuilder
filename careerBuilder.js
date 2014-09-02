@@ -203,14 +203,13 @@ var cs =
         this.description = description;
     }
 
-    var iScale = [{name: "Least important"}, {name: "Quite important"}, {name: "Important"}, {name: "Very important"}],
+    var iScale = [{name: "Least important"}, {name: "Quite important"}, {name: "Important"}, {name: "Most important"}],
         vDeck = new Array();
         deck = document.getElementById('deck-container'),
         playingArea = document.getElementById('playing-area'),
         skipCardButton = document.getElementById('skip-button'),
         finishButton = document.getElementById('finish-button'),
-        deckButton = document.getElementById('deck-button'),
-        followUp = document.getElementById('follow-up');
+        deckButton = document.getElementById('deck-button');
     
     (function populateVDeck() {
         var vals = getTemplateElement('value-list').getElementsByClassName('value');
@@ -444,7 +443,6 @@ var cs =
         finishButton.disabled = true;
         deck.innerHTML = "";
         playingArea.innerHTML = "";
-        followUp.classList.add('hidden');
         start();
     }
 
