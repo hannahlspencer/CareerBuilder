@@ -590,7 +590,7 @@ function showPopup(z, $popup) {
 			'width': '100%',
 			'z-index': z - 1
 		}).click(function() {
-				closePopup($popup.attr('id'));
+				closePopup(pid);
 		});
 	$('body').append('<div id="clear-overlay"></div>');
 	$('#clear-overlay')
@@ -601,7 +601,8 @@ function showPopup(z, $popup) {
 			'left': 0,
 			'width': '100%',
 		}).append($popup);
-	$popup.show();
+	$popup.slideDown('slow');
+	$("html, body").animate({ scrollTop: 0 }, 500);
 }
 
 function triggerTogglers(e, $this) {
@@ -852,7 +853,7 @@ $('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
 $('button#finish-button').click(function(e) { 
 									buildCardSortSummary();
 									closePopup('cs-container');
-									$('#cs-suggestion').slideDown('slow');
+									$('#cs-suggestion, #skills-values-suggestion').slideDown('slow');
 								});
 								
 $('#start-card-sort').click(function(e) {
