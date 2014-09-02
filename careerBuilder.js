@@ -430,8 +430,13 @@ var cs =
     }
 
     function skipCard() {
-        var topCard = deck.getElementsByClassName('value-card')[0];
-        deck.appendChild(topCard);
+        var bottomCard = deck.getElementsByClassName('value-card')[0],
+            topCard = deck.getElementsByClassName('value-card')[getDeckCount() - 1];
+        if (topCard.classList.contains('selected')) {
+        	topCard.classList.remove('selected');
+        	bottomCard.classList.add('selected');
+        }
+        deck.appendChild(bottomCard);
         styleDeck();
     }
 
