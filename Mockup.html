@@ -130,11 +130,11 @@
 					<h3 class="toggler hidden">Values and motivations</h3>
 					<div class="sub-content" id="values-sub-content">
 						<p>In order to have a happy, successful and fulfilling career, you need to consider your values as they are likely to be a key factor in deciding on a role or a particular sector.</p>
-						<p>Although completing the card sorting task below will not dictate the careers advice we provide, it is important that you keep your values and motivations in the forefront of your mind whilst progressing through the 'Careers research', 'Making a decision' and 'Taking action' sections.</p>
+						<p>Although completing the value sorting task below will not dictate the careers advice we provide, it is important that you keep your values and motivations in the forefront of your mind whilst progressing through the 'Careers research', 'Making a decision' and 'Taking action' sections.</p>
 						<div class="suggestion" id="cs-suggestion">
 							<p>Hopefully you found it useful to think about the priorities of your career values and motivations. You can download a summary of your choices at the end of this section.</p>
 						</div>
-						<button id='start-card-sort' type='button'>Open card sorting task</button>
+						<button id='start-card-sort' type='button'>Open value sorting task</button>
 						<div id="card-sorter" class="hidden">
 							<!--templates-->
 							<div id="templates">
@@ -760,21 +760,21 @@
 		<div id="cs-container" class="popup">
 			<div id="cs-header">
 				<h2 id="cs-title">Prioritising your career values</h2>
-				<button id="close-cs" type='button'>&times;</button>
+				<button id="close-cs" type='button' title="Close">&times;</button>
 			</div>
 			<div id="control-panel">
 				<div id="instructions">
-					<p>Drag each card onto a heading, or select a card and then select a column to drop the card there.</p>
-					<p>You can have a maximum of <span class="drop-limit"></span> cards in each column - so you'll have to think carefully about what's important to you.</p>
+					<p>Drag each value onto a heading, or select a value and then select a column to drop it there.</p>
+					<p>You can have a maximum of <span class="drop-limit"></span> values in each column - so you'll have to think carefully about what's important to you.</p>
 				</div>
 				<div id="deck-area">
 					<div id="deck-container" class="drop-zone" ondrop="cs.deckDrop(event);" ondragover="cs.allowDrop(event);"></div>
-					<p><span id="deck-count"></span> cards remaining</p>
+					<p><span id="deck-count"></span> values remaining</p>
 				</div>
 				<div id="button-container">
 					<div class="button-sub-container" id="card-actions">
-						<button id="skip-button" onclick="cs.skipCard();">Skip card</button>
-						<button id="deck-button" onclick="cs.deckButtonAction();" disabled>Put on deck</button>
+						<button id="skip-button" onclick="cs.skipCard();">Skip value</button>
+						<button id="deck-button" onclick="cs.deckButtonAction();" disabled>Put on pile</button>
 					</div>
 					<div class="button-sub-container" id="game-actions"> 
 						<button id="restart-button" onclick="cs.restart();">Restart</button>

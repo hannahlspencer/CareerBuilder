@@ -864,7 +864,7 @@ $('button#finish-button').click(function(e) {
 								
 $('#start-card-sort').click(function(e) {
 	showPopup(9999, $('#cs-container'));
-	$(this).html("Continue card sorting task");
+	$(this).html("Continue value sorting task");
 });
 
 //expand advice according to radio button selection
