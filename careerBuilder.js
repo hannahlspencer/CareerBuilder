@@ -204,7 +204,8 @@ var cs =
     }
 
     var iScale = [{name: "Least important"}, {name: "Quite important"}, {name: "Important"}, {name: "Most important"}],
-        vDeck = new Array();
+        vDeck = new Array(),
+        cardSorter = document.getElementById('cs-container'),
         deck = document.getElementById('deck-container'),
         playingArea = document.getElementById('playing-area'),
         skipCardButton = document.getElementById('skip-button'),
@@ -289,6 +290,7 @@ var cs =
     function start() {
         makeCols();
         makeDeck();
+        cardSorter.getElementsByClassName('drop-limit')[0].innerHTML = dropLimit;
         cardMoved();
     }
 

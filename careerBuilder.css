@@ -437,7 +437,7 @@ label {font-size:1em !important;}
     border-bottom: 2px solid #000000;
     border-right: 1px solid #000000;
     border-radius: 10px;
-    padding: 10px;
+    padding: 15px;
 }
 
 #cs-container #cs-header {
@@ -522,9 +522,14 @@ label {font-size:1em !important;}
 #cs-container #control-panel > div {
     float: left;
 	
-    padding: 10px;
-	padding-bottom: 0;
+    padding: 0;
+	
+    padding-right: 25px;
     display: table-cell;
+}
+
+#cs-container #control-panel #instructions p:first-child {
+	margin-top: 0;
 }
 
 #cs-container .col {
