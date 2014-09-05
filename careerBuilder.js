@@ -300,8 +300,11 @@ var cs =
         var cards = deck.getElementsByClassName('value-card'),
             l = cards.length;
         for (var i = 0; i < l; i++) {
-            cards[i].style.top = '-' + i + 'px';
-            cards[i].style.left = '-' + i + 'px';
+            var card = cards[i];
+            card.style.top = '-' + i + 'px';
+            card.style.left = '-' + i + 'px';
+            card.setAttribute('draggable', 'false');
+        	card.style.cursor = 'default';
         }
     }
 
@@ -337,10 +340,16 @@ var cs =
             return false;
         }
     }
+
+    function setTopCardDraggable() {
+        deck.lastChild.setAttribute('draggable', 'true');
+        deck.lastChild.style.cursor = 'move';
+    }
     
     function cardMoved() {
         updateDeckCount();
         styleDeck();
+        setTopCardDraggable();
         updateColCounts();
         deckButton.disabled = !(canPutSelectedOnDeck());
     }
@@ -440,6 +449,7 @@ var cs =
         }
         deck.appendChild(bottomCard);
         styleDeck();
+        setTopCardDraggable();
     }
 
     function isPotentiallyFinished() {
