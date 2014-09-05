@@ -424,7 +424,7 @@ label {font-size:1em !important;}
 
 /******************CARD SORTER******************/
 #cs-container {
-    width: 717px;
+    /*width: 717px;*/
     z-index: 9999;
     position: relative;
     display: table;
@@ -500,7 +500,7 @@ label {font-size:1em !important;}
 
 #cs-container #playing-area {
     display: table;
-    min-height: 455px;
+    /*min-height: 455px;*/
 }
 
 #cs-container #playing-area, #follow-up {

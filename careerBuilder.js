@@ -287,9 +287,15 @@ var cs =
         }
     }
 
+    function setDimensions(i, l) {
+    	cardSorter.style.width = (i * 179.25) + 'px';
+    	playingArea.style.minHeight = (l * 113.75) + 'px';
+    }
+
     function start() {
         makeCols();
         makeDeck();
+        setDimensions(iScale.length, dropLimit);
         cardSorter.getElementsByClassName('drop-limit')[0].innerHTML = dropLimit;
         cardMoved();
     }
