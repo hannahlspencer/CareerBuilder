@@ -9,6 +9,9 @@ var noSelectMessage = "You have not selected any",
     skipButton = "<button class='skip-section' type='button'>Skip this section</button>",
     summaryButton = "<button class='get-summary next' type='button'>Download section summary</button>",
     fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>",
+	saveButton = '<button id="save-button" onclick="saveProgress();" onkeypress="saveProgress();">Save progress</button>',
+	startAgainButton = '<button id="clear-button" onclick="clearAll();" onkeypress="clearAll();">Start again</button>',
+	summaryButton = '<button class="get-summary">Download summary</button>',
     closeButton = "<button class='next close-popup' type='button'>Close</button>",
     cardSortStart = "<button id='start-card-sort' class='next' type='button'>Start</button>",
     printButton = "<button id='print-summary' type='button' onclick='window.print()'>Print summary</button>",
@@ -397,7 +400,7 @@ var cs =
                 dz.appendChild(card);
             }
             else {
-                alert("Maximum of " + dropLimit + " cards per heading!");
+                alert("Maximum of " + dropLimit + " cards per column!");
             }
             if (getDeckCount() == 1) {
                 skipCardButton.disabled = true;
@@ -513,37 +516,6 @@ var cs =
 
 }());
 
-//set up
-if (!loadProgress()) {
-	cs.start();
-	$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
-	$('.section-content').hide();
-	$('.sub-content').hide();
-	$('.suggestion').hide();
-	$('.section-level-buttons').hide();
-	$('#further-sub-content .suggestion').show();
-	$('#review-sub-content .suggestion').show();
-	$('#reviewing-intro').hide();
-	$('#skills-values-suggestion').hide();
-	$('.skill-value-advice').hide();
-	$('#card-sorter').hide();
-	$('#review-sub-content .advice').hide();
-	$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
-	$('#values-summary').append("<li>You haven't finished the card sorting task.</li>");
-	$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
-	$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
-	$('#forme-sub-content').append(skipButton);
-	$('.sub-content').not('.check-option .sub-content').append(nextButton);
-	$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
-	$('#final-popup').append(fullSummaryButton);
-	$('#final-popup, #save-popup').append(closeButton);
-	$('.section:last-of-type .next-section').text('What next?');
-	$('#careerBuilder a').each(function() {
-		var $this = $(this);
-		$this.attr("target", "_blank");
-	});
-}
-
 //replace prop() with attr() if jQuery is older than 1.6
 if (typeof jQuery.fn.prop != 'function') {
     jQuery.fn.prop = jQuery.fn.attr;
@@ -588,14 +560,6 @@ function closePopup(popupId) {
 	$('#popups').append($('#'+popupId));
 	$('#overlay, #clear-overlay').remove();
 }
-
-$('#close-cs').click(function() {
-	closePopup('cs-container');
-});
-
-$('.close-popup').click(function() {
-	closePopup($(this).parent().attr('id'));
-});
 
 function showPopup(z, $popup) {
 	var docHeight = $(document).height(),
@@ -787,197 +751,244 @@ function saveSummary(e, $this) {
 	saveAs(oSummaryBlob, fileName);
 }
 
-$('.toggler').hover(
-	function() {
-		var $this = $(this);
-		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? down : up);
-		$this.children('.toggle-arrow').css('color', 'white');
-		if($this.is('h2')) {
-			$('h2.toggler').not('.hidden').each(function() {
-				$(this).children('.toggle-arrow').html(up);
-			});
-		}
-	},
-	function() {
-		var $this = $(this);
-		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down);
-		$this.children('.toggle-arrow').removeAttr('style');
-		if($this.is('h2')) {
-			$('h2.toggler').not('.hidden').each(function() {
-				$(this).children('.toggle-arrow').html(down);
-			});
-		}
-	}
-);
+//set up
+$(function() {
 	
-//toggle section & subsection visibility
-$('.toggler').click(function() {
-	var $this = $(this);
-	$this.toggleClass('hidden');
-	$this.siblings().slideToggle('slow', function() {
-		$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down).removeAttr('style');
-	});
-	if($this.is('h2')) {
-		$('h2.toggler').not($this).not('.hidden').each(function() {
-			var $thisH2 = $(this);
-			$thisH2.addClass('hidden');
-			$thisH2.siblings().slideUp('slow', function() {
-				$thisH2.children('.toggle-arrow').html(right);
-			});
+	if (!loadProgress()) {
+		cs.start();
+		$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
+		$('.section-content').hide();
+		$('.sub-content').hide();
+		$('.suggestion').hide();
+		$('.section-level-buttons').hide();
+		$('#further-sub-content .suggestion').show();
+		$('#review-sub-content .suggestion').show();
+		$('#reviewing-intro').hide();
+		$('#skills-values-suggestion').hide();
+		$('.skill-value-advice').hide();
+		$('#card-sorter').hide();
+		$('#review-sub-content .advice').hide();
+		$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
+		$('#values-summary').append("<li>You haven't finished the card sorting task.</li>");
+		$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
+		$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
+		$('#forme-sub-content').append(skipButton);
+		$('.sub-content').not('.check-option .sub-content').append(nextButton);
+		$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
+		$('#final-popup').append(fullSummaryButton);
+		$('#final-popup, #save-popup').append(closeButton);
+		$('.section:last-of-type .next-section').text('What next?');
+		$('#careerBuilder a').each(function() {
+			var $this = $(this);
+			$this.attr("target", "_blank");
 		});
 	}
-});
 
-$('.section1-trigger').click(function(e) { $('#who-head').trigger(e); });
+	$('#careerBuilderGuide').append(saveButton);
+	$('#careerBuilderGuide').append(startAgainButton);
+	$('#careerBuilderGuide').append(summaryButton);
 
-$('.section1-trigger').hover(	
-	function(e) { $('#who-head').trigger(e); },
-	function(e) { $('#who-head').trigger(e); }
-);
-
-$('.section2-trigger').click(function(e) { $('#research-head').trigger(e); });
-
-$('.section2-trigger').hover(	
-	function(e) { $('#research-head').trigger(e); },
-	function(e) { $('#research-head').trigger(e); }
-);
-
-$('.section3-trigger').click(function(e) { $('#decision-head').trigger(e); });
-
-$('.section3-trigger').hover(	
-	function(e) { $('#decision-head').trigger(e); },
-	function(e) { $('#decision-head').trigger(e); }
-);
-
-$('button.next-subsection').click(function(e) { triggerTogglers(e, $(this)); });
-
-$('button.next-subsection').hover(
-	function(e) { triggerTogglers(e, $(this)); },
-	function(e) { triggerTogglers(e, $(this)); }
-);
-
-$('button.skip-section').click(function(e) { skipSectionTrigger(e, $(this)); });
-
-$('button.skip-section').hover( 
-	function(e) { skipSectionTrigger(e, $(this)); },
-	function(e) { skipSectionTrigger(e, $(this)); }
-);
-
-$('button.next-section').click(function(e) { triggerTogglers(e, $(this)); });
-
-$('button.next-section').hover( 
-	function(e) { triggerTogglers(e, $(this)); },
-	function(e) { triggerTogglers(e, $(this)); }
-);
-
-$('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
-
-$('button#finish-button').click(function(e) { 
-									buildCardSortSummary();
-									closePopup('cs-container');
-									$('#cs-suggestion, #skills-values-suggestion').slideDown('slow');
-								});
-								
-$('#start-card-sort').click(function(e) {
-	showPopup(9999, $('#cs-container'));
-	$(this).html("Continue value sorting task");
-});
-
-//expand advice according to radio button selection
-$('input:radio').change(function() {
-	$('input:radio').each(function() {
-		var $this = $(this);
-		var qName = $this.attr('name');
-		var qVal = $this.attr('value');
-		var sID = qName + '-' + qVal;
-		$this.is(':checked') ? $('#' + sID).slideDown('slow') : $('#' + sID).slideUp('slow');
+	$('#close-cs').click(function() {
+		closePopup('cs-container');
 	});
-});
 
-//show skills in list and remove skills from pdam set when selected
-$('input[name=skill]').change(function() {
-	var $checked = $(this);
-	$('#skills-summary').html("");
-	$('#missing-skill-list li').hide();
-	$('#skills-values-suggestion').slideDown('slow');
-	var skillsCount = 0;
-	$('input:checkbox').each(function() {
-		var $this = $(this);
-		var checkName = $this.attr('name');
-		var checkVal = $this.attr('value');
-		var checkClass = $this.attr('class');
-		if ($this.is(':checked')) {
-			$('#skills-summary').append("<li>" + checkVal + "</li>");
-			skillsCount++;
-		}
-		else if ($this.not(':checked')) {
-			var missingSkillTargetId = '#' + checkClass + '-pdam';
-			$(missingSkillTargetId).show();
-		}
+	$('.close-popup').click(function() {
+		closePopup($(this).parent().attr('id'));
 	});
-	if (skillsCount == totalSkills) {
-		$('#missing-skills-advice').hide();
-		$('#all-skills-advice').show();
-	}
-	else {
-		$('#all-skills-advice').hide();
-		$('#missing-skills-advice').show();
-	}
-	if (skillsCount == 0) {
-		$('#skills-summary').append("<li>" + noSelectMessage + " skills</li>");
-		$('#skills-values-suggestion').slideUp('slow');
-	}
-});
 
-//show advice based on decision making barrier checkbox selection
-$('input:checkbox[name="barrier"]').change(function() { 
-	$('.barrier-list').html("");
-	$('#reviewing-intro').hide();
-	$('#review-sub-content .advice').hide();
-	var noneSelected = true;
-	$('input:checkbox[name="barrier"]').each(function() {
+
+	$('.toggler').hover(
+		function() {
+			var $this = $(this);
+			$this.children('.toggle-arrow').html($this.hasClass('hidden') ? down : up);
+			$this.children('.toggle-arrow').css('color', 'white');
+			if($this.is('h2')) {
+				$('h2.toggler').not('.hidden').each(function() {
+					$(this).children('.toggle-arrow').html(up);
+				});
+			}
+		},
+		function() {
+			var $this = $(this);
+			$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down);
+			$this.children('.toggle-arrow').removeAttr('style');
+			if($this.is('h2')) {
+				$('h2.toggler').not('.hidden').each(function() {
+					$(this).children('.toggle-arrow').html(down);
+				});
+			}
+		}
+	);
+
+	//toggle section & subsection visibility
+	$('.toggler').click(function() {
 		var $this = $(this);
-		$this.prop('disabled', false);
-		if ($this.is(':checked')) {
-			if ($this.attr('value') == 'None') {
-				$('input:checkbox[name="barrier"]').removeAttr('checked').prop('disabled', true);
-				$this.prop('checked', true).prop('disabled', false);
-				$('.barrier-list').html("");
-				$('#review-sub-content .advice').hide();
-				$('#reviewing-intro').hide();
-				$('.8 p').show();
-			}
-			else {
-				$('#reviewing-intro').show();
-			}
-			noneSelected = false;
-			var checkClass = $this.attr('class');
-			var checkVal = $this.attr('value');
-			$('#review-sub-content .advice').each(function() {
-				var $this = $(this);
-				var adviceID = $this.attr('id');
-				if (checkClass.indexOf(adviceID) >= 0) {
-					if (adviceID != "none") {
-						var barrierListSelector = '#' + adviceID + ' .barrier-list';
-						$(barrierListSelector).append("<li>You selected: <em>" + checkVal + "</em></li>");
-					}
-					$this.show();
-				}
+		$this.toggleClass('hidden');
+		$this.siblings().slideToggle('slow', function() {
+			$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down).removeAttr('style');
+		});
+		if($this.is('h2')) {
+			$('h2.toggler').not($this).not('.hidden').each(function() {
+				var $thisH2 = $(this);
+				$thisH2.addClass('hidden');
+				$thisH2.siblings().slideUp('slow', function() {
+					$thisH2.children('.toggle-arrow').html(right);
+				});
 			});
 		}
 	});
-	noneSelected ? $('.no-selection').show() : $('.no-selection').hide();
-});
 
-$('input:radio, input:checkbox').change(function() {
-	$this = $(this);
-	if ($this.is(':checked')) {
-		$this.attr('checked', true);
-	}
-	else {
-		$this.removeAttr('checked');
-	}
-	if ($('#save-button').html() != 'Save progress') {
-		$('#save-button').html('Save progress');
-	}
+	$('.section1-trigger').click(function(e) { $('#who-head').trigger(e); });
+
+	$('.section1-trigger').hover(	
+		function(e) { $('#who-head').trigger(e); },
+		function(e) { $('#who-head').trigger(e); }
+	);
+
+	$('.section2-trigger').click(function(e) { $('#research-head').trigger(e); });
+
+	$('.section2-trigger').hover(	
+		function(e) { $('#research-head').trigger(e); },
+		function(e) { $('#research-head').trigger(e); }
+	);
+
+	$('.section3-trigger').click(function(e) { $('#decision-head').trigger(e); });
+
+	$('.section3-trigger').hover(	
+		function(e) { $('#decision-head').trigger(e); },
+		function(e) { $('#decision-head').trigger(e); }
+	);
+
+	$('button.next-subsection').click(function(e) { triggerTogglers(e, $(this)); });
+
+	$('button.next-subsection').hover(
+		function(e) { triggerTogglers(e, $(this)); },
+		function(e) { triggerTogglers(e, $(this)); }
+	);
+
+	$('button.skip-section').click(function(e) { skipSectionTrigger(e, $(this)); });
+
+	$('button.skip-section').hover( 
+		function(e) { skipSectionTrigger(e, $(this)); },
+		function(e) { skipSectionTrigger(e, $(this)); }
+	);
+
+	$('button.next-section').click(function(e) { triggerTogglers(e, $(this)); });
+
+	$('button.next-section').hover( 
+		function(e) { triggerTogglers(e, $(this)); },
+		function(e) { triggerTogglers(e, $(this)); }
+	);
+
+	$('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
+
+	$('button#finish-button').click(function(e) { 
+										buildCardSortSummary();
+										closePopup('cs-container');
+										$('#cs-suggestion, #skills-values-suggestion').slideDown('slow');
+									});
+
+	$('#start-card-sort').click(function(e) {
+		showPopup(9999, $('#cs-container'));
+		$(this).html("Continue value sorting task");
+	});
+
+	//expand advice according to radio button selection
+	$('input:radio').change(function() {
+		$('input:radio').each(function() {
+			var $this = $(this);
+			var qName = $this.attr('name');
+			var qVal = $this.attr('value');
+			var sID = qName + '-' + qVal;
+			$this.is(':checked') ? $('#' + sID).slideDown('slow') : $('#' + sID).slideUp('slow');
+		});
+	});
+
+	//show skills in list and remove skills from pdam set when selected
+	$('input[name=skill]').change(function() {
+		var $checked = $(this);
+		$('#skills-summary').html("");
+		$('#missing-skill-list li').hide();
+		$('#skills-values-suggestion').slideDown('slow');
+		var skillsCount = 0;
+		$('input:checkbox').each(function() {
+			var $this = $(this);
+			var checkName = $this.attr('name');
+			var checkVal = $this.attr('value');
+			var checkClass = $this.attr('class');
+			if ($this.is(':checked')) {
+				$('#skills-summary').append("<li>" + checkVal + "</li>");
+				skillsCount++;
+			}
+			else if ($this.not(':checked')) {
+				var missingSkillTargetId = '#' + checkClass + '-pdam';
+				$(missingSkillTargetId).show();
+			}
+		});
+		if (skillsCount == totalSkills) {
+			$('#missing-skills-advice').hide();
+			$('#all-skills-advice').show();
+		}
+		else {
+			$('#all-skills-advice').hide();
+			$('#missing-skills-advice').show();
+		}
+		if (skillsCount == 0) {
+			$('#skills-summary').append("<li>" + noSelectMessage + " skills</li>");
+			$('#skills-values-suggestion').slideUp('slow');
+		}
+	});
+
+	//show advice based on decision making barrier checkbox selection
+	$('input:checkbox[name="barrier"]').change(function() { 
+		$('.barrier-list').html("");
+		$('#reviewing-intro').hide();
+		$('#review-sub-content .advice').hide();
+		var noneSelected = true;
+		$('input:checkbox[name="barrier"]').each(function() {
+			var $this = $(this);
+			$this.prop('disabled', false);
+			if ($this.is(':checked')) {
+				if ($this.attr('value') == 'None') {
+					$('input:checkbox[name="barrier"]').removeAttr('checked').prop('disabled', true);
+					$this.prop('checked', true).prop('disabled', false);
+					$('.barrier-list').html("");
+					$('#review-sub-content .advice').hide();
+					$('#reviewing-intro').hide();
+					$('.8 p').show();
+				}
+				else {
+					$('#reviewing-intro').show();
+				}
+				noneSelected = false;
+				var checkClass = $this.attr('class');
+				var checkVal = $this.attr('value');
+				$('#review-sub-content .advice').each(function() {
+					var $this = $(this);
+					var adviceID = $this.attr('id');
+					if (checkClass.indexOf(adviceID) >= 0) {
+						if (adviceID != "none") {
+							var barrierListSelector = '#' + adviceID + ' .barrier-list';
+							$(barrierListSelector).append("<li>You selected: <em>" + checkVal + "</em></li>");
+						}
+						$this.show();
+					}
+				});
+			}
+		});
+		noneSelected ? $('.no-selection').show() : $('.no-selection').hide();
+	});
+
+	$('input:radio, input:checkbox').change(function() {
+		$this = $(this);
+		if ($this.is(':checked')) {
+			$this.attr('checked', true);
+		}
+		else {
+			$this.removeAttr('checked');
+		}
+		if ($('#save-button').html() != 'Save progress') {
+			$('#save-button').html('Save progress');
+		}
+	});
 });
