@@ -73,11 +73,36 @@ label {font-size:1em !important;}
 	margin: 0 0 10px 0;
 }
 
-#careerBuilder .toggler span.toggle-arrow{
+#careerBuilder .toggler::before {
+	content: '\25B8';
 	font-weight: normal;
 	font-size: 1.4em;
-	vertical-align: -2px;
+	margin-right: 0.2em;
+	display: inline-block;
 	text-decoration: none;
+	-webkit-transition: all .15s ease-in-out;
+       -moz-transition: all .15s ease-in-out;
+        -ms-transition: all .15s ease-in-out;
+         -o-transition: all .15s ease-in-out;
+            transition: all .15s ease-in-out;
+}
+
+#careerBuilder .toggler.opening::before {
+	color: #FFF;
+	-webkit-transform: rotate(90deg); 
+	   -moz-transform: rotate(90deg);
+	    -ms-transform: rotate(90deg); 
+	     -o-transform: rotate(90deg);
+	        transform: rotate(90deg);
+}
+
+#careerBuilder .toggler.closing::before {
+	color: #FFF;
+	-webkit-transform: rotate(-90deg); 
+	   -moz-transform: rotate(-90deg);
+	    -ms-transform: rotate(-90deg); 
+	     -o-transform: rotate(-90deg);
+	        transform: rotate(-90deg);
 }
 
 #careerBuilder .toggler span.number {
@@ -221,6 +246,7 @@ label {font-size:1em !important;}
 	padding: 5px;
 	margin-bottom: 5px;
 	cursor: pointer;
+	transition: background-color 0.4s ease;
 }
 
 #careerBuilder button.skip-section, 
@@ -232,6 +258,7 @@ label {font-size:1em !important;}
 }
 
 #careerBuilder #who button.next,
+#careerBuilder #who button.get-summary,
 #start-card-sort  {
 	margin-top: 5px;
 }
@@ -251,6 +278,7 @@ label {font-size:1em !important;}
 	border-bottom: 2px solid #000000;
 	border-right: 1px solid #000000;
 	border-radius: 10px;
+	text-align: left;
 }
 
 .popup button.next,
@@ -261,6 +289,7 @@ label {font-size:1em !important;}
 	border-color: #333;
 	margin-bottom: 5px;
 	cursor: pointer;
+	transition: background-color 0.4s ease;
 }
 
 .popup button.next:hover,
@@ -438,6 +467,7 @@ label {font-size:1em !important;}
     border-right: 1px solid #000000;
     border-radius: 10px;
     padding: 15px;
+    text-align: left;
 }
 
 #cs-container #cs-header {
@@ -449,6 +479,7 @@ label {font-size:1em !important;}
 	margin-top: 0;
 	display: inline;
 	font-size: 1.8em;
+	font-weight: normal;
 }
 
 #cs-container h3 {
@@ -473,6 +504,8 @@ label {font-size:1em !important;}
     padding: 10px;
     margin: 10px;
     margin-right: 0;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
 }
     
     #cs-container button:first-child {
@@ -487,6 +520,7 @@ label {font-size:1em !important;}
         background: #898989;
         color: #cecece;
         border: 2px solid #898989;
+        cursor: auto;
     }
 
     #cs-container #close-cs {
@@ -511,7 +545,8 @@ label {font-size:1em !important;}
 }
 
 	#cs-container #instructions {
-		width: 27%;	
+		width: 27%;
+		font-size: 75%;
 	}
 
 	#cs-container #control-panel #deck-area {
@@ -561,7 +596,7 @@ label {font-size:1em !important;}
     border-radius: 10px;
     padding: 10px;
     background: #FBCFA6;
-    height: 75px;
+    height: 85px;
     font-size: 0.8em;
     width: 140px;
 }
@@ -573,11 +608,12 @@ label {font-size:1em !important;}
     
     #cs-container .value-description {
         margin: 5px 0 0 0;
+        font-size: 12px;
     }
 
 #cs-container #deck-container {
     width: 168px;
-    height: 103px;
+    height: 113px;
     border: 2px solid #ececec;
     border-left-color: #898989;
     border-top-color: #898989;

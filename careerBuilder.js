@@ -1,20 +1,17 @@
 //globals
 var noSelectMessage = "You have not selected any",
     totalSkills = $('input:checkbox[name="skill"]').length,
-    right = "&#9656; ",
-    down = "&#9662; ",
-    up = "&#9652; ",
-    nextButton = "<button class='next next-subsection' type='button'>Next</button>",
+    nextButton        = "<button class='next next-subsection' type='button'>Next</button>",
     nextSectionButton = "<button class='next next-section' type='button'>Next section</button>",
-    skipButton = "<button class='skip-section' type='button'>Skip this section</button>",
-    summaryButton = "<button class='get-summary next' type='button'>Download section summary</button>",
+    skipButton        = "<button class='skip-section' type='button'>Skip this section</button>",
+    summaryButton     = "<button class='get-summary next' type='button'>Download section summary</button>",
     fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>",
-	saveButton = '<button id="save-button" onclick="saveProgress();" onkeypress="saveProgress();">Save progress</button>',
-	startAgainButton = '<button id="clear-button" onclick="clearAll();" onkeypress="clearAll();">Start again</button>',
-	summaryButton = '<button class="get-summary">Download summary</button>',
-    closeButton = "<button class='next close-popup' type='button'>Close</button>",
-    cardSortStart = "<button id='start-card-sort' class='next' type='button'>Start</button>",
-    printButton = "<button id='print-summary' type='button' onclick='window.print()'>Print summary</button>",
+	saveButton        = '<button id="save-button" onclick="saveProgress();" onkeypress="saveProgress();">Save progress</button>',
+	startAgainButton  = '<button id="clear-button" onclick="clearAll();" onkeypress="clearAll();">Start again</button>',
+	summaryButton     = '<button class="get-summary">Download summary</button>',
+    closeButton       = "<button class='next close-popup' type='button'>Close</button>",
+    cardSortStart     = "<button id='start-card-sort' class='next' type='button'>Start</button>",
+    printButton       = "<button id='print-summary' type='button' onclick='window.print()'>Print summary</button>",
     cardSortInProgess = false;
 
 var cb = {
@@ -116,6 +113,9 @@ var cbSummaryStyle =
 "@media print {" +
 "    .advice {" +
 "        border: 1px solid #898989;" +
+"    }" +
+"    #print-summary {" +
+"        display: none;" +
 "    }" +
 "}" +
 "#careerBuilder-summary {" +
@@ -266,7 +266,10 @@ var cs =
             newCol.getElementsByClassName('importance-level')[0].innerHTML = colHeader;
             var id = 'dz-' + i;
             iScale[i].id = id;
-            newCol.getElementsByClassName('drop-zone')[0].setAttribute('id', id);
+            var dz = document.createElement('div');
+            dz.classList.add('drop-zone');
+            dz.setAttribute('id', id);
+            newCol.appendChild(dz);
             playingArea.appendChild(newCol);
         }
     }
@@ -531,7 +534,7 @@ function supportsStorage() {
 
 function saveProgress() {
 	if (supportsStorage()) {
-		localStorage.setItem('cb-html', $('#careerBuilder').html());
+		localStorage.setItem('cb-html', $('#save-area').html());
 		$('#save-button').html('&#10004; Saved');
 		showPopup(9999, $('#save-popup'));
 	} else {
@@ -542,7 +545,7 @@ function saveProgress() {
 function loadProgress() {
 	if (supportsStorage()) {
 		if (localStorage.getItem('cb-html') != undefined) {
-			$('#careerBuilder').html(localStorage.getItem('cb-html'));
+			$('#save-area').html(localStorage.getItem('cb-html'));
 			return true;
 		}
 	}
@@ -597,7 +600,7 @@ function triggerTogglers(e, $this) {
 	var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
 	var $nextH3 = $thisSub.next().find('h3.toggler');
 	if ($this.hasClass('next-section')) {
-		if ($thisSection.is(':last-of-type')) {
+		if ($thisSection.is('#achieving')) {
 			$thisSection.find('h2.toggler').trigger(e.type);
 			if (e.type == 'click') {
 				showPopup(9999, $('#final-popup'));
@@ -760,6 +763,7 @@ $(function() {
 		$('.section-content').hide();
 		$('.sub-content').hide();
 		$('.suggestion').hide();
+		$('.section-content').append('<div class="section-level-buttons"></div>');
 		$('.section-level-buttons').hide();
 		$('#further-sub-content .suggestion').show();
 		$('#review-sub-content .suggestion').show();
@@ -771,7 +775,7 @@ $(function() {
 		$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 		$('#values-summary').append("<li>You haven't finished the card sorting task.</li>");
 		$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
-		$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
+		//$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 		$('#forme-sub-content').append(skipButton);
 		$('.sub-content').not('.check-option .sub-content').append(nextButton);
 		$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
@@ -796,25 +800,22 @@ $(function() {
 		closePopup($(this).parent().attr('id'));
 	});
 
-
 	$('.toggler').hover(
 		function() {
 			var $this = $(this);
-			$this.children('.toggle-arrow').html($this.hasClass('hidden') ? down : up);
-			$this.children('.toggle-arrow').css('color', 'white');
+			$this.addClass($this.hasClass('hidden') ? 'opening' : 'closing');
 			if($this.is('h2')) {
 				$('h2.toggler').not('.hidden').each(function() {
-					$(this).children('.toggle-arrow').html(up);
+					$(this).addClass('closing');
 				});
 			}
 		},
 		function() {
 			var $this = $(this);
-			$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down);
-			$this.children('.toggle-arrow').removeAttr('style');
+			$this.removeClass($this.hasClass('hidden') ? 'opening' : 'closing');
 			if($this.is('h2')) {
 				$('h2.toggler').not('.hidden').each(function() {
-					$(this).children('.toggle-arrow').html(down);
+					$(this).removeClass('closing');
 				});
 			}
 		}
@@ -823,17 +824,16 @@ $(function() {
 	//toggle section & subsection visibility
 	$('.toggler').click(function() {
 		var $this = $(this);
-		$this.toggleClass('hidden');
-		$this.siblings().slideToggle('slow', function() {
-			$this.children('.toggle-arrow').html($this.hasClass('hidden') ? right : down).removeAttr('style');
-		});
+		$this.toggleClass('hidden')
+		    .siblings().slideToggle('slow', function() {
+		    	$this.removeClass('opening').removeClass('closing');
+		    });
 		if($this.is('h2')) {
 			$('h2.toggler').not($this).not('.hidden').each(function() {
-				var $thisH2 = $(this);
-				$thisH2.addClass('hidden');
-				$thisH2.siblings().slideUp('slow', function() {
-					$thisH2.children('.toggle-arrow').html(right);
-				});
+				$(this).addClass('hidden').removeClass('closing')
+				    .siblings().slideUp('slow', function() {
+				    	$this.removeClass('opening').removeClass('closing');
+				    });
 			});
 		}
 	});
