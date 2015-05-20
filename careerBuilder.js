@@ -1,6 +1,6 @@
 //globals
-var noSelectMessage = "You have not selected any",
-    totalSkills = $('input:checkbox[name="skill"]').length,
+var noSelectMessage   = "You have not selected any",
+    totalSkills       = $('input:checkbox[name="skill"]').length,
     nextButton        = "<button class='next next-subsection' type='button'>Next</button>",
     nextSectionButton = "<button class='next next-section' type='button'>Next section</button>",
     skipButton        = "<button class='skip-section' type='button'>Skip this section</button>",
@@ -10,7 +10,7 @@ var noSelectMessage = "You have not selected any",
 	startAgainButton  = '<button id="clear-button" onclick="clearAll();" onkeypress="clearAll();">Start again</button>',
 	summaryButton     = '<button class="get-summary">Download summary</button>',
     closeButton       = "<button class='next close-popup' type='button'>Close</button>",
-    cardSortStart     = "<button id='start-card-sort' class='next' type='button'>Start</button>",
+    cardSortStart     = '<button id="start-card-sort" type="button">Open value sorting task</button>',
     printButton       = "<button id='print-summary' type='button' onclick='window.print()'>Print summary</button>",
     cardSortInProgess = false;
 
@@ -218,9 +218,10 @@ var cs =
     (function populateVDeck() {
         var vals = getTemplateElement('value-list').getElementsByClassName('value');
         for (var i = 0; i < vals.length; i++) {
-            vDeck.push(new Value(vals[i].getElementsByClassName('title')[0].textContent, 
-                                 vals[i].getElementsByClassName('description')[0].textContent)
-                           );
+            vDeck.push(new Value(
+			   vals[i].getElementsByClassName('title')[0].textContent, 
+			   vals[i].getElementsByClassName('description')[0].textContent)
+            );
         }
     })();
 
@@ -276,7 +277,7 @@ var cs =
 
     function makeCard(val) {
         var card = getTemplateElement('value-card');
-        card.setAttribute('id', 'card-' + val.id)
+        card.setAttribute('id', 'card-' + val.id);
         card.getElementsByClassName('value-name')[0].innerHTML = val.name;
         card.getElementsByClassName('value-description')[0].innerHTML = val.description;
         return card;
@@ -503,18 +504,18 @@ var cs =
     /***API***/
 
     return {
-        start :            function()    {start();},
-        restart :          function()    {restart();},
-        finish :           function()    {finish();},
-        skipCard :         function()    {skipCard();},
-        pickUp :           function(e)   {pickUpCard(e)},
-        allowDrop :        function(e)   {allowDrop(e);},
+        start            : function()    {start();},
+        restart          : function()    {restart();},
+        finish           : function()    {finish();},
+        skipCard         : function()    {skipCard();},
+        pickUp           : function(e)   {pickUpCard(e)},
+        allowDrop        : function(e)   {allowDrop(e);},
         deckButtonAction : function()    {deckButtonAction();},
-        deckDrop :         function(e,t) {dropCardOnDeck(e,t);},
-        playingAreaDrop :  function(e,t) {dropCardInPlayingArea(e,t);},
-        toggleSelect :     function(e,t) {toggleSelect(e,t);},
-        clickDrop :        function(e,t) {clickDrop(e,t);},
-        getData :          function()    {return getData();}
+        deckDrop         : function(e,t) {dropCardOnDeck(e,t);},
+        playingAreaDrop  : function(e,t) {dropCardInPlayingArea(e,t);},
+        toggleSelect     : function(e,t) {toggleSelect(e,t);},
+        clickDrop        : function(e,t) {clickDrop(e,t);},
+        getData          : function()    {return getData();}
     };
 
 }());
@@ -588,17 +589,27 @@ function showPopup(z, $popup) {
 			'position': 'absolute',
 			'top': 0,
 			'left': 0,
-			'width': '100%',
+			'width': '100%'
 		}).append($popup);
 	$popup.slideDown('slow');
 	$("html, body").animate({ scrollTop: 0 }, 500);
 }
 
+function registerTriggerProxies(a) {
+	$.each(a, function(i, val) {
+		$(i).click(function(e) { $(val).trigger(e); });
+		$(i).hover(	
+			function(e) { $(val).trigger(e); },
+			function(e) { $(val).trigger(e); }
+		);
+	});
+}
+
 function triggerTogglers(e, $this) {
-	var $thisSub = $this.closest('li');
-	var $thisSection = $this.closest('.section');
-	var $h3Togglers = $thisSection.find('h3.toggler').not('.hidden');
-	var $nextH3 = $thisSub.next().find('h3.toggler');
+	var $thisSub = $this.closest('li'),
+	    $thisSection = $this.closest('.section'),
+	    $h3Togglers = $thisSection.find('h3.toggler').not('.closed'),
+	    $nextH3 = $thisSub.next().find('h3.toggler');
 	if ($this.hasClass('next-section')) {
 		if ($thisSection.is('#achieving')) {
 			$thisSection.find('h2.toggler').trigger(e.type);
@@ -609,14 +620,14 @@ function triggerTogglers(e, $this) {
 		else {
 			var $nextH2 = $thisSection.next().find('h2.toggler');
 			$nextH2.trigger(e.type);
-			$thisSection.next().find('h3.toggler').not('.hidden').trigger(e.type);
+			$thisSection.next().find('h3.toggler').not('.closed').trigger(e.type);
 		}
 	}
 	else if ($thisSub.is(':last-child') && e.type == 'click') {
 		$thisSection.find('.section-level-buttons').slideDown();
 	}
 	else {
-		if ($nextH3.is('.hidden')) {
+		if ($nextH3.is('.closed')) {
 			$nextH3.trigger(e.type);
 		}
 	}
@@ -760,22 +771,12 @@ $(function() {
 	if (!loadProgress()) {
 		cs.start();
 		$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
-		$('.section-content').hide();
-		$('.sub-content').hide();
-		$('.suggestion').hide();
-		$('.section-content').append('<div class="section-level-buttons"></div>');
-		$('.section-level-buttons').hide();
-		$('#further-sub-content .suggestion').show();
-		$('#review-sub-content .suggestion').show();
-		$('#reviewing-intro').hide();
-		$('#skills-values-suggestion').hide();
-		$('.skill-value-advice').hide();
-		$('#card-sorter').hide();
-		$('#review-sub-content .advice').hide();
+		$('#values-sub-content').append(cardSortStart);
+		$('.section-content').append('<div class="section-level-buttons hidden"></div>');
+		$('.hidden').hide();
 		$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
 		$('#values-summary').append("<li>You haven't finished the card sorting task.</li>");
 		$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
-		//$('.toggler').prepend("<span class='toggle-arrow'>" + right + "</span>");
 		$('#forme-sub-content').append(skipButton);
 		$('.sub-content').not('.check-option .sub-content').append(nextButton);
 		$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
@@ -788,9 +789,18 @@ $(function() {
 		});
 	}
 
-	$('#careerBuilderGuide').append(saveButton);
-	$('#careerBuilderGuide').append(startAgainButton);
-	$('#careerBuilderGuide').append(summaryButton);
+	$('#careerBuilderGuide')
+		.append(saveButton)
+		.append(startAgainButton)
+		.append(summaryButton);
+
+	registerTriggerProxies({
+		'.section1-trigger'   : '#who-head',
+		'.section2-trigger'   : '#research-head',
+		'.section3-trigger'   : '#decision-head',
+		'button.skip-section' : '#achieving-head'
+	});
+
 
 	$('#close-cs').click(function() {
 		closePopup('cs-container');
@@ -803,18 +813,18 @@ $(function() {
 	$('.toggler').hover(
 		function() {
 			var $this = $(this);
-			$this.addClass($this.hasClass('hidden') ? 'opening' : 'closing');
+			$this.addClass($this.hasClass('closed') ? 'opening' : 'closing');
 			if($this.is('h2')) {
-				$('h2.toggler').not('.hidden').each(function() {
+				$('h2.toggler').not('.closed').each(function() {
 					$(this).addClass('closing');
 				});
 			}
 		},
 		function() {
 			var $this = $(this);
-			$this.removeClass($this.hasClass('hidden') ? 'opening' : 'closing');
+			$this.removeClass($this.hasClass('closed') ? 'opening' : 'closing');
 			if($this.is('h2')) {
-				$('h2.toggler').not('.hidden').each(function() {
+				$('h2.toggler').not('.closed').each(function() {
 					$(this).removeClass('closing');
 				});
 			}
@@ -824,13 +834,13 @@ $(function() {
 	//toggle section & subsection visibility
 	$('.toggler').click(function() {
 		var $this = $(this);
-		$this.toggleClass('hidden')
+		$this.toggleClass('closed')
 		    .siblings().slideToggle('slow', function() {
 		    	$this.removeClass('opening').removeClass('closing');
 		    });
 		if($this.is('h2')) {
-			$('h2.toggler').not($this).not('.hidden').each(function() {
-				$(this).addClass('hidden').removeClass('closing')
+			$('h2.toggler').not($this).not('.closed').each(function() {
+				$(this).addClass('closed').removeClass('closing')
 				    .siblings().slideUp('slow', function() {
 				    	$this.removeClass('opening').removeClass('closing');
 				    });
@@ -838,44 +848,11 @@ $(function() {
 		}
 	});
 
-	$('.section1-trigger').click(function(e) { $('#who-head').trigger(e); });
+	$('button.next-subsection, button.next-section').click(function(e) { 
+	    triggerTogglers(e, $(this)); 
+	});
 
-	$('.section1-trigger').hover(	
-		function(e) { $('#who-head').trigger(e); },
-		function(e) { $('#who-head').trigger(e); }
-	);
-
-	$('.section2-trigger').click(function(e) { $('#research-head').trigger(e); });
-
-	$('.section2-trigger').hover(	
-		function(e) { $('#research-head').trigger(e); },
-		function(e) { $('#research-head').trigger(e); }
-	);
-
-	$('.section3-trigger').click(function(e) { $('#decision-head').trigger(e); });
-
-	$('.section3-trigger').hover(	
-		function(e) { $('#decision-head').trigger(e); },
-		function(e) { $('#decision-head').trigger(e); }
-	);
-
-	$('button.next-subsection').click(function(e) { triggerTogglers(e, $(this)); });
-
-	$('button.next-subsection').hover(
-		function(e) { triggerTogglers(e, $(this)); },
-		function(e) { triggerTogglers(e, $(this)); }
-	);
-
-	$('button.skip-section').click(function(e) { skipSectionTrigger(e, $(this)); });
-
-	$('button.skip-section').hover( 
-		function(e) { skipSectionTrigger(e, $(this)); },
-		function(e) { skipSectionTrigger(e, $(this)); }
-	);
-
-	$('button.next-section').click(function(e) { triggerTogglers(e, $(this)); });
-
-	$('button.next-section').hover( 
+	$('button.next-subsection, button.next-section').hover(
 		function(e) { triggerTogglers(e, $(this)); },
 		function(e) { triggerTogglers(e, $(this)); }
 	);
@@ -883,10 +860,10 @@ $(function() {
 	$('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
 
 	$('button#finish-button').click(function(e) { 
-										buildCardSortSummary();
-										closePopup('cs-container');
-										$('#cs-suggestion, #skills-values-suggestion').slideDown('slow');
-									});
+		buildCardSortSummary();
+		closePopup('cs-container');
+		$('#cs-suggestion, #skills-values-suggestion').slideDown('slow');
+	});
 
 	$('#start-card-sort').click(function(e) {
 		showPopup(9999, $('#cs-container'));
@@ -896,10 +873,10 @@ $(function() {
 	//expand advice according to radio button selection
 	$('input:radio').change(function() {
 		$('input:radio').each(function() {
-			var $this = $(this);
-			var qName = $this.attr('name');
-			var qVal = $this.attr('value');
-			var sID = qName + '-' + qVal;
+			var $this = $(this),
+			    qName = $this.attr('name'),
+			    qVal = $this.attr('value'),
+			    sID = qName + '-' + qVal;
 			$this.is(':checked') ? $('#' + sID).slideDown('slow') : $('#' + sID).slideUp('slow');
 		});
 	});
@@ -912,10 +889,10 @@ $(function() {
 		$('#skills-values-suggestion').slideDown('slow');
 		var skillsCount = 0;
 		$('input:checkbox').each(function() {
-			var $this = $(this);
-			var checkName = $this.attr('name');
-			var checkVal = $this.attr('value');
-			var checkClass = $this.attr('class');
+			var $this = $(this),
+			    checkName = $this.attr('name'),
+			    checkVal = $this.attr('value'),
+			    checkClass = $this.attr('class');
 			if ($this.is(':checked')) {
 				$('#skills-summary').append("<li>" + checkVal + "</li>");
 				skillsCount++;
