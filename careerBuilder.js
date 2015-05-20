@@ -787,6 +787,20 @@ $(function() {
 			var $this = $(this);
 			$this.attr("target", "_blank");
 		});
+
+		//set up ARIA attributes
+		$('.toggler').each(function() {
+			var $this = $(this),
+			    $next = $this.next();
+			if ($this.is('h2'))
+				$this.attr('role', 'sectionhead');
+			$this.attr('aria-expanded', false)
+			     .attr('aria-controls', $next.attr('id'));
+			$next.attr('aria-hidden', true);
+		});
+		$('.section').each(function() {
+			$(this).attr('role', 'section');
+		});
 	}
 
 	$('#careerBuilderGuide')
@@ -833,17 +847,26 @@ $(function() {
 
 	//toggle section & subsection visibility
 	$('.toggler').click(function() {
-		var $this = $(this);
+		var $this = $(this),
+		    state = $this.attr('aria-expanded') === 'false' ? true : false;
 		$this.toggleClass('closed')
-		    .siblings().slideToggle('slow', function() {
-		    	$this.removeClass('opening').removeClass('closing');
-		    });
+		     .attr('aria-expanded', state)
+			     .siblings()
+			     .attr('aria-hidden', !state)
+			     .slideToggle('slow', function() {
+			         $this.removeClass('opening').removeClass('closing');
+		});
+		//close other sections
 		if($this.is('h2')) {
 			$('h2.toggler').not($this).not('.closed').each(function() {
-				$(this).addClass('closed').removeClass('closing')
-				    .siblings().slideUp('slow', function() {
-				    	$this.removeClass('opening').removeClass('closing');
-				    });
+				$(this).addClass('closed')
+				       .removeClass('closing')
+				       .attr('aria-expanded', false)
+				           .siblings()
+				           .attr('aria-hidden', true)
+				           .slideUp('slow', function() {
+					           $this.removeClass('opening').removeClass('closing');
+				});
 			});
 		}
 	});
