@@ -206,7 +206,12 @@ var cs =
         this.description = description;
     }
 
-    var iScale = [{name: "Least important"}, {name: "Quite important"}, {name: "Important"}, {name: "Most important"}],
+    var iScale = [
+                  {name: "Least important"}, 
+                  {name: "Quite important"}, 
+                  {name: "Important"}, 
+                  {name: "Most important"}
+                 ],
         vDeck = new Array(),
         cardSorter = document.getElementById('cs-container'),
         deck = document.getElementById('deck-container'),
@@ -354,6 +359,10 @@ var cs =
         }
     }
 
+    function isPotentiallyFinished() {
+        return getDeckCount() == 0;
+    }
+
     function setTopCardDraggable() {
         deck.lastChild.setAttribute('draggable', 'true');
         deck.lastChild.style.cursor = 'move';
@@ -362,7 +371,8 @@ var cs =
     function cardMoved() {
         updateDeckCount();
         styleDeck();
-        setTopCardDraggable();
+        if (!isPotentiallyFinished())
+        	setTopCardDraggable();
         updateColCounts();
         deckButton.disabled = !(canPutSelectedOnDeck());
     }
@@ -465,10 +475,6 @@ var cs =
         setTopCardDraggable();
     }
 
-    function isPotentiallyFinished() {
-        return getDeckCount() == 0;
-    }
-
     function restart() {
         finishButton.disabled = true;
         deck.innerHTML = "";
@@ -482,8 +488,6 @@ var cs =
         finishButton.disabled = false;
         skipCardButton.disabled = true;
     }
-
-    function finish() { }
 
     function getData() {
     	var data = new Array(),
@@ -506,7 +510,6 @@ var cs =
     return {
         start            : function()    {start();},
         restart          : function()    {restart();},
-        finish           : function()    {finish();},
         skipCard         : function()    {skipCard();},
         pickUp           : function(e)   {pickUpCard(e)},
         allowDrop        : function(e)   {allowDrop(e);},
