@@ -115,6 +115,16 @@ label {font-size:1em !important;}
 	font-weight: bold;
 	font-size: 2em;
 	margin: 0 9px 0 0;
+	color: #F5F5F5;
+}
+
+#careerBuilder button.toggler {
+	background: none;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	text-align: left;
 }
 
 #careerBuilder h2 .subtitle {
@@ -122,11 +132,12 @@ label {font-size:1em !important;}
 	vertical-align: 10px;
 	margin-left: 5px;
 	font-weight: bold;
+	color: #F5F5F5;
 }
 
 #careerBuilder p {
-	padding: 0 10px 15px 15px;
-	margin:0;
+	margin: 0 10px 15px 15px;
+	padding:0;
 	font-size: 12px;
 }
 
@@ -142,11 +153,7 @@ label {font-size:1em !important;}
 }
 
 #careerBuilder li li .suggestion p:last-child {
-	padding-bottom: 0;
-}
-
-#careerBuilder li li .suggestion p {
-	margin:0;
+	margin-bottom: 0;
 }
 
 #careerBuilder .toggler {
@@ -156,12 +163,9 @@ label {font-size:1em !important;}
 #careerBuilder li.section {
 	font-family: Arial, sans serif;
 	overflow: auto;
-	color: #fff;
+	color: #000;
 	margin: 0 0 8px 0;
-	padding: 0 0 3px 0;
-	-webkit-box-shadow: 1px 2px 5px #bbb;
-	   -moz-box-shadow: 1px 2px 5px #bbb;
-            box-shadow: 1px 2px 5px #bbb;
+	padding: 0 0 5px 0;
 }
 
 #careerBuilder li li {
@@ -169,11 +173,7 @@ label {font-size:1em !important;}
 }
 
 #careerBuilder li li p{
-	padding: 0 10px 15px 0;
-}
-
-#careerBuilder li li#review-sub p {
-	padding: 5px 0;
+	margin: 0 10px 15px 0;
 }
 
 #careerBuilder input {
@@ -232,16 +232,46 @@ label {font-size:1em !important;}
 	color: #000;
 	margin: 5px 5px 0 5px;
 }
-
-#careerBuilder .section-level-buttons {
-	padding: 5px;
-}
-
-#careerBuilder .section-level-buttons button {
-	border-color: white !important;
+             .popup button, 
+      #cs-container button, 
+     #careerBuilder button,
+#careerBuilderGuide button {
+	font-weight: bold;
+	border: 0;
+	padding: 0.5em;
+	margin-bottom: 5px;
+	cursor: pointer;
+	transition: background-color 0.4s ease;
 }
 
 #careerBuilder button.next,
+        .popup button.next {
+	float: right;
+}
+
+#careerBuilder .section-level-buttons {
+	padding: 0.3em 0.3em 0 0.3em;
+}
+
+#careerBuilder .section-level-buttons button {
+	margin-bottom: 0;
+}
+
+             .popup button[disabled], 
+      #cs-container button[disabled], 
+     #careerBuilder button[disabled],
+#careerBuilderGuide button[disabled], 
+             .popup button[disabled]:hover, 
+      #cs-container button[disabled]:hover, 
+     #careerBuilder button[disabled]:hover,
+#careerBuilderGuide button[disabled]:hover  {
+	background: #898989;
+	color: #cecece;
+	border-color: #898989;
+	cursor: auto;
+}
+
+/*#careerBuilder button.next,
 #careerBuilder button.get-summary,
 #careerBuilder button.skip-section,
 .popup button.next,
@@ -272,7 +302,7 @@ label {font-size:1em !important;}
 #careerBuilder #who button.get-summary,
 #start-card-sort  {
 	margin-top: 5px;
-}
+}*/
 
 .popup {
 	display: none;
@@ -287,12 +317,11 @@ label {font-size:1em !important;}
 	left: 50%;
 	padding: 5px 15px;
 	border-bottom: 2px solid #000000;
-	border-right: 1px solid #000000;
-	border-radius: 10px;
+	border-right: 1px solid #000000;	
 	text-align: left;
 }
 
-.popup button.next,
+/*.popup button.next,
 .popup button.get-summary,
 #careerBuilderGuide button.get-summary,
 #save-button, #clear-button {
@@ -308,7 +337,7 @@ label {font-size:1em !important;}
 #save-button:hover, #clear-button:hover,
 #careerBuilderGuide button.get-summary:hover {
 	background-color: #666;
-}
+}*/
 
 #save-button,
 #clear-button,
@@ -332,135 +361,53 @@ label {font-size:1em !important;}
 }
 
 /****************** Colours ********************/
-#who, #who .subsection {
-	background: #F58621;
-	border-bottom: 2px solid #935014;
-	border-right: 1px solid #935014;
-	border-radius: 10px;
+#who {
+	background: #F9AB63;
 }
 
-#who button.next, #who button.get-summary, #start-card-sort {
-	background-color: #F58621;
-	border-color: #F58621;
+#who .subsection, #who button,
+#cs-container button {
+	background: #FAC38E;
 }
 
-#who #skills-sub, #who button.next:hover, 
-#who button.get-summary:hover, #start-card-sort:hover {
-	background: #F79E4D;
+#who button:hover, #cs-container button:hover {
+	background: #F9AB63;
 }
 
-#who #pdam-sub {
-	background: #F9B67A;
+#research {
+	background: #4DB8E4;
 }
 
-#who #values-sub {
-	background: #FBCFA6;
+#research .subsection, #research button {
+	background: #82CDEC;
 }
 
-#who #summary-sub {
-	background: #FDE7D3;
+#research button:hover {
+	background-color: #4DB8E4;
 }
 
-#research, #research .subsection {
-	background: #1999D4;
-	border-bottom: 2px solid #0F5C7F;
-	border-right: 1px solid #0F5C7F;
-	border-radius: 10px;
+#decision, #decision button {
+	background: #B497C7;
 }
 
-#research button.next, #research button.get-summary {
-	background-color: #1999D4;
-	border-color: #1999D4;
+#decision .subsection, #decision button {
+	background: #C3ACD2;
 }
 
-#research #sectors-sub, #research button.next:hover,
-#research button.get-summary:hover {
-	background: #5EB8E1;
+#decision button:hover {
+	background-color: #B497C7;
 }
 
-#research #roles-sub {
-	background: #8CCCEA;
+#achieving, #achieving button {
+	background: #7CCC80;
 }
 
-#research #employers-sub {
-	background: #BAE0F2;
+#achieving .subsection, #achieving button {
+	background: #A3DBA6;
 }
 
-#decision, #decision .subsection {
-	background: #936AB0;
-	border-bottom: 2px solid #58406A;
-	border-right: 1px solid #58406A;
-	border-radius: 10px;
-}
-
-#decision button.next, 
-#decision button.skip-section,
-#decision button.get-summary {
-	background-color: #936AB0;
-	border-color: #936AB0;
-}
-
-#decision #forme-sub, #decision button.next:hover,
-#decision button.skip-section:hover,
-#decision button.get-summary:hover {
-	background: #A988C0;
-}
-
-#decision #barriers-sub {
-	background: #BEA6D0;
-}
-
-#decision #review-sub {
-	background: #D4C3DF;
-}
-
-#decision #further-sub {
-	background: #E9E1EF;
-}
-
-#achieving, #achieving .subsection {
-	background: #2FB64B;
-	border-bottom: 2px solid #1C6D2D;
-	border-right: 1px solid #1C6D2D;
-	border-radius: 10px;
-}
-
-#achieving button.next, #achieving button.get-summary {
-	background-color: #2FB64B;
-	border-color: #2FB64B;
-}
-
-#achieving #cv-sub, #achieving button.next:hover,
-#achieving button.get-summary:hover {
-	background: #59C56F;
-}
-
-#achieving #application-sub {
-	background: #82D393;
-}
-
-#achieving #interview-sub {
-	background: #ACE2B7;
-}
-
-#achieving #assessment-sub {
-	background: #D5F0DB;
-}
-
-#who-head .subtitle, #who-head .number  {
-	color: #FBCFA6;
-}
-
-#research-head .subtitle, #research-head .number {
-	color: #8CCCEA;
-}
-
-#decision-head .subtitle, #decision-head .number {
-	color: #C9B4D8;
-}
-
-#achieving-head .subtitle, #achieving-head .number  {
-	color: #ACE2B7;
+#achieving button:hover {
+	background: #7CCC80;
 }
 
 /******************CARD SORTER******************/
@@ -476,7 +423,6 @@ label {font-size:1em !important;}
     margin-bottom: 20px;
     border-bottom: 2px solid #000000;
     border-right: 1px solid #000000;
-    border-radius: 10px;
     padding: 15px;
     text-align: left;
 }
@@ -503,7 +449,7 @@ label {font-size:1em !important;}
 	padding-right: 0;
 }
 
-#cs-container button {
+/*#cs-container button {
     display: block;
     width: 150px;
     background: #F58621;
@@ -517,13 +463,21 @@ label {font-size:1em !important;}
     margin-right: 0;
     cursor: pointer;
     transition: background-color 0.4s ease;
-}
+}*/
     
+    #cs-container button {
+		display: block;
+		width: 150px;
+		padding: 10px;
+		margin: 10px;
+		margin-right: 0;
+	}
+
     #cs-container button:first-child {
         margin-top: 0;
     }
     
-    #cs-container button:hover {
+    /*#cs-container button:hover {
         background: #F79E4D;
     }
     
@@ -532,16 +486,17 @@ label {font-size:1em !important;}
         color: #cecece;
         border: 2px solid #898989;
         cursor: auto;
-    }
+    }*/
 
     #cs-container #close-cs {
     	width: auto;
-    	height: 39px;
+    	height: 38px;
     	font-size: 2em;
     	padding: 0 0.3em;
     	margin: 0;
     	float: right;
-}
+    	overflow: hidden;
+	}
 
 #cs-container #playing-area {
     display: table;
@@ -604,9 +559,10 @@ label {font-size:1em !important;}
 
 #cs-container .value-card {
     cursor: move;
+    border: 2px solid #FAC38E;
     border-radius: 10px;
-    padding: 10px;
-    background: #FBCFA6;
+    padding: 8px;
+    background: #FAC38E;
     height: 85px;
     font-size: 0.8em;
     width: 140px;
@@ -638,10 +594,8 @@ label {font-size:1em !important;}
     border-right: 1px solid #C9A685;
 }
 
-#cs-container #deck-container .value-card:last-child {
+	#cs-container #deck-container .value-card:last-child {
         display: block;
-        background: #FBCFA6;
-        border: none;
     }
     
     #cs-container #deck-container .value-card:nth-child(odd) {
