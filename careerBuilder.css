@@ -19,6 +19,10 @@ label {font-size:1em !important;}
 	margin: 0;
 }
 
+#careerBuilder ul {
+	font-size: 1em;
+}
+
 #careerBuilder a, #careerBuilder a:visited, #careerBuilder .trigger-link {
 	color: #F00;
 	text-decoration: none;
@@ -28,7 +32,6 @@ label {font-size:1em !important;}
 #careerBuilder a:hover, #careerBuilder a:active, #careerBuilder .trigger-link:hover{
 	text-decoration: underline;
 }
-
 
 #careerBuilder ul#missing-skill-list {
 	overflow: auto;
@@ -58,23 +61,25 @@ label {font-size:1em !important;}
 }
 
 #careerBuilder h2 {
-	padding: 5px 0 0 12px;
-	font-size: 1.5em;
+	font-size: 1.6em;
 }
 
 #careerBuilder h3 {
-	padding-bottom: 5px;
-	font-size: 1.75em;
+	font-size: 1.4em;
 }
 
-#careerBuilder h4 {
+#careerBuilder h4, #careerBuilder h5 {
 	margin: 5px 0 0 0;
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1.1em;
 }
 
-#careerBuilder .suggestion h4 {
+#careerBuilder .suggestion h4, #careerBuilder .suggestion h5 {
 	margin: 0 0 10px 0;
+}
+
+#careerBuilder .advice h4, #careerBuilder .advice h5 {
+	margin-top: 0.75em;
 }
 
 #careerBuilder .toggler::before {
@@ -115,7 +120,6 @@ label {font-size:1em !important;}
 	font-weight: bold;
 	font-size: 2em;
 	margin: 0 9px 0 0;
-	color: #F5F5F5;
 }
 
 #careerBuilder button.toggler {
@@ -125,6 +129,35 @@ label {font-size:1em !important;}
 	margin: 0;
 	border: 0;
 	text-align: left;
+	font-size: 100%;
+	font-weight: normal;
+	background: none;
+}
+
+#careerBuilder button.toggler:hover {
+	background: none;
+}
+
+#careerBuilder h2 .toggler {
+	padding: 0.2em 0 0.1em 0.4em;
+}
+
+#careerBuilder h3 .toggler {
+	padding: 0.1em 0 0.25em 0.4em;
+}
+
+#careerBuilder .check-label {
+	width: auto;
+	display: inline;
+}
+
+#careerBuilder .check-label .toggler {
+	width: auto;
+    display: block;
+    font-weight: bold;
+    padding: 0.3em;
+    position: relative;
+    top: -10px;
 }
 
 #careerBuilder h2 .subtitle {
@@ -132,22 +165,24 @@ label {font-size:1em !important;}
 	vertical-align: 10px;
 	margin-left: 5px;
 	font-weight: bold;
-	color: #F5F5F5;
+	color: #FFF;
 }
 
 #careerBuilder p {
 	margin: 0 10px 15px 15px;
 	padding:0;
-	font-size: 12px;
+	font-size: 1em;
 }
 
 #careerBuilder .sub-content {
-	font-size: 12px;
+	font-size: 1em;
 	overflow: auto;
+	padding: 0.76em;
+	padding-top: 5px;
 }
 
 #careerBuilder .suggestion {
-	margin: 15px 0;
+	margin-top: 0.75em;
 	padding: 10px;
 	background: #F2F2F2;
 }
@@ -156,23 +191,29 @@ label {font-size:1em !important;}
 	margin-bottom: 0;
 }
 
-#careerBuilder .toggler {
-	cursor: pointer; 
-}
-
 #careerBuilder li.section {
 	font-family: Arial, sans serif;
-	overflow: auto;
 	color: #000;
 	margin: 0 0 8px 0;
-	padding: 0 0 5px 0;
 }
 
-#careerBuilder li li {
-	padding: 5px 10px 5px 10px;
+#careerBuilder .section-content {
+	margin-top: 4px;
 }
 
-#careerBuilder li li p{
+#careerBuilder .subsection {
+	margin: 0 5px 5px 5px;
+}
+
+#careerBuilder li.section:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+#careerBuilder li li p {
 	margin: 0 10px 15px 0;
 }
 
@@ -180,9 +221,18 @@ label {font-size:1em !important;}
 	margin-bottom: 7px;
 }
 
+#careerBuilder #skills-sub input {
+	float: left;
+	margin-bottom: 0;
+}
+
 #careerBuilder .check-option {
-	display: inline;
-	vertical-align: 2px;
+	display: table-row;
+	width: 100%;
+}
+
+#careerBuilder .check-option input {
+	display: table-cell;
 }
 
 #careerBuilder .check-option span {
@@ -190,7 +240,24 @@ label {font-size:1em !important;}
 }
 
 #careerBuilder .check-option .sub-content {
-	padding: 0 10px 10px 23px;
+	padding: 0 0 1em 0;
+}
+
+#careerBuilder .check-option .block-label {
+	display: table-cell;
+	width: 100%;
+	padding: 0.5em;
+    padding-right: 0;
+    border-bottom: 1px solid;
+    -webkit-transition: all .4s ease;
+       -moz-transition: all .4s ease;
+        -ms-transition: all .4s ease;
+         -o-transition: all .4s ease;
+            transition: all .4s ease;
+}
+
+#careerBuilder .check-option:first-of-type .block-label {
+	border-top: 1px solid;
 }
 
 #careerBuilder .selection-summary {
@@ -203,7 +270,7 @@ label {font-size:1em !important;}
 
 #careerBuilder ul.barrier-list li {
 	padding: 3px 0 0 0;
-	font-size: 12px;
+	font-size: 1em;
 	overflow: visible;
 }
 
@@ -223,38 +290,53 @@ label {font-size:1em !important;}
 #careerBuilder ul#skills-summary li, #careerBuilder ul#values-summary li,
 #careerBuilder .bulletlist li {
 	padding: 3px 0 0 0;
-	margin-left: 17px;
-	font-size: 12px;
+	margin-left: 1.3em;
+	font-size: 1em;
 	overflow: visible;
-}
-
-#careerBuilder .subsection {
-	color: #000;
-	margin: 5px 5px 0 5px;
 }
              .popup button, 
       #cs-container button, 
      #careerBuilder button,
 #careerBuilderGuide button {
+	font-size: 100%;
 	font-weight: bold;
-	border: 0;
-	padding: 0.5em;
-	margin-bottom: 5px;
+	border: 1px solid white;
+	padding: 0.75em;
+	margin-top: 0.75em;
 	cursor: pointer;
-	transition: background-color 0.4s ease;
+    -webkit-transition: all .4s ease;
+       -moz-transition: all .4s ease;
+        -ms-transition: all .4s ease;
+         -o-transition: all .4s ease;
+            transition: all .4s ease;
+}
+
+#careerBuilderGuide button {
+	margin-top: 0.5em;
+}
+
+#careerBuilderGuide button:first-of-type {
+	margin-top: 0;
+}
+
+             .popup button:hover, 
+#careerBuilderGuide button:hover {
+	background: #FFF;
 }
 
 #careerBuilder button.next,
         .popup button.next {
 	float: right;
+	display: block;
 }
 
 #careerBuilder .section-level-buttons {
-	padding: 0.3em 0.3em 0 0.3em;
+	padding: 0 0.3em 0.3em 0.3em;
 }
 
 #careerBuilder .section-level-buttons button {
 	margin-bottom: 0;
+	margin-top: 0;
 }
 
              .popup button[disabled], 
@@ -271,39 +353,6 @@ label {font-size:1em !important;}
 	cursor: auto;
 }
 
-/*#careerBuilder button.next,
-#careerBuilder button.get-summary,
-#careerBuilder button.skip-section,
-.popup button.next,
-.popup button.get-summary,
-#careerBuilderGuide button.get-summary,
-#save-button, #clear-button,
-#start-card-sort {
-	float: right;
-	font-weight: bold;
-	color: #FFF;
-	border-style: solid;
-	border-width: 2px;
-	padding: 5px;
-	margin-bottom: 5px;
-	cursor: pointer;
-	transition: background-color 0.4s ease;
-}
-
-#careerBuilder button.skip-section, 
-#careerBuilder button.get-summary,
-.popup button.get-summary,
-#careerBuilderGuide button.get-summary,
-#start-card-sort {
-	float: left;
-}
-
-#careerBuilder #who button.next,
-#careerBuilder #who button.get-summary,
-#start-card-sort  {
-	margin-top: 5px;
-}*/
-
 .popup {
 	display: none;
 	z-index: 9999;
@@ -315,29 +364,15 @@ label {font-size:1em !important;}
 	position: fixed;
 	top: 30%;
 	left: 50%;
-	padding: 5px 15px;
+	padding: 0.75em;
 	border-bottom: 2px solid #000000;
 	border-right: 1px solid #000000;	
 	text-align: left;
 }
 
-/*.popup button.next,
-.popup button.get-summary,
-#careerBuilderGuide button.get-summary,
-#save-button, #clear-button {
-	background-color: #333;
-	border-color: #333;
-	margin-bottom: 5px;
-	cursor: pointer;
-	transition: background-color 0.4s ease;
+.popup p:first-child {
+	margin-top: 0;
 }
-
-.popup button.next:hover,
-.popup button.get-summary:hover,
-#save-button:hover, #clear-button:hover,
-#careerBuilderGuide button.get-summary:hover {
-	background-color: #666;
-}*/
 
 #save-button,
 #clear-button,
@@ -361,54 +396,86 @@ label {font-size:1em !important;}
 }
 
 /****************** Colours ********************/
-#who {
+#who, #who .section-level-buttons button {
 	background: #F9AB63;
 }
 
-#who .subsection, #who button,
-#cs-container button {
-	background: #FAC38E;
-}
+	#who .number {
+		color: #FAC38E;
+	}
 
-#who button:hover, #cs-container button:hover {
-	background: #F9AB63;
-}
+	#who .subsection, #who button,
+	#cs-container button,
+	#who .section-level-buttons button:hover {
+		background: #FAC38E;
+	}
 
-#research {
+	#who button:hover, #cs-container button:hover {
+		background: #F9AB63;
+	}
+
+#research, #research .section-level-buttons button {
 	background: #4DB8E4;
 }
 
-#research .subsection, #research button {
-	background: #82CDEC;
-}
+	#research .number {
+		color: #82CDEC;
+	}
 
-#research button:hover {
-	background-color: #4DB8E4;
-}
+	#research .subsection, #research button,
+	#research .section-level-buttons button:hover {
+		background: #82CDEC;
+	}
 
-#decision, #decision button {
+	#research button:hover, #research .check-option .block-label:hover {
+		background: #4DB8E4;
+	}
+
+	#research .check-option .block-label {
+		border-color: #4DB8E4 !important;
+	}
+
+#decision, #decision .section-level-buttons button  {
 	background: #B497C7;
 }
 
-#decision .subsection, #decision button {
-	background: #C3ACD2;
-}
+	#decision .number {
+		color: #C3ACD2;
+	}
 
-#decision button:hover {
-	background-color: #B497C7;
-}
+	#decision .subsection, #decision button,
+	#decision .section-level-buttons button:hover {
+		background: #C3ACD2;
+	}
 
-#achieving, #achieving button {
+	#decision button:hover, #decision .check-option .block-label:hover {
+		background-color: #B497C7;
+	}
+
+	#decision .check-option .block-label {
+		border-color: #B497C7 !important;
+	}
+
+#achieving, #achieving .section-level-buttons button {
 	background: #7CCC80;
 }
 
-#achieving .subsection, #achieving button {
-	background: #A3DBA6;
-}
+	#achieving .number {
+		color: #A3DBA6;
+	}
 
-#achieving button:hover {
-	background: #7CCC80;
-}
+	#achieving .subsection, #achieving button,
+	#achieving .section-level-buttons button:hover {
+		background: #A3DBA6;
+	}
+
+	#achieving button:hover,#achieving .check-option .block-label:hover {
+		background: #7CCC80;
+	}
+
+	#achieving .check-option .block-label {
+		border-color: #7CCC80 !important;
+	}
 
 /******************CARD SORTER******************/
 #cs-container {
@@ -448,22 +515,6 @@ label {font-size:1em !important;}
 	margin: 0;
 	padding-right: 0;
 }
-
-/*#cs-container button {
-    display: block;
-    width: 150px;
-    background: #F58621;
-    border-style: solid;
-	border-width: 2px;
-	border-color: #F58621;
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    margin: 10px;
-    margin-right: 0;
-    cursor: pointer;
-    transition: background-color 0.4s ease;
-}*/
     
     #cs-container button {
 		display: block;
@@ -476,17 +527,6 @@ label {font-size:1em !important;}
     #cs-container button:first-child {
         margin-top: 0;
     }
-    
-    /*#cs-container button:hover {
-        background: #F79E4D;
-    }
-    
-    #cs-container button[disabled], #cs-container button[disabled]:hover {
-        background: #898989;
-        color: #cecece;
-        border: 2px solid #898989;
-        cursor: auto;
-    }*/
 
     #cs-container #close-cs {
     	width: auto;
@@ -534,7 +574,7 @@ label {font-size:1em !important;}
 }
 
 #cs-container .col {
-    width: 164px;
+    width: 165px;
     padding: 7px;
     display: table-cell;
 }
@@ -603,7 +643,9 @@ label {font-size:1em !important;}
         border-right: 1px solid #E2BA95;
     }
 
-#cs-container #deck-container .value-card.selected, #cs-container .value-card.selected {
+#cs-container .value-card:focus, 
+#cs-container #deck-container .value-card:focus {
+    outline: none;
     border: 2px solid blue;
 }
 
