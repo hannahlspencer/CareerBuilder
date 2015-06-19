@@ -17,10 +17,28 @@ label {font-size:1em !important;}
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	font-size: 1em;
 }
 
-#careerBuilder ul {
-	font-size: 1em;
+ol#careerBuilder {
+	counter-reset: item;
+}
+
+#careerBuilder fieldset {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+#careerBuilder legend {
+	margin-bottom: 0.75em;
+    display: table; /* Enable line-wrapping in IE8+ */
+    white-space: normal; /* Enable line-wrapping in old versions of some other browsers */
+}
+
+#careerBuilder #who legend,
+#careerBuilder #decision legend {
+	display: none;
 }
 
 #careerBuilder a, #careerBuilder a:visited, #careerBuilder .trigger-link {
@@ -115,13 +133,6 @@ label {font-size:1em !important;}
 	        transform: rotate(-90deg);
 }
 
-#careerBuilder .toggler span.number {
-	float: right;
-	font-weight: bold;
-	font-size: 2em;
-	margin: 0 9px 0 0;
-}
-
 #careerBuilder button.toggler {
 	background: none;
 	width: 100%;
@@ -140,6 +151,7 @@ label {font-size:1em !important;}
 
 #careerBuilder h2 .toggler {
 	padding: 0.2em 0 0.1em 0.4em;
+    position: relative;
 }
 
 #careerBuilder h3 .toggler {
@@ -197,6 +209,16 @@ label {font-size:1em !important;}
 	margin: 0 0 8px 0;
 }
 
+#careerBuilder li.section:before {
+	content: counter(item);
+    counter-increment: item;
+    font-size: 3em;
+    float: right;
+    position: relative;
+    left: -0.7em;
+    width: 0;
+}
+
 #careerBuilder .section-content {
 	margin-top: 4px;
 }
@@ -219,6 +241,8 @@ label {font-size:1em !important;}
 
 #careerBuilder input {
 	margin-bottom: 7px;
+	width: 1.2em;
+    height: 1.2em;
 }
 
 #careerBuilder #skills-sub input {
@@ -319,9 +343,14 @@ label {font-size:1em !important;}
 	margin-top: 0;
 }
 
+             .popup button, 
+#careerBuilderGuide button {
+	background: #DDD;
+}
+
              .popup button:hover, 
 #careerBuilderGuide button:hover {
-	background: #FFF;
+	background: #F2F2F2;
 }
 
 #careerBuilder button.next,
@@ -356,17 +385,16 @@ label {font-size:1em !important;}
 .popup {
 	display: none;
 	z-index: 9999;
-	color: #000000;
+	color: #000;
 	background-color: #ececec;
-	-moz-box-sizing: border-box;
 	margin-left: -200px;
 	width: 400px;
 	position: fixed;
 	top: 30%;
 	left: 50%;
 	padding: 0.75em;
-	border-bottom: 2px solid #000000;
-	border-right: 1px solid #000000;	
+	border-bottom: 2px solid #000;
+	border-right: 1px solid #000;	
 	text-align: left;
 }
 
@@ -400,7 +428,7 @@ label {font-size:1em !important;}
 	background: #F9AB63;
 }
 
-	#who .number {
+	#who:before {
 		color: #FAC38E;
 	}
 
@@ -418,7 +446,7 @@ label {font-size:1em !important;}
 	background: #4DB8E4;
 }
 
-	#research .number {
+	#research:before {
 		color: #82CDEC;
 	}
 
@@ -439,7 +467,7 @@ label {font-size:1em !important;}
 	background: #B497C7;
 }
 
-	#decision .number {
+	#decision:before {
 		color: #C3ACD2;
 	}
 
@@ -456,11 +484,32 @@ label {font-size:1em !important;}
 		border-color: #B497C7 !important;
 	}
 
+#searching, #searching .section-level-buttons button  {
+	background: #F36571;
+}
+
+	#searching:before {
+		color: #F7939C;
+	}
+
+	#searching .subsection, #searching button,
+	#searching .section-level-buttons button:hover {
+		background: #F7939C;
+	}
+
+	#searching button:hover, #searching .check-option .block-label:hover {
+		background-color: #F36571;
+	}
+
+	#searching .check-option .block-label {
+		border-color: #F36571 !important;
+	}
+
 #achieving, #achieving .section-level-buttons button {
 	background: #7CCC80;
 }
 
-	#achieving .number {
+	#achieving:before {
 		color: #A3DBA6;
 	}
 
@@ -530,12 +579,12 @@ label {font-size:1em !important;}
 
     #cs-container #close-cs {
     	width: auto;
-    	height: 38px;
     	font-size: 2em;
     	padding: 0 0.3em;
-    	margin: 0;
-    	float: right;
-    	overflow: hidden;
+    	position: absolute;
+		top: 0px;
+		right: 0px;
+		margin: 0.3em;
 	}
 
 #cs-container #playing-area {
@@ -643,9 +692,8 @@ label {font-size:1em !important;}
         border-right: 1px solid #E2BA95;
     }
 
-#cs-container .value-card:focus, 
-#cs-container #deck-container .value-card:focus {
-    outline: none;
+#cs-container .value-card.selected, 
+#cs-container #deck-container .value-card.selected {
     border: 2px solid blue;
 }
 

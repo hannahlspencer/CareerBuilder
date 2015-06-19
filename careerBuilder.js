@@ -1,18 +1,18 @@
 //globals
-var noSelectMessage   = "You have not selected any",
-    totalSkills       = $('input:checkbox[name="skill"]').length,
+var totalSkills       = $('input:checkbox[name="skill"]').length,
     nextButton        = "<button class='next next-subsection' type='button'>Next</button>",
     nextSectionButton = "<button class='next next-section' type='button'>Next section</button>",
     skipButton        = "<button class='skip-section' type='button'>Skip this section</button>",
     summaryButton     = "<button class='get-summary next' type='button'>Download section summary</button>",
     fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>",
-	saveButton        = '<button id="save-button" onclick="saveProgress();" onkeypress="saveProgress();">Save progress</button>',
-	startAgainButton  = '<button id="clear-button" onclick="clearAll();" onkeypress="clearAll();">Start again</button>',
+	saveButton        = '<button id="save-button" disabled>Save progress</button>',
+	startAgainButton  = '<button id="clear-button">Start again</button>',
 	summaryButton     = '<button class="get-summary">Download summary</button>',
     closeButton       = "<button class='next close-popup' type='button'>Close</button>",
     cardSortStart     = '<button id="start-card-sort" type="button">Open value sorting task</button>',
     printButton       = "<button id='print-summary' type='button' onclick='window.print()'>Print summary</button>",
-    cardSortInProgess = false;
+    cardSortInProgess = false,
+    openPopup         = '';
 
 var cb = {
 	"title" : "Career Builder",
@@ -147,6 +147,9 @@ var cbSummaryStyle =
 "#careerBuilder-summary ul {" +
 "	list-style: square;" +
 "}" +
+"#careerBuilder-summary h5 {" +
+"	font-size: 1em;" +
+"}" +
 "#careerBuilder-summary .advice {" +
 "	background: #F2F2F2;" +
 "	padding: 0 1em;" +
@@ -198,6 +201,9 @@ var cbSummaryStyle =
 /*********CARD SORTING MODULE*********/
 var cs =
 (function() {
+
+	//getElementsByClassName IE8 polyfill
+	(function(d,g){d[g]||(d[g]=function(g){return this.querySelectorAll("."+g)},Element.prototype[g]=d[g])})(document,"getElementsByClassName");
 
     /***VARIABLES***/
 
@@ -251,25 +257,19 @@ var cs =
         return array;
     }
 
-    function findPos(obj) {
-        var curtop = 0;
-        if (obj.offsetParent) {
-            do {
-                curtop += obj.offsetTop;
-            } while (obj = obj.offsetParent);
-            return [curtop];
-        }
-    }
-
     /***START STATE***/
 
     function makeCols() {
         for (var i = 0; i < iScale.length; i++) {
-            var newCol = getTemplateElement('playing-col');
+            var newCol    = getTemplateElement('playing-col'),
+                colHeader = iScale[i].name,
+                headElem  = newCol.getElementsByClassName('importance-level')[0],
+                headId    = 'importance-' + i;
             newCol.setAttribute('id', 'col-' + i);
-            var colHeader = iScale[i].name;
+            newCol.setAttribute('aria-labelledby', headId);
             colHeader += ' - <span class="col-card-count"></span>/' + dropLimit;
-            newCol.getElementsByClassName('importance-level')[0].innerHTML = colHeader;
+            headElem.innerHTML = colHeader;
+            headElem.setAttribute('id', headId);
             var id = 'dz-' + i;
             iScale[i].id = id;
             var dz = document.createElement('div');
@@ -281,10 +281,18 @@ var cs =
     }
 
     function makeCard(val) {
-        var card = getTemplateElement('value-card');
-        card.setAttribute('id', 'card-' + val.id);
-        card.getElementsByClassName('value-name')[0].innerHTML = val.name;
-        card.getElementsByClassName('value-description')[0].innerHTML = val.description;
+        var card   = getTemplateElement('value-card'),
+            name   = card.getElementsByClassName('value-name')[0],
+            desc   = card.getElementsByClassName('value-description')[0],
+            nameId = 'name-' + val.id,
+            descId = 'desc-' + val.id;
+		name.setAttribute('id', nameId);
+		name.innerHTML = val.name;
+		desc.setAttribute('id', descId);
+		desc.innerHTML = val.description;
+		card.setAttribute('id', 'card-' + val.id);
+        card.setAttribute('aria-labelledby', nameId);
+        card.setAttribute('aria-describedby', descId);
         return card;
     }
 
@@ -301,7 +309,7 @@ var cs =
 
     function setDimensions(i, l) {
     	cardSorter.style.width = (i * 179.25) + 'px';
-    	playingArea.style.minHeight = (l * 113.75) + 'px';
+    	playingArea.style.minHeight = playingArea.style.height = (l * 123) + 'px';
     }
 
     function start() {
@@ -322,6 +330,7 @@ var cs =
             card.style.top = '-' + i + 'px';
             card.style.left = '-' + i + 'px';
             card.setAttribute('draggable', 'false');
+            card.setAttribute('tabindex', '');
         	card.style.cursor = 'default';
         }
     }
@@ -364,8 +373,11 @@ var cs =
     }
 
     function setTopCardDraggable() {
-        deck.lastChild.setAttribute('draggable', 'true');
-        deck.lastChild.style.cursor = 'move';
+        var top = deck.lastChild;
+        top.setAttribute('draggable', 'true');
+        top.style.cursor = 'move';
+        top.setAttribute('tabindex', 0);
+		top.focus();
     }
     
     function cardMoved() {
@@ -427,39 +439,68 @@ var cs =
     }
 
     function dropCardInPlayingArea(event, col) {
+        event.preventDefault();
         var data = event.dataTransfer.getData("text"),
             card = document.getElementById(data);
         addCardToPlayingArea(card, col);
     }
 
+    function setColumnsFocusable() {
+    	var cols = cardSorter.getElementsByClassName('playing-col');
+		for (var i = 0; i < cols.length; i++) {
+			cols[i].setAttribute('tabindex', 0);
+		}
+    }
+
+    function unsetColumnsFocusable() {
+    	var cols = cardSorter.getElementsByClassName('playing-col');
+		for (var i = 0; i < cols.length; i++) {
+			cols[i].setAttribute('tabindex', '');
+		}
+    }
+
     function toggleSelect(event, target) {
-        deckButton.disabled = true;
-        var selected = document.getElementsByClassName('selected')[0];
-        if (selected != undefined) {
-            selected.classList.remove('selected');
+        event = event || window.event;
+        if (event.type == 'click' || 
+           (event.type == 'keyup' && event.keyCode == '13')) {
+			deckButton.disabled = true;
+			var selected = document.getElementsByClassName('selected')[0];
+			if (selected != undefined) {
+				selected.classList.remove('selected');
+			}
+			if (target.parentElement == deck) {
+				target = deck.lastChild;
+			}
+			if (target != selected) { //a new card has been selected
+				target.classList.add('selected');
+				setColumnsFocusable();
+				if (target.parentElement != deck) {
+					deckButton.disabled = false;
+				}
+			}
+			else { //card has been unselected
+				unsetColumnsFocusable();
+			}
+
         }
-        if (target.parentElement == deck) {
-            target = deck.lastChild;
-        }
-        if (target != selected) {
-            target.classList.add('selected');
-            if (target.parentElement != deck) {
-                deckButton.disabled = false;
-            }
-        }
-        if (event.stopPropagation) {
-            event.stopPropagation();
-        }
-        else {
-            event.cancelBubble = true;
-        }
+		if (event.stopPropagation) {
+			event.stopPropagation();
+		}
+		else {
+			event.cancelBubble = true;
+		}
     }
 
     function clickDrop(event, col) {
-        var card = document.getElementsByClassName('selected')[0];
-        if (card != undefined) {
-            card.classList.remove('selected');
-            addCardToPlayingArea(card, col);
+        event = event || window.event;
+        if (event.type == 'click' || 
+           (event.type == 'keyup' && event.keyCode == '13')) {
+			var card = document.getElementsByClassName('selected')[0];
+			if (card != undefined) {
+				card.classList.remove('selected');
+				unsetColumnsFocusable();
+				addCardToPlayingArea(card, col);
+			}
         }
     }
 
@@ -539,7 +580,7 @@ function supportsStorage() {
 function saveProgress() {
 	if (supportsStorage()) {
 		localStorage.setItem('cb-html', $('#save-area').html());
-		$('#save-button').html('&#10004; Saved');
+		$('#save-button').html('&#10004; Saved').attr('disabled', 'disabled');
 		showPopup(9999, $('#save-popup'));
 	} else {
 		alert("Unable to save progress");
@@ -558,12 +599,31 @@ function loadProgress() {
 
 function clearAll() {
 	if (supportsStorage()) {
-		localStorage.clear();
+		localStorage.removeItem('cb-html');
+		$('#save-area').html(localStorage.getItem('cb-default-html'));
+		$('#save-button').html('Save progress');
+		registerHandlers();
 	}
-	document.location.reload(true);
+	else {
+		document.location.reload(true);
+	}
 }
 
+var trapFocus = function(e) {
+	if (openPopup != '') {
+		var popup = document.getElementById(openPopup);
+		if (!popup.contains(e.target)) {
+			e.stopPropagation();
+			popup.focus();
+		}
+	}
+	else {
+		document.removeEventListener('focus', trapFocus, true);
+	}
+};
+
 function closePopup(popupId) {
+	openPopup = '';
 	$('#popups').append($('#'+popupId));
 	$('#overlay, #clear-overlay').remove();
 }
@@ -571,8 +631,9 @@ function closePopup(popupId) {
 function showPopup(z, $popup) {
 	var docHeight = $(document).height(),
 	    pid = $popup.attr('id');
-	$("body").append("<div id='overlay'></div>");
-	$("#overlay")
+	openPopup = pid;
+	$('body').append('<div id="overlay"></div>');
+	$('#overlay')
 		.height(docHeight)
 		.css({
 			'opacity' : 0.5,
@@ -594,16 +655,35 @@ function showPopup(z, $popup) {
 			'left': 0,
 			'width': '100%'
 		}).append($popup);
-	$popup.slideDown('slow');
-	$("html, body").animate({ scrollTop: 0 }, 500);
+	$popup.slideDown('slow').focus();
+	document.addEventListener('focus', trapFocus, true);
+	$('html, body').animate({ scrollTop: 0 }, 500);
 }
 
 function registerTriggerProxies(a) {
 	$.each(a, function(i, val) {
-		$(i).click(function(e) { $(val).trigger(e); });
-		$(i).hover(	
-			function(e) { $(val).trigger(e); },
-			function(e) { $(val).trigger(e); }
+		var $i = $(i), $val = $(val),
+			controls = $val.attr('aria-controls');
+		$i.attr('aria-controls', controls);
+		$i.click(function(e) { 
+			if (!($('#' + controls).attr('aria-hidden') == 'false')) {
+				$val.trigger(e);
+			}
+			$('html, body').animate({
+				scrollTop : $('#' + controls).offset().top
+			}, 1000);
+		});
+		$i.hover(	
+			function(e) { 
+			    if (!($('#' + controls).attr('aria-hidden') == 'false')) {
+			    	$val.trigger(e); 
+			    }
+			},
+			function(e) { 
+			    if (!($('#' + controls).attr('aria-hidden') == 'false')) {
+			    	$val.trigger(e); 
+			    }
+			}
 		);
 	});
 }
@@ -611,30 +691,31 @@ function registerTriggerProxies(a) {
 function triggerTogglers(e, $this) {
 	var $thisSub = $this.closest('li'),
 	    $thisSection = $this.closest('.section'),
-	    $h3Togglers = $thisSection.find('h3.toggler').not('.closed'),
-	    $nextH3 = $thisSub.next().find('h3.toggler');
+	    $h3Togglers = $thisSection.find('h3 > .toggler').not('.closed'),
+	    $nextH3 = $thisSub.next().find('h3 > .toggler');
+	$h3Togglers.not($nextH3).trigger(e.type);
 	if ($this.hasClass('next-section')) {
 		if ($thisSection.is('#achieving')) {
-			$thisSection.find('h2.toggler').trigger(e.type);
+			$thisSection.find('h2 > .toggler').trigger(e.type);
 			if (e.type == 'click') {
 				showPopup(9999, $('#final-popup'));
 			}
 		}
 		else {
-			var $nextH2 = $thisSection.next().find('h2.toggler');
+			var $nextH2 = $thisSection.next().find('h2 > .toggler');
 			$nextH2.trigger(e.type);
-			$thisSection.next().find('h3.toggler').not('.closed').trigger(e.type);
+			$thisSection.next().find('h3 > .toggler').not('.closed').trigger(e.type);
 		}
 	}
 	else if ($thisSub.is(':last-child') && e.type == 'click') {
-		$thisSection.find('.section-level-buttons').slideDown();
+		$thisSection.find('.section-level-buttons').slideDown()
+		    .find('button.get-summary').focus();
 	}
 	else {
 		if ($nextH3.is('.closed')) {
 			$nextH3.trigger(e.type);
 		}
 	}
-	$h3Togglers.not($nextH3).trigger(e.type);
 }
 
 function skipSectionTrigger(e, $this) {
@@ -661,7 +742,7 @@ function buildSectionSummary(section) {
 	$.each(section.subs, function(i, sub) {
 		sectionHTML += "<h3>" + sub.title + "</h3>";
 		if ($('input:radio[name=' + sub.id + ']:checked').length > 0) {
-			sectionHTML += "<p>" + $('#' + sub.id + '-sub-content').children(':first').html();
+			sectionHTML += "<p>" + $('#' + sub.id + '-sub-content legend').first().html();
 			var radId = $('input:radio[name=' + sub.id + ']:checked').attr('id');
 			sectionHTML += "<strong>";
 			sectionHTML += " " + $('label[for=' + radId + ']').text() + "</strong>.</p>";
@@ -681,17 +762,17 @@ function buildSectionSummary(section) {
 function getSummary(sectionID) {
 	var body = "<div class=\"section-summary\" id=\"" + sectionID + "-summary\">";
 	if (sectionID == cb.sections[0].id) {
-		body += "<h2>Self-assessment</h2>";
-		
-		body += "<h3>Your skills</h3>";
+		body += "<h2>Self-assessment</h2> \
+				 <h3>Your skills</h3>";
+
 		body += $('<div>').append($('#skills-summary').clone()).remove().html();
 		body += $('#pdam-sub-content').children().html(); //hidden ones have display:none on element
 		
 		body+= "<h3>Your values</h3>";
 		body += $('<div>').append($('#values-summary').clone()).remove().html();
 		
-		body+= "<h3>Next steps</h3>";
-		body += "<div class=\"advice\">";
+		body+= "<h3>Next steps</h3> \
+			    <div class=\"advice\">";
 		body += $('#skills-values-suggestion').html();
 		body += "</div>";
 	}
@@ -718,8 +799,8 @@ function getSummary(sectionID) {
 			body += "<p>You didn't select any decision making barriers.</p>";
 		}
 		
-		body += "<h3>Further support and advice</h3>"
-		body += "<div class=\"advice\">";
+		body += "<h3>Further support and advice</h3> \
+				 <div class=\"advice\">";
 		body += $('#further-sub-content .suggestion').html();
 		body += "</div>";
 	}
@@ -731,14 +812,20 @@ function getSummary(sectionID) {
 }
 
 function saveSummary(e, $this) {
-	var header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
+	var iconURL = 'http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/images/Icons/',
+	    header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \
+	              \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
 				 "<title>Your Career Builder summary</title>" +
+				 '<link rel="icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
+				 '<link rel="shortcut icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
 				 "<style>" + cbSummaryStyle + "</style>" +
-				 "</head><body id=\"careerBuilder-summary\">" + printButton + "<h1>Your Career Builder summary</h1>" +
-				 "<p>Here are your selections from <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" + 
+				 "</head><body id=\"careerBuilder-summary\">" + printButton +
+				 "<h1>Your Career Builder summary</h1>" +
+				 "<p>Here are your selections from \
+				  <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" + 
 				 " along with our suggestions of the resources and services best suited to you.</p>",
 	    footer = "</body></html>",
-	    fileName = "Career Builder";
+	    fileName = "CareerBuilder";
 	    sId = $this.closest('.section').attr('id');
 	var body = "";
 	if (sId == cb.sections[cb.sections.length - 1].id || sId == "careerBuilderGuide") {
@@ -768,59 +855,23 @@ function saveSummary(e, $this) {
 	saveAs(oSummaryBlob, fileName);
 }
 
-//set up
-$(function() {
-	
-	if (!loadProgress()) {
-		cs.start();
-		$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
-		$('#values-sub-content').append(cardSortStart);
-		$('.section-content').append('<div class="section-level-buttons hidden"></div>');
-		$('.hidden').hide();
-		$('#skills-summary').append("<li>" + noSelectMessage + " skills.</li>");
-		$('#values-summary').append("<li>You haven't finished the card sorting task.</li>");
-		$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
-		$('#forme-sub-content').append(skipButton);
-		$('.sub-content').not('.check-option .sub-content').append(nextButton);
-		$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
-		$('#final-popup').append(fullSummaryButton);
-		$('#final-popup, #save-popup').append(closeButton);
-		$('.section:last-of-type .next-section').text('What next?');
-		$('#careerBuilder a').each(function() {
-			var $this = $(this);
-			$this.attr("target", "_blank");
-		});
+function allowSave() {
+	$('#save-button').removeAttr('disabled').html('Save progress');
+}
 
-		//set up ARIA attributes
-		$('.toggler').each(function() {
-			var $this = $(this),
-			    $next = $this.next();
-			if ($this.is('h2'))
-				$this.attr('role', 'sectionhead');
-			$this.attr('aria-expanded', false)
-			     .attr('aria-controls', $next.attr('id'));
-			$next.attr('aria-hidden', true);
-		});
-		$('.section').each(function() {
-			$(this).attr('role', 'section');
-		});
-	}
-
-	$('#careerBuilderGuide')
-		.append(saveButton)
-		.append(startAgainButton)
-		.append(summaryButton);
-
+function registerHandlers() {
 	registerTriggerProxies({
-		'.section1-trigger'   : '#who-head',
-		'.section2-trigger'   : '#research-head',
-		'.section3-trigger'   : '#decision-head',
-		'button.skip-section' : '#achieving-head'
+		'.section1-trigger'   : '#who-head > .toggler',
+		'.section2-trigger'   : '#research-head > .toggler',
+		'.section3-trigger'   : '#decision-head > .toggler',
+		'button.skip-section' : '#achieving-head > .toggler',
+		'.values-trigger'     : '#start-card-sort',
+		'.skills-trigger'     : '#skills-sub > h3 > .toggler'
 	});
-
 
 	$('#close-cs').click(function() {
 		closePopup('cs-container');
+		$('#start-card-sort').focus();
 	});
 
 	$('.close-popup').click(function() {
@@ -829,19 +880,21 @@ $(function() {
 
 	$('.toggler').hover(
 		function() {
-			var $this = $(this);
+			var $this = $(this),
+			    $head = $this.parent();
 			$this.addClass($this.hasClass('closed') ? 'opening' : 'closing');
-			if($this.is('h2')) {
-				$('h2.toggler').not('.closed').each(function() {
+			if($head.is('h2')) {
+				$('h2 > .toggler').not('.closed').each(function() {
 					$(this).addClass('closing');
 				});
 			}
 		},
 		function() {
-			var $this = $(this);
+			var $this = $(this),
+			    $head = $this.parent();
 			$this.removeClass($this.hasClass('closed') ? 'opening' : 'closing');
-			if($this.is('h2')) {
-				$('h2.toggler').not('.closed').each(function() {
+			if($head.is('h2')) {
+				$('h2 > .toggler').not('.closed').each(function() {
 					$(this).removeClass('closing');
 				});
 			}
@@ -851,24 +904,27 @@ $(function() {
 	//toggle section & subsection visibility
 	$('.toggler').click(function() {
 		var $this = $(this),
+		    $head = $this.parent(),
 		    state = $this.attr('aria-expanded') === 'false' ? true : false;
 		$this.toggleClass('closed')
 		     .attr('aria-expanded', state)
-			     .siblings()
-			     .attr('aria-hidden', !state)
-			     .slideToggle('slow', function() {
-			         $this.removeClass('opening').removeClass('closing');
+		     .focus();
+	 	$head.next()
+			 .attr('aria-hidden', !state)
+			 .slideToggle('slow', function() {
+				 $this.removeClass('opening').removeClass('closing');
 		});
 		//close other sections
-		if($this.is('h2')) {
-			$('h2.toggler').not($this).not('.closed').each(function() {
+		if($head.is('h2')) {
+			$('h2 > .toggler').not($this).not('.closed').each(function() {
 				$(this).addClass('closed')
 				       .removeClass('closing')
 				       .attr('aria-expanded', false)
-				           .siblings()
+				           .parent().siblings()
 				           .attr('aria-hidden', true)
 				           .slideUp('slow', function() {
-					           $this.removeClass('opening').removeClass('closing');
+					           $this.removeClass('opening')
+					                .removeClass('closing');
 				});
 			});
 		}
@@ -885,10 +941,17 @@ $(function() {
 
 	$('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
 
-	$('button#finish-button').click(function(e) { 
+	$('#finish-button').click(function(e) { 
 		buildCardSortSummary();
 		closePopup('cs-container');
+		if ($('#values-sub-content').attr('aria-hidden') == 'true') {
+			$('button.toggler[aria-controls=values-sub-content]').click();
+		}
 		$('#cs-suggestion, #skills-values-suggestion').slideDown('slow');
+		$('html, body').animate({
+            scrollTop: $("#values-sub").offset().top
+        }, 1000);
+		$('#start-card-sort').focus();
 	});
 
 	$('#start-card-sort').click(function(e) {
@@ -896,14 +959,31 @@ $(function() {
 		$(this).html("Continue value sorting task");
 	});
 
+	$('#clear-button').click(function() {
+		clearAll();
+	});
+
+	$('#save-button').click(function() {
+		saveProgress();
+	});
+
+	$('.trigger-link').keyup(function(event) {
+		event = event || window.event;
+		if (event.keyCode === 32) { 
+			$(this).click();
+		}
+	});
+
 	//expand advice according to radio button selection
-	$('input:radio').change(function() {
-		$('input:radio').each(function() {
+	$('input[type=radio]').change(function() {
+		var qName = $(this).attr('name');
+		$('input[type=radio][name=' + qName + ']').each(function() {
 			var $this = $(this),
-			    qName = $this.attr('name'),
-			    qVal = $this.attr('value'),
-			    sID = qName + '-' + qVal;
-			$this.is(':checked') ? $('#' + sID).slideDown('slow') : $('#' + sID).slideUp('slow');
+			    $s   = $('#' + qName + '-' + $this.val()),
+			    state = $this.is(':checked');
+			$this.attr('aria-expanded', state);
+			$s.attr('aria-hidden', !state);
+			state ? $s.slideDown('slow') : $s.slideUp('slow');
 		});
 	});
 
@@ -914,7 +994,7 @@ $(function() {
 		$('#missing-skill-list li').hide();
 		$('#skills-values-suggestion').slideDown('slow');
 		var skillsCount = 0;
-		$('input:checkbox').each(function() {
+		$('input[name=skill]').each(function() {
 			var $this = $(this),
 			    checkName = $this.attr('name'),
 			    checkVal = $this.attr('value'),
@@ -937,7 +1017,9 @@ $(function() {
 			$('#missing-skills-advice').show();
 		}
 		if (skillsCount == 0) {
-			$('#skills-summary').append("<li>" + noSelectMessage + " skills</li>");
+			$('#skills-summary').append('<li><span class="trigger-link skills-trigger">\
+		                                     You haven\'t selected any skills.\
+		                                 </span></li>');
 			$('#skills-values-suggestion').slideUp('slow');
 		}
 	});
@@ -990,8 +1072,113 @@ $(function() {
 		else {
 			$this.removeAttr('checked');
 		}
-		if ($('#save-button').html() != 'Save progress') {
-			$('#save-button').html('Save progress');
-		}
+		allowSave();
 	});
+
+	$('#careerBuilder button').click(function() {
+		allowSave();
+	});
+}
+
+$(function() {
+	
+	if (!loadProgress()) { //progress not saved
+		cs.start();
+		$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
+		$('#values-sub-content').append(cardSortStart);
+		$('.section-content').append('<div class="section-level-buttons hidden"></div>');
+		$('#skills-summary').append(
+		    '<li><span class="trigger-link skills-trigger">\
+		         You haven\'t selected any skills.\
+		     </span></li>'
+		);
+		$('#values-summary').append(
+			'<li><span class="trigger-link values-trigger">\
+				  You haven\'t finished the card sorting task.\
+			 </span></li>'
+		);
+		$('#review-sub-content').prepend(
+		     '<p class="no-selection">Please select one or more decision making barriers from the section above.</p>' +
+			 '<p id="reviewing-intro" class="hidden">We have grouped the decision making barriers you have selected into themes.</p>'
+		);
+		$('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
+		$('#forme-sub-content').append(skipButton);
+		$('.sub-content').not('.check-option .sub-content').append(nextButton);
+		$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
+		$('#final-popup').append(fullSummaryButton);
+		$('#final-popup, #save-popup').append(closeButton);
+		$('.section:last-of-type .next-section').text('What next?');
+		$('#careerBuilder a').each(function() {
+			$(this).attr("target", "_blank");
+		});
+		$('.hidden').hide();
+
+		//set up ARIA attributes
+		$('.toggle-parent').each(function() {
+			var $this = $(this),
+			    $next = $this.next();
+			if ($this.is('h2'))
+				$this.attr('role', 'sectionhead');
+			$this.wrapInner('<button class="toggler closed" \
+			                  aria-expanded="false" \
+			                  aria-controls="'+ $next.attr('id') +'">');
+			$next.attr('aria-hidden', true);            
+		});
+		$('.section').attr('role', 'section');
+		$('.popup').attr('role', 'dialog');
+		$('input[name="skill"]').each(function() {
+			var $this = $(this),
+			    label = $this.attr('class');
+			$this.attr('aria-labelledby', label+'-head');
+		});
+		$('button.next, button.skip-section').each(function() {
+			var $this = $(this),
+			    $thisSection = $this.closest('.section'),
+			    id = '';
+			if ($this.is('.next-subsection')) {
+				var $thisSub = $this.closest('.subsection');
+				if ($thisSub.is(':last-child')) {
+					id = $thisSection.attr('id') + '-buttons';
+					$thisSection.find('.section-level-buttons').attr('id', id);
+				}
+				else {
+					id = $thisSub.next('.subsection').find('.sub-content').attr('id');
+				}
+			}
+			else if ($this.is('.next-section, .skip-section')) {
+				if ($thisSection.is(':last-child')) {
+					id = 'final-popup';
+				}
+				else {
+					id = $thisSection.next('.section').find('.section-content').attr('id');
+				}
+			}
+			$this.attr('aria-controls', id);
+		});
+		$('button#start-card-sort').attr('aria-controls', 'cs-container');
+		$('input[type=radio]').each(function() {
+			var $this = $(this),
+			    id = $this.attr('name') + '-' + $this.val();
+			$this.attr('aria-controls', id)
+			     .attr('aria-expanded', false);
+			$('#' + id).attr('aria-hidden', true);
+		});
+		$('.trigger-link').each(function() {
+			$(this).attr('role', 'button')
+			       .attr('tabindex', 0);
+		});
+		if (supportsStorage()) {
+			localStorage.setItem('cb-default-html', $('#save-area').html());
+		}
+	} //progress not saved end
+
+	if (supportsStorage) {
+		$('#careerBuilderGuide').append(saveButton);
+	}
+	$('#careerBuilderGuide')
+		.append(startAgainButton)
+		.append(summaryButton);
+
+	registerHandlers();
+
 });
