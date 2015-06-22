@@ -217,6 +217,8 @@ ol#careerBuilder {
     position: relative;
     left: -0.7em;
     width: 0;
+    color: #FFF;
+    opacity: 0.3;
 }
 
 #careerBuilder .section-content {
@@ -428,10 +430,6 @@ ol#careerBuilder {
 	background: #F9AB63;
 }
 
-	#who:before {
-		color: #FAC38E;
-	}
-
 	#who .subsection, #who button,
 	#cs-container button,
 	#who .section-level-buttons button:hover {
@@ -442,84 +440,56 @@ ol#careerBuilder {
 		background: #F9AB63;
 	}
 
-#research, #research .section-level-buttons button {
+#research, #research .section-level-buttons button,
+#research button:hover, #research .check-option .block-label:hover {
 	background: #4DB8E4;
 }
-
-	#research:before {
-		color: #82CDEC;
-	}
 
 	#research .subsection, #research button,
 	#research .section-level-buttons button:hover {
 		background: #82CDEC;
 	}
 
-	#research button:hover, #research .check-option .block-label:hover {
-		background: #4DB8E4;
-	}
-
 	#research .check-option .block-label {
 		border-color: #4DB8E4 !important;
 	}
 
-#decision, #decision .section-level-buttons button  {
+#decision, #decision .section-level-buttons button,
+#decision button:hover, #decision .check-option .block-label:hover {
 	background: #B497C7;
 }
-
-	#decision:before {
-		color: #C3ACD2;
-	}
 
 	#decision .subsection, #decision button,
 	#decision .section-level-buttons button:hover {
 		background: #C3ACD2;
 	}
 
-	#decision button:hover, #decision .check-option .block-label:hover {
-		background-color: #B497C7;
-	}
-
 	#decision .check-option .block-label {
 		border-color: #B497C7 !important;
 	}
 
-#searching, #searching .section-level-buttons button  {
+#searching, #searching .section-level-buttons button,
+#searching button:hover, #searching .check-option .block-label:hover {
 	background: #F36571;
 }
-
-	#searching:before {
-		color: #F7939C;
-	}
 
 	#searching .subsection, #searching button,
 	#searching .section-level-buttons button:hover {
 		background: #F7939C;
 	}
 
-	#searching button:hover, #searching .check-option .block-label:hover {
-		background-color: #F36571;
-	}
-
 	#searching .check-option .block-label {
 		border-color: #F36571 !important;
 	}
 
-#achieving, #achieving .section-level-buttons button {
+#achieving, #achieving .section-level-buttons button,
+#achieving button:hover,#achieving .check-option .block-label:hover {
 	background: #7CCC80;
 }
-
-	#achieving:before {
-		color: #A3DBA6;
-	}
 
 	#achieving .subsection, #achieving button,
 	#achieving .section-level-buttons button:hover {
 		background: #A3DBA6;
-	}
-
-	#achieving button:hover,#achieving .check-option .block-label:hover {
-		background: #7CCC80;
 	}
 
 	#achieving .check-option .block-label {

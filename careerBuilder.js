@@ -610,7 +610,7 @@ function clearAll() {
 }
 
 var trapFocus = function(e) {
-	if (openPopup != '') {
+	if (window.location.hash != '') {
 		var popup = document.getElementById(openPopup);
 		if (!popup.contains(e.target)) {
 			e.stopPropagation();
@@ -623,7 +623,8 @@ var trapFocus = function(e) {
 };
 
 function closePopup(popupId) {
-	openPopup = '';
+	window.location.hash = '';
+    history.pushState('', document.title, window.location.pathname);
 	$('#popups').append($('#'+popupId));
 	$('#overlay, #clear-overlay').remove();
 }
@@ -631,7 +632,6 @@ function closePopup(popupId) {
 function showPopup(z, $popup) {
 	var docHeight = $(document).height(),
 	    pid = $popup.attr('id');
-	openPopup = pid;
 	$('body').append('<div id="overlay"></div>');
 	$('#overlay')
 		.height(docHeight)
@@ -656,6 +656,7 @@ function showPopup(z, $popup) {
 			'width': '100%'
 		}).append($popup);
 	$popup.slideDown('slow').focus();
+	window.location.hash = pid;
 	document.addEventListener('focus', trapFocus, true);
 	$('html, body').animate({ scrollTop: 0 }, 500);
 }
@@ -860,6 +861,24 @@ function allowSave() {
 }
 
 function registerHandlers() {
+	
+	window.addEventListener('hashchange', function() {
+		var popups = [],
+		    h = window.location.hash.substring(1);
+
+		$('.popup').each(function() {
+			popups.push($(this).attr('id'));
+		});
+		    
+		if ($.inArray(h, popups) > -1) {
+			openPopup = h;
+		}
+		if (h == '') {
+			closePopup(openPopup);
+			openPopup = '';
+		}
+	}, false);
+
 	registerTriggerProxies({
 		'.section1-trigger'   : '#who-head > .toggler',
 		'.section2-trigger'   : '#research-head > .toggler',
