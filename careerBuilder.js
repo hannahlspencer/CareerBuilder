@@ -8,9 +8,9 @@ var totalSkills       = $('input:checkbox[name="skill"]').length,
 	saveButton        = '<button id="save-button" disabled>Save progress</button>',
 	startAgainButton  = '<button id="clear-button">Start again</button>',
 	summaryButton     = '<button class="get-summary">Download summary</button>',
-    closeButton       = "<button class='next close-popup' type='button'>Close</button>",
+    closeButton       = '<button class="next close-popup" type="button">Close</button>',
     cardSortStart     = '<button id="start-card-sort" type="button">Open value sorting task</button>',
-    printButton       = "<button id='print-summary' type='button' onclick='window.print()'>Print summary</button>",
+    printButton       = '<button id="print-summary" type="button" onclick="window.print()">Print summary</button>',
     cardSortInProgess = false,
     openPopup         = '';
 
@@ -591,6 +591,8 @@ function loadProgress() {
 	if (supportsStorage()) {
 		if (localStorage.getItem('cb-html') != undefined) {
 			$('#save-area').html(localStorage.getItem('cb-html'));
+			$('#clear-button').removeAttr('disabled');
+			cs.restart();
 			return true;
 		}
 	}
@@ -603,10 +605,13 @@ function clearAll() {
 		$('#save-area').html(localStorage.getItem('cb-default-html'));
 		$('#save-button').html('Save progress');
 		registerHandlers();
+		cs.restart();
 	}
 	else {
 		document.location.reload(true);
 	}
+	$('#clear-button, #save-button, #careerBuilderGuide .get-summary')
+	   .attr('disabled', 'disabled');
 }
 
 var trapFocus = function(e) {
@@ -856,8 +861,13 @@ function saveSummary(e, $this) {
 	saveAs(oSummaryBlob, fileName);
 }
 
+function allowFullDownload() {
+	$('#careerBuilderGuide .get-summary').removeAttr('disabled');
+}
+
 function allowSave() {
 	$('#save-button').removeAttr('disabled').html('Save progress');
+	$('#clear-button').removeAttr('disabled');
 }
 
 function registerHandlers() {
@@ -947,6 +957,7 @@ function registerHandlers() {
 				});
 			});
 		}
+		return false;
 	});
 
 	$('button.next-subsection, button.next-section').click(function(e) { 
@@ -958,11 +969,15 @@ function registerHandlers() {
 		function(e) { triggerTogglers(e, $(this)); }
 	);
 
-	$('button.get-summary').click(function(e) { saveSummary(e, $(this)); });
+	$('#careerBuilder button.get-summary').click(function(e) { 
+		saveSummary(e, $(this)); 
+		return false;
+	});
 
 	$('#finish-button').click(function(e) { 
 		buildCardSortSummary();
 		closePopup('cs-container');
+		allowFullDownload();
 		if ($('#values-sub-content').attr('aria-hidden') == 'true') {
 			$('button.toggler[aria-controls=values-sub-content]').click();
 		}
@@ -976,14 +991,7 @@ function registerHandlers() {
 	$('#start-card-sort').click(function(e) {
 		showPopup(9999, $('#cs-container'));
 		$(this).html("Continue value sorting task");
-	});
-
-	$('#clear-button').click(function() {
-		clearAll();
-	});
-
-	$('#save-button').click(function() {
-		saveProgress();
+		return false;
 	});
 
 	$('.trigger-link').keyup(function(event) {
@@ -1065,8 +1073,8 @@ function registerHandlers() {
 					$('#reviewing-intro').show();
 				}
 				noneSelected = false;
-				var checkClass = $this.attr('class');
-				var checkVal = $this.attr('value');
+				var checkClass = $this.attr('class'),
+				    checkVal = $this.attr('value');
 				$('#review-sub-content .advice').each(function() {
 					var $this = $(this);
 					var adviceID = $this.attr('id');
@@ -1091,6 +1099,7 @@ function registerHandlers() {
 		else {
 			$this.removeAttr('checked');
 		}
+		allowFullDownload();
 		allowSave();
 	});
 
@@ -1101,6 +1110,28 @@ function registerHandlers() {
 
 $(function() {
 	
+	if (supportsStorage) {
+		$('#careerBuilderGuide').append($(saveButton).click(function() { 
+			saveProgress();
+			return false;
+		}));
+	}
+	$('#careerBuilderGuide')
+		.append($(startAgainButton).attr('disabled', 'disabled').click(function() {
+			clearAll();
+			return false;
+		}))
+		.append($(summaryButton).attr('disabled', 'disabled').click(function(e) {
+			saveSummary(e, $(this)); 
+			return false;
+	}));
+
+	$('#final-popup').append($(fullSummaryButton).click(function(e) { 
+		saveSummary(e, $(this)); 
+		return false;
+	}));
+	$('#final-popup, #save-popup').append(closeButton);
+
 	if (!loadProgress()) { //progress not saved
 		cs.start();
 		$('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
@@ -1124,8 +1155,6 @@ $(function() {
 		$('#forme-sub-content').append(skipButton);
 		$('.sub-content').not('.check-option .sub-content').append(nextButton);
 		$('.section-level-buttons').append(summaryButton).append(nextSectionButton);
-		$('#final-popup').append(fullSummaryButton);
-		$('#final-popup, #save-popup').append(closeButton);
 		$('.section:last-of-type .next-section').text('What next?');
 		$('#careerBuilder a').each(function() {
 			$(this).attr("target", "_blank");
@@ -1190,13 +1219,6 @@ $(function() {
 			localStorage.setItem('cb-default-html', $('#save-area').html());
 		}
 	} //progress not saved end
-
-	if (supportsStorage) {
-		$('#careerBuilderGuide').append(saveButton);
-	}
-	$('#careerBuilderGuide')
-		.append(startAgainButton)
-		.append(summaryButton);
 
 	registerHandlers();
 

@@ -3,7 +3,7 @@
 .sys_layout_three_column_two #careerBuilder H3 {font-size: 1.3em !important;}
 label {font-size:1em !important;}
 
-/***CareerBuilder styling***/
+/***CareerBuilder styling v6 ***/
 #careerBuilder {
 	width: 100%;
 	font-size: 100%;
@@ -22,6 +22,12 @@ label {font-size:1em !important;}
 
 ol#careerBuilder {
 	counter-reset: item;
+}
+
+#careerBuilder *:focus,
+.popup:focus,
+.popup *:focus {
+	outline-color: #2e2e2e;
 }
 
 #careerBuilder fieldset {
@@ -168,6 +174,7 @@ ol#careerBuilder {
     display: block;
     font-weight: bold;
     padding: 0.3em;
+    padding-right: 1em;
     position: relative;
     top: -10px;
 }
@@ -175,9 +182,10 @@ ol#careerBuilder {
 #careerBuilder h2 .subtitle {
 	font-size: 0.8em;
 	vertical-align: 10px;
-	margin-left: 5px;
+	margin-left: 1.4em;
 	font-weight: bold;
 	color: #FFF;
+	opacity: 0.8;
 }
 
 #careerBuilder p {
@@ -213,6 +221,7 @@ ol#careerBuilder {
 	content: counter(item);
     counter-increment: item;
     font-size: 3em;
+    font-weight: bold;
     float: right;
     position: relative;
     left: -0.7em;
