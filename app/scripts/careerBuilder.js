@@ -224,7 +224,8 @@ var cs =
         playingArea = document.getElementById('playing-area'),
         skipCardButton = document.getElementById('skip-button'),
         finishButton = document.getElementById('finish-button'),
-        deckButton = document.getElementById('deck-button');
+        deckButton = document.getElementById('deck-button'),
+        restartButton = document.getElementById('restart-button');
 
     (function populateVDeck() {
         var vals = getTemplateElement('value-list').getElementsByClassName('value');
@@ -313,6 +314,9 @@ var cs =
     }
 
     function start() {
+        deckButton.onclick = deckButtonAction;
+        restartButton.onclick = restart;
+        skipCardButton.onclick = skipCard;
         makeCols();
         makeDeck();
         setDimensions(iScale.length, dropLimit);
@@ -406,18 +410,6 @@ var cs =
         appendToDeck(event.dataTransfer.getData("text"));
     }
 
-    function deckButtonAction() {
-        var selected = document.getElementsByClassName('selected')[0];
-        if (selected != undefined) {
-            appendToDeck(selected.id);
-            selected.classList.remove('selected');
-            deckButton.disabled = true;
-        }
-        else {
-            alert("No card selected!");
-        }
-    }
-
     function addCardToPlayingArea(card, col) {
         var dz = col.getElementsByClassName('drop-zone')[0];
         if (card.parentElement != dz) {
@@ -504,19 +496,36 @@ var cs =
         }
     }
 
-    function skipCard() {
-        var bottomCard = deck.getElementsByClassName('value-card')[0],
-            topCard = deck.getElementsByClassName('value-card')[getDeckCount() - 1];
-        if (topCard.classList.contains('selected')) {
-          topCard.classList.remove('selected');
-          bottomCard.classList.add('selected');
+  /*Button actions*/
+
+    function deckButtonAction() {
+        var selected = document.getElementsByClassName('selected')[0];
+        if (selected != undefined) {
+            appendToDeck(selected.id);
+            selected.classList.remove('selected');
+            deckButton.disabled = true;
         }
-        deck.appendChild(bottomCard);
-        styleDeck();
-        setTopCardDraggable();
+        else {
+            alert("No value selected!");
+        }
+    }
+
+    function skipCard() {
+    var bottomCard = deck.getElementsByClassName('value-card')[0],
+      topCard = deck.getElementsByClassName('value-card')[getDeckCount() - 1];
+    if (topCard.classList.contains('selected')) {
+      topCard.classList.remove('selected');
+      bottomCard.classList.add('selected');
+    }
+    deck.appendChild(bottomCard);
+    styleDeck();
+    setTopCardDraggable();
     }
 
     function restart() {
+        deckButton.onclick = null;
+        skipCardButton.onclick = null;
+        restartButton.onclick = null;
         finishButton.disabled = true;
         deck.innerHTML = "";
         playingArea.innerHTML = "";
@@ -733,8 +742,7 @@ function buildCardSortSummary() {
   var csData = cs.getData(),
       summary = "";
   for (var i = csData.length - 1; i >= 0; i--) {
-    summary += "<li><span class='importance-level'>" + csData[i].column.title + "</span> \
-                <ul class='value-list'>";
+    summary += "<li><span class='importance-level'>" + csData[i].column.title + "</span>                <ul class='value-list'>";
     for (var j = 0; j < csData[i].column.values.length; j++) {
       summary += "<li class='value-item'>" + csData[i].column.values[j] + "</li>";
     }
@@ -768,8 +776,7 @@ function buildSectionSummary(section) {
 function getSummary(sectionID) {
   var body = "<div class=\"section-summary\" id=\"" + sectionID + "-summary\">";
   if (sectionID == cb.sections[0].id) {
-    body += "<h2>Self-assessment</h2> \
-         <h3>Your skills</h3>";
+    body += "<h2>Self-assessment</h2>          <h3>Your skills</h3>";
 
     body += $('<div>').append($('#skills-summary').clone()).remove().html();
     body += $('#pdam-sub-content').children().html(); //hidden ones have display:none on element
@@ -777,8 +784,7 @@ function getSummary(sectionID) {
     body+= "<h3>Your values</h3>";
     body += $('<div>').append($('#values-summary').clone()).remove().html();
 
-    body+= "<h3>Next steps</h3> \
-          <div class=\"advice\">";
+    body+= "<h3>Next steps</h3>           <div class=\"advice\">";
     body += $('#skills-values-suggestion').html();
     body += "</div>";
   }
@@ -805,8 +811,7 @@ function getSummary(sectionID) {
       body += "<p>You didn't select any decision making barriers.</p>";
     }
 
-    body += "<h3>Further support and advice</h3> \
-         <div class=\"advice\">";
+    body += "<h3>Further support and advice</h3>         <div class=\"advice\">";
     body += $('#further-sub-content .suggestion').html();
     body += "</div>";
   }
@@ -819,16 +824,14 @@ function getSummary(sectionID) {
 
 function saveSummary(e, $this) {
   var iconURL = 'http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/images/Icons/',
-      header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \
-                \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
+      header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"                \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
          "<title>Your Career Builder summary</title>" +
          '<link rel="icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
          '<link rel="shortcut icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
          "<style>" + cbSummaryStyle + "</style>" +
          "</head><body id=\"careerBuilder-summary\">" + printButton +
          "<h1>Your Career Builder summary</h1>" +
-         "<p>Here are your selections from \
-          <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" +
+         "<p>Here are your selections from          <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" +
          " along with our suggestions of the resources and services best suited to you.</p>",
       footer = "</body></html>",
       fileName = "CareerBuilder";
@@ -883,7 +886,7 @@ function registerHandlers() {
     if ($.inArray(h, popups) > -1) {
       openPopup = h;
     }
-    if (h == '') {
+    if (h == '' && openPopup != '') {
       closePopup(openPopup);
       openPopup = '';
     }
@@ -986,6 +989,7 @@ function registerHandlers() {
             scrollTop: $("#values-sub").offset().top
         }, 1000);
     $('#start-card-sort').focus();
+    return false;
   });
 
   $('#start-card-sort').click(function(e) {
@@ -1044,9 +1048,7 @@ function registerHandlers() {
       $('#missing-skills-advice').show();
     }
     if (skillsCount == 0) {
-      $('#skills-summary').append('<li><span class="trigger-link skills-trigger">\
-                                         You haven\'t selected any skills.\
-                                     </span></li>');
+      $('#skills-summary').append('<li><span class="trigger-link skills-trigger">                                        You haven\'t selected any skills.                                     </span></li>');
       $('#skills-values-suggestion').slideUp('slow');
     }
   });
@@ -1138,14 +1140,10 @@ $(function() {
     $('#values-sub-content').append(cardSortStart);
     $('.section-content').append('<div class="section-level-buttons hidden"></div>');
     $('#skills-summary').append(
-        '<li><span class="trigger-link skills-trigger">\
-             You haven\'t selected any skills.\
-         </span></li>'
+        '<li><span class="trigger-link skills-trigger">            You haven\'t selected any skills.         </span></li>'
     );
     $('#values-summary').append(
-      '<li><span class="trigger-link values-trigger">\
-          You haven\'t finished the card sorting task.\
-       </span></li>'
+      '<li><span class="trigger-link values-trigger">         You haven\'t finished the value sorting task.      </span></li>'
     );
     $('#review-sub-content').prepend(
          '<p class="no-selection">Please select one or more decision making barriers from the section above.</p>' +
@@ -1167,9 +1165,7 @@ $(function() {
           $next = $this.next();
       if ($this.is('h2'))
         $this.attr('role', 'sectionhead');
-      $this.wrapInner('<button class="toggler closed" \
-                        aria-expanded="false" \
-                        aria-controls="'+ $next.attr('id') +'">');
+      $this.wrapInner('<button class="toggler closed"                         aria-expanded="false"                         aria-controls="'+ $next.attr('id') +'">');
       $next.attr('aria-hidden', true);
     });
     $('.section').attr('role', 'section');

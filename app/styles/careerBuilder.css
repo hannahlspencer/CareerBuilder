@@ -5,116 +5,130 @@ label {font-size:1em !important;}
 
 /***CareerBuilder styling v6 ***/
 #careerBuilder {
-	width: 100%;
-	font-size: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1.4em;
 }
 
 #careerBuilder .css-hidden {
-	display: none;
+  display: none;
 }
 
 #careerBuilder, #careerBuilder ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	font-size: 1em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1em;
 }
 
 ol#careerBuilder {
-	counter-reset: item;
+  counter-reset: item;
 }
 
 #careerBuilder *:focus,
 .popup:focus,
 .popup *:focus {
-	outline-color: #2e2e2e;
+  outline: 2px solid #5e5e5e;
 }
 
 #careerBuilder fieldset {
-	border: none;
-	padding: 0;
-	margin: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 #careerBuilder legend {
-	margin-bottom: 0.75em;
+  margin-bottom: 0.75em;
     display: table; /* Enable line-wrapping in IE8+ */
     white-space: normal; /* Enable line-wrapping in old versions of some other browsers */
 }
 
 #careerBuilder #who legend,
 #careerBuilder #decision legend {
-	display: none;
+  display: none;
 }
 
 #careerBuilder a, #careerBuilder a:visited, #careerBuilder .trigger-link {
-	color: #F00;
-	text-decoration: none;
-	cursor:pointer;
+  color: #F00;
+  text-decoration: none;
+  cursor:pointer;
 }
 
 #careerBuilder a:hover, #careerBuilder a:active, #careerBuilder .trigger-link:hover{
-	text-decoration: underline;
-}
-
-#careerBuilder ul#missing-skill-list {
-	overflow: auto;
+  text-decoration: underline;
 }
 
 #careerBuilder ul#missing-skill-list li {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
+  float: left;
+  width: 50%;
 }
 
 #careerBuilder ul#missing-skill-list li a {
-	padding: 10px;
-	margin: 5px 10px 5px 0;
-	display: block;
-	background: #F2F2F2;
-	float: left;
-	width: 43%;
+  padding: 0.7em;
+  margin: 0.3em;
+  display: block;
+  background: #F2F2F2;
+  line-height: 1em;
+}
+
+#careerBuilder ul#missing-skill-list li .link-sub {
+  font-size: 0.8em;
+  line-height: 0;
+  color: #999;
+  font-weight: bold;
+}
+
+#careerBuilder ul#missing-skill-list li a:hover {
+  text-decoration: none;
+}
+
+#careerBuilder ul#missing-skill-list li a:hover .underline {
+  text-decoration: underline;
 }
 
 #careerBuilder .importance-level {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 #careerBuilder h2, #careerBuilder h3 {
-	margin: 0;
-	font-weight: normal;
+  margin: 0;
+  font-weight: normal;
 }
 
 #careerBuilder h2 {
-	font-size: 1.6em;
+  font-size: 1.6em;
 }
 
 #careerBuilder h3 {
-	font-size: 1.4em;
+  font-size: 1.4em;
 }
 
 #careerBuilder h4, #careerBuilder h5 {
-	margin: 5px 0 0 0;
-	font-weight: bold;
-	font-size: 1.1em;
+  margin: 5px 0 0 0;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
 #careerBuilder .suggestion h4, #careerBuilder .suggestion h5 {
-	margin: 0 0 10px 0;
+  margin: 0 0 10px 0;
 }
 
 #careerBuilder .advice h4, #careerBuilder .advice h5 {
-	margin-top: 0.75em;
+  margin-top: 0.75em;
 }
 
 #careerBuilder .toggler::before {
-	content: '\203A';
-	font-weight: normal;
-	font-size: 1.4em;
-	margin: 0 0.3em 0 0.2em;
-	padding-bottom: 0.1em;
-	display: inline-block;
-	text-decoration: none;
-	-webkit-transition: all .15s ease-in-out;
+  content: '\203A';
+  font-weight: normal;
+  font-size: 1.4em;
+  /*margin: 0 0.3em 0 0.2em; /*dev only*/
+  margin-left: 0.2em; /*Contensis only*/
+  padding-bottom: 0.1em;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-transition: all .15s ease-in-out;
        -moz-transition: all .15s ease-in-out;
         -ms-transition: all .15s ease-in-out;
          -o-transition: all .15s ease-in-out;
@@ -122,55 +136,55 @@ ol#careerBuilder {
 }
 
 #careerBuilder .toggler.opening::before {
-	color: #FFF;
-	-webkit-transform: rotate(90deg); 
-	   -moz-transform: rotate(90deg);
-	    -ms-transform: rotate(90deg); 
-	     -o-transform: rotate(90deg);
-	        transform: rotate(90deg);
+  color: #FFF;
+  -webkit-transform: rotate(90deg);
+     -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+       -o-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 #careerBuilder .toggler.closing::before {
-	color: #FFF;
-	-webkit-transform: rotate(-90deg); 
-	   -moz-transform: rotate(-90deg);
-	    -ms-transform: rotate(-90deg);
-	     -o-transform: rotate(-90deg);
-	        transform: rotate(-90deg);
+  color: #FFF;
+  -webkit-transform: rotate(-90deg);
+     -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+       -o-transform: rotate(-90deg);
+          transform: rotate(-90deg);
 }
 
 #careerBuilder button.toggler {
-	background: none;
-	width: 100%;
-	padding: 0;
-	margin: 0;
-	border: 0;
-	text-align: left;
-	font-size: 100%;
-	font-weight: normal;
-	background: none;
+  background: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  text-align: left;
+  font-size: 100%;
+  font-weight: normal;
+  background: none;
 }
 
 #careerBuilder button.toggler:hover {
-	background: none;
+  background: none;
 }
 
 #careerBuilder h2 .toggler {
-	padding: 0.2em 0 0.1em 0.4em;
+  padding: 0.2em 0 0 0.4em;
     position: relative;
 }
 
 #careerBuilder h3 .toggler {
-	padding: 0.1em 0 0.25em 0.4em;
+  padding: 0.1em 0 0.25em 0.4em;
 }
 
 #careerBuilder .check-label {
-	width: auto;
-	display: inline;
+  width: auto;
+  display: inline;
 }
 
 #careerBuilder .check-label .toggler {
-	width: auto;
+  width: auto;
     display: block;
     font-weight: bold;
     padding: 0.3em;
@@ -180,62 +194,63 @@ ol#careerBuilder {
 }
 
 #careerBuilder h2 .subtitle {
-	font-size: 0.8em;
-	vertical-align: 10px;
-	margin-left: 1.4em;
-	font-weight: bold;
-	color: #FFF;
-	opacity: 0.8;
+  font-size: 0.8em;
+  vertical-align: 10px;
+  margin-left: 1.4em;
+  font-weight: bold;
+  color: #FFF;
+  opacity: 0.8;
 }
 
 #careerBuilder p {
-	margin: 0 10px 15px 15px;
-	padding:0;
-	font-size: 1em;
+  margin: 0 10px 15px 15px;
+  padding:0;
+  font-size: 1em;
 }
 
 #careerBuilder .sub-content {
-	font-size: 1em;
-	overflow: auto;
-	padding: 0.76em;
-	padding-top: 5px;
+  font-size: 1em;
+  overflow: auto;
+  padding: 0.76em;
+  padding-top: 5px;
 }
 
 #careerBuilder .suggestion {
-	margin-top: 0.75em;
-	padding: 10px;
-	background: #F2F2F2;
+  margin-top: 0.75em;
+  padding: 10px;
+  background: #F2F2F2;
 }
 
 #careerBuilder li li .suggestion p:last-child {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 #careerBuilder li.section {
-	font-family: Arial, sans serif;
-	color: #000;
-	margin: 0 0 8px 0;
+  font-family: Arial, sans serif;
+  color: #000;
+  margin: 0 0 8px 0;
 }
 
 #careerBuilder li.section:before {
-	content: counter(item);
+  content: counter(item);
     counter-increment: item;
     font-size: 3em;
     font-weight: bold;
     float: right;
     position: relative;
     left: -0.7em;
+    top: 0.4em;
     width: 0;
     color: #FFF;
     opacity: 0.3;
 }
 
 #careerBuilder .section-content {
-	margin-top: 4px;
+  margin-top: 4px;
 }
 
 #careerBuilder .subsection {
-	margin: 0 5px 5px 5px;
+  margin: 0 5px 5px 5px;
 }
 
 #careerBuilder li.section:after {
@@ -247,41 +262,41 @@ ol#careerBuilder {
 }
 
 #careerBuilder li li p {
-	margin: 0 10px 15px 0;
+  margin: 0 0 15px 0;
 }
 
 #careerBuilder input {
-	margin-bottom: 7px;
-	width: 1.2em;
+  margin-bottom: 7px;
+  width: 1.2em;
     height: 1.2em;
 }
 
 #careerBuilder #skills-sub input {
-	float: left;
-	margin-bottom: 0;
+  float: left;
+  margin-bottom: 0;
 }
 
 #careerBuilder .check-option {
-	display: table-row;
-	width: 100%;
+  display: table-row;
+  width: 100%;
 }
 
 #careerBuilder .check-option input {
-	display: table-cell;
+  display: table-cell;
 }
 
 #careerBuilder .check-option span {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 #careerBuilder .check-option .sub-content {
-	padding: 0 0 1em 0;
+  padding: 0 0 1em 0;
 }
 
 #careerBuilder .check-option .block-label {
-	display: table-cell;
-	width: 100%;
-	padding: 0.5em;
+  display: table-cell;
+  width: 100%;
+  padding: 0.5em;
     padding-right: 0;
     border-bottom: 1px solid;
     -webkit-transition: all .4s ease;
@@ -292,53 +307,53 @@ ol#careerBuilder {
 }
 
 #careerBuilder .check-option:first-of-type .block-label {
-	border-top: 1px solid;
+  border-top: 1px solid;
 }
 
 #careerBuilder .selection-summary {
-	width: 100%;
+  width: 100%;
 }
 
 #careerBuilder ul.barrier-list {
-	list-style: none;
+  list-style: none;
 }
 
 #careerBuilder ul.barrier-list li {
-	padding: 3px 0 0 0;
-	font-size: 1em;
-	overflow: visible;
+  padding: 3px 0 0 0;
+  font-size: 1em;
+  overflow: visible;
 }
 
 #careerBuilder .bulletlist {
-	margin: 0 0 15px 13px;
+  margin: 0 0 15px 13px;
 }
 
 #careerBuilder .bulletlist li:first-child {
-	padding-top: 0;
+  padding-top: 0;
 }
 
 #careerBuilder ul#skills-summary, #careerBuilder ul#values-summary,
 #careerBuilder .bulletlist {
-	list-style-type: square;
+  list-style-type: square;
 }
 
 #careerBuilder ul#skills-summary li, #careerBuilder ul#values-summary li,
 #careerBuilder .bulletlist li {
-	padding: 3px 0 0 0;
-	margin-left: 1.3em;
-	font-size: 1em;
-	overflow: visible;
+  padding: 3px 0 0 0;
+  margin-left: 1.3em;
+  font-size: 1em;
+  overflow: visible;
 }
-             .popup button, 
-      #cs-container button, 
+             .popup button,
+      #cs-container button,
      #careerBuilder button,
 #careerBuilderGuide button {
-	font-size: 100%;
-	font-weight: bold;
-	border: 1px solid white;
-	padding: 0.75em;
-	margin-top: 0.75em;
-	cursor: pointer;
+  font-size: 100%;
+  font-weight: bold;
+  border: 1px solid white;
+  padding: 0.75em;
+  margin-top: 0.75em;
+  cursor: pointer;
     -webkit-transition: all .4s ease;
        -moz-transition: all .4s ease;
         -ms-transition: all .4s ease;
@@ -347,163 +362,163 @@ ol#careerBuilder {
 }
 
 #careerBuilderGuide button {
-	margin-top: 0.5em;
+  margin-top: 0.5em;
 }
 
 #careerBuilderGuide button:first-of-type {
-	margin-top: 0;
+  margin-top: 0;
 }
 
-             .popup button, 
+             .popup button,
 #careerBuilderGuide button {
-	background: #DDD;
+  background: #DDD;
 }
 
-             .popup button:hover, 
+             .popup button:hover,
 #careerBuilderGuide button:hover {
-	background: #F2F2F2;
+  background: #F2F2F2;
 }
 
 #careerBuilder button.next,
         .popup button.next {
-	float: right;
-	display: block;
+  float: right;
+  display: block;
 }
 
 #careerBuilder .section-level-buttons {
-	padding: 0 0.3em 0.3em 0.3em;
+  padding: 0 0.3em 0.3em 0.3em;
 }
 
 #careerBuilder .section-level-buttons button {
-	margin-bottom: 0;
-	margin-top: 0;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
-             .popup button[disabled], 
-      #cs-container button[disabled], 
+             .popup button[disabled],
+      #cs-container button[disabled],
      #careerBuilder button[disabled],
-#careerBuilderGuide button[disabled], 
-             .popup button[disabled]:hover, 
-      #cs-container button[disabled]:hover, 
+#careerBuilderGuide button[disabled],
+             .popup button[disabled]:hover,
+      #cs-container button[disabled]:hover,
      #careerBuilder button[disabled]:hover,
 #careerBuilderGuide button[disabled]:hover  {
-	background: #898989;
-	color: #cecece;
-	border-color: #898989;
-	cursor: auto;
+  background: #898989;
+  color: #cecece;
+  border-color: #898989;
+  cursor: auto;
 }
 
 .popup {
-	display: none;
-	z-index: 9999;
-	color: #000;
-	background-color: #ececec;
-	margin-left: -200px;
-	width: 400px;
-	position: fixed;
-	top: 30%;
-	left: 50%;
-	padding: 0.75em;
-	border-bottom: 2px solid #000;
-	border-right: 1px solid #000;	
-	text-align: left;
+  display: none;
+  z-index: 9999;
+  color: #000;
+  background-color: #ececec;
+  margin-left: -200px;
+  width: 400px;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  padding: 0.75em;
+  border-bottom: 2px solid #000;
+  border-right: 1px solid #000;
+  text-align: left;
 }
 
 .popup p:first-child {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 #save-button,
 #clear-button,
 #careerBuilderGuide button.get-summary {
-	width: 100%;
+  width: 100%;
 }
 
 #careerBuilderGuide {
-	background: #F2F2F2;
-	padding: 10px;
-	width: 220px;
-	overflow: auto;
+  background: #F2F2F2;
+  padding: 10px;
+  width: 220px;
+  overflow: auto;
 }
 
 #careerBuilderGuide h5 {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 #careerBuilderGuide ul {
-	padding-left: 17px;
+  padding-left: 17px;
 }
 
 /****************** Colours ********************/
 #who, #who .section-level-buttons button {
-	background: #F9AB63;
+  background: #F9AB63;
 }
 
-	#who .subsection, #who button,
-	#cs-container button,
-	#who .section-level-buttons button:hover {
-		background: #FAC38E;
-	}
+  #who .subsection, #who button,
+  #cs-container button,
+  #who .section-level-buttons button:hover {
+    background: #FAC38E;
+  }
 
-	#who button:hover, #cs-container button:hover {
-		background: #F9AB63;
-	}
+  #who button:hover, #cs-container button:hover {
+    background: #F9AB63;
+  }
 
 #research, #research .section-level-buttons button,
 #research button:hover, #research .check-option .block-label:hover {
-	background: #4DB8E4;
+  background: #4DB8E4;
 }
 
-	#research .subsection, #research button,
-	#research .section-level-buttons button:hover {
-		background: #82CDEC;
-	}
+  #research .subsection, #research button,
+  #research .section-level-buttons button:hover {
+    background: #82CDEC;
+  }
 
-	#research .check-option .block-label {
-		border-color: #4DB8E4 !important;
-	}
+  #research .check-option .block-label {
+    border-color: #4DB8E4 !important;
+  }
 
 #decision, #decision .section-level-buttons button,
 #decision button:hover, #decision .check-option .block-label:hover {
-	background: #B497C7;
+  background: #B497C7;
 }
 
-	#decision .subsection, #decision button,
-	#decision .section-level-buttons button:hover {
-		background: #C3ACD2;
-	}
+  #decision .subsection, #decision button,
+  #decision .section-level-buttons button:hover {
+    background: #C3ACD2;
+  }
 
-	#decision .check-option .block-label {
-		border-color: #B497C7 !important;
-	}
+  #decision .check-option .block-label {
+    border-color: #B497C7 !important;
+  }
 
 #searching, #searching .section-level-buttons button,
 #searching button:hover, #searching .check-option .block-label:hover {
-	background: #F36571;
+  background: #F36571;
 }
 
-	#searching .subsection, #searching button,
-	#searching .section-level-buttons button:hover {
-		background: #F7939C;
-	}
+  #searching .subsection, #searching button,
+  #searching .section-level-buttons button:hover {
+    background: #F7939C;
+  }
 
-	#searching .check-option .block-label {
-		border-color: #F36571 !important;
-	}
+  #searching .check-option .block-label {
+    border-color: #F36571 !important;
+  }
 
 #achieving, #achieving .section-level-buttons button,
 #achieving button:hover,#achieving .check-option .block-label:hover {
-	background: #7CCC80;
+  background: #7CCC80;
 }
 
-	#achieving .subsection, #achieving button,
-	#achieving .section-level-buttons button:hover {
-		background: #A3DBA6;
-	}
+  #achieving .subsection, #achieving button,
+  #achieving .section-level-buttons button:hover {
+    background: #A3DBA6;
+  }
 
-	#achieving .check-option .block-label {
-		border-color: #7CCC80 !important;
-	}
+  #achieving .check-option .block-label {
+    border-color: #7CCC80 !important;
+  }
 
 /******************CARD SORTER******************/
 #cs-container {
@@ -523,48 +538,48 @@ ol#careerBuilder {
 }
 
 #cs-container #cs-header {
-	overflow: auto;
-	margin-bottom: 10px;
+  overflow: auto;
+  margin-bottom: 10px;
 }
 
 #cs-container #cs-title {
-	margin-top: 0;
-	display: inline;
-	font-size: 1.8em;
-	font-weight: normal;
+  margin-top: 0;
+  display: inline;
+  font-size: 1.8em;
+  font-weight: normal;
 }
 
 #cs-container h3 {
-	margin-left: 0;
+  margin-left: 0;
 }
 
 #cs-container #control-panel #button-container {
-	float: right;
-	margin: 0;
-	padding-right: 0;
+  float: right;
+  margin: 0;
+  padding-right: 0;
 }
-    
+
     #cs-container button {
-		display: block;
-		width: 150px;
-		padding: 10px;
-		margin: 10px;
-		margin-right: 0;
-	}
+    display: block;
+    width: 150px;
+    padding: 10px;
+    margin: 10px;
+    margin-right: 0;
+  }
 
     #cs-container button:first-child {
         margin-top: 0;
     }
 
     #cs-container #close-cs {
-    	width: auto;
-    	font-size: 2em;
-    	padding: 0 0.3em;
-    	position: absolute;
-		top: 0px;
-		right: 0px;
-		margin: 0.3em;
-	}
+      width: auto;
+      font-size: 2em;
+      padding: 0 0.3em;
+      position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 0.3em;
+  }
 
 #cs-container #playing-area {
     display: table;
@@ -575,21 +590,21 @@ ol#careerBuilder {
 }
 
 #cs-container #control-panel {
-	display: table;
+  display: table;
 }
 
-	#cs-container #instructions {
-		width: 27%;
-		font-size: 75%;
-	}
+  #cs-container #instructions {
+    width: 27%;
+    font-size: 75%;
+  }
 
-	#cs-container #control-panel #deck-area {
-		margin-left: 30px;
-	}
-	
-	#cs-container #button-container .button-sub-container {
-		float: left;
-	}
+  #cs-container #control-panel #deck-area {
+    margin-left: 30px;
+  }
+
+  #cs-container #button-container .button-sub-container {
+    float: left;
+  }
 
 #cs-container #control-panel > div {
     float: left;
@@ -598,7 +613,7 @@ ol#careerBuilder {
 }
 
 #cs-container #control-panel #instructions p:first-child {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 #cs-container .col {
@@ -614,7 +629,7 @@ ol#careerBuilder {
     #cs-container .importance-level {
         margin: 0 auto;
         display: inline;
-    
+
         font-size: 1em;
         font-weight: bold;
 }
@@ -635,12 +650,12 @@ ol#careerBuilder {
     font-size: 0.8em;
     width: 140px;
 }
-    
+
     #cs-container .value-name {
         margin: 0;
         font-weight: bold;
     }
-    
+
     #cs-container .value-description {
         margin: 5px 0 0 0;
         font-size: 12px;
@@ -662,16 +677,16 @@ ol#careerBuilder {
     border-right: 1px solid #C9A685;
 }
 
-	#cs-container #deck-container .value-card:last-child {
+  #cs-container #deck-container .value-card:last-child {
         display: block;
     }
-    
+
     #cs-container #deck-container .value-card:nth-child(odd) {
         border-bottom: 1px solid #E2BA95;
         border-right: 1px solid #E2BA95;
     }
 
-#cs-container .value-card.selected, 
+#cs-container .value-card.selected,
 #cs-container #deck-container .value-card.selected {
     border: 2px solid blue;
 }
