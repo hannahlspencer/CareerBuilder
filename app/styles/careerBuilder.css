@@ -48,10 +48,11 @@ ol#careerBuilder {
   display: none;
 }
 
-#careerBuilder a, #careerBuilder a:visited, #careerBuilder .trigger-link {
-  color: #F00;
+#careerBuilder a, #careerBuilder a:visited {
+  color: #DE1122;
   text-decoration: none;
-  cursor:pointer;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 #careerBuilder a:hover, #careerBuilder a:active, #careerBuilder .trigger-link:hover{
@@ -69,15 +70,14 @@ ol#careerBuilder {
   padding: 0.7em;
   margin: 0.3em;
   display: block;
-  background: #F2F2F2;
+  background: #FBFBFB;
   line-height: 1em;
 }
 
 #careerBuilder ul#missing-skill-list li .link-sub {
   font-size: 0.8em;
   line-height: 0;
-  color: #999;
-  font-weight: bold;
+  color: #555;
 }
 
 #careerBuilder ul#missing-skill-list li a:hover {
@@ -199,7 +199,7 @@ ol#careerBuilder {
   margin-left: 1.4em;
   font-weight: bold;
   color: #FFF;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 #careerBuilder p {
@@ -218,7 +218,7 @@ ol#careerBuilder {
 #careerBuilder .suggestion {
   margin-top: 0.75em;
   padding: 10px;
-  background: #F2F2F2;
+  background: #FBFBFB;
 }
 
 #careerBuilder li li .suggestion p:last-child {

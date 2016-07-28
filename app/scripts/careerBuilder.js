@@ -742,7 +742,7 @@ function buildCardSortSummary() {
   var csData = cs.getData(),
       summary = "";
   for (var i = csData.length - 1; i >= 0; i--) {
-    summary += "<li><span class='importance-level'>" + csData[i].column.title + "</span>                <ul class='value-list'>";
+    summary += "<li><span class='importance-level'>" + csData[i].column.title + "</span><ul class='value-list'>";
     for (var j = 0; j < csData[i].column.values.length; j++) {
       summary += "<li class='value-item'>" + csData[i].column.values[j] + "</li>";
     }
@@ -811,7 +811,7 @@ function getSummary(sectionID) {
       body += "<p>You didn't select any decision making barriers.</p>";
     }
 
-    body += "<h3>Further support and advice</h3>         <div class=\"advice\">";
+    body += "<h3>Further support and advice</h3> <div class=\"advice\">";
     body += $('#further-sub-content .suggestion').html();
     body += "</div>";
   }
@@ -824,14 +824,14 @@ function getSummary(sectionID) {
 
 function saveSummary(e, $this) {
   var iconURL = 'http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/images/Icons/',
-      header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"                \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
+      header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
          "<title>Your Career Builder summary</title>" +
          '<link rel="icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
          '<link rel="shortcut icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
          "<style>" + cbSummaryStyle + "</style>" +
          "</head><body id=\"careerBuilder-summary\">" + printButton +
          "<h1>Your Career Builder summary</h1>" +
-         "<p>Here are your selections from          <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" +
+         "<p>Here are your selections from <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" +
          " along with our suggestions of the resources and services best suited to you.</p>",
       footer = "</body></html>",
       fileName = "CareerBuilder";
@@ -1012,7 +1012,6 @@ function registerHandlers() {
       var $this = $(this),
           $s   = $('#' + qName + '-' + $this.val()),
           state = $this.is(':checked');
-      $this.attr('aria-expanded', state);
       $s.attr('aria-hidden', !state);
       state ? $s.slideDown('slow') : $s.slideUp('slow');
     });
@@ -1140,10 +1139,10 @@ $(function() {
     $('#values-sub-content').append(cardSortStart);
     $('.section-content').append('<div class="section-level-buttons hidden"></div>');
     $('#skills-summary').append(
-        '<li><span class="trigger-link skills-trigger">            You haven\'t selected any skills.         </span></li>'
+        '<li><a class="trigger-link skills-trigger">Select your skills</a></li>'
     );
     $('#values-summary').append(
-      '<li><span class="trigger-link values-trigger">         You haven\'t finished the value sorting task.      </span></li>'
+      '<li><a class="trigger-link values-trigger">Finished the value sorting task</a></li>'
     );
     $('#review-sub-content').prepend(
          '<p class="no-selection">Please select one or more decision making barriers from the section above.</p>' +
@@ -1163,12 +1162,9 @@ $(function() {
     $('.toggle-parent').each(function() {
       var $this = $(this),
           $next = $this.next();
-      if ($this.is('h2'))
-        $this.attr('role', 'sectionhead');
-      $this.wrapInner('<button class="toggler closed"                         aria-expanded="false"                         aria-controls="'+ $next.attr('id') +'">');
+      $this.wrapInner('<button class="toggler closed" aria-expanded="false" aria-controls="'+ $next.attr('id') +'">');
       $next.attr('aria-hidden', true);
     });
-    $('.section').attr('role', 'section');
     $('.popup').attr('role', 'dialog');
     $('input[name="skill"]').each(function() {
       var $this = $(this),
@@ -1203,8 +1199,7 @@ $(function() {
     $('input[type=radio]').each(function() {
       var $this = $(this),
           id = $this.attr('name') + '-' + $this.val();
-      $this.attr('aria-controls', id)
-           .attr('aria-expanded', false);
+      $this.attr('aria-controls', id);
       $('#' + id).attr('aria-hidden', true);
     });
     $('.trigger-link').each(function() {
