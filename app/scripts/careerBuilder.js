@@ -1135,6 +1135,7 @@ $(function() {
 
   if (!loadProgress()) { //progress not saved
     cs.start();
+    $('#careerBuilder').removeClass('no-js');
     $('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
     $('#values-sub-content').append(cardSortStart);
     $('.section-content').append('<div class="section-level-buttons hidden"></div>');
@@ -1142,11 +1143,11 @@ $(function() {
         '<li><a class="trigger-link skills-trigger">Select your skills</a></li>'
     );
     $('#values-summary').append(
-      '<li><a class="trigger-link values-trigger">Finished the value sorting task</a></li>'
+      '<li><a class="trigger-link values-trigger">Finish the value sorting task</a></li>'
     );
     $('#review-sub-content').prepend(
-         '<p class="no-selection">Please select one or more decision making barriers from the section above.</p>' +
-       '<p id="reviewing-intro" class="hidden">We have grouped the decision making barriers you have selected into themes.</p>'
+      '<p class="no-selection">Please select one or more decision making barriers from the section above.</p>' +
+      '<p id="reviewing-intro" class="hidden">We have grouped the decision making barriers you have selected into themes.</p>'
     );
     $('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
     $('#forme-sub-content').append(skipButton);
@@ -1156,6 +1157,16 @@ $(function() {
     $('#careerBuilder a').each(function() {
       $(this).attr("target", "_blank");
     });
+    $('a[href$=".pdf"]').after(
+      '<span class="link-icon link-icon-pdf" title="PDF">&#x1F4C4;</span>'
+    );
+    $('a[href^="https://careers"]').after(
+      '<span class="link-icon link-icon-private" title="CareerHub login required">&#x1F512;</span>'
+    );
+    $('a[href*="/internal/exclusive"]').after(
+      '<span class="link-icon link-icon-private" title="LSE IT account required">&#x1F512;</span>'
+    );
+
     $('.hidden').hide();
 
     //set up ARIA attributes
@@ -1169,7 +1180,7 @@ $(function() {
     $('input[name="skill"]').each(function() {
       var $this = $(this),
           label = $this.attr('class');
-      $this.attr('aria-labelledby', label+'-head');
+      $this.attr('aria-labelledby', label + '-head');
     });
     $('button.next, button.skip-section').each(function() {
       var $this = $(this),

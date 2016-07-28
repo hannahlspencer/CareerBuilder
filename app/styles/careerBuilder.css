@@ -59,6 +59,33 @@ ol#careerBuilder {
   text-decoration: underline;
 }
 
+/*icons for pdf and password protected links*/
+  #careerBuilder.no-js a[href$=".pdf"],
+  #careerBuilder.no-js a[href^="https://careers"],
+  #careerBuilder.no-js a[href*="/internal/exclusive"] {
+    padding-right: 0.9em;
+  }
+
+  #careerBuilder .link-icon,
+  #careerBuilder.no-js a[href$=".pdf"]::after,
+  #careerBuilder.no-js a[href^="https://careers"]::after,
+  #careerBuilder.no-js a[href*="/internal/exclusive"]::after {
+    font-weight: normal;
+    color: #999;
+    text-decoration: none;
+  }
+
+  #careerBuilder.no-js a[href^="https://careers"]::after,
+  #careerBuilder.no-js a[href*="/internal/exclusive"]::after {
+    content: '\1F512';
+    position: absolute;
+  }
+
+  #careerBuilder.no-js a[href$=".pdf"]::after {
+    content: '\1F4C4';
+    position: absolute;
+  }
+
 #careerBuilder ul#missing-skill-list li {
   padding: 0;
   margin: 0;
