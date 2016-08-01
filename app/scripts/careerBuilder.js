@@ -832,9 +832,9 @@ function saveSummary(e, $this) {
          "<p>Here are your selections from <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" +
          " along with our suggestions of the resources and services best suited to you.</p>",
       footer = "</body></html>",
-      fileName = "CareerBuilder";
-      sId = $this.closest('.section').attr('id');
-  var body = "";
+      fileName = "CareerBuilder",
+      sId = $this.closest('.section').attr('id'),
+      body = "";
   if (sId == cb.sections[cb.sections.length - 1].id || sId == "careerBuilderGuide") {
     $.each(cb.sections, function(i, section) {
       if (section.id != "final-popup") {
