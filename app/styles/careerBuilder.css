@@ -308,8 +308,13 @@ ol#careerBuilder {
   width: 100%;
 }
 
-#careerBuilder .check-option input {
+#careerBuilder .check-wrapper {
   display: table-cell;
+  vertical-align: middle;
+}
+
+#careerBuilder .check-wrapper input {
+  margin: 0.2em 0.5em 0 0;
 }
 
 #careerBuilder .check-option span {
