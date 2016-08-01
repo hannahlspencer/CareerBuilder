@@ -1,1 +1,1 @@
-[Demo](http://personal.lse.ac.uk/wildmanm/careerbuilder)
+[Current live version](http://lse.ac.uk/careerbuilder)
