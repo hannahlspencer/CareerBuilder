@@ -48,14 +48,16 @@ ol#careerBuilder {
   display: none;
 }
 
-#careerBuilder a, #careerBuilder a:visited {
+#careerBuilder a, #careerBuilder a:visited,
+.popup a, .popup a:visited {
   color: #DE1122;
   text-decoration: none;
   cursor: pointer;
   font-weight: bold;
 }
 
-#careerBuilder a:hover, #careerBuilder a:active, #careerBuilder .trigger-link:hover{
+#careerBuilder a:hover, #careerBuilder a:active,
+#careerBuilder .trigger-link:hover, .popup a:hover {
   text-decoration: underline;
 }
 
@@ -200,7 +202,7 @@ ol#careerBuilder {
 
 #careerBuilder h2 .toggler {
   padding: 0.2em 0 0 0.4em;
-    position: relative;
+  position: relative;
 }
 
 #careerBuilder h3 .toggler {
@@ -214,12 +216,12 @@ ol#careerBuilder {
 
 #careerBuilder .check-label .toggler {
   width: auto;
-    display: block;
-    font-weight: bold;
-    padding: 0.3em;
-    padding-right: 1em;
-    position: relative;
-    top: -10px;
+  display: block;
+  font-weight: bold;
+  padding: 0.3em;
+  padding-right: 1em;
+  position: relative;
+  top: -10px;
 }
 
 #careerBuilder h2 .subtitle {
@@ -262,16 +264,16 @@ ol#careerBuilder {
 
 #careerBuilder li.section:before {
   content: counter(item);
-    counter-increment: item;
-    font-size: 3em;
-    font-weight: bold;
-    float: right;
-    position: relative;
-    left: -0.7em;
-    top: 0.4em;
-    width: 0;
-    color: #FFF;
-    opacity: 0.3;
+  counter-increment: item;
+  font-size: 3em;
+  font-weight: bold;
+  float: right;
+  position: relative;
+  left: -0.7em;
+  top: 0.4em;
+  width: 0;
+  color: #FFF;
+  opacity: 0.3;
 }
 
 #careerBuilder .section-content {
@@ -395,6 +397,10 @@ ol#careerBuilder {
             transition: all .4s ease;
 }
 
+.popup button {
+  margin-top: 0;
+}
+
 #careerBuilderGuide button {
   margin-top: 0.5em;
 }
@@ -446,20 +452,29 @@ ol#careerBuilder {
   display: none;
   z-index: 9999;
   color: #000;
-  background-color: #ececec;
-  margin-left: -200px;
+  background-color: white;
   width: 400px;
-  position: fixed;
-  top: 30%;
-  left: 50%;
+  position: relative;
+  margin: 0 auto;
+  top: 10%;
   padding: 0.75em;
-  border-bottom: 2px solid #000;
-  border-right: 1px solid #000;
   text-align: left;
+  border-radius: 0.5em;
+  box-shadow: 0.25em 0.25em 1em #444;
 }
 
 .popup p:first-child {
   margin-top: 0;
+}
+
+.popup:focus {
+  outline: none;
+}
+
+.popup .popup-header h2 {
+  font-weight: normal;
+  font-size: 1.4em;
+  display: inline;
 }
 
 #save-button,
@@ -467,6 +482,34 @@ ol#careerBuilder {
 #careerBuilderGuide button.get-summary {
   width: 100%;
 }
+
+.popup .cb-close-button {
+  width: auto;
+  position: absolute;
+  display: block;
+  top: 0px;
+  right: 0px;
+  margin: 0.3em;
+}
+
+.popup .popup-header .cb-close-button {
+  font-size: 1.5em;
+  padding: 0 0.3em;
+  position: relative;
+  float: right;
+  margin: 0;
+}
+
+.popup-header {
+  display: block;
+  width: 100%;
+}
+
+  .popup-header::after, .popup::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
 
 #careerBuilderGuide {
   background: #F2F2F2;
@@ -556,19 +599,6 @@ ol#careerBuilder {
 
 /******************CARD SORTER******************/
 #cs-container {
-    z-index: 9999;
-    position: relative;
-    display: table;
-    top: 10%;
-    left: 0;
-    background: white;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #000000;
-    border-right: 1px solid #000000;
-    padding: 15px;
-    text-align: left;
 }
 
 #cs-container #cs-header {
@@ -593,7 +623,7 @@ ol#careerBuilder {
   padding-right: 0;
 }
 
-    #cs-container button {
+  #cs-container button {
     display: block;
     width: 150px;
     padding: 10px;
@@ -606,14 +636,11 @@ ol#careerBuilder {
     }
 
     #cs-container #close-cs {
-      width: auto;
       font-size: 2em;
       padding: 0 0.3em;
-      position: absolute;
-    top: 0px;
-    right: 0px;
-    margin: 0.3em;
-  }
+      width: auto;
+      margin-right: 0.4em;
+    }
 
 #cs-container #playing-area {
     display: table;

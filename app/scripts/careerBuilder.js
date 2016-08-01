@@ -638,8 +638,10 @@ var trapFocus = function(e) {
 
 function closePopup(popupId) {
   window.location.hash = '';
-    history.pushState('', document.title, window.location.pathname);
-  $('#popups').append($('#'+popupId));
+  history.pushState('', document.title, window.location.pathname);
+  var $popup = $('#'+popupId);
+  $popup.slideUp();
+  $('#popups').append($popup);
   $('#overlay, #clear-overlay').remove();
 }
 
@@ -672,7 +674,6 @@ function showPopup(z, $popup) {
   $popup.slideDown('slow').focus();
   window.location.hash = pid;
   document.addEventListener('focus', trapFocus, true);
-  $('html, body').animate({ scrollTop: 0 }, 500);
 }
 
 function registerTriggerProxies(a) {
@@ -684,9 +685,6 @@ function registerTriggerProxies(a) {
       if (!($('#' + controls).attr('aria-hidden') == 'false')) {
         $val.trigger(e);
       }
-      $('html, body').animate({
-        scrollTop : $('#' + controls).offset().top
-      }, 1000);
     });
     $i.hover(
       function(e) {
@@ -1093,7 +1091,7 @@ function registerHandlers() {
   });
 
   $('input:radio, input:checkbox').change(function() {
-    $this = $(this);
+    var $this = $(this);
     if ($this.is(':checked')) {
       $this.attr('checked', true);
     }
@@ -1157,13 +1155,13 @@ $(function() {
     $('#careerBuilder a').each(function() {
       $(this).attr("target", "_blank");
     });
-    $('a[href$=".pdf"]').after(
+    $('#save-area a[href$=".pdf"]').after(
       '<span class="link-icon link-icon-pdf" title="PDF">&#x1F4C4;</span>'
     );
-    $('a[href^="https://careers"]').after(
+    $('#save-area a[href^="https://careers"]').after(
       '<span class="link-icon link-icon-private" title="CareerHub login required">&#x1F512;</span>'
     );
-    $('a[href*="/internal/exclusive"]').after(
+    $('#save-area a[href*="/internal/exclusive"]').after(
       '<span class="link-icon link-icon-private" title="LSE IT account required">&#x1F512;</span>'
     );
 
