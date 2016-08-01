@@ -61,6 +61,14 @@ ol#careerBuilder {
   text-decoration: underline;
 }
 
+#careerBuilder a.disabled-link {
+  pointer-events: none;
+  cursor: default;
+  background: #898989;
+  color: #cecece;
+  border-color: #898989;
+}
+
 /*icons for pdf and password protected links*/
   #careerBuilder.no-js a[href$=".pdf"],
   #careerBuilder.no-js a[href^="https://careers"],
@@ -92,13 +100,14 @@ ol#careerBuilder {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
+  justify-content: space-between;
   box-sizing: border-box;
 }
 
 #careerBuilder ul#missing-skill-list li {
-  padding: 0.3em 0.6em 0.3em 0;
+  padding: 0.3em 0;
   display: flex;
-  flex-basis: 50%;
+  flex-basis: 48.8%;
   box-sizing: border-box;
 }
 
@@ -441,6 +450,7 @@ ol#careerBuilder {
   margin-top: 0;
 }
 
+      #careerBuilder a.disabled-link,
              .popup button[disabled],
       #cs-container button[disabled],
      #careerBuilder button[disabled],
@@ -452,7 +462,12 @@ ol#careerBuilder {
   background: #898989;
   color: #cecece;
   border-color: #898989;
-  cursor: auto;
+  cursor: default;
+  pointer-events: none;
+}
+
+#careerBuilder a.disabled-link .link-sub {
+  color: #cecece !important;
 }
 
 .popup {
