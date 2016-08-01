@@ -147,6 +147,10 @@ var cbSummaryStyle =
 "#careerBuilder-summary ul {" +
 " list-style: square;" +
 "}" +
+"#careerBuilder-summary li {" +
+" display: list-item !important;" +
+" margin: 0.5em 0;" +
+"}" +
 "#careerBuilder-summary h5 {" +
 " font-size: 1em;" +
 "}" +
@@ -824,6 +828,7 @@ function saveSummary(e, $this) {
   var iconURL = 'http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/images/Icons/',
       header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
          "<title>Your Career Builder summary</title>" +
+         '<meta charset="utf-8">' +
          '<link rel="icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
          '<link rel="shortcut icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
          "<style>" + cbSummaryStyle + "</style>" +
