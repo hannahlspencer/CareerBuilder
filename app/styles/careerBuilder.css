@@ -61,14 +61,6 @@ ol#careerBuilder {
   text-decoration: underline;
 }
 
-#careerBuilder a.disabled-link {
-  pointer-events: none;
-  cursor: default;
-  background: #898989;
-  color: #cecece;
-  border-color: #898989;
-}
-
 /*icons for pdf and password protected links*/
   #careerBuilder.no-js a[href$=".pdf"],
   #careerBuilder.no-js a[href^="https://careers"],
@@ -312,6 +304,10 @@ ol#careerBuilder {
 
 #careerBuilder .subsection {
   margin: 0 5px 5px 5px;
+}
+
+#careerBuilder ul.subsection-list {
+  overflow: auto;
 }
 
 #careerBuilder li.section::after,
