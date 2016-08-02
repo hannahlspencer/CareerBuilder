@@ -456,8 +456,7 @@ ol#careerBuilder {
   display: block;
 }
 
-#careerBuilder button.next .button-icon,
-#careerBuilder button.previous .button-icon {
+#careerBuilder button .button-icon {
   position: relative;
   font-weight: normal;
   font-size: 5em;
@@ -478,6 +477,15 @@ ol#careerBuilder {
   float: left;
   top: 0.26em;
   margin-right: 0;
+}
+
+#careerBuilder button.get-summary .button-icon {
+  float: left;
+  font-size: 1.75em;
+  margin-left: 0;
+  left: -0.21em;
+  top: 0.39em;
+  font-weight: bold;
 }
 
 #careerBuilder button.previous, #careerBuilder button.get-summary {
