@@ -966,7 +966,7 @@ function registerHandlers() {
     return false;
   });
 
-  $('button.next-subsection, button.next-section').click(function(e) {
+  $('button.next-subsection, button.next-section, button.previous-subsection').click(function(e) {
       triggerTogglers(e, $(this));
   });
 
