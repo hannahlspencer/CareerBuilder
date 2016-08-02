@@ -175,7 +175,6 @@ ol#careerBuilder {
       -ms-transition: all .15s ease-in-out;
        -o-transition: all .15s ease-in-out;
           transition: all .15s ease-in-out;
-          transform-origin: center center;
 }
 
 #careerBuilder .toggler.opening::before {
@@ -414,10 +413,10 @@ ol#careerBuilder {
      #careerBuilder button,
 #careerBuilderGuide button {
   box-sizing: border-box;
+  border: 1px solid;
   width: 50%;
   font-size: 100%;
   font-weight: bold;
-  border: 1px solid white;
   padding: 0.75em;
   margin-top: 0.75em;
   cursor: pointer;
@@ -433,6 +432,7 @@ ol#careerBuilder {
   margin: 0 auto;
   width: 100%;
   font-size: 1.2em;
+  border: 1px solid white;
 }
 
 .popup button {
@@ -609,7 +609,12 @@ ol#careerBuilder {
 /****************** Colours ********************/
 #who, #who .section-level-buttons button {
   background: #F9AB63;
+  border-color: #FAC38E;
 }
+
+  #who button {
+    border-color: #F9AB63;
+  }
 
   #who button .button-icon {
     color: #FAC38E;
@@ -634,6 +639,14 @@ ol#careerBuilder {
   background: #4DB8E4;
 }
 
+  #research button {
+    border-color: #4DB8E4;
+  }
+
+  #research .section-level-buttons button {
+    border-color: #82CDEC;
+  }
+
   #research button .button-icon {
     color: #82CDEC;
   }
@@ -655,6 +668,14 @@ ol#careerBuilder {
 #decision button:hover, #decision .check-option .block-label:hover {
   background: #B497C7;
 }
+
+  #decision button {
+    border-color: #B497C7;
+  }
+
+  #decision .section-level-buttons button {
+    border-color: #C3ACD2;
+  }
 
   #decision button .button-icon {
     color: #C3ACD2;
@@ -678,6 +699,14 @@ ol#careerBuilder {
   background: #F36571;
 }
 
+  #searching button {
+    border-color: #F36571;
+  }
+
+  #searching .section-level-buttons button {
+    border-color: #F7939C;
+  }
+
   #searching .subsection, #searching button,
   #searching .section-level-buttons button:hover {
     background: #F7939C;
@@ -691,6 +720,14 @@ ol#careerBuilder {
 #achieving button:hover,#achieving .check-option .block-label:hover {
   background: #7CCC80;
 }
+
+  #achieving button {
+    border-color: #7CCC80;
+  }
+
+  #achieving .section-level-buttons button {
+    border-color: #A3DBA6;
+  }
 
   #achieving button .button-icon {
     color: #A3DBA6;
