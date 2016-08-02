@@ -1,6 +1,7 @@
 //globals
 var totalSkills       = $('input:checkbox[name="skill"]').length,
     nextButton        = "<button class='next next-subsection' type='button'>Next</button>",
+    previousButton    = "<button class='previous previous-subsection' type='button'>Previous</button>",
     nextSectionButton = "<button class='next next-section' type='button'>Next section</button>",
     skipButton        = "<button class='skip-section' type='button'>Skip this section</button>",
     summaryButton     = "<button class='get-summary next' type='button'>Download section summary</button>",
@@ -1146,7 +1147,7 @@ $(function() {
         '<li><a class="trigger-link skills-trigger">Select your skills</a></li>'
     );
     $('#values-summary').append(
-      '<li><a class="trigger-link values-trigger">Finish the value sorting task</a></li>'
+      '<li><a class="trigger-link values-trigger">Complete the value sorting task</a></li>'
     );
     $('#review-sub-content').prepend(
       '<p class="no-selection">Please select one or more decision making barriers from the section above.</p>' +
@@ -1154,12 +1155,14 @@ $(function() {
     );
     $('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
     $('#forme-sub-content').append(skipButton);
-    $('.sub-content').not('.check-option .sub-content').append(nextButton);
+    $('.sub-content').not('.check-option .sub-content').each(function(i) {
+      var $this = $(this);
+      $this.append(i > 0 ? previousButton : '');
+      $this.append(nextButton);
+    });
     $('.section-level-buttons').append(summaryButton).append(nextSectionButton);
     $('.section:last-of-type .next-section').text('What next?');
-    $('#careerBuilder a').each(function() {
-      $(this).attr("target", "_blank");
-    });
+    $('#careerBuilder a').not('.trigger-link').attr("target", "_blank");
     $('#save-area a[href$=".pdf"]').after(
       '<span class="link-icon link-icon-pdf" title="PDF">&#x1F4C4;</span>'
     );
