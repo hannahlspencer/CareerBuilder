@@ -5,9 +5,10 @@ var totalSkills       = $('input:checkbox[name="skill"]').length,
     nextSectionButton = '<button class="next next-section" type="button">Next section<span class="button-icon">&#x203A;</span></button>',
     skipButton        = "<button class='skip-section action-button' type='button'>Skip this section</button>",
     fullSummaryButton = '<button class="get-summary" type="button"><span class="button-icon">&#x1F4E5;</span>Download full summary</button>',
+    summaryButton     = '<button class="get-summary"><span class="button-icon">&#x1F4E5;</span>Download summary</button>',
     saveButton        = '<button id="save-button" disabled>Save progress</button>',
     startAgainButton  = '<button id="clear-button">Start again</button>',
-    summaryButton     = '<button class="get-summary"><span class="button-icon">&#x1F4E5;</span>Save summary</button>',
+
     closeButton       = '<button class="next close-popup" type="button">Close</button>',
     cardSortStart     = '<button class="action-button" id="start-card-sort" type="button">Open value sorting task</button>',
     printButton       = '<button id="print-summary" type="button" onclick="window.print()">Print summary</button>',
@@ -711,8 +712,11 @@ function triggerTogglers(e, $this) {
       $h3Togglers = $thisSection.find('h3 > .toggler').not('.closed');
   if ($this.hasClass('previous-subsection')) {
     var $prevH3 = $thisSub.prev().find('h3 > .toggler');
+    if ($thisSub.is('.section')) { //final previous button of section
+        $prevH3 = $thisSection.find('.subsection').last().find('h3 > .toggler');
+    }
     $h3Togglers.not($prevH3).trigger(e.type);
-    if ($thisSub.is(':first-child')) {
+    if ($thisSub.is('.subsection:first-child')) {
       var $prevSection = $thisSection.prev(),
           $prevH2 = $prevSection.find('h2 > .toggler');
       $prevH2.trigger(e.type);
@@ -724,7 +728,7 @@ function triggerTogglers(e, $this) {
       }
     }
   }
-  else {
+  else { //next button
     var $nextH3 = $thisSub.next().find('h3 > .toggler');
     $h3Togglers.not($nextH3).trigger(e.type);
     if ($this.hasClass('next-section')) {
@@ -1173,10 +1177,9 @@ $(function() {
     $('#forme-sub-content').append(skipButton);
     $('.sub-content').not('.check-option .sub-content').each(function(i) {
       var $this = $(this);
-      $this.append(i > 0 ? previousButton : '');
-      $this.append(nextButton);
+      $this.append(i > 0 ? previousButton : '').append(nextButton);
     });
-    $('.section-level-buttons').append(summaryButton).append(nextSectionButton);
+    $('.section-level-buttons').append(summaryButton).append(previousButton).append(nextSectionButton);
     $('.section:last-of-type .next-section').text('What next?');
     $('#careerBuilder a').not('.trigger-link').attr("target", "_blank");
     $('#save-area a[href$=".pdf"]').after(

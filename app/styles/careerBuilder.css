@@ -435,14 +435,6 @@ ol#careerBuilder {
             transition: all .4s ease;
 }
 
-#careerBuilder .action-button {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  font-size: 1.2em;
-  border-color: black;
-}
-
 .popup button {
   margin-top: 0;
 }
@@ -507,7 +499,7 @@ ol#careerBuilder {
   font-weight: bold;
 }
 
-#careerBuilder button.previous, #careerBuilder button.get-summary {
+#careerBuilder button.previous {
   margin-right: 0.4em;
 }
 
@@ -515,7 +507,7 @@ ol#careerBuilder {
   margin-left: 0.2em;
 }
 
-#careerBuilder .section-level-buttons button.get-summary {
+#careerBuilder .section-level-buttons button.previous {
   margin-right: 0.2em;
 }
 
@@ -530,8 +522,18 @@ ol#careerBuilder {
   width: calc(50% - 0.2em);
 }
 
-#final-popup button.get-summary {
+#careerBuilder .action-button,
+.popup button.get-summary,
+#careerBuilder .section-level-buttons button.get-summary {
+  display: block;
+  margin: 0 auto;
   width: 100%;
+  font-size: 1.2em;
+  border-color: black;
+}
+
+#careerBuilder .section-level-buttons button.get-summary {
+  margin-bottom: 0.25em;
 }
 
              .popup button[disabled],
