@@ -272,6 +272,10 @@ ol#careerBuilder {
   margin-bottom: 0;
 }
 
+#careerBuilder #cs-suggestion {
+  margin-bottom: 0.75em;
+}
+
 #careerBuilder li.section {
   font-family: Arial, sans serif;
   color: #000;
@@ -400,6 +404,8 @@ ol#careerBuilder {
       #cs-container button,
      #careerBuilder button,
 #careerBuilderGuide button {
+  box-sizing: border-box;
+  width: 50%;
   font-size: 100%;
   font-weight: bold;
   border: 1px solid white;
@@ -411,6 +417,13 @@ ol#careerBuilder {
         -ms-transition: all .4s ease;
          -o-transition: all .4s ease;
             transition: all .4s ease;
+}
+
+#careerBuilder .action-button {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 1.2em;
 }
 
 .popup button {
@@ -439,6 +452,10 @@ ol#careerBuilder {
         .popup button.next {
   float: right;
   display: block;
+}
+
+#careerBuilder button.previous, #careerBuilder button.get-summary {
+  border-right: 0;
 }
 
 #careerBuilder .section-level-buttons {
