@@ -8,8 +8,6 @@ var totalSkills       = $('input:checkbox[name="skill"]').length,
     summaryButton     = '<button class="get-summary"><span class="button-icon">&#x1F4E5;</span>Download summary</button>',
     saveButton        = '<button id="save-button" disabled>Save progress</button>',
     startAgainButton  = '<button id="clear-button">Start again</button>',
-
-    closeButton       = '<button class="next close-popup" type="button">Close</button>',
     cardSortStart     = '<button class="action-button" id="start-card-sort" type="button">Open value sorting task</button>',
     printButton       = '<button id="print-summary" type="button" onclick="window.print()">Print summary</button>',
     cardSortInProgess = false,
@@ -1155,7 +1153,6 @@ $(function() {
     saveSummary(e, $(this));
     return false;
   }));
-  $('#save-popup').append(closeButton);
 
   if (!loadProgress()) { //progress not saved
     cs.start();
