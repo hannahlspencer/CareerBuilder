@@ -708,29 +708,46 @@ function registerTriggerProxies(a) {
 function triggerTogglers(e, $this) {
   var $thisSub = $this.closest('li'),
       $thisSection = $this.closest('.section'),
-      $h3Togglers = $thisSection.find('h3 > .toggler').not('.closed'),
-      $nextH3 = $thisSub.next().find('h3 > .toggler');
-  $h3Togglers.not($nextH3).trigger(e.type);
-  if ($this.hasClass('next-section')) {
-    if ($thisSection.is('#achieving')) {
-      $thisSection.find('h2 > .toggler').trigger(e.type);
-      if (e.type == 'click') {
-        showPopup(9999, $('#final-popup'));
-      }
+      $h3Togglers = $thisSection.find('h3 > .toggler').not('.closed');
+  if ($this.hasClass('previous-subsection')) {
+    var $prevH3 = $thisSub.prev().find('h3 > .toggler');
+    $h3Togglers.not($prevH3).trigger(e.type);
+    if ($thisSub.is(':first-child')) {
+      var $prevSection = $thisSection.prev(),
+          $prevH2 = $prevSection.find('h2 > .toggler');
+      $prevH2.trigger(e.type);
+      $prevSection.find('h3 > .toggler').not('.closed').trigger(e.type);
     }
     else {
-      var $nextH2 = $thisSection.next().find('h2 > .toggler');
-      $nextH2.trigger(e.type);
-      $thisSection.next().find('h3 > .toggler').not('.closed').trigger(e.type);
+      if ($prevH3.is('.closed')) {
+        $prevH3.trigger(e.type);
+      }
     }
   }
-  else if ($thisSub.is(':last-child') && e.type == 'click') {
-    $thisSection.find('.section-level-buttons').slideDown()
-        .find('button.get-summary').focus();
-  }
   else {
-    if ($nextH3.is('.closed')) {
-      $nextH3.trigger(e.type);
+    var $nextH3 = $thisSub.next().find('h3 > .toggler');
+    $h3Togglers.not($nextH3).trigger(e.type);
+    if ($this.hasClass('next-section')) {
+      if ($thisSection.is('#achieving')) {
+        $thisSection.find('h2 > .toggler').trigger(e.type);
+        if (e.type == 'click') {
+          showPopup(9999, $('#final-popup'));
+        }
+      }
+      else {
+        var $nextH2 = $thisSection.next().find('h2 > .toggler');
+        $nextH2.trigger(e.type);
+        $thisSection.next().find('h3 > .toggler').not('.closed').trigger(e.type);
+      }
+    }
+    else if ($thisSub.is(':last-child') && e.type == 'click') {
+      $thisSection.find('.section-level-buttons').slideDown()
+          .find('button.get-summary').focus();
+    }
+    else {
+      if ($nextH3.is('.closed')) {
+        $nextH3.trigger(e.type);
+      }
     }
   }
 }
@@ -970,7 +987,7 @@ function registerHandlers() {
       triggerTogglers(e, $(this));
   });
 
-  $('button.next-subsection, button.next-section').hover(
+  $('button.next-subsection, button.next-section, button.previous-subsection').hover(
     function(e) { triggerTogglers(e, $(this)); },
     function(e) { triggerTogglers(e, $(this)); }
   );
