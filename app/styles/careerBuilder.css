@@ -145,6 +145,7 @@ ol#careerBuilder {
 #careerBuilder h3 {
   font-size: 1.4em;
   line-height: 1.4em;
+  margin-top: 2px;
 }
 
 #careerBuilder h4, #careerBuilder h5 {
@@ -807,10 +808,10 @@ ol#careerBuilder {
     }
 
     #cs-container #close-cs {
-      font-size: 2em;
+      font-size: 1.75em;
       padding: 0 0.3em;
       width: auto;
-      margin-right: 0.4em;
+      margin-right: calc(0.4em + 1px);
     }
 
 #cs-container #playing-area {
