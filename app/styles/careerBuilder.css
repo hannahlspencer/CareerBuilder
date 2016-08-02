@@ -458,22 +458,26 @@ ol#careerBuilder {
 
 #careerBuilder button.next .button-icon,
 #careerBuilder button.previous .button-icon {
-  display: block;
+  position: relative;
   font-weight: normal;
   font-size: 5em;
   line-height: 0;
+  width: 0;
+  margin: 0 0.18em;
 }
 
 #careerBuilder button.next .button-icon {
   transform: rotate(90deg);
   float: right;
-  margin-top: 0.14em;
+  top: -3px;
+  margin-left: 0;
 }
 
 #careerBuilder button.previous .button-icon {
   transform: rotate(270deg);
   float: left;
-  margin-top: 0.09em;
+  top: 0.26em;
+  margin-right: 0;
 }
 
 #careerBuilder button.previous, #careerBuilder button.get-summary {
