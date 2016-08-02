@@ -1134,7 +1134,7 @@ $(function() {
     saveSummary(e, $(this));
     return false;
   }));
-  $('#final-popup, #save-popup').append(closeButton);
+  $('#save-popup').append(closeButton);
 
   if (!loadProgress()) { //progress not saved
     cs.start();

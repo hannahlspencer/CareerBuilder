@@ -471,6 +471,7 @@ ol#careerBuilder {
   margin-left: 0.4em;
 }
 
+.popup button .button-icon,
 #careerBuilder button .button-icon {
   position: relative;
   font-weight: normal;
@@ -480,6 +481,7 @@ ol#careerBuilder {
   margin: 0 0.18em;
 }
 
+.popup button.next .button-icon,
 #careerBuilder button.next .button-icon {
   transform: rotate(90deg);
   float: right;
@@ -494,6 +496,7 @@ ol#careerBuilder {
   margin-right: 0;
 }
 
+.popup button.get-summary .button-icon,
 #careerBuilder button.get-summary .button-icon {
   float: left;
   font-size: 1.75em;
@@ -517,6 +520,7 @@ ol#careerBuilder {
 
 #careerBuilder .section-level-buttons {
   padding: 0 0.3em 0.3em calc(0.3em + 1px);
+  margin-top: 1px;
 }
 
 #careerBuilder .section-level-buttons button {
@@ -525,7 +529,10 @@ ol#careerBuilder {
   width: calc(50% - 0.2em);
 }
 
-      #careerBuilder a.disabled-link,
+#final-popup button.get-summary {
+  width: 100%;
+}
+
              .popup button[disabled],
       #cs-container button[disabled],
      #careerBuilder button[disabled],
