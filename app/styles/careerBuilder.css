@@ -10,6 +10,10 @@ label {font-size:1em !important;}
   line-height: 1.4em;
 }
 
+#careerBuilder * {
+  box-sizing: border-box;
+}
+
 #careerBuilder .css-hidden {
   display: none;
 }
@@ -408,13 +412,16 @@ ol#careerBuilder {
   font-size: 1em;
   overflow: visible;
 }
+
+/**************************** BUTTONS ********************************/
+
              .popup button,
       #cs-container button,
      #careerBuilder button,
 #careerBuilderGuide button {
   box-sizing: border-box;
   border: 1px solid;
-  width: 50%;
+  width: calc(50% - 0.4em);
   font-size: 100%;
   font-weight: bold;
   padding: 0.75em;
@@ -461,6 +468,7 @@ ol#careerBuilder {
         .popup button.next {
   float: right;
   display: block;
+  margin-left: 0.4em;
 }
 
 #careerBuilder button .button-icon {
@@ -496,16 +504,25 @@ ol#careerBuilder {
 }
 
 #careerBuilder button.previous, #careerBuilder button.get-summary {
-  border-right: 0;
+  margin-right: 0.4em;
+}
+
+#careerBuilder .section-level-buttons button.next {
+  margin-left: 0.2em;
+}
+
+#careerBuilder .section-level-buttons button.get-summary {
+  margin-right: 0.2em;
 }
 
 #careerBuilder .section-level-buttons {
-  padding: 0 0.3em 0.3em 0.3em;
+  padding: 0 0.3em 0.3em calc(0.3em + 1px);
 }
 
 #careerBuilder .section-level-buttons button {
   margin-bottom: 0;
   margin-top: 0;
+  width: calc(50% - 0.2em);
 }
 
       #careerBuilder a.disabled-link,
@@ -524,9 +541,7 @@ ol#careerBuilder {
   pointer-events: none;
 }
 
-#careerBuilder a.disabled-link .link-sub {
-  color: #cecece !important;
-}
+/**************************** BUTTONS end ********************************/
 
 .popup {
   display: none;
