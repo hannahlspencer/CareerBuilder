@@ -144,7 +144,6 @@ ol#careerBuilder {
 
 #careerBuilder h2 {
   font-size: 1.6em;
-  line-height: 1.3em;
 }
 
 #careerBuilder h3 {
@@ -170,16 +169,21 @@ ol#careerBuilder {
   content: '\203A';
   font-weight: normal;
   font-size: 1.4em;
-  /*margin: 0 0.3em 0 0.2em; /*dev only*/
+  width: 0.25em;
+  height: 0.35em;
+  line-height: 0.3em;
+  /*outline: 1px solid red;*/
+  margin-right: 0.1em;
   margin-left: 0.2em; /*Contensis only*/
   padding-bottom: 0.1em;
   display: inline-block;
   text-decoration: none;
   -webkit-transition: all .15s ease-in-out;
-       -moz-transition: all .15s ease-in-out;
-        -ms-transition: all .15s ease-in-out;
-         -o-transition: all .15s ease-in-out;
-            transition: all .15s ease-in-out;
+     -moz-transition: all .15s ease-in-out;
+      -ms-transition: all .15s ease-in-out;
+       -o-transition: all .15s ease-in-out;
+          transition: all .15s ease-in-out;
+          transform-origin: center center;
 }
 
 #careerBuilder .toggler.opening::before {
@@ -217,12 +221,12 @@ ol#careerBuilder {
 }
 
 #careerBuilder h2 .toggler {
-  padding: 0.2em 0 0 0.4em;
+  padding: 0.5em 0 0.1em 0.4em;
   position: relative;
 }
 
 #careerBuilder h3 .toggler {
-  padding: 0.1em 0 0.25em 0.4em;
+  padding: 0.5em 0 0.45em 0.4em;
 }
 
 #careerBuilder .check-label {
@@ -234,17 +238,24 @@ ol#careerBuilder {
   width: auto;
   display: block;
   font-weight: bold;
-  padding: 0.3em;
+  padding: 0.6em;
   padding-right: 1em;
   position: relative;
   top: -10px;
 }
 
+#careerBuilder .check-label .toggler::before {
+  margin-left: 0;
+}
+
 #careerBuilder h2 .subtitle {
-  font-size: 0.8em;
   vertical-align: 10px;
   margin-left: 1.4em;
+  margin-top: 0.3em;
+  padding-bottom: 0.45em;
+  display: block;
   font-weight: bold;
+  font-size: 0.8em;
   color: #FFF;
   opacity: 0.9;
 }
