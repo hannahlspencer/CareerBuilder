@@ -1,8 +1,8 @@
 //globals
 var totalSkills       = $('input:checkbox[name="skill"]').length,
-    nextButton        = "<button class='next next-subsection' type='button'>Next</button>",
-    previousButton    = "<button class='previous previous-subsection' type='button'>Previous</button>",
-    nextSectionButton = "<button class='next next-section' type='button'>Next section</button>",
+    nextButton        = '<button class="next next-subsection" type="button">Next<span class="button-icon">&#x203A;</span></button>',
+    previousButton    = '<button class="previous previous-subsection" type="button"><span class="button-icon">&#x203A;</span>Previous</button>',
+    nextSectionButton = '<button class="next next-section" type="button">Next section<span class="button-icon">&#x203A;</span></button>',
     skipButton        = "<button class='skip-section action-button' type='button'>Skip this section</button>",
     summaryButton     = "<button class='get-summary next' type='button'>Download section summary</button>",
     fullSummaryButton = "<button class='get-summary' type='button'>Download full summary</button>",
