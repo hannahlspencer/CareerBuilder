@@ -112,9 +112,14 @@ var cbSummaryStyle =
 "@media print {" +
 "    .advice {" +
 "        border: 1px solid #898989;" +
+"        overflow: visible;" +
 "    }" +
 "    #print-summary {" +
 "        display: none;" +
+"    }" +
+"    a::after {" +
+"        content: \" (\" attr(href) \")\";" +
+"        font-size: 75%" +
 "    }" +
 "}" +
 "#careerBuilder-summary {" +
