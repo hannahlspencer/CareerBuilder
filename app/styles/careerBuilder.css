@@ -441,6 +441,8 @@ ol#careerBuilder {
 
 #careerBuilderGuide button {
   margin-top: 0.5em;
+  width: 100%;
+  display: block;
 }
 
 #careerBuilderGuide button:first-of-type {
@@ -490,6 +492,7 @@ ol#careerBuilder {
 }
 
 .popup button.get-summary .button-icon,
+#careerBuilderGuide button .button-icon,
 #careerBuilder button.get-summary .button-icon {
   float: left;
   font-size: 1.75em;
@@ -497,6 +500,11 @@ ol#careerBuilder {
   left: -0.21em;
   top: 0.39em;
   font-weight: bold;
+}
+
+#careerBuilderGuide button .button-icon {
+  font-size: 1.2em;
+  line-height: 1em;
 }
 
 #careerBuilder button.previous {
