@@ -421,7 +421,7 @@ ol#careerBuilder {
      #careerBuilder button,
 #careerBuilderGuide button {
   box-sizing: border-box;
-  border: 1px solid;
+  border: 1px solid #666;
   width: calc(50% - 0.4em);
   font-size: 100%;
   font-weight: bold;
@@ -537,7 +537,6 @@ ol#careerBuilder {
   margin: 0 auto;
   width: 100%;
   font-size: 1.2em;
-  border-color: black;
 }
 
 #careerBuilder .section-level-buttons button.get-summary {

@@ -929,7 +929,7 @@ function registerHandlers() {
   });
 
   $('.close-popup').click(function() {
-    closePopup($(this).parent().attr('id'));
+    closePopup($(this).closest('.popup').attr('id'));
   });
 
   $('.toggler').hover(
