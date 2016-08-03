@@ -537,6 +537,7 @@ ol#careerBuilder {
   margin: 0 auto;
   width: 100%;
   font-size: 1.2em;
+  border-width: 2px;
 }
 
 #careerBuilder .section-level-buttons button.get-summary {
@@ -644,7 +645,7 @@ ol#careerBuilder {
   border-color: #FAC38E;
 }
 
-  #who button {
+  #who button, #cs-container button {
     border-color: #F9AB63;
   }
 
