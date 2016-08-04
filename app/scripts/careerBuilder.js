@@ -645,12 +645,13 @@ var trapFocus = function(e) {
 };
 
 function closePopup(popupId) {
-  window.location.hash = '';
-  history.pushState('', document.title, window.location.pathname);
   var $popup = $('#'+popupId);
-  $popup.slideUp();
-  $('#popups').append($popup);
-  $('.cb-overlay').remove();
+  $popup.slideUp('fast', function() {
+    window.location.hash = '';
+    history.pushState('', document.title, window.location.pathname);
+    $('#popups').append($popup);
+    $('.cb-overlay').remove();
+  });
 }
 
 function showPopup(z, $popup) {
