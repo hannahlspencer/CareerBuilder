@@ -14,96 +14,96 @@ var totalSkills       = 0,
     openPopup         = '';
 
 var cb = {
-  "title" : "Career Builder",
-  "sections" : [
+  title : "Career Builder",
+  sections : [
     {
-      "id" : "who",
-      "title" : "Self assessment",
-      "subs" : [
+      id : "who",
+      title : "Self assessment",
+      subs : [
         {
-          "id" : "skills",
-          "title" : "Skills and abilities"
+          id : "skills",
+          title : "Skills and abilities"
         },
         {
-          "id" : "pdam",
-          "title" : "Developing your skillset"
+          id : "pdam",
+          title : "Developing your skillset"
         },
         {
-          "id" : "values",
-          "title" : "Values and motivations"
+          id : "values",
+          title : "Values and motivations"
         },
         {
-          "id" : "summary",
-          "title" : "What next?"
+          id : "summary",
+          title : "What next?"
         }
       ]
     },
     {
-      "id" : "research",
-      "title" : "Careers research",
-      "subs" : [
+      id : "research",
+      title : "Careers research",
+      subs : [
         {
-          "id" : "sectors",
-          "title" : "Sectors"
+          id : "sectors",
+          title : "Sectors"
         },
         {
-          "id" : "roles",
-          "title" : "Roles"
+          id : "roles",
+          title : "Roles"
         },
         {
-          "id" : "employers",
-          "title" : "Employers"
+          id : "employers",
+          title : "Employers"
         }
       ]
     },
     {
-      "id" : "decision",
-      "title" : "Making a decision",
-      "subs" : [
+      id : "decision",
+      title : "Making a decision",
+      subs : [
         {
-          "id" : "forme",
-          "title" : "Do I need to use this section?"
+          id : "forme",
+          title : "Do I need to use this section?"
         },
         {
-          "id" : "barriers",
-          "title" : "Barriers to effective decision making"
+          id : "barriers",
+          title : "Barriers to effective decision making"
         },
         {
-          "id" : "review",
-          "title" : "Reviewing your responses"
+          id : "review",
+          title : "Reviewing your responses"
         },
         {
-          "id" : "further",
-          "title" : "Further support and advice"
+          id : "further",
+          title : "Further support and advice"
         }
       ]
     },
     {
-      "id" : "achieving",
-      "title" : "Taking action",
-      "subs" : [
+      id : "achieving",
+      title : "Taking action",
+      subs : [
         {
-          "id" : "cv",
-          "title" : "CV and cover letter support"
+          id : "cv",
+          title : "CV and cover letter support"
         },
         {
-          "id" : "application",
-          "title" : "Application form support"
+          id : "application",
+          title : "Application form support"
         },
         {
-          "id" : "interview",
-          "title" : "Interview support"
+          id : "interview",
+          title : "Interview support"
         },
         {
-          "id" : "assessment",
-          "title" : "Assessment centre support"
+          id : "assessment",
+          title : "Assessment centre support"
         }
       ]
     },
     {
-      "id" : "final-popup",
-      "title" : "You have now finished the last section of Career Builder but this is not the end of your career planning!",
-      "subs" : []
+      id : "final-popup",
+      title : "You have now finished the last section of Career Builder but this is not the end of your career planning!",
+      subs : []
     }
   ]
 };
@@ -656,29 +656,18 @@ function closePopup(popupId) {
 function showPopup(z, $popup) {
   var docHeight = $(document).height(),
       pid = $popup.attr('id');
-  $('body').append('<div id="overlay"></div>');
-  $('#overlay')
+  $('body').append('<div id="cb-dark-overlay" class="cb-overlay"></div>');
+  $('#cb-dark-overlay')
     .height(docHeight)
     .css({
-      'opacity' : 0.5,
-      'position': 'fixed',
-      'top': 0,
-      'left': 0,
-      'background-color': 'black',
-      'width': '100%',
       'z-index': z - 1
     }).click(function() {
         closePopup(pid);
     });
-  $('body').append('<div id="clear-overlay"></div>');
-  $('#clear-overlay')
+  $('body').append('<div id="cb-clear-overlay" class="cb-overlay"></div>');
+  $('#cb-clear-overlay')
     .height(docHeight)
-    .css({
-      'position': 'absolute',
-      'top': 0,
-      'left': 0,
-      'width': '100%'
-    }).append($popup);
+    .append($popup);
   $popup.slideDown('slow').focus();
   window.location.hash = pid;
   document.addEventListener('focus', trapFocus, true);

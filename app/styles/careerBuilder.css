@@ -1,9 +1,3 @@
-/***LSE site resets***/
-.sys_layout_three_column_three p , .sys_layout_three_column_three ul {font-size:.75em;}
-.sys_layout_three_column_two #careerBuilder H3 {font-size: 1.3em !important;}
-label {font-size:1em !important;}
-
-/***CareerBuilder styling v6 ***/
 #careerBuilder {
   width: 100%;
   font-size: 100%;
@@ -637,6 +631,19 @@ ol#careerBuilder {
 
 #careerBuilderGuide ul {
   padding-left: 17px;
+}
+
+.cb-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#cb-dark-overlay {
+  position: fixed;
+  opacity: 0.5;
+  background-color: black;
 }
 
 /****************** Colours ********************/
