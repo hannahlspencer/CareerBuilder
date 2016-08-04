@@ -3,7 +3,7 @@ var totalSkills       = 0,
     nextButton        = '<button class="next next-subsection" type="button">Next<span class="button-icon">&#x203A;</span></button>',
     previousButton    = '<button class="previous previous-subsection" type="button"><span class="button-icon">&#x203A;</span>Previous</button>',
     nextSectionButton = '<button class="next next-section" type="button">Next section<span class="button-icon">&#x203A;</span></button>',
-    skipButton        = '<button class="skip-section action-button" type="button">Skip this section</button>',
+    skipButton        = '<button class="skip-section action-button next-section" type="button">Skip this section</button>',
     fullSummaryButton = '<button class="get-summary" type="button"><span class="button-icon">&#x1F4E5;</span>Download full summary</button>',
     summaryButton     = '<button class="get-summary"><span class="button-icon">&#x1F4E5;</span>Download summary</button>',
     saveButton        = '<button id="save-button" disabled>Save progress</button>',
@@ -12,6 +12,8 @@ var totalSkills       = 0,
     printButton       = '<button id="print-summary" type="button" onclick="window.print()">Print summary</button>',
     cardSortInProgess = false,
     openPopup         = '';
+
+var cb_state = {};
 
 var cb = {
   title : "Career Builder",
@@ -581,11 +583,6 @@ var cs =
 
 }());
 
-//replace prop() with attr() if jQuery is older than 1.6
-if (typeof jQuery.fn.prop != 'function') {
-    jQuery.fn.prop = jQuery.fn.attr;
-}
-
 function supportsStorage() {
   try {
     return 'localStorage' in window && window['localStorage'] !== null;
@@ -597,6 +594,7 @@ function supportsStorage() {
 function saveProgress() {
   if (supportsStorage()) {
     localStorage.setItem('cb-html', $('#save-area').html());
+    localStorage.setObject('cb-state', cb_state);
     $('#save-button').html('&#10004; Saved').attr('disabled', 'disabled');
     showPopup(9999, $('#save-popup'));
   } else {
@@ -610,6 +608,7 @@ function loadProgress() {
       $('#save-area').html(localStorage.getItem('cb-html'));
       $('#clear-button').removeAttr('disabled');
       cs.restart();
+      cb_state = localStorage.getObject('cb-state');
       return true;
     }
   }
@@ -619,6 +618,7 @@ function loadProgress() {
 function clearAll() {
   if (supportsStorage()) {
     localStorage.removeItem('cb-html');
+    localStorage.removeItem('cb-state');
     $('#save-area').html(localStorage.getItem('cb-default-html'));
     $('#save-button').html('Save progress');
     registerHandlers();
@@ -650,7 +650,7 @@ function closePopup(popupId) {
   var $popup = $('#'+popupId);
   $popup.slideUp();
   $('#popups').append($popup);
-  $('#overlay, #clear-overlay').remove();
+  $('.cb-overlay').remove();
 }
 
 function showPopup(z, $popup) {
@@ -871,7 +871,6 @@ function saveSummary(e, $this) {
   body += "<h2>Next steps in your career planning</h2>";
   $('#final-popup p').not('.summary-exclude').each(function() {
       body += "<p>" + $(this).html() + "</p>";
-    }
   });
   var html = header + body + footer,
       oSummaryBlob = new Blob([html], {type: 'text/html'});
@@ -911,7 +910,6 @@ function registerHandlers() {
     '.section1-trigger'   : '#who-head > .toggler',
     '.section2-trigger'   : '#research-head > .toggler',
     '.section3-trigger'   : '#decision-head > .toggler',
-    //'button.skip-section' : '#achieving-head > .toggler',
     '.values-trigger'     : '#start-card-sort',
     '.skills-trigger'     : '#skills-sub > h3 > .toggler'
   });
@@ -991,6 +989,14 @@ function registerHandlers() {
     saveSummary(e, $(this));
     return false;
   });
+    
+  $('button.skip-section').click(function(e) {
+     var $section = $(this).closest('.section'),
+         sectionId = $section.attr('id');
+     cb_state.skippedSections.push(sectionId);
+     console.log(cb_state);
+     return false;
+  });
 
   $('#finish-button').click(function(e) {
     buildCardSortSummary();
@@ -1025,7 +1031,7 @@ function registerHandlers() {
     var qName = $(this).attr('name');
     $('input[type=radio][name=' + qName + ']').each(function() {
       var $this = $(this),
-          $s   = $('#' + qName + '-' + $this.val()),
+          $s    = $('#' + qName + '-' + $this.val()),
           state = $this.is(':checked');
       $s.attr('aria-hidden', !state);
       state ? $s.slideDown('slow') : $s.slideUp('slow');
@@ -1125,10 +1131,15 @@ function registerHandlers() {
 }
 
 $(function() {
+  
+  //replace prop() with attr() if jQuery is older than 1.6
+  if (typeof jQuery.fn.prop != 'function') {
+    jQuery.fn.prop = jQuery.fn.attr;
+  }
     
   totalSkills = $('input:checkbox[name="skill"]').length;
   
-  if (supportsStorage) {
+  if (supportsStorage()) {
       
     Storage.prototype.setObject = function(key, value) {
       this.setItem(key, JSON.stringify(value));
@@ -1160,6 +1171,7 @@ $(function() {
 
   if (!loadProgress()) { //progress not saved
     cs.start();
+    cb_state.skippedSections = [];
     $('#careerBuilder').removeClass('no-js');
     $('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
     $('#values-sub-content').append(cardSortStart);
