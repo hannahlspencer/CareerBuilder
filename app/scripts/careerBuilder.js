@@ -880,8 +880,7 @@ function saveSummary(e, $this) {
     });
   }
   body += "<h2>Next steps in your career planning</h2>";
-  $('#final-popup').children().each(function(i) {
-    if (i == 1 || i == 2) {
+  $('#final-popup p').not('.summary-exclude').each(function() {
       body += "<p>" + $(this).html() + "</p>";
     }
   });
