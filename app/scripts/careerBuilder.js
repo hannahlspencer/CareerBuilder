@@ -1,9 +1,9 @@
 //globals
-var totalSkills       = $('input:checkbox[name="skill"]').length,
+var totalSkills       = 0,
     nextButton        = '<button class="next next-subsection" type="button">Next<span class="button-icon">&#x203A;</span></button>',
     previousButton    = '<button class="previous previous-subsection" type="button"><span class="button-icon">&#x203A;</span>Previous</button>',
     nextSectionButton = '<button class="next next-section" type="button">Next section<span class="button-icon">&#x203A;</span></button>',
-    skipButton        = "<button class='skip-section action-button' type='button'>Skip this section</button>",
+    skipButton        = '<button class="skip-section action-button" type="button">Skip this section</button>',
     fullSummaryButton = '<button class="get-summary" type="button"><span class="button-icon">&#x1F4E5;</span>Download full summary</button>',
     summaryButton     = '<button class="get-summary"><span class="button-icon">&#x1F4E5;</span>Download summary</button>',
     saveButton        = '<button id="save-button" disabled>Save progress</button>',
@@ -1137,6 +1137,8 @@ function registerHandlers() {
 
 $(function() {
 
+  totalSkills = $('input:checkbox[name="skill"]').length;
+  
   if (supportsStorage) {
     $('#careerBuilderGuide').append($(saveButton).click(function() {
       saveProgress();
