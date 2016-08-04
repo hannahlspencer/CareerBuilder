@@ -911,7 +911,7 @@ function registerHandlers() {
     '.section1-trigger'   : '#who-head > .toggler',
     '.section2-trigger'   : '#research-head > .toggler',
     '.section3-trigger'   : '#decision-head > .toggler',
-    'button.skip-section' : '#achieving-head > .toggler',
+    //'button.skip-section' : '#achieving-head > .toggler',
     '.values-trigger'     : '#start-card-sort',
     '.skills-trigger'     : '#skills-sub > h3 > .toggler'
   });
@@ -1125,10 +1125,19 @@ function registerHandlers() {
 }
 
 $(function() {
-
+    
   totalSkills = $('input:checkbox[name="skill"]').length;
   
   if (supportsStorage) {
+      
+    Storage.prototype.setObject = function(key, value) {
+      this.setItem(key, JSON.stringify(value));
+    }
+    Storage.prototype.getObject = function(key) {
+      var value = this.getItem(key);
+      return value && JSON.parse(value);
+    }
+    
     $('#careerBuilderGuide').append($(saveButton).click(function() {
       saveProgress();
       return false;
