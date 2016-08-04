@@ -854,13 +854,15 @@ function saveSummary(e, $this) {
       fileName = "CareerBuilder",
       sId = $this.closest('.section').attr('id'),
       body = "";
+  //download full summary 
   if (sId == cb.sections[cb.sections.length - 1].id || sId == "careerBuilderGuide") {
     $.each(cb.sections, function(i, section) {
-      if (section.id != "final-popup") {
+      if (cb_state.skippedSections.indexOf(section.id) < 0) {
         body += getSummary(section.id);
       }
     });
   }
+  //download summary for one section
   else {
     body += getSummary(sId);
     $.each(cb.sections, function(i, section) {
@@ -995,7 +997,6 @@ function registerHandlers() {
      var $section = $(this).closest('.section'),
          sectionId = $section.attr('id');
      cb_state.skippedSections.push(sectionId);
-     console.log(cb_state);
      return false;
   });
 
@@ -1172,7 +1173,7 @@ $(function() {
 
   if (!loadProgress()) { //progress not saved
     cs.start();
-    cb_state.skippedSections = [];
+    cb_state.skippedSections = ["final-popup"];
     $('#careerBuilder').removeClass('no-js');
     $('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
     $('#values-sub-content').append(cardSortStart);
