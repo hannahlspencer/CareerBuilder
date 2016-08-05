@@ -5,7 +5,7 @@ var totalSkills       = 0,
     nextSectionButton = '<button class="next next-section" type="button">Next section<span class="button-icon">&#x203A;</span></button>',
     skipButton        = '<button class="skip-section action-button next-section" type="button">Skip this section</button>',
     fullSummaryButton = '<button class="get-summary" type="button"><span class="button-icon">&#x1F4E5;</span>Download full summary</button>',
-    summaryButton     = '<button class="get-summary"><span class="button-icon">&#x1F4E5;</span>Download summary</button>',
+    summaryButton     = '<button class="get-summary" disabled><span class="button-icon">&#x1F4E5;</span>Download summary</button>',
     saveButton        = '<button id="save-button" disabled>Save progress</button>',
     startAgainButton  = '<button id="clear-button">Start again</button>',
     cardSortStart     = '<button class="action-button" id="start-card-sort" type="button">Open value sorting task</button>',
@@ -609,7 +609,7 @@ function loadProgress() {
       $('#clear-button').removeAttr('disabled');
       cs.restart();
       cb_state = localStorage.getObject('cb-state');
-      if (cb_state.allowDownload) {
+      if (cb_state.allowDownload.full) {
         $('#careerBuilderGuide .get-summary').removeAttr('disabled');
       }
       return true;
@@ -624,7 +624,7 @@ function clearAll() {
     localStorage.removeItem('cb-state');
     $('#save-area').html(localStorage.getItem('cb-default-html'));
     $('#save-button').html('Save progress');
-    cb_state = {};
+    resetState();
     registerHandlers();
     cs.restart();
   }
@@ -885,9 +885,20 @@ function saveSummary(e, $this) {
   saveAs(oSummaryBlob, fileName);
 }
 
+function resetState() {
+    cb_state = {};
+    cb_state.allowDownload = {};
+    cb_state.skippedSections = ["final-popup"];
+}
+
+function allowSectionDownload(id) {
+  $('#' + id + ' button.get-summary').removeAttr('disabled');
+  cb_state.allowDownload[id] = true;
+}
+
 function allowFullDownload() {
   $('#careerBuilderGuide .get-summary').removeAttr('disabled');
-  cb_state.allowDownload = true;
+  cb_state.allowDownload['full'] = true;
 }
 
 function allowSave() {
@@ -1121,14 +1132,21 @@ function registerHandlers() {
   });
 
   $('input:radio, input:checkbox').change(function() {
-    var $this = $(this);
+    var $this = $(this),
+        $thisSection = $this.closest('.section'),
+        thisSectionId = $thisSection.attr('id');
     if ($this.is(':checked')) {
       $this.attr('checked', true);
     }
     else {
       $this.removeAttr('checked');
     }
-    allowFullDownload();
+    if (!cb_state.allowDownload || !cb_state.allowDownload['full']) {
+      allowFullDownload();
+    }
+    if (!cb_state.allowDownload || !cb_state.allowDownload[thisSectionId]) {
+      allowSectionDownload(thisSectionId);
+    }
     allowSave();
   });
 
@@ -1178,7 +1196,7 @@ $(function() {
 
   if (!loadProgress()) { //progress not saved
     cs.start();
-    cb_state.skippedSections = ["final-popup"];
+    resetState();
     $('#careerBuilder').removeClass('no-js');
     $('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
     $('#values-sub-content').append(cardSortStart);
