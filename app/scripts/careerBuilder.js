@@ -609,6 +609,9 @@ function loadProgress() {
       $('#clear-button').removeAttr('disabled');
       cs.restart();
       cb_state = localStorage.getObject('cb-state');
+      if (cb_state.allowDownload) {
+        $('#careerBuilderGuide .get-summary').removeAttr('disabled');
+      }
       return true;
     }
   }
@@ -621,6 +624,7 @@ function clearAll() {
     localStorage.removeItem('cb-state');
     $('#save-area').html(localStorage.getItem('cb-default-html'));
     $('#save-button').html('Save progress');
+    cb_state = {};
     registerHandlers();
     cs.restart();
   }
@@ -842,9 +846,9 @@ function saveSummary(e, $this) {
   var iconURL = 'http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/images/Icons/',
       header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
          "<title>Your Career Builder summary</title>" +
-         '<meta charset="utf-8">' +
-         '<link rel="icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
-         '<link rel="shortcut icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
+         "<meta charset=\"utf-8\">" +
+         "<link rel=\"icon\" type=\"image/x-icon\" href=\"http://www.lse.ac.uk/favicon.ico\">" +
+         "<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"http://www.lse.ac.uk/favicon.ico\">" +
          "<style>" + cbSummaryStyle + "</style>" +
          "</head><body id=\"careerBuilder-summary\">" + printButton +
          "<h1>Your Career Builder summary</h1>" +
@@ -854,7 +858,7 @@ function saveSummary(e, $this) {
       fileName = "CareerBuilder",
       sId = $this.closest('.section').attr('id'),
       body = "";
-  //download full summary 
+  //download full summary
   if (sId == cb.sections[cb.sections.length - 1].id || sId == "careerBuilderGuide") {
     $.each(cb.sections, function(i, section) {
       if (cb_state.skippedSections.indexOf(section.id) < 0) {
@@ -883,6 +887,7 @@ function saveSummary(e, $this) {
 
 function allowFullDownload() {
   $('#careerBuilderGuide .get-summary').removeAttr('disabled');
+  cb_state.allowDownload = true;
 }
 
 function allowSave() {
@@ -992,7 +997,7 @@ function registerHandlers() {
     saveSummary(e, $(this));
     return false;
   });
-    
+
   $('button.skip-section').click(function(e) {
      var $section = $(this).closest('.section'),
          sectionId = $section.attr('id');
@@ -1133,16 +1138,16 @@ function registerHandlers() {
 }
 
 $(function() {
-  
+
   //replace prop() with attr() if jQuery is older than 1.6
   if (typeof jQuery.fn.prop != 'function') {
     jQuery.fn.prop = jQuery.fn.attr;
   }
-    
+
   totalSkills = $('input:checkbox[name="skill"]').length;
-  
+
   if (supportsStorage()) {
-      
+
     Storage.prototype.setObject = function(key, value) {
       this.setItem(key, JSON.stringify(value));
     }
@@ -1150,7 +1155,7 @@ $(function() {
       var value = this.getItem(key);
       return value && JSON.parse(value);
     }
-    
+
     $('#careerBuilderGuide').append($(saveButton).click(function() {
       saveProgress();
       return false;
