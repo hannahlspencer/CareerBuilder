@@ -927,11 +927,11 @@ function registerHandlers() {
   }, false);
 
   registerTriggerProxies({
-    '.section1-trigger'   : '#who-head > .toggler',
-    '.section2-trigger'   : '#research-head > .toggler',
-    '.section3-trigger'   : '#decision-head > .toggler',
-    '.values-trigger'     : '#start-card-sort',
-    '.skills-trigger'     : '#skills-sub > h3 > .toggler'
+    '.section1-trigger' : '#who-head > .toggler',
+    '.section2-trigger' : '#research-head > .toggler',
+    '.section3-trigger' : '#decision-head > .toggler',
+    '.values-trigger'   : '#start-card-sort',
+    '.skills-trigger'   : '#skills-sub > h3 > .toggler'
   });
 
   $('#close-cs').click(function() {
@@ -1202,10 +1202,10 @@ $(function() {
     $('#values-sub-content').append(cardSortStart);
     $('.section-content').append('<div class="section-level-buttons hidden"></div>');
     $('#skills-trigger-container').append(
-      '<a href="http://lse.ac.uk/careerbuilder" class="trigger-link skills-trigger">Select your skills</a>'
+      '<a class="trigger-link skills-trigger">Select your skills</a>'
     );
     $('#values-trigger-container').append(
-      '<a href="http://lse.ac.uk/careerbuilder" class="trigger-link values-trigger">Complete the value sorting task</a>'
+      '<a class="trigger-link values-trigger">Complete the value sorting task</a>'
     );
     $('#review-sub-content').prepend(
       '<p class="no-selection">Please select one or more decision making barriers from the section above.</p>' +
@@ -1213,11 +1213,14 @@ $(function() {
     );
     $('#review-sub-content .advice h4').after('<ul class="barrier-list"></ul>');
     $('#forme-sub-content').append(skipButton);
-    $('.sub-content').not('.check-option .sub-content').each(function(i) {
-      var $this = $(this);
-      $this.append(i > 0 ? previousButton : '').append(nextButton);
-    });
-    $('.section-level-buttons').append(summaryButton).append(previousButton).append(nextSectionButton);
+    $('.sub-content').not('.check-option .sub-content')
+      .append(previousButton)
+      .append(nextButton);
+    $('.previous-subsection').get(0).remove();
+    $('.section-level-buttons')
+      .append(summaryButton)
+      .append(previousButton)
+      .append(nextSectionButton);
     $('.section:last-of-type .next-section').text('What next?');
     $('#careerBuilder a').attr("target", "_blank")
       .filter('.trigger-link').attr('href', window.location.href);;
