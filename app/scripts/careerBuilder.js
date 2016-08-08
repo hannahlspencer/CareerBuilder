@@ -978,6 +978,9 @@ function registerHandlers() {
        .attr('aria-hidden', !state)
        .slideToggle('slow', function() {
          $this.removeClass('opening').removeClass('closing');
+         if ($this.is(':hover')) {
+           $this.trigger('mouseenter');
+         }
     });
     //close other sections
     if($head.is('h2')) {
