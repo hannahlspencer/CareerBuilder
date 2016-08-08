@@ -794,13 +794,19 @@ function buildSectionSummary(section) {
 function getSummary(sectionID) {
   var body = "<div class=\"section-summary\" id=\"" + sectionID + "-summary\">";
   if (sectionID == cb.sections[0].id) {
-    body += "<h2>Self-assessment</h2>          <h3>Your skills</h3>";
+    body += "<h2>Self-assessment</h2> <h3>Your skills</h3>";
 
-    body += $('<div>').append($('#skills-summary').clone()).remove().html();
+    body += $('<div>')
+      .append($('#skills-trigger-container').clone())
+      .append($('#skills-summary').clone())
+      .remove().html();
     body += $('#pdam-sub-content').children().html(); //hidden ones have display:none on element
 
     body+= "<h3>Your values</h3>";
-    body += $('<div>').append($('#values-summary').clone()).remove().html();
+    body += $('<div>')
+      .append($('#values-trigger-container').clone())
+      .append($('#values-summary').clone())
+      .remove().html();
 
     body+= "<h3>Next steps</h3>           <div class=\"advice\">";
     body += $('#skills-values-suggestion').html();
@@ -1213,7 +1219,8 @@ $(function() {
     });
     $('.section-level-buttons').append(summaryButton).append(previousButton).append(nextSectionButton);
     $('.section:last-of-type .next-section').text('What next?');
-    $('#careerBuilder a').not('.trigger-link').attr("target", "_blank");
+    $('#careerBuilder a').attr("target", "_blank")
+      .filter('.trigger-link').attr('href', window.location.href);;
     $('#save-area a[href$=".pdf"]').after(
       '<span class="link-icon link-icon-pdf" title="PDF">&#x1F4C4;</span>'
     );
