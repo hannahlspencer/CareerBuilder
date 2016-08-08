@@ -688,6 +688,7 @@ function registerTriggerProxies(a) {
       if (!($('#' + controls).attr('aria-hidden') == 'false')) {
         $val.trigger(e);
       }
+      return false;
     });
     $i.hover(
       function(e) {
@@ -764,6 +765,7 @@ function buildCardSortSummary() {
     }
     summary += "</ul></li>";
   }
+  $('#values-trigger-container').hide();
   $('#values-summary').html(summary);
 }
 
@@ -778,7 +780,7 @@ function buildSectionSummary(section) {
       sectionHTML += " " + $('label[for=' + radId + ']').text() + "</strong>.</p>";
       sectionHTML += "<p>Here's our advice:</p>";
       sectionHTML += "<div class=\"advice\">";
-      var sugId = radId.substring(0, radId.length - 6); // 6 is length of "-radio"
+      var sugId = radId.substring(0, radId.length - 6); // "-radio"
       sectionHTML += $('#' + sub.id + '-sub-content #' + sugId).html();
       sectionHTML += "</div>";
     }
@@ -1018,8 +1020,8 @@ function registerHandlers() {
     }
     $('#cs-suggestion, #skills-values-suggestion').slideDown('slow');
     $('html, body').animate({
-            scrollTop: $("#values-sub").offset().top
-        }, 1000);
+      scrollTop: $("#values-sub").offset().top
+    }, 1000);
     $('#start-card-sort').focus();
     return false;
   });
@@ -1035,6 +1037,7 @@ function registerHandlers() {
     if (event.keyCode === 32) {
       $(this).click();
     }
+    return false;
   });
 
   //expand advice according to radio button selection
@@ -1052,7 +1055,8 @@ function registerHandlers() {
   //show skills in list and remove skills from pdam set when selected
   $('input[name=skill]').change(function() {
     var $checked = $(this);
-    $('#skills-summary').html("");
+    $('#skills-summary').html('');
+    $('#skills-trigger-container').hide();
     $('#missing-skill-list li').hide();
     $('#skills-values-suggestion').slideDown('slow');
     var skillsCount = 0;
@@ -1079,7 +1083,7 @@ function registerHandlers() {
       $('#missing-skills-advice').show();
     }
     if (skillsCount == 0) {
-      $('#skills-summary').append('<li><span class="trigger-link skills-trigger">                                        You haven\'t selected any skills.                                     </span></li>');
+      $('#skills-trigger-container').show();
       $('#skills-values-suggestion').slideUp('slow');
     }
   });
@@ -1191,11 +1195,11 @@ $(function() {
     $('input:checkbox, input:radio').removeAttr('checked'); //for mozilla
     $('#values-sub-content').append(cardSortStart);
     $('.section-content').append('<div class="section-level-buttons hidden"></div>');
-    $('#skills-summary').append(
-        '<li><a class="trigger-link skills-trigger">Select your skills</a></li>'
+    $('#skills-trigger-container').append(
+      '<a href="http://lse.ac.uk/careerbuilder" class="trigger-link skills-trigger">Select your skills</a>'
     );
-    $('#values-summary').append(
-      '<li><a class="trigger-link values-trigger">Complete the value sorting task</a></li>'
+    $('#values-trigger-container').append(
+      '<a href="http://lse.ac.uk/careerbuilder" class="trigger-link values-trigger">Complete the value sorting task</a>'
     );
     $('#review-sub-content').prepend(
       '<p class="no-selection">Please select one or more decision making barriers from the section above.</p>' +
