@@ -8,5 +8,8 @@ body {
   position: fixed;
   top: 0;
   right: 0;
+}
+
+#careerBuilderGuide p, #careerBuilderGuide li {
   font-size: 75%;
 }

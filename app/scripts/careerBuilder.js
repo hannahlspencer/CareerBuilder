@@ -6,8 +6,8 @@ var totalSkills       = 0,
     skipButton        = '<button class="skip-section action-button next-section" type="button">Skip this section</button>',
     fullSummaryButton = '<button class="get-summary" type="button"><span class="button-icon">&#x1F4E5;</span>Download full summary</button>',
     summaryButton     = '<button class="get-summary" disabled><span class="button-icon">&#x1F4E5;</span>Download summary</button>',
-    saveButton        = '<button id="save-button" disabled>Save progress</button>',
-    startAgainButton  = '<button id="clear-button">Start again</button>',
+    saveButton        = '<button id="save-button" disabled><span class="button-icon">&#x1F4BE;</span>Save progress</button>',
+    startAgainButton  = '<button id="clear-button"><span class="button-icon">&#x1F503;</span>Start again</button>',
     cardSortStart     = '<button class="action-button" id="start-card-sort" type="button">Open value sorting task</button>',
     printButton       = '<button id="print-summary" type="button" onclick="window.print()">Print summary</button>',
     cardSortInProgess = false,
@@ -595,7 +595,8 @@ function saveProgress() {
   if (supportsStorage()) {
     localStorage.setItem('cb-html', $('#save-area').html());
     localStorage.setObject('cb-state', cb_state);
-    $('#save-button').html('&#10004; Saved').attr('disabled', 'disabled');
+    $('#save-button').attr('disabled', 'disabled')
+      .find('.button-icon').html('&#x2705;');
     showPopup(9999, $('#save-popup'));
   } else {
     alert("Unable to save progress");
@@ -623,7 +624,7 @@ function clearAll() {
     localStorage.removeItem('cb-html');
     localStorage.removeItem('cb-state');
     $('#save-area').html(localStorage.getItem('cb-default-html'));
-    $('#save-button').html('Save progress');
+    $('#save-button .button-icon').html('&#x1F4BE;');
     resetState();
     registerHandlers();
     cs.restart();
@@ -893,7 +894,8 @@ function allowSectionDownload(id) {
 }
 
 function allowSave() {
-  $('#save-button').removeAttr('disabled').html('Save progress');
+  $('#save-button').removeAttr('disabled')
+    .find('.button-icon').html('&#x1F4BE;');
   $('#clear-button').removeAttr('disabled');
 }
 

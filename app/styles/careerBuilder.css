@@ -499,6 +499,7 @@ ol#careerBuilder {
 #careerBuilderGuide button .button-icon {
   font-size: 1.2em;
   line-height: 1em;
+  font-weight: normal;
 }
 
 #careerBuilder button.previous {
