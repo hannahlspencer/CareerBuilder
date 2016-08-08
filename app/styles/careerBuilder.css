@@ -546,11 +546,22 @@ ol#careerBuilder {
       #cs-container button[disabled]:hover,
      #careerBuilder button[disabled]:hover,
 #careerBuilderGuide button[disabled]:hover  {
-  background: #898989;
-  color: #cecece;
-  border-color: #898989;
-  cursor: default;
+  background: #898989 !important;
+  color: #cecece !important;
+  border-color: #898989 !important;
   pointer-events: none;
+  cursor: not-allowed;
+}
+
+             .popup button[disabled] .button-icon,
+      #cs-container button[disabled] .button-icon,
+     #careerBuilder button[disabled] .button-icon,
+#careerBuilderGuide button[disabled] .button-icon,
+             .popup button[disabled]:hover .button-icon,
+      #cs-container button[disabled]:hover .button-icon,
+     #careerBuilder button[disabled]:hover .button-icon,
+#careerBuilderGuide button[disabled]:hover .button-icon {
+  color: #cecece !important;
 }
 
 /**************************** BUTTONS end ********************************/

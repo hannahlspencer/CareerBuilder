@@ -609,7 +609,7 @@ function loadProgress() {
       $('#clear-button').removeAttr('disabled');
       cs.restart();
       cb_state = localStorage.getObject('cb-state');
-      if (cb_state.allowDownload.full) {
+      if (cb_state.allowDownload != null && cb_state.allowDownload.length > 0) {
         $('#careerBuilderGuide .get-summary').removeAttr('disabled');
       }
       return true;
@@ -753,11 +753,6 @@ function triggerTogglers(e, $this) {
   }
 }
 
-function skipSectionTrigger(e, $this) {
-  var $lastButton = $this.closest('.section').find('.next-subsection:last');
-  triggerTogglers(e, $lastButton);
-}
-
 function buildCardSortSummary() {
   var csData = cs.getData(),
       summary = "";
@@ -887,18 +882,14 @@ function saveSummary(e, $this) {
 
 function resetState() {
     cb_state = {};
-    cb_state.allowDownload = {};
+    cb_state.allowDownload = [];
     cb_state.skippedSections = ["final-popup"];
 }
 
 function allowSectionDownload(id) {
-  $('#' + id + ' button.get-summary').removeAttr('disabled');
-  cb_state.allowDownload[id] = true;
-}
-
-function allowFullDownload() {
   $('#careerBuilderGuide .get-summary').removeAttr('disabled');
-  cb_state.allowDownload['full'] = true;
+  $('#' + id + ' button.get-summary').removeAttr('disabled');
+  cb_state.allowDownload.push(id);
 }
 
 function allowSave() {
@@ -1019,7 +1010,7 @@ function registerHandlers() {
   $('#finish-button').click(function(e) {
     buildCardSortSummary();
     closePopup('cs-container');
-    allowFullDownload();
+    allowSectionDownload('who');
     if ($('#values-sub-content').attr('aria-hidden') == 'true') {
       $('button.toggler[aria-controls=values-sub-content]').click();
     }
@@ -1141,10 +1132,7 @@ function registerHandlers() {
     else {
       $this.removeAttr('checked');
     }
-    if (!cb_state.allowDownload || !cb_state.allowDownload['full']) {
-      allowFullDownload();
-    }
-    if (!cb_state.allowDownload || !cb_state.allowDownload[thisSectionId]) {
+    if (!cb_state.allowDownload || cb_state.allowDownload.indexOf(thisSectionId) < 0) {
       allowSectionDownload(thisSectionId);
     }
     allowSave();
