@@ -16,204 +16,204 @@ var totalSkills       = 0,
 var cb_state = {};
 
 var cb = {
-  title : "Career Builder",
+  title : 'Career Builder',
   sections : [
     {
-      id : "who",
-      title : "Self assessment",
+      id : 'who',
+      title : 'Self assessment',
       subs : [
         {
-          id : "skills",
-          title : "Skills and abilities"
+          id : 'skills',
+          title : 'Skills and abilities'
         },
         {
-          id : "pdam",
-          title : "Developing your skillset"
+          id : 'pdam',
+          title : 'Developing your skillset'
         },
         {
-          id : "values",
-          title : "Values and motivations"
+          id : 'values',
+          title : 'Values and motivations'
         },
         {
-          id : "summary",
-          title : "What next?"
+          id : 'summary',
+          title : 'What next?'
         }
       ]
     },
     {
-      id : "research",
-      title : "Careers research",
+      id : 'research',
+      title : 'Careers research',
       subs : [
         {
-          id : "sectors",
-          title : "Sectors"
+          id : 'sectors',
+          title : 'Sectors'
         },
         {
-          id : "roles",
-          title : "Roles"
+          id : 'roles',
+          title : 'Roles'
         },
         {
-          id : "employers",
-          title : "Employers"
+          id : 'employers',
+          title : 'Employers'
         }
       ]
     },
     {
-      id : "decision",
-      title : "Making a decision",
+      id : 'decision',
+      title : 'Making a decision',
       subs : [
         {
-          id : "forme",
-          title : "Do I need to use this section?"
+          id : 'forme',
+          title : 'Do I need to use this section?'
         },
         {
-          id : "barriers",
-          title : "Barriers to effective decision making"
+          id : 'barriers',
+          title : 'Barriers to effective decision making'
         },
         {
-          id : "review",
-          title : "Reviewing your responses"
+          id : 'review',
+          title : 'Reviewing your responses'
         },
         {
-          id : "further",
-          title : "Further support and advice"
+          id : 'further',
+          title : 'Further support and advice'
         }
       ]
     },
     {
-      id : "achieving",
-      title : "Taking action",
+      id : 'achieving',
+      title : 'Taking action',
       subs : [
         {
-          id : "cv",
-          title : "CV and cover letter support"
+          id : 'cv',
+          title : 'CV and cover letter support'
         },
         {
-          id : "application",
-          title : "Application form support"
+          id : 'application',
+          title : 'Application form support'
         },
         {
-          id : "interview",
-          title : "Interview support"
+          id : 'interview',
+          title : 'Interview support'
         },
         {
-          id : "assessment",
-          title : "Assessment centre support"
+          id : 'assessment',
+          title : 'Assessment centre support'
         }
       ]
     },
     {
-      id : "final-popup",
-      title : "You have now finished the last section of Career Builder but this is not the end of your career planning!",
+      id : 'final-popup',
+      title : 'You have now finished the last section of Career Builder but this is not the end of your career planning!',
       subs : []
     }
   ]
 };
 
 var cbSummaryStyle =
-"@media print {" +
-"    .advice {" +
-"        border: 1px solid #898989;" +
-"        overflow: visible;" +
-"    }" +
-"    #print-summary {" +
-"        display: none;" +
-"    }" +
-"    a::after {" +
-"        content: \" (\" attr(href) \")\";" +
-"        font-size: 75%" +
-"    }" +
-"}" +
-"#careerBuilder-summary {" +
-" font-family: Arial, sans serif;" +
-" max-width: 760px;" +
-" margin: 0 auto;" +
-" padding: 1em;" +
-"}" +
-"#careerBuilder-summary a," +
-"#careerBuilder-summary a:hover," +
-"#careerBuilder-summary a:visited {" +
-" color: red;" +
-"}" +
-"#careerBuilder-summary #print-summary {" +
-" float: right;" +
-" margin-top: 30px;" +
-"   background-color: #333;" +
-"   border-color: #333;" +
-"   cursor: pointer;" +
-"   font-weight: bold;" +
-"   color: #FFF;" +
-"   border-style: solid;" +
-"   border-width: 2px;" +
-"   padding: 5px" +
-"}" +
-"#careerBuilder-summary #print-summary:hover {" +
-"   background-color: #666;" +
-"}" +
-"#careerBuilder-summary ul {" +
-" list-style: square;" +
-"}" +
-"#careerBuilder-summary li {" +
-" display: list-item !important;" +
-" margin: 0.5em 0;" +
-"}" +
-"#careerBuilder-summary h5 {" +
-" font-size: 1em;" +
-"}" +
-"#careerBuilder-summary .advice {" +
-" background: #F2F2F2;" +
-" padding: 0 1em;" +
-" overflow: auto;" +
-" " +
-"}" +
-"#careerBuilder-summary .section-summary {" +
-" border: 4px solid;" +
-" padding: 0 1em 1em 1em;" +
-" margin: 1em 0;" +
-" background: white;" +
-"}" +
-"#careerBuilder-summary #who-summary {" +
-" border: 4px solid #F58621;" +
-"}" +
-"#careerBuilder-summary #who-summary h2 {" +
-" color: #F58621;" +
-"}" +
-"#careerBuilder-summary #who-summary #values-summary {" +
-"   padding: 0;" +
-"   overflow: auto;" +
-"}" +
-"#careerBuilder-summary #who-summary #values-summary > li {" +
-"   list-style: none;" +
-"   float: left;" +
-"}" +
-"#careerBuilder-summary #who-summary #values-summary > li .importance-level {" +
-"   font-weight: bold;" +
-"}" +
-"#careerBuilder-summary #research-summary {" +
-" border: 4px solid #1999D4;" +
-"}" +
-"#careerBuilder-summary #research-summary h2 {" +
-" color: #1999D4;" +
-"}" +
-"#careerBuilder-summary #decision-summary {" +
-" border: 4px solid #936AB0;" +
-"}" +
-"#careerBuilder-summary #decision-summary h2 {" +
-" color: #936AB0;" +
-"}" +
-"#careerBuilder-summary #achieving-summary {" +
-" border: 4px solid #2FB64B;" +
-"}" +
-"#careerBuilder-summary #achieving-summary h2 {" +
-" color: #2FB64B;" +
-"}";
+'@media print {' +
+'    .advice {' +
+'        border: 1px solid #898989;' +
+'        overflow: visible;' +
+'    }' +
+'    #print-summary {' +
+'        display: none;' +
+'    }' +
+'    a::after {' +
+'        content: " (" attr(href) ")";' +
+'        font-size: 75%' +
+'    }' +
+'}' +
+'#careerBuilder-summary {' +
+' font-family: Arial, sans serif;' +
+' max-width: 760px;' +
+' margin: 0 auto;' +
+' padding: 1em;' +
+'}' +
+'#careerBuilder-summary a,' +
+'#careerBuilder-summary a:hover,' +
+'#careerBuilder-summary a:visited {' +
+' color: red;' +
+'}' +
+'#careerBuilder-summary #print-summary {' +
+' float: right;' +
+' margin-top: 30px;' +
+'   background-color: #333;' +
+'   border-color: #333;' +
+'   cursor: pointer;' +
+'   font-weight: bold;' +
+'   color: #FFF;' +
+'   border-style: solid;' +
+'   border-width: 2px;' +
+'   padding: 5px' +
+'}' +
+'#careerBuilder-summary #print-summary:hover {' +
+'   background-color: #666;' +
+'}' +
+'#careerBuilder-summary ul {' +
+' list-style: square;' +
+'}' +
+'#careerBuilder-summary li {' +
+' display: list-item !important;' +
+' margin: 0.5em 0;' +
+'}' +
+'#careerBuilder-summary h5 {' +
+' font-size: 1em;' +
+'}' +
+'#careerBuilder-summary .advice {' +
+' background: #F2F2F2;' +
+' padding: 0 1em;' +
+' overflow: auto;' +
+' ' +
+'}' +
+'#careerBuilder-summary .section-summary {' +
+' border: 4px solid;' +
+' padding: 0 1em 1em 1em;' +
+' margin: 1em 0;' +
+' background: white;' +
+'}' +
+'#careerBuilder-summary #who-summary {' +
+' border: 4px solid #F58621;' +
+'}' +
+'#careerBuilder-summary #who-summary h2 {' +
+' color: #F58621;' +
+'}' +
+'#careerBuilder-summary #who-summary #values-summary {' +
+'   padding: 0;' +
+'   overflow: auto;' +
+'}' +
+'#careerBuilder-summary #who-summary #values-summary > li {' +
+'   list-style: none;' +
+'   float: left;' +
+'}' +
+'#careerBuilder-summary #who-summary #values-summary > li .importance-level {' +
+'   font-weight: bold;' +
+'}' +
+'#careerBuilder-summary #research-summary {' +
+' border: 4px solid #1999D4;' +
+'}' +
+'#careerBuilder-summary #research-summary h2 {' +
+' color: #1999D4;' +
+'}' +
+'#careerBuilder-summary #decision-summary {' +
+' border: 4px solid #936AB0;' +
+'}' +
+'#careerBuilder-summary #decision-summary h2 {' +
+' color: #936AB0;' +
+'}' +
+'#careerBuilder-summary #achieving-summary {' +
+' border: 4px solid #2FB64B;' +
+'}' +
+'#careerBuilder-summary #achieving-summary h2 {' +
+' color: #2FB64B;' +
+'}';
 
 /*********CARD SORTING MODULE*********/
 var cs =
 (function() {
 
   //getElementsByClassName IE8 polyfill
-  (function(d,g){d[g]||(d[g]=function(g){return this.querySelectorAll("."+g)},Element.prototype[g]=d[g])})(document,"getElementsByClassName");
+  (function(d,g){d[g]||(d[g]=function(g){return this.querySelectorAll('.'+g)},Element.prototype[g]=d[g])})(document,'getElementsByClassName');
 
     /***VARIABLES***/
 
@@ -223,10 +223,10 @@ var cs =
     }
 
     var iScale = [
-                  {name: "Least important"},
-                  {name: "Quite important"},
-                  {name: "Important"},
-                  {name: "Most important"}
+                  {name: 'Least important'},
+                  {name: 'Quite important'},
+                  {name: 'Important'},
+                  {name: 'Most important'}
                  ],
         vDeck = new Array(),
         cardSorter = document.getElementById('cs-container'),
@@ -367,7 +367,7 @@ var cs =
     }
 
     function pickUpCard(event) {
-        event.dataTransfer.setData("text", event.target.id);
+        event.dataTransfer.setData('text', event.target.id);
     }
 
     function allowDrop(event) {
@@ -417,7 +417,7 @@ var cs =
 
     function dropCardOnDeck(event) {
         event.preventDefault();
-        appendToDeck(event.dataTransfer.getData("text"));
+        appendToDeck(event.dataTransfer.getData('text'));
     }
 
     function addCardToPlayingArea(card, col) {
@@ -428,7 +428,7 @@ var cs =
                 dz.appendChild(card);
             }
             else {
-                alert("Maximum of " + dropLimit + " cards per column!");
+                alert('Maximum of ' + dropLimit + ' cards per column!');
             }
             if (getDeckCount() == 1) {
                 skipCardButton.disabled = true;
@@ -442,7 +442,7 @@ var cs =
 
     function dropCardInPlayingArea(event, col) {
         event.preventDefault();
-        var data = event.dataTransfer.getData("text"),
+        var data = event.dataTransfer.getData('text'),
             card = document.getElementById(data);
         addCardToPlayingArea(card, col);
     }
@@ -516,7 +516,7 @@ var cs =
             deckButton.disabled = true;
         }
         else {
-            alert("No value selected!");
+            alert('No value selected!');
         }
     }
 
@@ -537,8 +537,8 @@ var cs =
         skipCardButton.onclick = null;
         restartButton.onclick = null;
         finishButton.disabled = true;
-        deck.innerHTML = "";
-        playingArea.innerHTML = "";
+        deck.innerHTML = '';
+        playingArea.innerHTML = '';
         start();
     }
 
@@ -599,7 +599,7 @@ function saveProgress() {
       .find('.button-icon').html('&#x2705;');
     showPopup(9999, $('#save-popup'));
   } else {
-    alert("Unable to save progress");
+    alert('Unable to save progress');
   }
 }
 
@@ -757,44 +757,44 @@ function triggerTogglers(e, $this) {
 
 function buildCardSortSummary() {
   var csData = cs.getData(),
-      summary = "";
+      summary = '';
   for (var i = csData.length - 1; i >= 0; i--) {
-    summary += "<li><span class='importance-level'>" + csData[i].column.title + "</span><ul class='value-list'>";
+    summary += '<li><span class=\'importance-level\'>' + csData[i].column.title + '</span><ul class=\'value-list\'>';
     for (var j = 0; j < csData[i].column.values.length; j++) {
-      summary += "<li class='value-item'>" + csData[i].column.values[j] + "</li>";
+      summary += '<li class=\'value-item\'>' + csData[i].column.values[j] + '</li>';
     }
-    summary += "</ul></li>";
+    summary += '</ul></li>';
   }
   $('#values-trigger-container').hide();
   $('#values-summary').html(summary);
 }
 
 function buildSectionSummary(section) {
-  var sectionHTML = "<h2>" + section.title + "</h2>";
+  var sectionHTML = '<h2>' + section.title + '</h2>';
   $.each(section.subs, function(i, sub) {
-    sectionHTML += "<h3>" + sub.title + "</h3>";
+    sectionHTML += '<h3>' + sub.title + '</h3>';
     if ($('input:radio[name=' + sub.id + ']:checked').length > 0) {
-      sectionHTML += "<p>" + $('#' + sub.id + '-sub-content legend').first().html();
+      sectionHTML += '<p>' + $('#' + sub.id + '-sub-content legend').first().html();
       var radId = $('input:radio[name=' + sub.id + ']:checked').attr('id');
-      sectionHTML += "<strong>";
-      sectionHTML += " " + $('label[for=' + radId + ']').text() + "</strong>.</p>";
-      sectionHTML += "<p>Here's our advice:</p>";
-      sectionHTML += "<div class=\"advice\">";
+      sectionHTML += '<strong>';
+      sectionHTML += ' ' + $('label[for=' + radId + ']').text() + '</strong>.</p>';
+      sectionHTML += '<p>Here\'s our advice:</p>';
+      sectionHTML += '<div class="advice">';
       var sugId = radId.substring(0, radId.length - 6); // "-radio"
       sectionHTML += $('#' + sub.id + '-sub-content #' + sugId).html();
-      sectionHTML += "</div>";
+      sectionHTML += '</div>';
     }
     else {
-      sectionHTML += "<p>You didn't answer this question.</p>";
+      sectionHTML += '<p>You didn\'t answer this question.</p>';
     }
   });
   return sectionHTML;
 };
 
 function getSummary(sectionID) {
-  var body = "<div class=\"section-summary\" id=\"" + sectionID + "-summary\">";
+  var body = '<div class="section-summary" id="' + sectionID + '-summary">';
   if (sectionID == cb.sections[0].id) {
-    body += "<h2>Self-assessment</h2> <h3>Your skills</h3>";
+    body += '<h2>Self-assessment</h2> <h3>Your skills</h3>';
 
     body += $('<div>')
       .append($('#skills-trigger-container').clone())
@@ -802,68 +802,68 @@ function getSummary(sectionID) {
       .remove().html();
     body += $('#pdam-sub-content').children().html(); //hidden ones have display:none on element
 
-    body+= "<h3>Your values</h3>";
+    body+= '<h3>Your values</h3>';
     body += $('<div>')
       .append($('#values-trigger-container').clone())
       .append($('#values-summary').clone())
       .remove().html();
 
-    body+= "<h3>Next steps</h3>           <div class=\"advice\">";
+    body+= '<h3>Next steps</h3>           <div class="advice">';
     body += $('#skills-values-suggestion').html();
-    body += "</div>";
+    body += '</div>';
   }
   else if (sectionID == cb.sections[1].id) {
     body += buildSectionSummary(cb.sections[1]);
   }
   else if (sectionID == cb.sections[2].id) {
-    body += "<h2>Making a decision</h2>";
+    body += '<h2>Making a decision</h2>';
 
-    body += "<h3>Overcoming your decision making barriers</h3>";
-    var $adviceList = $("#" + sectionID + " .advice")
+    body += '<h3>Overcoming your decision making barriers</h3>';
+    var $adviceList = $('#' + sectionID + ' .advice')
                 .filter(function(index) {
-                  return $(this).css("display") == "block";
+                  return $(this).css('display') == 'block';
               }).clone();
     if ($adviceList.length > 0) {
       $adviceList.each(function() {
         var $advice = $(this);
         $advice.children().css('display', 'block');
-        $advice.find(".toggle-arrow").remove();
+        $advice.find('.toggle-arrow').remove();
         body += $advice.html();
       });
     }
     else {
-      body += "<p>You didn't select any decision making barriers.</p>";
+      body += '<p>You didn\'t select any decision making barriers.</p>';
     }
 
-    body += "<h3>Further support and advice</h3> <div class=\"advice\">";
+    body += '<h3>Further support and advice</h3> <div class="advice">';
     body += $('#further-sub-content .suggestion').html();
-    body += "</div>";
+    body += '</div>';
   }
   else if (sectionID == cb.sections[3].id) {
     body += buildSectionSummary(cb.sections[3]);
   }
-  body += "</div>"
+  body += '</div>'
   return body;
 }
 
 function saveSummary(e, $this) {
   var iconURL = 'http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/images/Icons/',
-      header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html><head>" +
-         "<title>Your Career Builder summary</title>" +
-         "<meta charset=\"utf-8\">" +
-         "<link rel=\"icon\" type=\"image/x-icon\" href=\"http://www.lse.ac.uk/favicon.ico\">" +
-         "<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"http://www.lse.ac.uk/favicon.ico\">" +
-         "<style>" + cbSummaryStyle + "</style>" +
-         "</head><body id=\"careerBuilder-summary\">" + printButton +
-         "<h1>Your Career Builder summary</h1>" +
-         "<p>Here are your selections from <a href=\"http://lse.ac.uk/careerbuilder\">Career Builder</a>" +
-         " along with our suggestions of the resources and services best suited to you.</p>",
-      footer = "</body></html>",
-      fileName = "CareerBuilder",
+      header = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html><head>' +
+         '<title>Your Career Builder summary</title>' +
+         '<meta charset="utf-8">' +
+         '<link rel="icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
+         '<link rel="shortcut icon" type="image/x-icon" href="http://www.lse.ac.uk/favicon.ico">' +
+         '<style>' + cbSummaryStyle + '</style>' +
+         '</head><body id="careerBuilder-summary">' + printButton +
+         '<h1>Your Career Builder summary</h1>' +
+         '<p>Here are your selections from <a href="http://lse.ac.uk/careerbuilder">Career Builder</a>' +
+         ' along with our suggestions of the resources and services best suited to you.</p>',
+      footer = '</body></html>',
+      fileName = 'CareerBuilder',
       sId = $this.closest('.section').attr('id'),
-      body = "";
+      body = '';
   //download full summary
-  if (sId == cb.sections[cb.sections.length - 1].id || sId == "careerBuilderGuide") {
+  if (sId == cb.sections[cb.sections.length - 1].id || sId == 'careerBuilderGuide') {
     $.each(cb.sections, function(i, section) {
       if (cb_state.skippedSections.indexOf(section.id) < 0) {
         body += getSummary(section.id);
@@ -875,24 +875,24 @@ function saveSummary(e, $this) {
     body += getSummary(sId);
     $.each(cb.sections, function(i, section) {
       if (section.id == sId) {
-        fileName += " - " + section.title;
+        fileName += ' - ' + section.title;
       }
     });
   }
-  body += "<h2>Next steps in your career planning</h2>";
+  body += '<h2>Next steps in your career planning</h2>';
   $('#final-popup p').not('.summary-exclude').each(function() {
-      body += "<p>" + $(this).html() + "</p>";
+      body += '<p>' + $(this).html() + '</p>';
   });
   var html = header + body + footer,
       oSummaryBlob = new Blob([html], {type: 'text/html'});
-  fileName += " summary.html";
+  fileName += ' summary.html';
   saveAs(oSummaryBlob, fileName);
 }
 
 function resetState() {
     cb_state = {};
     cb_state.allowDownload = [];
-    cb_state.skippedSections = ["final-popup"];
+    cb_state.skippedSections = ['final-popup'];
 }
 
 function allowSectionDownload(id) {
@@ -1029,7 +1029,7 @@ function registerHandlers() {
     }
     $('#cs-suggestion, #skills-values-suggestion').slideDown('slow');
     $('html, body').animate({
-      scrollTop: $("#values-sub").offset().top
+      scrollTop: $('#values-sub').offset().top
     }, 1000);
     $('#start-card-sort').focus();
     return false;
@@ -1037,7 +1037,7 @@ function registerHandlers() {
 
   $('#start-card-sort').click(function(e) {
     showPopup(9999, $('#cs-container'));
-    $(this).html("Continue value sorting task");
+    $(this).html('Continue value sorting task');
     return false;
   });
 
@@ -1075,7 +1075,7 @@ function registerHandlers() {
           checkVal = $this.attr('value'),
           checkClass = $this.attr('class');
       if ($this.is(':checked')) {
-        $('#skills-summary').append("<li>" + checkVal + "</li>");
+        $('#skills-summary').append('<li>' + checkVal + '</li>');
         skillsCount++;
       }
       else if ($this.not(':checked')) {
@@ -1099,7 +1099,7 @@ function registerHandlers() {
 
   //show advice based on decision making barrier checkbox selection
   $('input:checkbox[name="barrier"]').change(function() {
-    $('.barrier-list').html("");
+    $('.barrier-list').html('');
     $('#reviewing-intro').hide();
     $('#review-sub-content .advice').hide();
     var noneSelected = true;
@@ -1110,7 +1110,7 @@ function registerHandlers() {
         if ($this.attr('value') == 'None') {
           $('input:checkbox[name="barrier"]').removeAttr('checked').prop('disabled', true);
           $this.prop('checked', true).prop('disabled', false);
-          $('.barrier-list').html("");
+          $('.barrier-list').html('');
           $('#review-sub-content .advice').hide();
           $('#reviewing-intro').hide();
           $('.8 p').show();
@@ -1125,9 +1125,9 @@ function registerHandlers() {
           var $this = $(this);
           var adviceID = $this.attr('id');
           if (checkClass.indexOf(adviceID) >= 0) {
-            if (adviceID != "none") {
+            if (adviceID != 'none') {
               var barrierListSelector = '#' + adviceID + ' .barrier-list';
-              $(barrierListSelector).append("<li>You selected: <em>" + checkVal + "</em></li>");
+              $(barrierListSelector).append('<li>You selected: <em>' + checkVal + '</em></li>');
             }
             $this.show();
           }
@@ -1225,7 +1225,7 @@ $(function() {
       .append(previousButton)
       .append(nextSectionButton);
     $('.section:last-of-type .next-section').text('What next?');
-    $('#careerBuilder a').attr("target", "_blank")
+    $('#careerBuilder a').attr('target', '_blank')
       .filter('.trigger-link').attr('href', window.location.href);;
     $('#save-area a[href$=".pdf"]').after(
       '<span class="link-icon link-icon-pdf" title="PDF">&#x1F4C4;</span>'
@@ -1240,6 +1240,9 @@ $(function() {
     $('.hidden').hide();
 
     //set up ARIA attributes
+    $('.button-icon, .link-icon')
+      .attr('aria-hidden', true)
+      .attr('role', 'presentation');
     $('.toggle-parent').each(function() {
       var $this = $(this),
           $next = $this.next();
