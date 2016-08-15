@@ -1226,20 +1226,24 @@ $(function() {
       .append(nextSectionButton);
     $('.section:last-of-type .next-section').text('What next?');
     $('#careerBuilder a').attr('target', '_blank')
-      .filter('.trigger-link').attr('href', window.location.href);;
-    $('#save-area a[href$=".pdf"]').after(
+      .filter('.trigger-link').attr('href', window.location.href);
+    $('#save-area a[href$=".pdf"], #popups a[href$=".pdf"]').after(
       '<span class="link-icon link-icon-pdf" title="PDF">&#x1F4C4;</span>'
     );
-    $('#save-area a[href^="https://careers"]').after(
+    $('#save-area a[href^="https://careers"], #popups a[href^="https://careers"]').after(
       '<span class="link-icon link-icon-private" title="CareerHub login required">&#x1F512;</span>'
     );
-    $('#save-area a[href*="/internal/exclusive"]').after(
+    $('#save-area a[href*="/internal/exclusive"], #popups a[href*="/internal/exclusive"]').after(
       '<span class="link-icon link-icon-private" title="LSE IT account required">&#x1F512;</span>'
     );
 
     $('.hidden').hide();
 
     //set up ARIA attributes
+    $('#careerBuilder')
+      .attr('role','application')
+      .attr('aria-label', 'Career Builder')
+      .attr('aria-describedby', 'careerBuilderGuide');
     $('.button-icon, .link-icon')
       .attr('aria-hidden', true)
       .attr('role', 'presentation');
