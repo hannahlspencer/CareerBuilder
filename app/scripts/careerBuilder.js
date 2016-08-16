@@ -1219,7 +1219,7 @@ $(function() {
     $('.sub-content').not('.check-option .sub-content')
       .append(previousButton)
       .append(nextButton);
-    $('.previous-subsection').get(0).remove();
+    $('.previous-subsection').first().remove();
     $('.section-level-buttons')
       .append(summaryButton)
       .append(previousButton)
