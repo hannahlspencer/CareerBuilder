@@ -1049,7 +1049,7 @@ function registerHandlers() {
     return false;
   });
 //changes made
- $(document).keyup(function(event) {
+ $('.popup').keyup(function(event) {
     event = event || window.event;
     if (event.keyCode === 27) {
 	  closePopup('cs-container');
