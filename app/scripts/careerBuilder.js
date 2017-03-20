@@ -1048,7 +1048,7 @@ function registerHandlers() {
     }
     return false;
   });
-//changes made
+
  $('.popup').keyup(function(event) {
     event = event || window.event;
     if (event.keyCode === 27) {
