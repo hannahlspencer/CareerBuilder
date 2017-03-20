@@ -1049,6 +1049,14 @@ function registerHandlers() {
     return false;
   });
 
+ $('.popup').keyup(function(event) {
+    event = event || window.event;
+    if (event.keyCode === 27) {
+	  closePopup($(this).closest('.popup').attr('id'));
+    }
+    return false;
+  });
+
   //expand advice according to radio button selection
   $('input[type=radio]').change(function() {
     var qName = $(this).attr('name');
