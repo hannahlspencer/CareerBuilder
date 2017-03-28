@@ -1052,7 +1052,7 @@ function registerHandlers() {
  $('.popup').keyup(function(event) {
     event = event || window.event;
     if (event.keyCode === 27) {
-	  closePopup($(this).closest('.popup').attr('id'));
+      closePopup($(this).closest('.popup').attr('id'));
     }
     return false;
   });
