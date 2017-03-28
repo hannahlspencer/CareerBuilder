@@ -59,7 +59,7 @@
           return response.text();
         }).then(function(text) {
           document.getElementById('cb-container').innerHTML = text;
-          document.getElementById('cb-script').setAttribute('src', 'scripts/careerBuilder.js');
+          //document.getElementById('cb-script').setAttribute('src', 'scripts/careerBuilder.js');
         }).catch(function(err) {
           console.error(err);
         });
@@ -71,7 +71,7 @@
             var xmlTxt = xhr.responseText;
             var target = document.getElementById('cb-container');
             target.innerHTML = xmlTxt;
-            document.getElementById('cb-script').setAttribute('src', 'scripts/careerBuilder.js');
+            //document.getElementById('cb-script').setAttribute('src', 'scripts/careerBuilder.js');
           }
         };
         xhr.open("GET","careerbuilder.html",true);
