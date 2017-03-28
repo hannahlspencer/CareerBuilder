@@ -59,6 +59,16 @@ ol#careerBuilder {
   text-decoration: underline;
 }
 
+.no-js .trigger-link {
+  text-decoration: none !important;
+  color: black !important;
+ }
+  
+ .no-js .trigger-link :hover{
+  text-decoration: none !important;
+  color: black !important;
+ }
+ 
 /*icons for pdf and password protected links*/
   #careerBuilder.no-js a[href$=".pdf"],
   #careerBuilder.no-js a[href^="https://careers"],
