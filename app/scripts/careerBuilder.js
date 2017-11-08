@@ -80,6 +80,24 @@ var cb = {
         }
       ]
     },
+	{
+      id : 'searching',
+      title : 'Finding opportunities',
+      subs : [
+        {
+          id : 'safety',
+          title : 'Safety advice'
+        },
+        {
+          id : 'jobhunt',
+          title : 'Find opportunities'
+        },
+        {
+          id : 'networking',
+          title : 'Networking'
+        }
+	  ]
+	}, 
     {
       id : 'achieving',
       title : 'Taking action',
@@ -201,6 +219,12 @@ var cbSummaryStyle =
 '#careerBuilder-summary #decision-summary h2 {' +
 ' color: #936AB0;' +
 '}' +
+'#careerBuilder-summary #searching-summary {' +
+' border: 4px solid #F36571;' +
+'}' +
+'#careerBuilder-summary #searching-summary h2 {' +
+' color: #F36571;' +
+'}' +
 '#careerBuilder-summary #achieving-summary {' +
 ' border: 4px solid #2FB64B;' +
 '}' +
@@ -297,13 +321,13 @@ var cs =
             desc   = card.getElementsByClassName('value-description')[0],
             nameId = 'name-' + val.id,
             descId = 'desc-' + val.id;
-    name.setAttribute('id', nameId);
-    name.innerHTML = val.name;
-    desc.setAttribute('id', descId);
-    desc.innerHTML = val.description;
-    card.setAttribute('id', 'card-' + val.id);
-        card.setAttribute('aria-labelledby', nameId);
-        card.setAttribute('aria-describedby', descId);
+			name.setAttribute('id', nameId);
+			name.innerHTML = val.name;
+			desc.setAttribute('id', descId);
+			desc.innerHTML = val.description;
+			card.setAttribute('id', 'card-' + val.id);
+			card.setAttribute('aria-labelledby', nameId);
+			card.setAttribute('aria-describedby', descId);
         return card;
     }
 
@@ -769,26 +793,35 @@ function buildCardSortSummary() {
   $('#values-summary').html(summary);
 }
 
+
 function buildSectionSummary(section) {
   var sectionHTML = '<h2>' + section.title + '</h2>';
-  $.each(section.subs, function(i, sub) {
-    sectionHTML += '<h3>' + sub.title + '</h3>';
-    if ($('input:radio[name=' + sub.id + ']:checked').length > 0) {
-      sectionHTML += '<p>' + $('#' + sub.id + '-sub-content legend').first().html();
-      var radId = $('input:radio[name=' + sub.id + ']:checked').attr('id');
-      sectionHTML += '<strong>';
-      sectionHTML += ' ' + $('label[for=' + radId + ']').text() + '</strong>.</p>';
-      sectionHTML += '<p>Here\'s our advice:</p>';
-      sectionHTML += '<div class="advice">';
-      var sugId = radId.substring(0, radId.length - 6); // "-radio"
-      sectionHTML += $('#' + sub.id + '-sub-content #' + sugId).html();
-      sectionHTML += '</div>';
-    }
-    else {
-      sectionHTML += '<p>You didn\'t answer this question.</p>';
-    }
+  console.log(section.title);
+   $.each(section.subs, function(i, sub) {
+	 sectionHTML += buildRadioSubsection(sub);
   });
   return sectionHTML;
+
+ };
+
+function buildRadioSubsection(sub) {
+	var subsecHTML = "";
+	subsecHTML += '<h3>' + sub.title + '</h3>';
+    if ($('input:radio[name=' + sub.id + ']:checked').length > 0) {
+      subsecHTML += '<p>' + $('#' + sub.id + '-sub-content legend').first().html();
+      var radId = $('input:radio[name=' + sub.id + ']:checked').attr('id');
+      subsecHTML += '<strong>';
+      subsecHTML += ' ' + $('label[for=' + radId + ']').text() + '</strong>.</p>';
+      subsecHTML += '<p>Here\'s our advice:</p>';
+      subsecHTML += '<div class="advice">';
+      var sugId = radId.substring(0, radId.length - 6); // "-radio"
+      subsecHTML += $('#' + sub.id + '-sub-content #' + sugId).html();
+      subsecHTML += '</div>';
+    }
+    else {
+      subsecHTML += '<p>You didn\'t answer this question.</p>';
+    }
+	return subsecHTML;
 };
 
 function getSummary(sectionID) {
@@ -840,7 +873,33 @@ function getSummary(sectionID) {
     body += '</div>';
   }
   else if (sectionID == cb.sections[3].id) {
-    body += buildSectionSummary(cb.sections[3]);
+	//finding opps section
+	body += '<h2>' + cb.sections[3].title + '</h2>';
+
+	//Safety advice title
+	body += '<h3>' + cb.sections[3].subs[0].title + '</h3>';
+	
+	//($('input:checkbox[name=' + cb.sections[3].subs[0].id + ']:checked').length == 0)
+	if ((($('input:checkbox[id=safety-1]:checked').length) == 0) && (($('input:checkbox[id=safety-2]:checked').length) == 0)) {
+      body += '<p><a href="http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/CareerPlanningJobHunting/CareerBuilder/Home.aspx">' + 'Please read our safety advice for job-hunting</a></p>';
+	} else if ((($('input:checkbox[id=safety-1]:checked').length) == 1) && (($('input:checkbox[id=safety-2]:checked').length) == 0)) {
+	  body += '<p>You only checked our advice on <a href="http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/CareerPlanningJobHunting/JobHunting/Safety.aspx">searching for a job</a>. Please read both sets of safety advice</p>';
+	} else if ((($('input:checkbox[id=safety-2]:checked').length) == 1) && (($('input:checkbox[id=safety-1]:checked').length) == 0)) {
+	  body += '<p>You only checked our advice on <a href="http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/Internships/Safety.aspx">working with individuals privately</a>. Please read both sets of safety advice</p>';
+	} else {
+	  body += '<p>Thank you for reading our safety advice on <a href="http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/CareerPlanningJobHunting/JobHunting/Safety.aspx">searching for a job</a> and <a href="http://www.lse.ac.uk/intranet/CareersAndVacancies/careersService/Internships/Safety.aspx">working with individuals privately</a>.</p>';
+	}
+		
+	//Finding opportunities section done
+	body += '<h3>' + cb.sections[3].subs[1].title + '</h3>';
+    body += $('#job-sub-content').children().html(); 
+
+	//Networking section done
+	body += buildRadioSubsection(cb.sections[3].subs[2]);
+  }
+  else if (sectionID == cb.sections[4].id) {
+    body += buildSectionSummary(cb.sections[4]);
+	
   }
   body += '</div>'
   return body;
@@ -1045,6 +1104,15 @@ function registerHandlers() {
     event = event || window.event;
     if (event.keyCode === 32) {
       $(this).click();
+    }
+    return false;
+  });
+ 
+ //to close popup with the esc key
+ $('.popup').keyup(function(event) {
+    event = event || window.event;
+    if (event.keyCode === 27) {
+	  closePopup($(this).closest('.popup').attr('id'));
     }
     return false;
   });
